@@ -68,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $sexe;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $telephone;
 
@@ -165,7 +165,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // $this->password = null;
     }
 
     public function getPrenom(): ?string
@@ -240,12 +240,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): ?int
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+    public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
 

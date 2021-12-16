@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -17,13 +18,26 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+        
+            //POUR L'EMAIL, IL FAUDRA AJOUTER UNE CONTRAINTE QUI CONTRÔLE LE RESPECT DE LA CASSE!
+            ->add('email', TextType::class,[
+                'required'=> false,
+                'constraints' => [
+                    new NotBlank([
+                        'message'=>"Veuillez renseigner votre email."
+                    ])
+                ]
+            ])
+
+            #################### CHECKBOX CONDITIONS GENERALES (fonctionnel, à ajouter si besoin)#############################################
+
             // ->add('agreeTerms', CheckboxType::class, [
             //     'mapped' => false,
             //     'constraints' => [
@@ -32,22 +46,33 @@ class RegistrationFormType extends AbstractType
             //         ]),
             //     ],
             // ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
+
+
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'required' => false,
+                'invalid_message' =>"Les mots de passe ne correspondent pas",
+                'options' =>[
+                    'attr' =>[
+                        'class' => 'password-field'
+                ]
+                ],
+                'first_options' => [
+                    'label' => "Mot de passe"
+                ],
+                'second_options' =>[
+                    'label'=>"Confirmer votre mot de passe"
+                ],
+                'constraints'=>[
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message'=>"Veuillez renseigner votre mot de passe."
                     ]),
                     new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
+                        'min'=>8,
+                        'minMessage' =>"Votre mot de passe doit contenir au minimum 8 caractères."
+                    ])
+
+                ]
             ])
             
             ->add('nom', TextType::class,[
@@ -77,15 +102,16 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('telephone', NumberType::class,[
+            ->add('telephone', TextType::class,[
                 'required'=>false,
                 'constraints'=>[
-                    new Length([
-                        'min' => 10, 
-                        'max' => 10,
-                        'minMessage' => "Veuillez entrer un numéro de téléphone valide",
-                        'maxMessage'=> "Veuillez entrer un numéro de téléphone valide"
-                    ]),
+                    //Regex qui prend en compte le '0' initial des numéros de tel
+                    new Regex ([
+                        'pattern'=>'/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
+                        'match'=>true,
+                        'message'=> "Veuillez entrer un numéro de téléphone valide"
+                ])
+                
                 ]
             ])
 
@@ -100,6 +126,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ]
             ])
+
             ->add('ville', TextType::class,[
                 'required'=> false,
                 'constraints' => [
@@ -134,6 +161,7 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
+            
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'm',
@@ -154,3 +182,9 @@ class RegistrationFormType extends AbstractType
         ]);
     }
 }
+
+// ^
+//     (?:(?:\+|00)33|0)     # Dialing code
+//     \s*[1-9]              # First number (from 1 to 9)
+//     (?:[\s.-]*\d{2}){4}   # End of the phone number
+// $

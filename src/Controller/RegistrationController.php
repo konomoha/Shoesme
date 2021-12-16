@@ -21,16 +21,18 @@ class RegistrationController extends AbstractController
         $registerForm = $this->createForm(RegistrationFormType::class, $user);
         $registerForm->handleRequest($request);
 
-        if ($registerForm->isSubmitted()) {
+        if ($registerForm->isSubmitted()&& $registerForm->isValid()) 
+        {
 
             $avatar = $registerForm->get('avatar')->getData();
-            // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $registerForm->get('plainPassword')->getData()
-                )
+            
+           
+            $hash = $userPasswordHasher->hashPassword(
+                $user,
+                $registerForm->get('password')->getData()
             );
+
+            $user->setPassword($hash);
 
             if($avatar)
             {   
@@ -43,7 +45,7 @@ class RegistrationController extends AbstractController
                     $this->getparameter('avatar_directory'),
                     $nouveauNomFichier);
 
-             $user->setAvatar($nouveauNomFichier);
+                $user->setAvatar($nouveauNomFichier);
               
             }
             
@@ -51,7 +53,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
 
             return $this->redirectToRoute('home');
         }
@@ -59,5 +61,23 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $registerForm->createView(),
         ]);
+    }
+
+    ///////////////////////////CREATION D'UNE ROUTE + TEMPLATE PROFIL (profil.html.twig)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    #[Route('/profil', name: 'app_profil')]
+    public function userProfil(): Response
+    {
+        
+        if(!$this->getUser())
+        {
+            return $this->redirectToRoute('app_login');
+        }
+        
+        $user = $this->getUser();
+
+        return $this->render('registration/profil.html.twig', [
+            'profildata'=> $user ]);
+
     }
 }
