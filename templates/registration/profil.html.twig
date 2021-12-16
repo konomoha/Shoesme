@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog Symfony | Profil{% endblock %}
+
+{% block body %}
+
+{{dump(profildata)}}
+
+ <div class="mx-auto text-center my-4">
+
+    <p><span>Nom:</span> {{ profildata.nom}}</p>
+    <p><span>prenom:</span> {{ profildata.prenom }}</p>
+    <p><span>adresse:</span> {{ profildata.adresse }}</p>
+    <p><span>ville:</span> {{ profildata.ville }}</p>
+    <p><span>codepostal:</span> {{ profildata.codepostal }}</p>
+    
+ </div>
+
+{% endblock %}

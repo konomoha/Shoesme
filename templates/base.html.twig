@@ -35,11 +35,27 @@
                 <a href="{{ path('home') }}" class="logo">ShooseMe</a>
 
                 <div>
-                    <a href="{{ path('backoffice') }}" class="btn btn-outline-success lien nav-header-1">Backoffice</a>
 
+                {# AJOUT D'UNE CONDITION POUR LIMITER L'ACCES DU BACKOFFICE AUX MEMBRE AYANT LE ROLE ADMIN (il faut attribuer manuellement en bdd) #}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('backoffice') }}" class="btn btn-outline-success lien nav-header-1">BACKOFFICE</a>
+                {% endif %}
+                    
+                {# CONDITIONS DE CHANGEMENT DES BOUTONS NAV EN FONCTION DE CONNEXION OU NON #}
+
+                    {% if app.user %}
+                    <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{app.user.prenom}} {{app.user.nom}}</strong></a>
+                    {% else %}
                     <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a>
+                    {% endif %}
 
-                    <a href="#" class="lien lien-connect nav-header-1">Se connecter</a>
+                    {% if app.user %}
+                    <a href="{{ path('app_logout')}}" class="">Déconnexion</a>
+                    {% else %}
+                    <a href="{{ path('app_login')}}" class="">Se connecter</a>
+                    {% endif %}
+                    
                     {# <div class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"></a>
