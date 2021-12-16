@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shoesme | Accueil{% endblock %}
+
+{% block body %}
+
+    <h1>Bonjour</h1>
+    {# {{ dump(app) }} #}
+    {% for message in app.flashes('success') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
+
+{% endblock %}
