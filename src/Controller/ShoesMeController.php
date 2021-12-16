@@ -12,7 +12,7 @@ class ShoesMeController extends AbstractController
     public function index(): Response
     {
 
-        return $this->render('shoesme/index.html.twig');
+        return $this->render('shoes_me/home.html.twig');
 
     }
 }

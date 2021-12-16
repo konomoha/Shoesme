@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
         $registerForm = $this->createForm(RegistrationFormType::class, $user);
         $registerForm->handleRequest($request);
 
-        if ($registerForm->isSubmitted() && $registerForm->isValid()) {
+        if ($registerForm->isSubmitted()) {
 
             $avatar = $registerForm->get('avatar')->getData();
             // encode the plain password
