@@ -1,33 +1,3 @@
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Shoesme | Inscription{% endblock %}
-
-{% block body %}
-    <h1>Inscription</h1>
-
-    {{ form_start(registrationForm) }}
-
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.sexe) }}
-        {{ form_row(registrationForm.dateNaissance) }}
-        {{ form_row(registrationForm.adresse) }}
-        {{ form_row(registrationForm.telephone) }}
-        {{ form_row(registrationForm.codePostal) }}
-        {{ form_row(registrationForm.ville) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.avatar) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-      
-
-        <button type="submit" class="btn">Valider</button>
-
-    {{ form_row(registrationForm._token) }}
-    {{ form_end(registrationForm) }}
-{% endblock %} #}
-
 {% extends "base.html.twig" %}
 
 {% block title %}
@@ -35,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center my-4">Inscription</h1>
+
 
     {# {{dump(registrationForm.sex.vars.choices.0.value)}} #}
 
@@ -71,5 +41,8 @@
     
     {# {{ form_row(registrationForm._token) }} !!! Attention, Grégory a ajouté ce row dans le formulaire du dessus, il est probablement important pour le bon fonctionnement de l'inscription, il faudra effectuer des tests avec et sans#}
 
-    {{form_end(registrationForm)}}
+
+        {{form_end(registrationForm)}}
+    <div>
+</main>
 {% endblock %}
