@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ShoesMeController extends AbstractController
+class BackofficeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/backoffice', name: 'backoffice')]
     public function index(): Response
     {
-
-        return $this->render('shoesme/index.html.twig');
-
+        return $this->render('backoffice/home.html.twig', [
+            'title' => 'BackofficeAcces',
+        ]);
     }
 }
