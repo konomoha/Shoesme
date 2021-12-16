@@ -1,0 +1,88 @@
+*{
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style-type: none !important;
+    text-decoration: none !important;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.carousel-1{
+    height: 450px;
+    width: 450px;
+}
+
+.main{
+    min-height: 900px;
+    background-color: brown;
+}
+
+.icon-1{
+    color: white;
+}
+
+.nav-header-1:hover{
+    color: white;
+    text-decoration: underline !important;
+}
+
+.nav-footer:hover{
+    text-decoration: underline !important;
+    color: white !important;
+    font-size: 1.2em !important;    
+}
+
+.nav-header{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.nav-header:hover{
+    border: 1px solid white;
+    background-color: rgba(59, 59, 59, 0.644);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-link{
+    color: white;
+}
+
+.three-icon{
+    display: flex;
+    flex-direction: row;
+}
+
+.icon-logo-soc{
+    font-size: 3em;
+    color: white;
+    margin: 15px !important;
+}
+
+.icon-logo{
+    font-size: 2em;
+}
+
+.icon-logo-2{
+    font-size: 1.5em;
+}
+
+.logo{
+    margin: 10px !important;
+    font-size: 2em;
+}
+
+.lien{
+    margin-top: 7px !important;
+    margin-bottom: 7px !important;
+}
+
+a{
+    color: white;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.lien-connect{
+    border-left: 0.5px solid white;
+    
+}
