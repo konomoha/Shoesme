@@ -126,14 +126,14 @@
                 <ul class="dropdown-menu dropdown-menu-secondary text-small shadow" aria-labelledby="dropdownUser1">
                     <li><a class="dropdown-item" href="">Profil</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="">Quitter</a></li>
+                    <li><a class="dropdown-item" href="{{ path('home') }}">Quitter</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="">Deconnexion</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="p-2" style="width: 80%; margin-left: 20%; overflow-y: auto;">        
+        <div class="p-2 main-23" style="width: 80%; margin-left: 20%; overflow-y: auto;">        
         {% block body %}
             
         {% endblock %}        
