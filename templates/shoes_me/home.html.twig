@@ -6,6 +6,12 @@
 
 {% block body %}
 
+    {% for message in app.flashes('success') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
 <main class="main">
     {# <div id="carouselExampleIndicators" class="carousel slide carousel-1" data-bs-ride="carousel">
   <div class="carousel-indicators ">

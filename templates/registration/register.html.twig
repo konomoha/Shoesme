@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Shoesme | Inscription{% endblock %}
 
@@ -26,4 +26,48 @@
 
     {{ form_row(registrationForm._token) }}
     {{ form_end(registrationForm) }}
+{% endblock %} #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Shoesme| Inscription
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Inscription</h1>
+
+    {# {{dump(registrationForm.sex.vars.choices.0.value)}} #}
+
+    {{form_start(registrationForm, {'attr': {'class': 'col-5 mx-auto my-5'}} ) }}
+
+            {{form_row(registrationForm.sexe, {'attr': {'class': 'd-flex flex-row'}} ) }}
+
+        <div class="col-10">
+            {{form_row(registrationForm.nom)}}
+            {{form_row(registrationForm.prenom)}}
+            {{form_row(registrationForm.email)}}
+            {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+            }) }}
+            {{form_row(registrationForm.dateNaissance)}}
+            {{form_row(registrationForm.adresse)}}
+        </div>
+         <div class='d-flex flex-row'>       
+            {{form_row(registrationForm.ville, {'attr': {'class': 'col-3'}} ) }}
+            {{form_row(registrationForm.codePostal, {'attr': {'class': 'col-3'}} ) }}
+        </div>
+        <div class='col-5'>
+            {{form_row(registrationForm.telephone)}} 
+        </div>
+       
+        <div class='col-10'>
+            {{form_row(registrationForm.avatar)}}            
+        </div>
+
+    <div class="mx-auto text-center">
+        <button class="col-4 btn btn-dark text-white">Valider</button>
+    </div>
+
+    {{form_end(registrationForm)}}
 {% endblock %}
