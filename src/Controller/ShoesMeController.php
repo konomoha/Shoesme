@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShoesMeController extends AbstractController
 {
-    #[Route('/shoes/me', name: 'shoes_me')]
+    #[Route('/', name: 'home')]
     public function index(): Response
     {
 
