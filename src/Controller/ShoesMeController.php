@@ -11,8 +11,8 @@ class ShoesMeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
-        return $this->render('shoes_me/home.html.twig', [
-            'title' => 'bienvenue sur ShooseMe',
-        ]);
+
+        return $this->render('shoesme/index.html.twig');
+
     }
 }
