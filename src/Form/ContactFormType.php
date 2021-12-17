@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContactFormType extends AbstractType
 {
@@ -13,44 +15,40 @@ class ContactFormType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'require' => false,
-                'contraints' => [
-                    'message' => [
+                'label' => 'Nom :',
+                'required' => false,
+                'constraints' => [
                         new NotBlank([
-                            'message' => 'Nom :'
+                            'message' => 'Saisir un Nom'
                         ])
                     ]
-                ]
             ])
             ->add('prenom', TextType::class,[
-                'require' => false,
-                'contraints' => [
-                    'message' => [
+                'label' => 'Prenom :',
+                'required' => false,
+                'constraints' => [
                         new NotBlank([
-                            'message' => 'Prenom :'
-                        ])
+                            'message' => 'Saisir un Prenom'
+                        ]),
                     ]
-                ]
             ])
             ->add('email', TextType::class,[
-                'require' => false,
-                'contraints' => [
-                    'message' => [
+                'label' => 'Email :',
+                'required' => false,
+                'constraints' => [
                         new NotBlank([
-                            'message' => 'Email :'
-                        ])
+                            'message' => 'Saisir un Email'
+                        ]),
                     ]
-                ]
             ])
-            ->add('description', TextArea::class,[
-                'require' => false,
-                'contraints' => [
-                    'message' => [
+            ->add('commentaire', TextareaType::class,[
+                'label' => 'Votre Message :',
+                'required' => false,
+                'constraints' => [
                         new NotBlank([
-                            'message' => 'Votre message :'
+                            'message' => 'Saisir votre message :'
                         ])
                     ]
-                ]
             ])
         ;
     }
