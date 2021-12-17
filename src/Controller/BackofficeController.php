@@ -77,7 +77,7 @@ class BackofficeController extends AbstractController
 
         if($formAdminShoes->isSubmitted() && $formAdminShoes->isValid())
         {
-            $shoes=$this->getUser();
+            
             if($shoes->getId() )
                 $txt = 'modifiée';
             else 
@@ -117,7 +117,6 @@ class BackofficeController extends AbstractController
     }
 
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
-}
 
 
 /* affichage des message de contact */
