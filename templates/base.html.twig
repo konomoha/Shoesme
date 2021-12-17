@@ -58,14 +58,14 @@
 
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="#">Mon panier</a></li>
-                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                        <li><a class="dropdown-item" href="{{path('app_profil')}}">Mon profil</a></li>
                         <li><a class="dropdown-item" href="#">Mes commandes</a></li>
                         <li><hr class="dropdown-divider"></li>
                             {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('backoffice') }}" class="text-dark nav-header-2">BACKOFFICE</a>
                         {% endif %}
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href={{ path('app_logout')}}"">Deconnexion</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_logout')}}">Deconnexion</a></li>
                     </ul>
                 </div>
                     
@@ -83,7 +83,7 @@
         </div>
     </nav>
 
-        <div class="d-flex justify-content-center align-items-center p-2">
+        <div class="d-flex justify-content-center align-items-center p-3 shadow-lg">
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Nouveautés</a>
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
             <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Homme</a>
@@ -92,10 +92,11 @@
         </div>
     
     
-        
+    <div class="hauteur-min">    
     {% block body %}
             
     {% endblock %}
+    </div>
 
     
 <footer class="py-2 pb-1 bg-black">
