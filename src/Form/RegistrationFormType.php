@@ -107,7 +107,7 @@ class RegistrationFormType extends AbstractType
                 'constraints'=>[
                     //Regex qui prend en compte le '0' initial des numéros de tel
                     new Regex ([
-                        'pattern'=>'/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
+                        'pattern'=> '/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
                         'match'=>true,
                         'message'=> "Veuillez entrer un numéro de téléphone valide"
                 ])

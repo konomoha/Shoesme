@@ -67,7 +67,7 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light position-fixed h-100" style="width: 20%;">
             <a href="{{ path('backoffice') }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             
-            <span class="fs-4 text-black">ShoesMeAccés</span>
+            <span class="fs-4 text-black">ShoesMeAccèsAdmin</span>
             </a>
             <hr>
             {# {{ dump(app.request.attributes.get('_route')) }} #}
@@ -108,6 +108,12 @@
                     <a href="" class="nav-link text-dark {% if route_name == '' %} active {% endif %}">
                     <i class="bi bi-chat-dots"></i>&nbsp;
                     Gestion Commentaires
+                    </a>
+                </li>
+                 <li>
+                    <a href="" class="nav-link text-dark {% if route_name == '' %} active {% endif %}">
+                    <i class="bi bi-people"></i>&nbsp;
+                    Messages contact
                     </a>
                 </li>
                 <li>
