@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Entity\Chaussure;
+
+use App\Form\ChaussureType;
+
 use App\Repository\ContactRepository;
+
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class BackofficeController extends AbstractController
 {
-/* ################## Route Ecran Accueil Back-office ################## */
+/* ##################------------ Route Ecran Accueil Back-office ------------################## */
     #[Route('/backoffice', name: 'backoffice')]
     public function index(): Response
     {
@@ -24,24 +28,26 @@ class BackofficeController extends AbstractController
         ]);
     }
 
-/* ################## ROUTE AFFICHAGE ET SUPPRESSION CHAUSSURE ################## */    
-    #[Route('/backoffice/produit', name: 'backoffice_produit_affichage')]
+/* ##################------------ CRUD - CHAUSSURE ------------################## */   
+
+/* ################## ROUTE AFFICHAGE ET SUPPRESSION ################## */
+    #[Route('/backoffice/produit', name: 'backoffice_produit')]
     #[Route('/backoffice/produit/suppression/{id}', name: 'backoffice_produit_suppression')]
     public function backOfficeProduit(EntityManagerInterface $manager, Chaussure $shoesRemove=null, ChaussureRepository $chaussureRepo)
     {
         //Affichage chaussures
-        $titreColonne=$manager->getClassMetadata(Article::class)->getFieldNames();
+        $titreColonne=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
         $shoes = $chaussureRepo->findAll();
 
         //Suppression chaussures
         if($shoesRemove)
         {
-            $id=$shoesRemove->getId();
+            $id=$shoesRemove->getId(). ' - ' . $shoesRemove->getMarque(). ' - ' . $shoesRemove->getModel();
             $manager->remove($shoesRemove);
             $manager->flush();
-            $this->addFlash('success', "La chaussure n° $id a été supprimée");
+            $this->addFlash('suppression', "La chaussure n° $id a été supprimée");
 
-            return $this->redirectToRoute('backoffice_produit_affichage');
+            return $this->redirectToRoute('backoffice_produit');
         }
         //Fin suppression chaussure
 
@@ -50,9 +56,9 @@ class BackofficeController extends AbstractController
             'chaussure'=>$shoes
         ]);
     }
-/* ################## FIN ROUTE AFFICHAGE ET SUPPRESSION CHAUSSURE ################## */
 
-/* ################## ROUTE AJOUT/MODIFICATION CHAUSSURE ################## */
+
+/* ################## ROUTE AJOUT ET MODIFICATION ################## */
     #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
     #[Route('/backoffice/produit/modification/{id}', name: 'backoffice_produit_modification')]
     public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager)
@@ -100,16 +106,19 @@ class BackofficeController extends AbstractController
 
             $this->addFlash('success', "La chaussure a été $txt avec succès.");
 
-            return $this->redirectToRoute('backoffice_produit_affichage');
+            return $this->redirectToRoute('backoffice_produit');
         }
 
-        return $this->render('backoffice/admin_produit_form.html.twig', [
+        return $this->render('backoffice/chaussureAjout.html.twig', [
             'formAdminShoes' => $formAdminShoes->createView(),
             'photoEnregistree' => $shoes->getPhoto(), 
             'Modification' => $shoes->getId()
         ]);
     }
-/* ################## FIN ROUTE AJOUT/MODIFICATION CHAUSSURE ################## */
+
+/* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
+}
+
 
 /* affichage des message de contact */
 
@@ -148,4 +157,5 @@ class BackofficeController extends AbstractController
     }
 
 }
+
 
