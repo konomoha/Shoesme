@@ -32,6 +32,10 @@
     overflow-x: auto;
     overflow-y: scroll;
 }
+.photobo
+{
+    width:15vw;
+}
 
 .entete-comments{
     background-color: rgba(98, 20, 243, 0.418);
