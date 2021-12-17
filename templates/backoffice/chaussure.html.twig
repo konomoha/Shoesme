@@ -1,0 +1,48 @@
+{% extends "/backoffice/home.html.twig" %}
+
+{% block title %}
+    Shoesme | BO - Chaussures
+{% endblock %}
+
+{% block body %}
+<main id="MainStock">
+    <h1 class="text-center my-5 bg-white">Vue d'ensemble du stock</h1>
+    {% for message in app.flashes('suppression') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
+    <table class="table table-light table-hover mt-5">
+        <tr>
+        {% for nom in colonne %}
+            <th class="text-center">{{nom}}</th>        
+        {% endfor %}
+            <th>Action</th>
+        </tr>
+        
+        {% for data in chaussure %}
+        <tr> 
+            <td class="text-center align-middle">{{data.id}}</td>
+            <td class="text-center align-middle">{{data.marque}}</td>
+            <td class="text-center align-middle">{{data.model}}</td>
+            <td class="text-center align-middle">{{data.type}}</td>
+            <td class="text-center align-middle">{{data.taille}}</td>
+            <td class="text-center align-middle">{{data.couleur}}</td>
+            <td class="text-center align-middle">{{data.matiere}}</td>
+            <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
+            <td class="text-center align-middle"><img src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+            <td class="text-center align-middle">{{data.prix}}</td>
+            <td class="text-center align-middle">{{data.stock}}</td>
+            
+            <td><a href="{{path('backoffice_produit_ajout')}}" class="icone-tableau text-center"><i class="fas fa-plus-circle text-success"></i></a><br>
+                <a href="{{path('backoffice_produit_modification',{'id': data.id}) }}" class="icone-tableau text-center"><i class="fas fa-edit text-warning"></i></a><br>
+                <a href="{{path('backoffice_produit_suppression', {'id': data.id}) }}" class="icone-tableau text-center"><i class="fas fa-trash-alt text-danger"></i></a>
+            </td>
+        </tr>
+        {% endfor %}    
+        
+    </table>
+</main>
+
+{% endblock %}

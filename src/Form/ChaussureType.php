@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\Chaussure;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ChaussureType extends AbstractType
 {
@@ -19,7 +21,23 @@ class ChaussureType extends AbstractType
             ->add('couleur')
             ->add('matiere')
             ->add('descriptif')
-            ->add('photo')
+            ->add('photo', FileType::class, [
+                'label' => "Uploader une photo",
+                'mapped' => true, 
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png.'
+                    ])
+                ]
+            ])
             ->add('prix')
             ->add('stock')
         ;

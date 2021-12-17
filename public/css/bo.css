@@ -5,8 +5,8 @@
 .main-23{
     background-image: url("../img/img3.jpg");
     background-size: cover no-repeat;
-    position: fixed;
-    height: auto;
+    /* position: fixed; */
+    /* height: auto; */
 }
 
 .main-bo{
@@ -14,4 +14,16 @@
     background-color: rgba(240, 248, 255, 0.692);
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* CRUD CHAUSSURE */
+.icone-tableau
+{
+    font-size: 1.5em;
+}
+
+#MainStock
+{
+    overflow-x: auto;
+    overflow-y: scroll;
 }
