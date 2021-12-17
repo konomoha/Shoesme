@@ -6,6 +6,10 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.hauteur-min{
+    min-height: 800px;
+}
+
 .color-nav{
     background-color: #DC5959;
 }
