@@ -31,11 +31,13 @@
             <td class="text-center align-middle">{{data.couleur}}</td>
             <td class="text-center align-middle">{{data.matiere}}</td>
             <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
+
             <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+
             <td class="text-center align-middle">{{data.prix}}</td>
             <td class="text-center align-middle">{{data.stock}}</td>
-            
-            <td><a href="{{path('backoffice_produit_ajout')}}" class="icone-tableau text-center"><i class="fas fa-plus-circle text-success"></i></a><br>
+
+            <td class="text-center align-middle">
                 <a href="{{path('backoffice_produit_modification',{'id': data.id}) }}" class="icone-tableau text-center"><i class="fas fa-edit text-warning"></i></a><br>
                 <a href="{{path('backoffice_produit_suppression', {'id': data.id}) }}" class="icone-tableau text-center"><i class="fas fa-trash-alt text-danger"></i></a>
             </td>

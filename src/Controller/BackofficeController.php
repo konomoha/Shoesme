@@ -78,6 +78,7 @@ class BackofficeController extends AbstractController
         if($formAdminShoes->isSubmitted() && $formAdminShoes->isValid())
         {
            
+
             if($shoes->getId() )
                 $txt = 'modifiée';
             else 
@@ -119,7 +120,6 @@ class BackofficeController extends AbstractController
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 
 
-
 /* affichage des message de contact */
 
 #[Route('/backoffice/message', name: 'app_message')]
@@ -157,5 +157,3 @@ class BackofficeController extends AbstractController
     }
 
 }
-
-
