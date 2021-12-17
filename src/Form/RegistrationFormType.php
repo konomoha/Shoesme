@@ -74,6 +74,7 @@ class RegistrationFormType extends AbstractType
                         ])
 
                     ]
+
                 ])
                 
                 ->add('nom', TextType::class,[

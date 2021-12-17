@@ -7,13 +7,18 @@
 {% block body %}
 
 
+<div class="main-inscription">
+<div class="div-inscription p-4">
+
+
+<h1 class="text-center">Inscription</h1>
     {# {{dump(registrationForm.sex.vars.choices.0.value)}} #}
 
-    {{form_start(registrationForm, {'attr': {'class': 'col-5 mx-auto my-5'}} ) }}
+    {{form_start(registrationForm, {'attr': {'class': 'col-5  mx-auto my-5 bg-white form-inscription'}} ) }}
 
             {{form_row(registrationForm.sexe, {'attr': {'class': 'd-flex flex-row'}} ) }}
 
-        <div class="col-10">
+        <div class="col-12">
             {{form_row(registrationForm.nom)}}
             {{form_row(registrationForm.prenom)}}
             {{form_row(registrationForm.email)}}
@@ -23,15 +28,19 @@
             {{form_row(registrationForm.dateNaissance)}}
             {{form_row(registrationForm.adresse)}}
         </div>
-         <div class='d-flex flex-row'>       
-            {{form_row(registrationForm.ville, {'attr': {'class': 'col-3'}} ) }}
-            {{form_row(registrationForm.codePostal, {'attr': {'class': 'col-3'}} ) }}
+         <div class='d-flex flex-row justify-content-between'>  
+            <div class="col-5">     
+                {{form_row(registrationForm.ville) }}
+            </div> 
+            <div class="col-5"> 
+                {{form_row(registrationForm.codePostal) }}
+            </div> 
         </div>
         <div class='col-5'>
             {{form_row(registrationForm.telephone)}} 
         </div>
        
-        <div class='col-10'>
+        <div class='col-12'>
             {{form_row(registrationForm.avatar)}}            
         </div>
 
@@ -39,10 +48,13 @@
         <button class="col-4 btn btn-dark text-white">Valider</button>
     </div>
     
-    {# {{ form_row(registrationForm._token) }}  #}
+
+    {{ form_row(registrationForm._token) }} 
+    {# !!! Attention, Grégory a ajouté ce row dans le formulaire du dessus, il est probablement important pour le bon fonctionnement de l'inscription, il faudra effectuer des tests avec et sans #}
 
 
         {{form_end(registrationForm)}}
-    <div>
-</main>
+    </div>
+</div>
+
 {% endblock %}
