@@ -4,7 +4,30 @@ $(document).ready(function() {
             url: '/js/dataTables.french.json'
         },
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [ 4 ] }
+            { 'bSortable': false, 'aTargets': [ 4,6 ] }
         ]
     });
 });
+
+$(document).ready(function() {
+    $('#table-article').DataTable({
+        language: {
+            url: '/js/dataTables.french.json'
+        },
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 7,8,11 ] }
+        ]
+    });
+});
+
+$(document).ready(function() {
+    $('#table-user').DataTable({
+        language: {
+            url: '/js/dataTables.french.json'
+        },
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 11,12 ] }
+        ]
+    });
+});
+
