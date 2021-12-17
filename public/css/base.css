@@ -6,6 +6,22 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.color-nav{
+    background-color: #95E5C2;
+}
+
+.color-nav2{
+    background-color: #F8FBFA;   
+}
+
+
+.logo{
+    height: 50px;
+    width: 50px;
+}
+.color-menu{
+    color: black;
+}
 
 .main-inscription{
     background-image: url("../img/img2.jpg");
