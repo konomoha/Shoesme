@@ -22,7 +22,7 @@ class ChaussureType extends AbstractType
             ->add('matiere')
             ->add('descriptif')
             ->add('photo', FileType::class, [
-                'label' => "Uploader une photo",
+                'label' => "Ajouter une photo",
                 'mapped' => true, 
                 'required' => false,
                 'data_class' => null,
@@ -32,9 +32,10 @@ class ChaussureType extends AbstractType
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
-                            'image/jpg'
+                            'image/jpg',
+                            'image/gif'
                         ],
-                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png.'
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
                     ])
                 ]
             ])
