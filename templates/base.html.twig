@@ -35,9 +35,9 @@
   </head>
   <body>
 
-        <nav class="navbar navbar-light bg-black">
+        <nav class="navbar navbar-light color-nav">
             <div class="container-fluid">
-                <a href="{{ path('home') }}" class="logo">ShooseMe</a>
+                <a href="{{ path('home') }}" class="logo"><img src="{{ asset('img/logo.png') }}" class="logo"></a>
 
                 <div>
 
@@ -77,20 +77,22 @@
             </div>
         </nav>
 
-        <nav class="d-flex flex-row justify-content-between bg-secondary">
+        <nav class="d-flex flex-row justify-content-between color-nav2">
             <div class="">
                 <a><i class="bi bi-ear icon-logo icon-1"></i></a>
             </div>
 
             <div class="container d-flex justify-content-center align-items-center">
-                    <a href="#" class="nav-header nav-link link-dark mx-2">Nouveautés</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2">Femme</a>
-                    <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2">Homme</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2">Enfant</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2">Promotions</a>
+                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Nouveautés</a>
+                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
+                    <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Homme</a>
+                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Enfant</a>
+                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Promotions</a>
                 </ul>
             </div>
 
+
+            
             <div class="three-icon align-items-center">
                 <a href="#"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
                 {# <i class="bi bi-heart icon-logo-2 mx-2 icon-1"></i>
@@ -98,12 +100,12 @@
             </div>
         </nav>
 
-
+        
     {% block body %}
             
     {% endblock %}
 
-    
+    <img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere" class="w-100">
 <footer class="py-2 pb-1 bg-black">
     <div class="row col-12">
         <div class="col-1">
