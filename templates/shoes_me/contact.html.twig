@@ -6,36 +6,26 @@
 
 {% block body %}
 
+<div class="main-inscription">
+<div class="div-inscription p-4">
 
   <h1 class="text-center my-5">Contactez-nous</h1>
 
-            <div class="container d-flex justify-content-around zone-map-contact mb-5">
-                <div class="col-12 col-sm-12 col-md-7 col-lg-5 col-xl-5">
-                    <h4 class="text-center mb-3">Formulaire de contact</h4>
-                    <form action="" class="mb-5">
-                        <div class="mb-3">
-                            <!-- <label for="nom" class="form-label">Nom</label> -->
-                            <input type="text" class="form-control" id="nom" name="nom" placeholder="Saisir votre nom">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="prenom" class="form-label">Prénom</label> -->
-                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Saisir votre prénom">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="email" class="form-label">Email</label> -->
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Saisir votre Email">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="sujet" class="form-label">Email</label> -->
-                            <input type="text" class="form-control" id="sujet" name="sujet" placeholder="Saisir votre Sujet">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="sujet" class="form-label">Message</label> -->
-                            <textarea type="text" class="form-control" id="sujet" rows="10" name="sujet" placeholder="Saisir votre message"></textarea>
-                        </div>
-                        <input type="submit" name="submit" value="Envoyer" class="btn btn-dark">
-                    </form>
-                </div>
-            </div>
+
+    {{ form_start(formContact, {'attr': {'class': 'col-5  mx-auto my-5 bg-white form-inscription'}} ) }}
+
+        {{ form_row(formContact.nom) }}
+        {{ form_row(formContact.prenom) }}
+        {{ form_row(formContact.email) }}
+        {{ form_row(formContact.commentaire) }}
+
+        <div class="mx-auto text-center">
+            <button class="col-4 btn btn-dark text-white">Valider</button>
+        </div>
+
+    {{ form_end(formContact) }}
+
+</div>
+</div>
     
 {% endblock %}

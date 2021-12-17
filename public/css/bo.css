@@ -1,20 +1,25 @@
 *{
-    font-family: 'Bakbak One', cursive;
+    font-family: 'Oswald', sans-serif;
+    
 }
 
 .main-23{
     background-image: url("../img/img3.jpg");
     background-size: cover no-repeat;
     /* position: fixed; */
+
     /* height: auto; */
+
+   
+
 }
 
 .main-bo{
-    min-height: 900px;
-    background-color: rgba(240, 248, 255, 0.692);
+    background-color: rgba(240, 248, 255, 0.767);
     margin: 0 !important;
     padding: 0 !important;
 }
+
 
 /* CRUD CHAUSSURE */
 .icone-tableau
@@ -27,3 +32,23 @@
     overflow-x: auto;
     overflow-y: scroll;
 }
+
+.entete-comments{
+    background-color: rgba(98, 20, 243, 0.418);
+}
+
+.main-inscription{
+    background-image: url("../img/img2.jpg");
+    background-size: contain;
+}
+
+.div-inscription{
+    background-color: rgba(240, 248, 255, 0.548) !important;
+}
+
+.form-inscription{
+    padding: 30px !important;
+    /* border: 2px solid rgba(19, 19, 19, 0.767);
+    border-radius: 10px; */
+}
+

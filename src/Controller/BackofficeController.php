@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Chaussure;
+
 use App\Form\ChaussureType;
+
+use App\Repository\ContactRepository;
+
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,5 +115,47 @@ class BackofficeController extends AbstractController
             'Modification' => $shoes->getId()
         ]);
     }
+
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 }
+
+
+/* affichage des message de contact */
+
+#[Route('/backoffice/message', name: 'app_message')]
+#[Route('/backoffice/message/delete/{id}', name: 'app_delete_message')]
+    public function messageView(EntityManagerInterface $manager, ContactRepository $repoContact)
+    {
+
+        $colonnes = $manager->getclassMetadata(Contact::class)->getFieldNames();
+
+        $cellules = $repoContact->findAll();
+
+
+        return $this->render('backoffice/admin_message.html.twig', [
+            'colonnes' => $colonnes,
+            'cellules' => $cellules
+        ]);
+
+      
+    }
+
+    #[Route('/backoffice/message/{id}/delete', name: 'app_delete_message')]
+    public function deleteMessage(EntityManagerInterface $manager, Contact $contactRemove)
+    {
+        if($contactRemove)
+        
+            $id = $contactRemove->getId();
+
+            $manager->remove($contactRemove);
+            $manager->flush();
+
+            $this->addFlash('success', "Le commentaire $id a bien été supprimer avec succès");
+
+            return $this->redirectToRoute('app_message');
+       
+    }
+
+}
+
+

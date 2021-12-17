@@ -37,6 +37,11 @@ class Contact
      */
     private $commentaire;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Contact
     public function setCommentaire(?string $commentaire): self
     {
         $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
