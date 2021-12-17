@@ -3,7 +3,7 @@
     padding: 0 !important;
     list-style-type: none !important;
     text-decoration: none !important;
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Oswald', sans-serif;
 }
 
 
@@ -96,4 +96,14 @@ a{
 .lien-connect{
     border-left: 0.5px solid white;
     
+}
+
+.ch1{
+    display: flex;
+    
+    
+}
+
+.H{
+     color: black;
 }
