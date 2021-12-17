@@ -1,0 +1,59 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block body %}
+
+<div class="main-bo">
+    <h1 class="text-center mt-3 mb-4">Commentaires</h1>
+
+    {# {% for message in app.flashes('success') %}
+        <div class="col-6 mx-auto text-center alert alert-success">
+            {{ message }}
+        </div>        
+    {% endfor %} #}
+
+        <table class="table table-striped mx-2" id="table-contact">
+            <thead class="entete-comments">
+                <tr class="">
+                        {% for data in colonnes %}
+
+                            {% if data != 'id' %}
+
+                                <th class="text-center"> {{data|capitalize}} </th>
+
+                            {% endif %}
+                            
+                        {% endfor %}
+
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for data in cellules %} 
+
+                    {% if data != 'id'  %}
+                    <tr class="">
+
+                    
+                    <td class="text-center"> {{ data.nom}} </td>
+                    <td class="text-center"> {{ data.prenom}} </td>
+                    <td class="text-center"> {{ data.email}} </td>
+                    <td>{{ data.commentaire|slice(0, 100)|striptags }}[...]</td>
+                    <td class="text-center"> {{ data.date|date("d/m/Y") }} </td>
+                    
+                    <td ><div class="d-flex nowrap"><a href="{{ path('app_delete_message', {'id': data.id}) }}" class="btn bg-danger text-white me-1" onclick="return(confirm('Etes-vous sur de vouloir supprimer ce commentaire : {{ data.id }} ' ))"><i class="bi bi-trash"></i></a>
+
+                    </tr>
+
+                    {% endif %}  
+
+                {% endfor %}
+            </tbody>        
+        </table>
+    </div>
+    
+{% endblock %}
