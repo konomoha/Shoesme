@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Contact;
+
 use App\Entity\Chaussure;
 
 use App\Form\ChaussureType;
 
+use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
-
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +25,7 @@ class BackofficeController extends AbstractController
     #[Route('/backoffice', name: 'backoffice')]
     public function index(): Response
     {
-        return $this->render('backoffice/home.html.twig', [
+        return $this->render('backoffice/admin_home.html.twig', [
             'title' => 'BackofficeAcces',
         ]);
     }
@@ -123,7 +125,7 @@ class BackofficeController extends AbstractController
 /* affichage des message de contact */
 
 #[Route('/backoffice/message', name: 'app_message')]
-#[Route('/backoffice/message/delete/{id}', name: 'app_delete_message')]
+
     public function messageView(EntityManagerInterface $manager, ContactRepository $repoContact)
     {
 
@@ -154,6 +156,24 @@ class BackofficeController extends AbstractController
 
             return $this->redirectToRoute('app_message');
        
+    }
+
+    #[Route('backoffice/user', name: 'app_admin_user')]
+
+    public function userView(EntityManagerInterface $manager, UserRepository $repoUser)
+    {
+
+        $colonnes = $manager->getclassMetadata(User::class)->getFieldNames();
+
+        $cellules = $repoUser->findAll();
+
+
+        return $this->render('backoffice/admin_user.html.twig', [
+            'colonnes' => $colonnes,
+            'cellules' => $cellules
+        ]);
+
+      
     }
 
 }

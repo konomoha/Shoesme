@@ -1,0 +1,44 @@
+{% extends 'base_backoffice.html.twig' %}
+
+{% block title %}
+    Hello BackofficeController!
+{% endblock %}
+
+{% block body %}
+
+
+
+<h1 class="text-center my-3">Bienvenue dans le gestionnaire</h1>
+
+   <div class="col-8 mx-auto d-flex justify-content-around flex-wrap">             
+    <a href="{{path('backoffice_produit')}}" class="btn btn-outline-secondary align-items-center p-5 fs-5 m-5">
+    Articles liste
+    </a>
+
+    <a href="{{path('backoffice_produit_ajout')}}" class="btn btn-outline-dark p-5 fs-5 m-5">
+    Ajouter article
+    </a>
+
+    <a href="" class="btn btn-outline-dark p-5 fs-5 m-5">
+    Categories
+    </a>
+
+    <a href="" class="btn btn-outline-dark p-5 fs-5 m-5">
+    Ajouter categorie
+    </a>
+
+    <a href="" class="btn btn-outline-dark p-5 fs-5 m-5">
+    Gestion Commentaires
+    </a>
+
+    <a href="{{ path('app_message') }}" class="btn btn-outline-dark p-5 fs-5 m-5">
+    Messages contact
+    </a>
+
+    <a href=" {{ path('app_admin_user') }} " class="btn btn-outline-dark p-5 fs-5 m-5">
+    Utilisateurs
+    </a>
+</div>
+
+
+{% endblock %}

@@ -16,9 +16,10 @@
 
 
 .logo{
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
 }
+
 .color-menu{
     color: black;
 }
@@ -40,7 +41,6 @@
 
 .main{
     min-height: 900px;
-    background-color: brown;
 }
 
 .icon-1{
@@ -49,6 +49,12 @@
 
 .nav-header-1:hover{
     color: white;
+    text-decoration: underline !important;
+}
+
+.nav-header-2:hover{
+    background: black;
+    color: white !important;
     text-decoration: underline !important;
 }
 
@@ -65,8 +71,8 @@
 
 .nav-header:hover{
     border: 1px solid white;
-    background-color: rgba(59, 59, 59, 0.644);
-    color: white;
+    background-color: black;
+    color: white !important;
     border-radius: 5px;
 }
 

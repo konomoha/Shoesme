@@ -1,0 +1,66 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block body %}
+
+<div class="main-bo">
+    <h1 class="text-center mt-3 mb-4">Liste des Utilisateurs</h1>
+
+    {# {% for message in app.flashes('success') %}
+        <div class="col-6 mx-auto text-center alert alert-success">
+            {{ message }}
+        </div>        
+    {% endfor %} #}
+
+        <table class="table table-striped mx-2" id="table-user">
+            <thead class="entete-comments">
+                <tr class="">
+                        {% for data in colonnes %}
+
+                            {% if data != 'password' %}
+                                <th class="text-center"> {{data|capitalize}} </th>
+                            {% endif %}
+                            
+                        {% endfor %}
+
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for data in cellules %} 
+                    
+                    <tr class="">
+                        {% if data != 'password' %}  
+
+                            <td class="text-center"> {{ data.id}} </td>
+                            <td class="text-center"> {{ data.email}} </td>                            
+                            {% if data.roles[0] != "ROLE_ADMIN"  %}
+                                <td class="text-center"> USER </td>
+                            {% else %}
+                                <td class="text-center"> ADMIN </td>
+                            {% endif %} 
+                            <td class="text-center"> {{ data.prenom|capitalize}} </td>
+                            <td class="text-center"> {{ data.nom|upper}} </td>
+                            <td class="text-center"> {{ data.adresse}} </td>
+                            <td class="text-center"> {{ data.ville|upper}} </td>
+                            <td class="text-center"> {{ data.codepostal}} </td>
+                            <td class="text-center"> {{ data.sexe|upper}} </td>
+                            <td class="text-center"> +33{{ data.telephone}} </td>
+                            <td class="text-center"> {{ data.datenaissance|date("d/m/Y")}} </td>
+                            <td></td>
+                            
+                            <td class="d-flex justify-content-center"><a href="" class="btn btn-outline-success"><i class="bi bi-pen"></i></a>
+                        {% endif %}
+                    </tr> 
+
+                {% endfor %}
+            </tbody>        
+        </table>
+    </div>
+
+    
+{% endblock %}
