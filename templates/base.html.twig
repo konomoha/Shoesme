@@ -35,77 +35,70 @@
   </head>
   <body>
 
-        <nav class="navbar navbar-light color-nav">
-            <div class="container-fluid">
-                <a href="{{ path('home') }}" class="logo"><img src="{{ asset('img/logo.png') }}" class="logo"></a>
-
-                <div>
-
-                {# AJOUT D'UNE CONDITION POUR LIMITER L'ACCES DU BACKOFFICE AUX MEMBRE AYANT LE ROLE ADMIN (il faut attribuer manuellement en bdd) #}
-
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('backoffice') }}" class="btn btn-outline-success lien nav-header-1">BACKOFFICE</a>
-                {% endif %}
-                    
-                {# CONDITIONS DE CHANGEMENT DES BOUTONS NAV EN FONCTION DE CONNEXION OU NON #}
-
-                    {% if app.user %}
-                    <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{app.user.prenom}} {{app.user.nom}}</strong></a>
-                    {% else %}
-                    <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a>
-                    {% endif %}
-
-                    {% if app.user %}
-                    <a href="{{ path('app_logout')}}" class="">Déconnexion</a>
-                    {% else %}
-                    <a href="{{ path('app_login')}}" class="">Se connecter</a>
-                    {% endif %}
-                    
-                    {# <div class="flex-shrink-0 dropdown">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"></a>
-
-                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#">Mon compte</a></li>
-                            <li><a class="dropdown-item" href="#">Mes commandes</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Deconnexion</a></li>
-                        </ul>
-                    </div> #}
+    <nav class="navbar navbar-light color-nav">
+        <div class="container-fluid d-flex justify-content-between">
+            <div >
+                <a href="{{ path('home') }}"><img src="{{ asset('img/logo001.png') }}" class="logo"></a>
+                <h4 class="text-center">ShoesMe</h4>
+            </div>
+            
+            <div class="d-flex flex-row flex-end align-items-center pe-2">
+                
+                <div class="">                 
+                
+                    <a href="#"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
+                
+                {% if app.user %}
+                <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{ app.user.prenom|upper }} {#{{app.user.nom}} #}</strong></a>
                 </div>
 
+                <div class="flex-shrink-0 dropdown ">             
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ asset('img/vegeta.jpg') }}" alt="mdo" width="50" height="50" class="rounded-circle"></a>
+
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" href="#">Mon panier</a></li>
+                        <li><a class="dropdown-item" href="{{path('app_profil')}}">Mon profil</a></li>
+                        <li><a class="dropdown-item" href="#">Mes commandes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('backoffice') }}" class="text-dark nav-header-2">BACKOFFICE</a>
+                        {% endif %}
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ path('app_logout')}}">Deconnexion</a></li>
+                    </ul>
+                </div>
+                    
+                {% else %}
+                <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a>
+                {% endif %}
+
+                {% if app.user %}                    
+                
+                {% else %}
+                <a href="{{ path('app_login')}}" class="">Se connecter</a>
+                {% endif %}  
+                
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <nav class="d-flex flex-row justify-content-between color-nav2">
-            <div class="">
-                <a><i class="bi bi-ear icon-logo icon-1"></i></a>
-            </div>
-
-            <div class="container d-flex justify-content-center align-items-center">
-                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Nouveautés</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
-                    <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Homme</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Enfant</a>
-                    <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Promotions</a>
-                </ul>
-            </div>
-
-
-            
-            <div class="three-icon align-items-center">
-                <a href="#"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
-                {# <i class="bi bi-heart icon-logo-2 mx-2 icon-1"></i>
-                <i class="bi bi-person icon-logo-2 mx-2 icon-1"></i> #}
-            </div>
-        </nav>
-
-        
+        <div class="d-flex justify-content-center align-items-center p-3 shadow-lg">
+            <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Nouveautés</a>
+            <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
+            <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Homme</a>
+            <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Enfant</a>
+            <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Promotions</a>
+        </div>
+    
+    
+    <div class="hauteur-min">    
     {% block body %}
             
     {% endblock %}
+    </div>
 
-    <img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere" class="w-100">
+    
 <footer class="py-2 pb-1 bg-black">
     <div class="row col-12">
         <div class="col-1">

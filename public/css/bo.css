@@ -3,19 +3,15 @@
     
 }
 
-.main-23{
-    background-image: url("../img/img3.jpg");
-    background-size: cover no-repeat;
-    /* position: fixed; */
-
-    /* height: auto; */
-
-   
-
-}
+/* .main-23{
+     background-image: url("../img/img3.jpg");
+    background-size: cover no-repeat; 
+     position: fixed; 
+     height: auto;
+} */
 
 .main-bo{
-    background-color: rgba(240, 248, 255, 0.767);
+    background-color: rgba(240, 248, 255, 0.87);
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -24,17 +20,21 @@
 /* CRUD CHAUSSURE */
 .icone-tableau
 {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
-#MainStock
+/* #MainStock
 {
     overflow-x: auto;
     overflow-y: scroll;
-}
+} */
 .photobo
 {
     width:15vw;
+}
+
+.photobo{
+    width: 15vw;
 }
 
 .entete-comments{
@@ -54,5 +54,10 @@
     padding: 30px !important;
     /* border: 2px solid rgba(19, 19, 19, 0.767);
     border-radius: 10px; */
+}
+
+.taille-lien{
+    width: 150px;
+    height: 150px;
 }
 

@@ -1,4 +1,4 @@
-{% extends "/backoffice/home.html.twig" %}
+{% extends "base_backoffice.html.twig" %}
 
 {% block title %}
     Shoesme | Ajout - Chaussures
@@ -10,8 +10,14 @@
 <div class="main-inscription" id="MainStock">
 <div class="div-inscription p-4">
 
-<h1 class="text-center">Ajout chaussure</h1>
-    {{dump(formAdminShoes)}}
+<h1 class="text-center">
+    {% if Modification %}
+        Modification chaussure {{Modification}}
+    {% else %}
+        Ajout nouvelle chaussure
+    {% endif %}
+</h1>
+    {# {{dump(formAdminShoes)}} #}
 
     {{form_start(formAdminShoes, {'attr': {'class': 'col-5  mx-auto my-5 bg-white form-inscription'}} ) }}
 
@@ -28,8 +34,14 @@
 
         {{form_row(formAdminShoes._token)}}
 
-        <div class="mx-auto text-center">
-            <button class="col-4 btn btn-dark text-white mb-3">Valider</button>
+        <div class="text-center">
+        <button class="btn btn-dark">
+        {% if Modification %}
+            Enregistrer les modifications
+        {% else %}
+            Enregistrer
+        {% endif %}
+        </button>
         </div>
 
     {{form_end(formAdminShoes)}}
