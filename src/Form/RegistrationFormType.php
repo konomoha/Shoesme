@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -31,9 +32,11 @@ class RegistrationFormType extends AbstractType
                 ->add('email', TextType::class,[
                     'required'=> false,
                     'constraints' => [
-                        new NotBlank([
-                            'message'=>"Veuillez renseigner votre email."
-                        ])
+                        new Regex ([
+                            'pattern'=>'/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/',
+                            'match'=>true,
+                            'message'=> "Veuillez un email valide!"
+                    ])
                     ]
                 ])
 
@@ -138,11 +141,11 @@ class RegistrationFormType extends AbstractType
                     ]
                 ])
 
-                ->add('dateNaissance', DateType::class, [
-                    
-                    'widget' => 'single_text',
-                    "format" => 'yyyy-MM-dd',
-                    
+                ->add('dateNaissance', BirthdayType::class, [
+                    'label' => "Date de Naissance",
+                    'placeholder' => [
+                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    ],
                 ])
 
                 ->add('avatar', FileType::class, [
@@ -246,11 +249,11 @@ class RegistrationFormType extends AbstractType
                     ]
                 ])
 
-                ->add('dateNaissance', DateType::class, [
-                    
-                    'widget' => 'single_text',
-                    "format" => 'yyyy-MM-dd',
-                    
+                ->add('dateNaissance', BirthdayType::class, [
+                    'label' => "Date de Naissance",
+                    'placeholder' => [
+                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    ],
                 ])
 
                 ->add('avatar', FileType::class, [
