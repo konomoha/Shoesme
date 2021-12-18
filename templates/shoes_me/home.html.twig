@@ -5,12 +5,18 @@
 {% endblock %}
 
 {% block body %}
-
-    {% for message in app.flashes('success') %}
+  {% for message in app.flashes('success_register') %}
     
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
     {% endfor %}
+
+  {% for message in app.flashes('success_edit') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
 
 <div class="main">
 <div class="">
