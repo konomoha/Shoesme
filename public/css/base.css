@@ -133,3 +133,9 @@ a{
 .H{
      color: black;
 }
+
+.shoes_card
+{
+    width: 30%;
+    height: auto;
+}

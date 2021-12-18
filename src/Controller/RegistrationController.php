@@ -50,7 +50,7 @@ class RegistrationController extends AbstractController
               
             }
             
-            $this->addFlash('success', "Félicitations, vous êtes inscrit(e)!");
+            $this->addFlash('success_register', "Félicitations, vous êtes inscrit(e)!");
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -119,14 +119,14 @@ class RegistrationController extends AbstractController
                     $user->setAvatar($avatarActuel);
 
             else{
-                $user->setAvatar("test");
+                $user->setAvatar(null);
             }
                
             }
             
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash('success', 'Vous avez modifié vos informations, merci de vous authentifier à nouveau');
+            $this->addFlash('success_edit', 'Vous avez modifié vos informations, merci de vous authentifier à nouveau');
 
             return $this->redirectToRoute('app_logout');
         }
