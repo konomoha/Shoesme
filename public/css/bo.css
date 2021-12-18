@@ -61,3 +61,12 @@
     height: 150px;
 }
 
+th, td
+{
+    vertical-align: middle !important;
+}
+
+.avatarbo
+{
+    width: 7vw;
+}

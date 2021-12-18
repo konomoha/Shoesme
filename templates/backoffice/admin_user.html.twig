@@ -51,8 +51,12 @@
                             <td class="text-center"> {{ data.sexe|upper}} </td>
                             <td class="text-center"> +33{{ data.telephone}} </td>
                             <td class="text-center"> {{ data.datenaissance|date("d/m/Y")}} </td>
-                            <td></td>
-                            
+                             {% if data.avatar != null %}
+                                <td><img class="avatarbo" src="{{ asset('avatar/' ~ data.avatar)}}" alt="avatar"></td>
+                            {% else %}
+                                <td class="text-danger">Aucun avatar uplodé</td>
+                            {% endif %}
+                                        
                             <td class="d-flex justify-content-center"><a href="" class="btn btn-outline-success"><i class="bi bi-pen"></i></a>
                         {% endif %}
                     </tr> 
