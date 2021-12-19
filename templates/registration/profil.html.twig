@@ -9,7 +9,12 @@
 <h2 class="text-center my-4">Bienvenue <span class="text-danger">{{profildata.prenom|upper}}</h2>
 
    {% if profildata.roles.0 == 'ROLE_ADMIN' %}
-        <p class="text-center text-secondary fs-5 mb-5">Tu es tellement un beau gosse que tu es <span class="text-success">ADMINISTRATEUR</span> du site</p>
+        {% if profildata.sexe == 'm' %}
+            <p class="text-center text-secondary fs-5 mb-5">Tu es tellement un beau gosse que tu es <span class="text-success">ADMINISTRATEUR</span> du site</p>
+            {% else %}
+             <p class="text-center text-secondary fs-5 mb-5">Tu es tellement une bombasse que tu es <span class="text-success">ADMINISTRATRICE</span> du site</p>
+        {% endif %}
+       
    {% endif %}
 
 
