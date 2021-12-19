@@ -34,7 +34,6 @@
         {% endblock %}
   </head>
   <body>
-
     <nav class="navbar navbar-light color-nav">
         <div class="container-fluid d-flex justify-content-between">
             <div >
@@ -46,7 +45,7 @@
                 
                 <div class="">                 
                 
-                    <a href="#"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
+                    <a href="{{path('panier')}}"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
                 
                 {% if app.user %}
                 <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{ app.user.prenom|upper }} {#{{app.user.nom}} #}</strong></a>
@@ -57,7 +56,7 @@
                         <img src="{{ asset('img/vegeta.jpg') }}" alt="mdo" width="50" height="50" class="rounded-circle"></a>
 
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item" href="#">Mon panier</a></li>
+                        <li><a class="dropdown-item" href="{{path('panier')}}">Mon panier</a></li>
                         <li><a class="dropdown-item" href="{{path('app_profil')}}">Mon profil</a></li>
                         <li><a class="dropdown-item" href="#">Mes commandes</a></li>
                         <li><hr class="dropdown-divider"></li>

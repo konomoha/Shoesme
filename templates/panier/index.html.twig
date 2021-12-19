@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shoesme | Mon Panier {% endblock %}
+
+{% block body %}
+<h1 class="text-center">
+    {% if app.user %}
+        Votre panier, {{app.user.prenom}}
+    {% else %}
+        Panier
+    {% endif %}
+</h1>
+
+{# {{dump(dataPanier)}} #}
+{% if dataPanier %}
+
+<table class="table-bordered col-8 mx-auto text-center">
+    <thead>
+    <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for data in dataPanier %}
+    <tr>
+        <td class="p-2">{{data.Chaussure.model}}</td>
+        <td class="p-2">{{data.Chaussure.prix}} €</td> 
+        <td class="p-2">{{data.Quantite}}</td>
+        <td class="p-2">{{data.Chaussure.prix * data.Quantite}} €</td>
+        <td class="p-2"> 
+            <a href="{{path('panier_add', {id: data.Chaussure.id})}}" class="btn btn-success"><i class="bi bi-cart-plus"></i></a>
+            <a href="{{path('panier_remove', {id: data.Chaussure.id})}}" class="btn btn-warning"><i class="bi bi-cart-dash"></i></a>
+            <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="btn btn-danger"><i class="bi bi-cart-x"></i></a>
+        </td>
+    </tr>
+    {% endfor %}</tbody>
+     
+    <tfoot>
+    <tr>
+        <td colspan="3" class="fw-bold">Total</td>
+        <td class="fw-bold">{{total}} €</td>
+        <td>
+            <a href="{{path('panier_delete_all')}}" class="btn btn-danger text-white">Vider mon panier</a>
+        </td>
+    </tr>
+    </tfoot>
+    
+</table>
+{% else %}
+<h2 class="text-center fst-italic mt-5"><i class="bi bi-bag"></i> Panier vide </h2>
+{% endif %}
+    
+    
+{% endblock %}
