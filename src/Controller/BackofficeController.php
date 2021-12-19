@@ -53,7 +53,7 @@ class BackofficeController extends AbstractController
         }
         //Fin suppression chaussure
 
-        return $this->render('backoffice/chaussure.html.twig', [
+        return $this->render('backoffice/admin_article.html.twig', [
             'colonne'=>$titreColonne,
             'chaussure'=>$shoes
         ]);
@@ -112,7 +112,7 @@ class BackofficeController extends AbstractController
             return $this->redirectToRoute('backoffice_produit');
         }
 
-        return $this->render('backoffice/chaussureAjout.html.twig', [
+        return $this->render('backoffice/admin_article_ajout.html.twig', [
             'formAdminShoes' => $formAdminShoes->createView(),
             'photoEnregistree' => $shoes->getPhoto(), 
             'Modification' => $shoes->getId()
