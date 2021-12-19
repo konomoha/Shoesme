@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block body %}
-
-    {% for message in app.flashes('success') %}
+  {% for message in app.flashes('success_register') %}
     
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
     {% endfor %}
+
 <img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere" class="w-100">
+
 <div class="main">
 <div class="">
   <div class="d-flex justify-content-around py-5">

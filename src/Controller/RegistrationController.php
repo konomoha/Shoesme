@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
@@ -50,7 +51,7 @@ class RegistrationController extends AbstractController
               
             }
             
-            $this->addFlash('success', "Félicitations, vous êtes inscrit(e)!");
+            $this->addFlash('success_register', "Félicitations, vous êtes inscrit(e)!");
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -87,28 +88,39 @@ class RegistrationController extends AbstractController
     #[Route('/profil/{id}/edit', name: 'app_profil_edit')]
     public function profilEdit(User $user=null, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger):Response
     {
+        
+        if($user)
+        {
+            $avatarActuel = $user->getAvatar();
+        }
+            
         $profilUpdate = $this->createForm(RegistrationFormType::class, $user, ['userUpdate'=>true]);
         $profilUpdate->handleRequest($request);
-        
-            $avatarActuel = $user->getAvatar();
-        
 
         if($profilUpdate->isSubmitted() && $profilUpdate->isValid())
         {
             // dd($user);
+            
             $avatar = $profilUpdate->get('avatar')->getData();
 
             if($avatar)
             {   
                 $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);           
                 $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
-                $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
+                $nouveauNomFichier = $nomOrigineAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
 
-     
-                $avatar->move(
+                try
+                {
+                    $avatar->move(
                     $this->getparameter('avatar_directory'),
                     $nouveauNomFichier);
+                }
 
+                catch(FileException $e)
+                {
+                    
+                }
+                
                 $user->setAvatar($nouveauNomFichier);
               
             }
@@ -116,23 +128,28 @@ class RegistrationController extends AbstractController
             else
             {
                 if(isset($avatarActuel))
+                {
                     $user->setAvatar($avatarActuel);
+                }
+                    
 
-            else{
-                $user->setAvatar("test");
+                else
+                {
+                    $user->setAvatar(null);
+                }
+       
             }
-               
-            }
-            
+
+            $this->addFlash('success_update', "Votre profil a été mis à jour, veuillez vous authentifier à nouveau.");
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash('success', 'Vous avez modifié vos informations, merci de vous authentifier à nouveau');
-
+            
             return $this->redirectToRoute('app_logout');
+
         }
         return $this->render('registration/profil_edit.html.twig', [
             'profilUpdate'=> $profilUpdate->createView(),
-            'avatarActuel'=>$avatarActuel]);
+            'avatarActuel'=>$user->getAvatar()]);
     }
 
     

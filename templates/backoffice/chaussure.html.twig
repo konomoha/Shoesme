@@ -7,7 +7,17 @@
 {% block body %}
 <main id="MainStock">
     <h1 class="text-center my-5 bg-white">Vue d'ensemble du stock</h1>
+
+{# ////////////// MESSAGE DE SUPPRESSION ///////////////////////////////// #}
     {% for message in app.flashes('suppression') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
+
+{# ////////////// MESSAGE D'AJOUT OU DE MODIFICATION ///////////////////////////////// #}
+    {% for message in app.flashes('success') %}
     
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 

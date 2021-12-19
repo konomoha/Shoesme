@@ -3,16 +3,23 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+
 <div class="trans">
 <div id="connexion">
 <form method="post">
+
+
+    
+    <h1 class="h3 my-3 font-weight-normal text-center">Connectez-vous</h1>
+
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger text-center col-2 mx-auto mt-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% for message in app.flashes('success') %}
+    {% for message in app.flashes('success_edit') %}
 
     <div class="bg-success text-center p-3 mx-auto col-5 ">{{ message }}</div>
+    
 
     {% endfor %}
 
@@ -22,6 +29,7 @@
             Bienvenue {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     {% endif %}
+
 
     <h1 class="h-3 mb-3 font-weight-normal text-center">Connexion</h1>
     <div class="my-3">
@@ -60,4 +68,5 @@
 <p class="text-center">Pas encore de compte ? <a href="" class="text-black lien-inscrip">S'inscrire</a></p>
 </div>
 </div>
+
 {% endblock %}
