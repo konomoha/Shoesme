@@ -3,19 +3,41 @@
 {% block title %}Hello HommeController!{% endblock %}
 
 {% block body %}
-<div class="d-flex">
-    <div class="head">
-        <h3 class="me-5">Homme</h3>
+
+    <div class="">
+        <h3 class="text-center">Homme</h3>
         
-            <div class="container d-flex justify-content-center align-items-center">
-                <a href="#" class="me-5 H">Promotions</a>
-                <a href="#" class="me-5 H">Sneakers</a>
-                <a href="#" class="me-5 H">Derbies</a>
-                <a href="#" class="me-5 H">Boots</a>
-                <a href="#" class="me-5 H">Chaussures de villes</a>
+            <div class="d-flex justify-content-center">
+                <a href="#" class="H">Promotions</a>
+                <a href="#" class="H">Sneakers</a>
+                <a href="#" class="H">Derbies</a>
+                <a href="#" class="H">Boots</a>
+                <a href="#" class="H">Chaussures de villes</a>
             </div>
     </div>
-</div>
+
+    <form method="post">
+        <label for="categorie">Catégories</label>
+        <select name="categorie" id="categorie">
+            <option value=""></option>
+        </select>
+
+        <label for="marque">Marques</label>
+        <select name="marque" id="marque">
+            <option value=""></option>
+        </select>
+
+        <label for="taille">Taille</label>
+        <select name="taille" id="taille">
+            <option value=""></option>
+        </select>
+
+        <label for="couleur">Couleur</label>
+        <select name="couleur" id="couleur">
+            <option value=""></option>
+        </select>
+    </form>
+
 
 <img src="{{ asset('img/banniere.jpg') }}" alt="banniere" class="w-100">
 
