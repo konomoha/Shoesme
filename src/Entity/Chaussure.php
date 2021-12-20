@@ -35,16 +35,6 @@ class Chaussure
     private $type;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $taille;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $couleur;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $matiere;
@@ -65,24 +55,24 @@ class Chaussure
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $stock;
-
-    /**
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="chaussure")
      */
     private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="chaussure")
+     * @ORM\ManyToMany(targetEntity=Couleur::class, mappedBy="chaussure")
      */
-    private $detailsCommandes;
+    private $couleurs;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sexe;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
-        $this->detailsCommandes = new ArrayCollection();
+        $this->couleurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,30 +112,6 @@ class Chaussure
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getTaille(): ?float
-    {
-        return $this->taille;
-    }
-
-    public function setTaille(float $taille): self
-    {
-        $this->taille = $taille;
-
-        return $this;
-    }
-
-    public function getCouleur(): ?string
-    {
-        return $this->couleur;
-    }
-
-    public function setCouleur(string $couleur): self
-    {
-        $this->couleur = $couleur;
 
         return $this;
     }
@@ -198,18 +164,6 @@ class Chaussure
         return $this;
     }
 
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Commentaire[]
      */
@@ -241,31 +195,40 @@ class Chaussure
     }
 
     /**
-     * @return Collection|DetailsCommande[]
+     * @return Collection|Couleur[]
      */
-    public function getDetailsCommandes(): Collection
+    public function getCouleurs(): Collection
     {
-        return $this->detailsCommandes;
+        return $this->couleurs;
     }
 
-    public function addDetailsCommande(DetailsCommande $detailsCommande): self
+    public function addCouleur(Couleur $couleur): self
     {
-        if (!$this->detailsCommandes->contains($detailsCommande)) {
-            $this->detailsCommandes[] = $detailsCommande;
-            $detailsCommande->setChaussure($this);
+        if (!$this->couleurs->contains($couleur)) {
+            $this->couleurs[] = $couleur;
+            $couleur->addChaussure($this);
         }
 
         return $this;
     }
 
-    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    public function removeCouleur(Couleur $couleur): self
     {
-        if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
-            if ($detailsCommande->getChaussure() === $this) {
-                $detailsCommande->setChaussure(null);
-            }
+        if ($this->couleurs->removeElement($couleur)) {
+            $couleur->removeChaussure($this);
         }
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

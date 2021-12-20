@@ -28,16 +28,16 @@ class DetailsCommande
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Chaussure::class, inversedBy="detailsCommandes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $chaussure;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="detailsCommandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Taille::class, inversedBy="detailsCommandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $taille;
 
     public function getId(): ?int
     {
@@ -68,18 +68,6 @@ class DetailsCommande
         return $this;
     }
 
-    public function getChaussure(): ?Chaussure
-    {
-        return $this->chaussure;
-    }
-
-    public function setChaussure(?Chaussure $chaussure): self
-    {
-        $this->chaussure = $chaussure;
-
-        return $this;
-    }
-
     public function getCommande(): ?Commande
     {
         return $this->commande;
@@ -88,6 +76,18 @@ class DetailsCommande
     public function setCommande(?Commande $commande): self
     {
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getTaille(): ?Taille
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(?Taille $taille): self
+    {
+        $this->taille = $taille;
 
         return $this;
     }

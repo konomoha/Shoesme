@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Entity\Chaussure;
+use App\Entity\Couleur;
+use App\Entity\Taille;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -13,41 +15,36 @@ class ShoesmeFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for($i=1; $i<4; $i++)
-        {
-            $user = new User;
-            $user->setNom($faker->firstName)
-                ->setPrenom($faker->lastName)
-                ->setEmail($faker->email)
-                ->setAdresse("$i rue du test")
-                ->setTelephone("013478300$i")
-                ->setCodePostal("7898$i")
-                ->setVille($faker->country)
-                ->setDateNaissance($faker->dateTimeBetween())
-                ->setSexe("m")
-                ->setPassword("1234");
 
-                $manager->persist($user);
-        }
-        $manager->flush();
+        // for($i=1; $i<4; $i++)
+        // {
+        //     $user = new User;
+        //     $user->setNom($faker->firstName)
+        //         ->setPrenom($faker->lastName)
+        //         ->setEmail($faker->email)
+        //         ->setAdresse("$i rue du test")
+        //         ->setTelephone("013478300$i")
+        //         ->setCodePostal("7898$i")
+        //         ->setVille($faker->country)
+        //         ->setDateNaissance($faker->dateTimeBetween())
+        //         ->setSexe("m")
+        //         ->setPassword("1234");
 
-        for($j=1; $j<8; $j++)
-        {
-            $chaussure = new Chaussure;
-            $chaussure->setMarque($faker->word)
-                        ->setModel($faker->word)
-                        ->setTaille($faker->numberBetween(10,20))
-                        ->setCouleur($faker->safeColorName)
-                        ->setMatiere($faker->word)
-                        ->setDescriptif($faker->paragraph())
-                        ->setPhoto($faker->word)
-                        ->setPrix($faker->numberBetween(10,20))
-                        ->setStock($faker->numberBetween(10,20))
-                        ->setType($faker->word);
+        //         $manager->persist($user);
+        // }
+        // $manager->flush();
 
-                        $manager->persist($chaussure);
-        }
-        $manager->flush();
+        // for($j=1; $j<6; $j++)
+        // {
+        //    $couleur = new Couleur;
+        //    $couleur->setNomCouleur(array_rand(['Blanc', 'Bleu', 'Rouge', 'Noir', 'Gris', 'Beige' ]))
+        //             ->addTaille->findAll()
+
+
+
+        
+        // $manager->flush();
+
         
     }
 }

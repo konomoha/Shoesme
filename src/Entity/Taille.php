@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
+use App\Repository\TailleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CommandeRepository::class)
+ * @ORM\Entity(repositoryClass=TailleRepository::class)
  */
-class Commande
+class Taille
 {
     /**
      * @ORM\Id
@@ -22,26 +22,26 @@ class Commande
     /**
      * @ORM\Column(type="float")
      */
-    private $montant;
+    private $pointure;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $etat;
+    private $stock;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Couleur::class, inversedBy="tailles")
      */
-    private $user;
+    private $couleur;
 
     /**
-     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="commande")
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="taille")
      */
     private $detailsCommandes;
 
     public function __construct()
     {
+        $this->couleur = new ArrayCollection();
         $this->detailsCommandes = new ArrayCollection();
     }
 
@@ -50,38 +50,50 @@ class Commande
         return $this->id;
     }
 
-    public function getMontant(): ?float
+    public function getPointure(): ?float
     {
-        return $this->montant;
+        return $this->pointure;
     }
 
-    public function setMontant(float $montant): self
+    public function setPointure(float $pointure): self
     {
-        $this->montant = $montant;
+        $this->pointure = $pointure;
 
         return $this;
     }
 
-    public function getEtat(): ?string
+    public function getStock(): ?int
     {
-        return $this->etat;
+        return $this->stock;
     }
 
-    public function setEtat(string $etat): self
+    public function setStock(int $stock): self
     {
-        $this->etat = $etat;
+        $this->stock = $stock;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|Couleur[]
+     */
+    public function getCouleur(): Collection
     {
-        return $this->user;
+        return $this->couleur;
     }
 
-    public function setUser(?User $user): self
+    public function addCouleur(Couleur $couleur): self
     {
-        $this->user = $user;
+        if (!$this->couleur->contains($couleur)) {
+            $this->couleur[] = $couleur;
+        }
+
+        return $this;
+    }
+
+    public function removeCouleur(Couleur $couleur): self
+    {
+        $this->couleur->removeElement($couleur);
 
         return $this;
     }
@@ -98,7 +110,7 @@ class Commande
     {
         if (!$this->detailsCommandes->contains($detailsCommande)) {
             $this->detailsCommandes[] = $detailsCommande;
-            $detailsCommande->setCommande($this);
+            $detailsCommande->setTaille($this);
         }
 
         return $this;
@@ -108,12 +120,11 @@ class Commande
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
             // set the owning side to null (unless already changed)
-            if ($detailsCommande->getCommande() === $this) {
-                $detailsCommande->setCommande(null);
+            if ($detailsCommande->getTaille() === $this) {
+                $detailsCommande->setTaille(null);
             }
         }
 
         return $this;
     }
-
 }
