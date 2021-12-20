@@ -29,7 +29,7 @@ class PanierController extends AbstractController
             $total += $chaussure->getPrix() * $quantite; //le prix de l'article multiplié par la quantité
         }
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             "dataPanier"=>$dataPanier,
             "total"=>$total
         ]
@@ -61,7 +61,7 @@ class PanierController extends AbstractController
 
       return $this->redirectToRoute('homme');
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
         ]);
     }
@@ -91,7 +91,7 @@ class PanierController extends AbstractController
 
       return $this->redirectToRoute('panier');
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
         ]);
     }
@@ -113,7 +113,7 @@ class PanierController extends AbstractController
 
       return $this->redirectToRoute('panier');
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
         ]);
     }
@@ -127,7 +127,7 @@ class PanierController extends AbstractController
 
       return $this->redirectToRoute('panier');
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
         ]);
     }

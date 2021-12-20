@@ -159,21 +159,26 @@ class BackofficeController extends AbstractController
     }
 
     #[Route('backoffice/user', name: 'app_admin_user')]
-
-    public function userView(EntityManagerInterface $manager, UserRepository $repoUser)
+    public function userView(EntityManagerInterface $manager, UserRepository $repoUser, )
     {
 
         $colonnes = $manager->getclassMetadata(User::class)->getFieldNames();
 
         $cellules = $repoUser->findAll();
 
-
         return $this->render('backoffice/admin_user.html.twig', [
             'colonnes' => $colonnes,
             'cellules' => $cellules
         ]);
-
       
     }
+
+    // #[Route('backoffice/user/{id}/update', name: 'app_admin_user_update')]
+    // public function roleUser()
+    // {
+
+
+    //     return $this->render('backoffice/admin_user.html.twig');
+    // }
 
 }
