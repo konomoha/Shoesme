@@ -1,4 +1,6 @@
+
  {% extends "base_backoffice.html.twig" %}
+ 
 {% block title %}
     ShoesMe | Commentaires
 {% endblock %}
@@ -7,30 +9,46 @@
 
     <h1 class="text-center my-4">Commentaires Utilisateurs</h1>
 
+    {% for message in app.flashes ('success') %}
+
+        <div class="bg-success col-5 text-center mx-auto my-4 p-3 text-white">{{ message }}</div>
+
+    {% endfor %}
+
     <table class="table table-light table-hover mt-5" id="table-comment">
         <thead>
             <tr>
-            {% for data in colonnes %}
+                {% for data in colonnes %}
 
-                {% if data != 'id' %}
-                    <th>{{data}}</th>
-                {% endif %}
+                    {% if data != 'id' %}
+                        <th>{{data}}</th>
+                    {% endif %}
+                    
+                {% endfor %}
+                    <th>Auteur</th>
+                    <th>Modèle</th>
+                    <th>Action</th>
                 
-            {% endfor %}
-                <th>Auteur</th>
-                <th>Modèle</th></tr>
+            </tr>
         </thead>
+
         <tbody>
-    {% for data in dataComment %}
-        <tr>
-            <th>{{data.date|date('d/m/Y')}}</th>
-            <th>{{data.contenu}}</th>
-            <th>{{data.evaluation}}</th>
-            <th>{{data.user.prenom}} {{data.user.nom}}</th>
-            <th>{{data.chaussure.marque}} {{data.chaussure.model}}</th>
-        </tr>
-    {% endfor %}
-    </tbody>
+            {% for data in dataComment %}
+                <tr>
+                    <th>{{data.date|date('d/m/Y')}}</th>
+                    <th>{{data.contenu}}</th>
+                    <th>{{data.evaluation}}</th>
+                    <th>{{data.user.prenom}} {{data.user.nom}}</th>
+                    <th>{{data.chaussure.marque}} {{data.chaussure.model}}</th>
+                    <th>
+                        <a href="{{path('app_admin_commentaire_delete', {'id': data.id})}}" onclick="return(confirm        ('Voulez-vous vraiment supprimmer le commentaire de {{data.user.prenom}} {{data.user.nom}}?'));"><span > <i class="bi bi-trash"></i></span></a>
+
+                        <a href="{{path('app_admin_commentaire_update', {'id': data.id })}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 {% endblock %} 
