@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Contact;
+use App\Entity\Chaussure;
+use App\Entity\Commentaire;
+use App\Form\CommentFormType;
 use App\Form\ContactFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +53,33 @@ class ShoesMeController extends AbstractController
         ]);
     }
 
+    #[Route('/details_article/{id}', name:'details_article')]
+    public function detailArticle(Request $request, EntityManagerInterface $manager, Chaussure $chaussure):Response
+    {
+        $commentaire = new Commentaire;
+        
+        $id = $this->getUser();
+        $formComment = $this->createForm(CommentFormType::class, $commentaire);
+
+        $formComment->handleRequest($request);
+       
+        if($formComment->isSubmitted() && $formComment->isValid())
+        {
+
+            // dd($id);
+            $commentaire->setDate(new \DateTime());
+            // $commentaire->setUser($id);
+            $manager->persist($commentaire);
+            $manager->flush();
+            $this->addFlash('success', "Félicitations! Votre commentaire a bien été posté!");
+            return $this->redirectToRoute('details_article', ['id'=> $chaussure->getId()]);
+        }
+
+        return $this->render('details_articles/details_articles.html.twig', [
+            'formComment' => $formComment->createView()
+        ]);
+
+    }
     
 }
 

@@ -55,7 +55,6 @@
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in chaussure %}
-
         <div class="shoes_card card mb-5">
             <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
             <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
@@ -70,7 +69,7 @@
 
 
 
-     {# <div class="ch1 mb-1 mt-5">
+    {# <div class="ch1 mb-1 mt-5">
 
         <div class="card mx-3">
             <img src="{{ asset('img/nike1.jpg') }}" class="card-img-top" alt="chaussure1">
@@ -101,7 +100,6 @@
 
             <div class="card mx-3">
                 <img src="{{ asset('img/lacoste1.jpg') }}" class="card-img-top" alt="chaussure1">
-                <button class="btn btn-dark"><a href="{{ 'details_article.html.twig' }}">En savoir plus</a></button>
                 <p class="fst-italic">Sneakers T-Clip Lacoste x Peanuts homme en cuir</p>
             </div>
 
@@ -118,7 +116,7 @@
             </div>
         </div>
     
-    {# <h3><a href="" class="H py-3">Tout voir</a></h3> #}
+    {# <h3><a href="#" class="H py-3">Tout voir</a></h3> #}
 
 
     {# <img src="{{ asset('img/banniere3.jpg') }}" alt="banniere" class="w-100"> #}
