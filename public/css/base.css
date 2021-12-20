@@ -158,3 +158,22 @@ a{
     height: auto;
 
 }
+
+
+.btn-details{
+    text-decoration: underline;
+}
+
+.modal{
+    
+        width: 1000px;
+        height: 1000px;
+        position: absolute;
+        left: 50%;
+        top: 50%; 
+        margin-left: -150px;
+        /* margin-right: 150px; */
+        margin-top: -150px;
+        justify-content: center;
+     
+}
