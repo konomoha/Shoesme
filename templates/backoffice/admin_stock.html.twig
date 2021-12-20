@@ -1,0 +1,23 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    Shoesme | BO - Stock
+{% endblock %}
+
+
+{% block body %}
+{# {{dump(dataChaussure)}}
+{{dump(dataCouleur)}} #}
+            
+                
+
+    <form action="" method="GET">
+        <select name="couleur" id="couleur">
+        {% for data in dataCouleur %}
+            <option value={{data.id}}>{{data.nomCouleur}}</option>
+        {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-dark">Valider</button>
+    </form>
+
+{% endblock %}

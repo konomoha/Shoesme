@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Taille;
+
 use App\Entity\Contact;
 
+use App\Entity\Couleur;
+
 use App\Entity\Chaussure;
-
 use App\Form\ChaussureType;
-
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
 use App\Repository\ChaussureRepository;
+use App\Repository\CouleurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -122,7 +125,36 @@ class BackofficeController extends AbstractController
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 
 
-/* affichage des message de contact */
+
+/* ##################------------ DEBUT - CRUD - STOCK ------------################## */
+
+/* ################## ROUTE AFFICHAGE ET SUPPRESSION ################## */
+#[Route('backoffice/stock', name:'app_admin_stock')]
+public function backOfficeStock (EntityManagerInterface $manager, CouleurRepository $repoCouleur, ChaussureRepository $repoChaussure, Request $request, Couleur $couleur=null)
+{
+    $dataCouleur=$repoCouleur->findAll();
+    
+    
+    if($request->query->get('couleur'))
+    {
+        $selectionCouleur=$request->query->get('couleur');
+        
+        $dataChaussure=$repoChaussure->find($selectionCouleur);
+        // dd($dataChaussure);
+    }
+    
+
+    return $this->render('backoffice/admin_stock.html.twig', [
+        'dataCouleur'=>$dataCouleur,
+        // 'dataChaussure'=>$dataChaussure,
+    ]);
+}
+
+/* ##################------------ FIN - CRUD - STOCK ------------################## */
+
+
+
+/* ################## DEBUT AFFICHAGE DES MESSAGES DE CONTACT ################## */ 
 
 #[Route('/backoffice/message', name: 'app_message')]
 
@@ -172,6 +204,8 @@ class BackofficeController extends AbstractController
         ]);
       
     }
+
+   
 
     // #[Route('backoffice/user/{id}/update', name: 'app_admin_user_update')]
     // public function roleUser()

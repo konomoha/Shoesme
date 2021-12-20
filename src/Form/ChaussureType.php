@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Couleur;
 use App\Entity\Chaussure;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -91,7 +92,15 @@ class ChaussureType extends AbstractType
                             'message' => 'Saisir une Marque'
                         ])
                     ]
-            ]);
+            ])
+            // ->add('couleur', ChoiceType::class,[
+            //     'choices'=>[
+            //        new Couleur ('nomCouleur')],
+            //        'nomCouleur->getId()' => 'nomCouleur->getNomCouleur()',
+            //     'label'=> 'Couleur :',
+            //     'required'=>false,
+            // ])
+            ;
             
         
     }
