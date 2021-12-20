@@ -11,10 +11,77 @@
     {% endif %}
 </h1>
 
+
 {# {{dump(dataPanier)}} #}
 {% if dataPanier %}
+{% for data in dataPanier %}
 
-<table class="table-bordered col-8 mx-auto text-center">
+<div class="d-flex flex-row">
+    <div class="col-md-2 bg-success">
+    ff
+    </div>
+    <div class="col-md-5 bg-primary">
+    ff
+    </div>
+    <div class="col-md-1">
+    </div>
+       
+    <div class="col-md-3 bg-warning">
+    ff
+    </div>
+    <div class="col-md-1 bg-danger">
+    ff
+    </div>
+</div>
+
+ <div class="boite-1 col-md-6 d-flex flex-row">
+            <div class="boite-4 col-3">
+                <a href="" class="p-0"><img class="img-fluid " src="{{ asset('img/' ~ data.Chaussure.photo) }}" alt=""></a>
+            </div>
+
+            <div class="boite-2 col-6">
+                <strong class="">{{ data.Chaussure.marque }}</strong>
+                <p class="mb-0">{{ data.Chaussure.descriptif }}</p>
+                    <div class="">Taille : 42</div>
+                        <form method="post" class="col-3">
+                            <label for="quantite"></label>
+                                <select name="quantite" id="quantite" class="form-select col-6">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                        </form>
+
+                        <a href="#" class="text-dark">Continue reading</a>
+                    </div>
+
+                    <div class="boite-3 col-2">
+                    <p> {{ data.Chaussure.prix }} €</p>
+
+                    <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-x-lg"></i></a>
+                    </div>
+                
+                    
+            </div>
+        </div>
+
+
+
+{% endfor %}
+
+
+
+
+
+
+{# <table class="table-bordered col-8 mx-auto text-center">
     <thead>
     <tr>
         <th>Produit</th>
@@ -30,11 +97,11 @@
     <tr>
         <td class="p-2">{{data.Chaussure.model}}</td>
         <td class="p-2">{{data.Chaussure.prix}} €</td> 
-        <td class="p-2">{{data.Quantite}}</td>
+        <td class="p-2"><a href="{{path('panier_remove', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-dash-square"></i></a>{{data.Quantite}} <a href="{{path('panier_add', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-plus-square"></i></i></a></td>
         <td class="p-2">{{data.Chaussure.prix * data.Quantite}} €</td>
         <td class="p-2"> 
-            <a href="{{path('panier_add', {id: data.Chaussure.id})}}" class="btn btn-success"><i class="bi bi-cart-plus"></i></a>
-            <a href="{{path('panier_remove', {id: data.Chaussure.id})}}" class="btn btn-warning"><i class="bi bi-cart-dash"></i></a>
+           
+            
             <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="btn btn-danger"><i class="bi bi-cart-x"></i></a>
         </td>
     </tr>
@@ -50,10 +117,10 @@
     </tr>
     </tfoot>
     
-</table>
+</table> #}
 {% else %}
 <h2 class="text-center fst-italic mt-5"><i class="bi bi-bag"></i> Panier vide </h2>
-{% endif %}
+{% endif %} 
     
     
 {% endblock %}

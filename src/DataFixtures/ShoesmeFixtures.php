@@ -36,13 +36,10 @@ class ShoesmeFixtures extends Fixture
             $chaussure = new Chaussure;
             $chaussure->setMarque($faker->word)
                         ->setModel($faker->word)
-                        ->setTaille($faker->numberBetween(10,20))
-                        ->setCouleur($faker->safeColorName)
                         ->setMatiere($faker->word)
                         ->setDescriptif($faker->paragraph())
                         ->setPhoto($faker->word)
                         ->setPrix($faker->numberBetween(10,20))
-                        ->setStock($faker->numberBetween(10,20))
                         ->setType($faker->word);
 
                         $manager->persist($chaussure);
