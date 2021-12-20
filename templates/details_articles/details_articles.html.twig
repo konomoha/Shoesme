@@ -4,6 +4,12 @@
 
 {% block body %}
 
+{% for message in app.flashes('success') %}
+    
+        <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+
+    {% endfor %}
+
 <div class="d-flex ms-5 mt-5">
  
        
@@ -118,4 +124,11 @@
     </div>
 
 </div>
+
+{{form_start(formComment)}}
+  {{form_row(formComment.contenu)}}
+  {{form_row(formComment.evaluation)}}
+  <button>Valider</button>
+{{form_end(formComment)}}
+
 {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base_backoffice.html.twig" %}
+{% block title %}
+    ShoesMe | Commentaires
+{% endblock %}
+
+{% block body %}
+    
+    {# {{dump(dataComment)}} #}
+    <h1 class="text-center my-4">Commentaires Utilisateurs</h1>
+
+    <table class="table table-light table-hover mt-5" id="table-comment">
+        <thead>
+            <tr>
+            {% for data in colonnes %}
+
+                {% if data != 'id' %}
+                    <th>{{data}}</th>
+                {% endif %}
+                
+            {% endfor %}
+                <th>Auteur</th>
+                <th>Modèle</th></tr>
+        </thead>
+        <tbody>
+    {% for data in dataComment %}
+        <tr>
+            <th>{{data.date|date('d/m/Y')}}</th>
+            <th>{{data.contenu}}</th>
+            <th>{{data.evaluation}}</th>
+            <th>{{data.user.prenom}} {{data.user.nom}}</th>
+            <th>{{data.chaussure.marque}} {{data.chaussure.model}}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

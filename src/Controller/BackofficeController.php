@@ -9,13 +9,19 @@ use App\Entity\Contact;
 
 use App\Entity\Couleur;
 
+
+use App\Entity\Commentaire;
+
+
 use App\Entity\Chaussure;
+
 use App\Form\ChaussureType;
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
 use App\Repository\ChaussureRepository;
 use App\Repository\CouleurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -214,5 +220,18 @@ public function backOfficeStock (EntityManagerInterface $manager, CouleurReposit
 
     //     return $this->render('backoffice/admin_user.html.twig');
     // }
+
+    #[Route('backoffice/commentaires', name:'app_admin_commentaire')]
+    public function adminCommentaire(CommentaireRepository $repoComment, EntityManagerInterface $manager): Response
+    {
+        $dataComment = $repoComment->findAll();
+        $colonnes = $manager->getClassMetadata(Commentaire::class)->getFieldNames();
+
+        return $this->render('backoffice/admin_commentaire.html.twig', [
+            'colonnes'=>$colonnes,
+            'dataComment'=>$dataComment
+        ]);
+
+    }
 
 }
