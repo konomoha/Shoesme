@@ -15,6 +15,7 @@ class ShoesmeFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+
         // for($i=1; $i<4; $i++)
         // {
         //     $user = new User;
@@ -43,6 +44,7 @@ class ShoesmeFixtures extends Fixture
 
         
         // $manager->flush();
+
         
     }
 }

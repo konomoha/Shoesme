@@ -4,4 +4,69 @@
 
 {% block body %}
 
+
+<div class="">
+        <h3 class="text-center">Femme</h3>
+        
+            <div class="d-flex justify-content-center">
+                <a href="#" class="H">Promotions</a>
+                <a href="#" class="H">Sneakers</a>
+                <a href="#" class="H">Derbies</a>
+                <a href="#" class="H">Boots</a>
+                <a href="#" class="H">Chaussures de villes</a>
+            </div>
+    </div>
+
+    <form method="post">
+        <label for="categorie">Catégories</label>
+        <select name="categorie" id="categorie">
+            <option value=""></option>
+        </select>
+
+        <label for="marque">Marques</label>
+        <select name="marque" id="marque">
+            <option value=""></option>
+        </select>
+
+        <label for="taille">Taille</label>
+        <select name="taille" id="taille">
+            <option value=""></option>
+        </select>
+
+        <label for="couleur">Couleur</label>
+        <select name="couleur" id="couleur">
+            <option value=""></option>
+        </select>
+    </form>
+
+
+<img src="{{ asset('img/banniere.jpg') }}" alt="banniere" class="w-100">
+
+<h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1>
+{# {{dump(chaussure)}} #}
+
+{# {% for message in app.flashes('success') %}
+    <div class="col-3 p-2 mx-auto text-center alert alert-success">
+    <p>{{message}}</p>
+    <p class="fw-bold"><a href="{{path('panier')}}">Aller au panier</a></p>
+    </div>    
+{% endfor %} #}
+    <div class="ch1 mb-1 mt-5 row justify-content-around">
+
+        {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
+        
+        {% for data in chaussure %}
+        {# {{ dump(chaussure)}} #}
+            {% if data.sexe == 'f' %}
+                <div class="shoes_card card mb-5">
+                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
+                    <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
+                    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>     
+                </div>
+            {% endif %} 
+
+        {% endfor %}
+    </div>
+
+
 {% endblock %}

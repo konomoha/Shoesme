@@ -17,7 +17,7 @@ class HommeController extends AbstractController
         $chaussure = $repoChaussure->findBy(
             array(), // condition where
             array (), //order by
-            6, // la limite de chaussures à afficher
+            57, // la limite de chaussures à afficher
             0); // offset
          
         return $this->render('homme/homme.html.twig', [

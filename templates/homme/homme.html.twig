@@ -55,7 +55,7 @@
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in chaussure %}
-
+ {{ dump(chaussure)}}
         <div class="shoes_card card mb-5">
             <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
             <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
@@ -97,11 +97,11 @@
 
 
     {# <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1> #}
-        <div class="ch1 mb-1 ">
+        {# <div class="ch1 mb-1 ">
 
             <div class="card mx-3">
                 <img src="{{ asset('img/lacoste1.jpg') }}" class="card-img-top" alt="chaussure1">
-                <button class="btn btn-dark"><a href="{{ 'details_article.html.twig' }}">En savoir plus</a></button>
+                <button class="btn btn-dark"><a href="{{ ('details_articles.html.twig') }}">En savoir plus</a></button>
                 <p class="fst-italic">Sneakers T-Clip Lacoste x Peanuts homme en cuir</p>
             </div>
 
@@ -116,7 +116,7 @@
                 <p class="fst-italic">Sneakers L-Guard Breaker homme en daim et textile</p>
                 
             </div>
-        </div>
+        </div> #}
     
     {# <h3><a href="" class="H py-3">Tout voir</a></h3> #}
 
@@ -125,7 +125,7 @@
 
 
     {# <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1> #}
-        <div class="ch1 mb-1 mt-5">
+        {# <div class="ch1 mb-1 mt-5">
 
             <div class="card mx-3">
                 <img src="{{ asset('img/adidas1.jpg') }}" class="card-img-top" alt="chaussure1">
@@ -143,7 +143,7 @@
                 <p class="fst-italic">Y-3 HOKORI II</p>
                 
             </div>
-        </div>
+        </div> #}
     
     <h3><a href="#" class="H py-3">Tout voir</a></h3>
 
