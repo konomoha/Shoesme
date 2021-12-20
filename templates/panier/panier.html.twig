@@ -5,7 +5,7 @@
 {% block body %}
 <h1 class="text-center">
     {% if app.user %}
-        Votre panier, {{app.user.prenom}}
+        Votre panier, {{app.user.prenom|capitalize}}
     {% else %}
         Panier
     {% endif %}
