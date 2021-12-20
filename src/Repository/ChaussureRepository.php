@@ -20,21 +20,21 @@ class ChaussureRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Chaussure[] Returns an array of Chaussure objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    //   * @return Chaussure[] Returns an array of Chaussure objects
+    // */
+    
+    // public function findByCouleur($value)
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('couleur = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('')
+    //         ->setMaxResults('')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+    
 
     /*
     public function findOneBySomeField($value): ?Chaussure
