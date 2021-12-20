@@ -78,7 +78,7 @@
                 </div>
                     
                 {% else %}
-                {# <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a> #}
+                 <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a> 
                 {% endif %}
 
                 {% if app.user %}                    
@@ -86,9 +86,9 @@
                 {% else %}
                 <a href="{{ path('app_login')}}" class="">Se connecter</a>
                 <!-- Button trigger modal -->
-                    <a href="{{path('app_login')}}" class="lien nav-header-1 " data-toggle="modal" data-target="#exampleModalCenter">
+                    {# <a href="{{path('app_login')}}" class="lien nav-header-1 " data-toggle="modal" data-target="#exampleModalCenter">
                     Se connecter
-                    </a>
+                    </a> #}
 
                     <!-- Modal -->
                     <div class="modal fade modal-position" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -118,7 +118,7 @@
 
         <div class="d-flex justify-content-center align-items-center p-3 shadow-lg">
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Nouveautés</a>
-            <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
+            <a href="{{ path('femme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Femme</a>
             <a href="{{ path('homme') }}" class="nav-header nav-link link-dark mx-2 text-dark">Homme</a>
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Enfant</a>
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Promotions</a>
