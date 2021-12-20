@@ -59,7 +59,7 @@ class PanierController extends AbstractController
       $session->set("panier", $panier);
       $this->addFlash('success', "$model a bien été ajouté au panier!");
 
-      return $this->redirectToRoute('homme');
+      return $this->redirectToRoute('panier');
 
         return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
