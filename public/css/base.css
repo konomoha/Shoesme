@@ -6,6 +6,10 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.modal-position{
+    margin-left: 35% !important;
+}
+
 .hauteur-min{
     min-height: 800px;
 }
