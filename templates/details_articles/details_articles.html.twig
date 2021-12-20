@@ -125,10 +125,62 @@
 
 </div>
 
-{{form_start(formComment)}}
-  {{form_row(formComment.contenu)}}
-  {{form_row(formComment.evaluation)}}
-  <button>Valider</button>
-{{form_end(formComment)}}
+{# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
+
+<h2 class="text-center">Donnez votre avis</h2>
+
+{# {{dump(formComment.evaluation)}} #}
+
+  {% if app.user %}
+    <div class="col-4 mx-auto">
+
+      {{form_start(formComment)}}
+
+        {{form_row(formComment.contenu)}}
+
+        {{form_row(formComment.evaluation)}}
+
+        <button>Valider</button>
+
+      {{form_end(formComment)}}
+
+    </div>
+
+  {% else %}
+
+    <p class="text-secondary"> <a class="link-secondary" href="{{path('app_login')}}">Identifiez-vous</a> ou <a class="link-secondary" href="{{path('app_register')}}">créez votre compte</a>  pour poster un commentaire</p>
+        
+  {% endif %}
+
+{# ############################################# COMMENTAIRES ############################################### #}
+
+<h2 class="text-center">Derniers avis</h2>
+
+{% if chaussure.commentaires is not empty %}
+  {% for comment in chaussure.commentaires %}
+        
+      {# {{ dump(comment) }} #}
+      <div class="mb-3">
+      
+        <div class="col-4">
+
+          <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}})</small></p>
+          
+        </div>
+
+        <div class="col-8">
+
+          <p class="mb-2"><strong>Commentaire:</strong> <span class="fst-italic">{{ comment.contenu }}</span></p><hr>
+
+        </div>
+        
+      </div>
+  {% endfor %}
+
+  {% else %}
+
+    <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
+
+{% endif %}
 
 {% endblock %}

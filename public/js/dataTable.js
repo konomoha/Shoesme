@@ -37,7 +37,7 @@ $(document).ready(function() {
             url: '/js/dataTables.french.json'
         },
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [ 2,4 ] }
+            { 'bSortable': false, 'aTargets': [ 1,3,4,5 ] }
         ]
     });
 });

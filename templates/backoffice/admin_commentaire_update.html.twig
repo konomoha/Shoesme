@@ -1,0 +1,24 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    Shoesme | Comment Update
+{% endblock %}
+
+{% block body %}
+
+    <h1>Modifier le commentaire</h1>
+
+    <div class="col-4 mx-auto">
+
+        {{form_start(formComment)}}
+
+            {{form_row(formComment.contenu)}}
+
+            {{form_row(formComment.evaluation)}}
+
+            <button>Modifier</button>
+
+        {{form_end(formComment)}}
+
+    </div>
+{% endblock %}

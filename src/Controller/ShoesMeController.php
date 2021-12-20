@@ -59,6 +59,7 @@ class ShoesMeController extends AbstractController
         $commentaire = new Commentaire;
         
         $id = $this->getUser();
+        // $idshoes = $chaussure;
         $formComment = $this->createForm(CommentFormType::class, $commentaire);
 
         $formComment->handleRequest($request);
@@ -66,9 +67,10 @@ class ShoesMeController extends AbstractController
         if($formComment->isSubmitted() && $formComment->isValid())
         {
 
-            // dd($id);
+            // dd($chaussure);
             $commentaire->setDate(new \DateTime());
-            // $commentaire->setUser($id);
+            $commentaire->setUser($id);
+            $commentaire->setChaussure($chaussure);
             $manager->persist($commentaire);
             $manager->flush();
             $this->addFlash('success', "Félicitations! Votre commentaire a bien été posté!");
@@ -76,7 +78,8 @@ class ShoesMeController extends AbstractController
         }
 
         return $this->render('details_articles/details_articles.html.twig', [
-            'formComment' => $formComment->createView()
+            'formComment' => $formComment->createView(),
+            'chaussure'=> $chaussure
         ]);
 
     }

@@ -10,16 +10,17 @@ use App\Entity\Contact;
 use App\Entity\Couleur;
 
 
-use App\Entity\Commentaire;
-
-
 use App\Entity\Chaussure;
 
+
+use App\Entity\Commentaire;
+
 use App\Form\ChaussureType;
+use App\Form\CommentFormType;
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
-use App\Repository\ChaussureRepository;
 use App\Repository\CouleurRepository;
+use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -221,15 +222,54 @@ public function backOfficeStock (EntityManagerInterface $manager, CouleurReposit
     //     return $this->render('backoffice/admin_user.html.twig');
     // }
 
-    #[Route('backoffice/commentaires', name:'app_admin_commentaire')]
-    public function adminCommentaire(CommentaireRepository $repoComment, EntityManagerInterface $manager): Response
+    // ############################################ AFFICHAGE DES COMMENTAIRES #################################
+
+    #[Route('backoffice/commentaire', name:'app_admin_commentaire')]
+    #[Route('/backoffice/commentaire/{id}/delete', name:'app_admin_commentaire_delete')]
+    public function adminCommentaire(CommentaireRepository $repoComment, EntityManagerInterface $manager, Commentaire $commentRemove=null): Response
     {
         $dataComment = $repoComment->findAll();
         $colonnes = $manager->getClassMetadata(Commentaire::class)->getFieldNames();
 
+        if($commentRemove)
+        {
+            //On stock l'auteur du commentaire dans une variable afin de l'intégrer dans le message de validation
+            $auteur = $commentRemove->getUser()->getNom()." ". $commentRemove->getUser()->getPrenom();
+            $manager->remove($commentRemove);
+            $manager->flush();
+            $this->addFlash('success', "le commentaire de $auteur à bien été supprimé");
+            return $this->redirectToRoute('app_admin_commentaire');
+        }
+
         return $this->render('backoffice/admin_commentaire.html.twig', [
             'colonnes'=>$colonnes,
             'dataComment'=>$dataComment
+        ]);
+
+    }
+
+    //############################################# MODIFICATION COMMENTAIRES #################################
+
+    #[Route('/backoffice/commentaire/{id}/update', name:'app_admin_commentaire_update')]
+    public function updateComment(Commentaire $commentaire, EntityManagerInterface $manager, Request $request): Response
+    {
+        $formComment = $this->createForm(CommentFormType::class, $commentaire);
+
+        $formComment->handleRequest($request);
+
+        if($formComment->isSubmitted() && $formComment->isValid())
+
+        {
+            $auteur = $commentaire->getUser()->getNom()." ". $commentaire->getUser()->getPrenom();
+            $manager->persist($commentaire);
+            $manager->flush();
+            $this->addFlash('success', "le commentaire de $auteur à bien été modifié");
+            return $this->redirectToRoute('app_admin_commentaire');
+        }       
+        
+
+        return $this->render('backoffice/admin_commentaire_update.html.twig',[
+            'formComment'=>$formComment->createView()
         ]);
 
     }
