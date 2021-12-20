@@ -6,9 +6,9 @@
     font-family: 'Oswald', sans-serif;
 }
 
-.modal-position{
+/* .modal-position{
     margin-left: 35% !important;
-}
+} */
 
 .hauteur-min{
     min-height: 800px;
@@ -181,3 +181,30 @@ a{
         justify-content: center;
      
 }
+
+/*################# carte article panier #####################*/
+
+/* .boite-1{
+    border: 1px solid black;
+    padding: 0 !important;
+    height: 250px;
+
+}
+
+.boite-2{
+    border: 1px solid red;
+    padding-left: 1em !important;
+}
+
+.boite-3{
+    border: 1px solid green;
+}
+
+.boite-4{
+    border: 1px solid blue;
+    padding: 0 !important;
+}
+
+.boite-4 img{
+    height: 100%;
+} */
