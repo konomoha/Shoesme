@@ -1,12 +1,12 @@
-{% extends "base_backoffice.html.twig" %}
 
+ {% extends "base_backoffice.html.twig" %}
+ 
 {% block title %}
     ShoesMe | Commentaires
 {% endblock %}
 
 {% block body %}
-    
-    {# {{dump(dataComment)}} #}
+
     <h1 class="text-center my-4">Commentaires Utilisateurs</h1>
 
     {% for message in app.flashes ('success') %}
@@ -51,4 +51,4 @@
         </tbody>
     </table>
 
-{% endblock %}
+{% endblock %} 
