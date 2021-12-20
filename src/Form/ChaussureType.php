@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +20,19 @@ class ChaussureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+            ->add('sexe', ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'm',
+                    'Femme' => 'f'                    
+                ],
+                // 'attr' => [
+                //     'style' => 'margin-left: 10px;'
+                // ],
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'Civilité' 
+            ])
             ->add('marque', TextType::class,[
                 'label' => 'Marque :',
                 'required' => false,

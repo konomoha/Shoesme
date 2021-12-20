@@ -64,6 +64,11 @@ class Chaussure
      */
     private $couleurs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sexe;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -212,6 +217,18 @@ class Chaussure
         if ($this->couleurs->removeElement($couleur)) {
             $couleur->removeChaussure($this);
         }
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }
