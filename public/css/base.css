@@ -184,14 +184,21 @@ a{
 
 /*################# carte article panier #####################*/
 
-/* .boite-1{
+.boite-1{
+    margin-left: 10% !important;
+    margin-right: 10% !important;
     border: 1px solid black;
     padding: 0 !important;
-    height: 250px;
 
 }
 
-.boite-2{
+.boite-synth{
+    border: 1px solid black;
+    margin-left: 10% !important;
+    margin-right: 30% !important;
+}
+
+/* .boite-2{
     border: 1px solid red;
     padding-left: 1em !important;
 }
@@ -207,4 +214,4 @@ a{
 
 .boite-4 img{
     height: 100%;
-} */
+}  */

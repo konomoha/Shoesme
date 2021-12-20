@@ -43,7 +43,6 @@
 <img src="{{ asset('img/banniere.jpg') }}" alt="banniere" class="w-100">
 
 <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1>
-{# {{dump(chaussure)}} #}
 
 {# {% for message in app.flashes('success') %}
     <div class="col-3 p-2 mx-auto text-center alert alert-success">
@@ -56,7 +55,6 @@
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in chaussure %}
-        {# {{ dump(chaussure)}} #}
             {% if data.sexe == 'f' %}
                 <div class="shoes_card card mb-5">
                     <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
