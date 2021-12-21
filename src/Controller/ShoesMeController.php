@@ -84,17 +84,38 @@ class ShoesMeController extends AbstractController
     public function detailArticle(CommentaireRepository $repoCommentaire, Request $request, EntityManagerInterface $manager, Chaussure $chaussure):Response
     {
         $commentaire = new Commentaire;
+        $total= 0;
+        foreach($chaussure->getCommentaires() as $key => $value)
+        {
+            if(!empty($value->getEvaluation()))
+            {
+                $note = $value->getEvaluation();
+                // dump($eval);
+                $dataNote[] = $note;
+                // dump($evaluation);
+                $total += $note;
+            }
+        }
+
+        dump(count($dataNote));
+
+        $resultat = $total / count($dataNote);
+        $moyenne = round($resultat,1);
+
+        // dump($moyenne);
+
+        // dump($chaussure->getCommentaires());
         
         $id = $this->getUser();
         // $idshoes = $chaussure;
         $formComment = $this->createForm(CommentFormType::class, $commentaire);
-
         $formComment->handleRequest($request);
-       
+        $datacom = $repoCommentaire->findAll();
+        $total = 0;
+
         if($formComment->isSubmitted() && $formComment->isValid())
         {
-
-            // dd($chaussure);
+             
             $commentaire->setDate(new \DateTime());
             $commentaire->setUser($id);
             $commentaire->setChaussure($chaussure);
@@ -103,10 +124,17 @@ class ShoesMeController extends AbstractController
             $this->addFlash('success_comment', "Félicitations! Votre commentaire a bien été posté!");
             return $this->redirectToRoute('details_article', ['id'=> $chaussure->getId()]);
         }
+        
+        // foreach($datacom as $note)
+        // {
+        //     $total += $note->getEvaluation();
+        // }
 
         return $this->render('details_articles/details_articles.html.twig', [
             'formComment' => $formComment->createView(),
-            'chaussure'=> $chaussure
+            'chaussure'=> $chaussure,
+            'datacom'=>$datacom,
+            'moyenne'=>$moyenne
         ]);
 
     }

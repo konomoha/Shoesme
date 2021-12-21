@@ -38,6 +38,7 @@ class CommentFormType extends AbstractType
                     'Super'=> '4'
                     
                 ],
+                'required' => false,
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Note' 
