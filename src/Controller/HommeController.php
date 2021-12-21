@@ -20,7 +20,7 @@ class HommeController extends AbstractController
             57, // la limite de chaussures à afficher
             0); // offset
          
-        return $this->render('shoes_me/homme.html.twig', [
+        return $this->render('homme/homme.html.twig', [
             'chaussure'=> $chaussure
         ]);
     }
