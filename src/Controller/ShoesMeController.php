@@ -8,7 +8,11 @@ use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\CommentFormType;
 use App\Form\ContactFormType;
+
 use App\Repository\CommentaireRepository;
+
+use App\Repository\ChaussureRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +23,22 @@ use Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy;
 class ShoesMeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(): Response
+    public function index( ChaussureRepository $repoChaussure): Response
     {
 
-        return $this->render('shoes_me/home.html.twig');
+        $chaussure = $repoChaussure->findBy(
+            array(), // condition where
+            array (), //order by
+            10, // la limite de chaussures à afficher
+            0); // offset
+
+        return $this->render('shoes_me/home.html.twig', [
+            'chaussure'=> $chaussure
+        ]);
 
     }
+
+
 
     #[Route ('/contact', name: 'contact')]
     public function contact(Contact $contact = null, Request $request, EntityManagerInterface $manager): Response

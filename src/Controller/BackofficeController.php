@@ -48,7 +48,9 @@ class BackofficeController extends AbstractController
     public function backOfficeProduit(EntityManagerInterface $manager, Chaussure $shoesRemove=null, ChaussureRepository $chaussureRepo)
     {
         //Affichage chaussures
-        $titreColonne=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+        $titreColonneChaussure=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+        $titreColonneCouleur=$manager->getClassMetadata(Couleur::class)->getFieldNames();
+        
         $shoes = $chaussureRepo->findAll();
 
         //Suppression chaussures
@@ -64,7 +66,8 @@ class BackofficeController extends AbstractController
         //Fin suppression chaussure
 
         return $this->render('backoffice/admin_article.html.twig', [
-            'colonne'=>$titreColonne,
+            'colonneChaussure'=>$titreColonneChaussure,
+            'colonneCouleur'=>$titreColonneCouleur,
             'chaussure'=>$shoes
         ]);
     }

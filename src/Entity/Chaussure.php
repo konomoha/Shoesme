@@ -69,6 +69,11 @@ class Chaussure
      */
     private $sexe;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $top;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -229,6 +234,18 @@ class Chaussure
     public function setSexe(string $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function getTop(): ?string
+    {
+        return $this->top;
+    }
+
+    public function setTop(?string $top): self
+    {
+        $this->top = $top;
 
         return $this;
     }
