@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Chaussure;
 use App\Repository\ChaussureRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,11 +38,10 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/add/{id}', name: 'panier_add')]
-    public function addPanier(Chaussure $chaussure, SessionInterface $session): Response
+    public function addPanier(Chaussure $chaussure, SessionInterface $session, EntityManagerInterface $manager): Response
     {
         $id = $chaussure->getId();
         $model = $chaussure->getModel();
-      
         $panier = $session->get("panier", []);
         
         if(!empty($panier[$id]))
@@ -57,6 +57,8 @@ class PanierController extends AbstractController
       
       //sauvegarde du panier
       $session->set("panier", $panier);
+      $session->set("commande", $panier);
+ 
       $this->addFlash('success', "$model a bien été ajouté au panier!");
 
       return $this->redirectToRoute('panier');
@@ -110,20 +112,6 @@ class PanierController extends AbstractController
 
       
       $session->set("panier", $panier);
-
-      return $this->redirectToRoute('panier');
-
-        return $this->render('panier/panier.html.twig', [
-            'controller_name' => 'PanierController',
-        ]);
-    }
-
-    #[Route('/panier/delete_all', name:'panier_delete_all')]
-    public function deleteAll(SessionInterface $session): Response
-    {  
-     
-      $session->remove("panier"); //panier complètement supprimé
-
 
       return $this->redirectToRoute('panier');
 
