@@ -15,37 +15,34 @@
 <img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere" class="w-100">
 
 
-<div class="col-2 d-flex flex-row nowrap">
-  {% for data in chaussure %}
-    {% if data.top == 'top' %}   
+<div class="d-flex flex-row justify-content-center my-5">
+  {% for data in chaussure_m %}
+    <div class="d-flex flex-row my-3">
       <div>
-        <div class="" style="width: 20rem;">
-          <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="...">
+        <div class="mx-1" style="width: 20rem;">
+          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="..."></a>
         </div>
       </div>
-    {% endif %}
+      </div>
   {% endfor %}
-  
-</div>
+  </div>
 
-  
 
-<div class="ch1 mb-1 mt-5 row justify-content-around">
-
-        {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
-        
-        {% for data in chaussure %}
-
- 
-        <div class="shoes_card card mb-5 ">
-            <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
-            <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
-            <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>     
+  <div class="d-flex flex-row justify-content-center my-5">
+  {% for data in chaussure_f %} 
+    
+    <div class="d-flex flex-row my-3">
+      <div>
+        <div class="mx-1" style="width: 20rem;">
+          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="..."></a>
         </div>
+      </div>
+      </div>
 
-        {% endfor %}
+  {% endfor %}
+  </div>
 
-    </div>
+
 
 
 

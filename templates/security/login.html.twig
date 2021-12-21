@@ -5,8 +5,7 @@
 {% block body %}
 
 <div class="trans">
-<div id="connexion">
-<form method="post">
+
 
     {% if error %}
         <div class="alert alert-danger text-center col-2 mx-auto mt-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -26,7 +25,8 @@
         </div>
     {% endif %}
 
-
+<div id="connexion">
+<form method="post">
 
     <h1 class="h-3 mb-3 font-weight-normal text-center">Connexion</h1>
     <div class="my-3">
@@ -57,12 +57,12 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary px-2 mb-5" type="submit">
+    <button class="btn btn-lg btn-primary px-2 mb-5 mx-auto" type="submit">
         Se connecter
     </button>
     </div>
 </form>
-<p class="text-center">Pas encore de compte ? <a href="" class="text-black lien-inscrip">S'inscrire</a></p>
+<p class="text-center">Pas encore de compte ? <a href="{{ path('app_register') }}" class="text-black lien-inscrip">S'inscrire</a></p>
 </div>
 </div>
 
