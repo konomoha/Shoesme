@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+{# {{dump(chaussure.0.couleurs.0)}} #}
+{# {{dump(colonneCouleur)}} #}
 <main id="MainStock">
     <h1 class="text-center my-5 bg-white">Vue d'ensemble du stock</h1>
 
@@ -22,7 +24,7 @@
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
     {% endfor %}
-
+{# ////////////// FIN MESSAGE D'AJOUT OU DE MODIFICATION ///////////////////////////////// #}
     <div class="d-flex justify-content-center my-4">
         <a href=" {{ path('backoffice_produit_ajout') }} " class="btn btn-outline-success col-10">Ajouter article</a>
     </div>
@@ -30,18 +32,35 @@
     <table class="table table-light table-hover mt-5" id="table-article">
     <thead>
         <tr>
-        {% for nom in colonne %}
+        {% for nom in colonneChaussure %}
             {% if nom != 'id' %}
                 <th class="text-center">{{nom}}</th> 
             {% endif %}
                    
         {% endfor %}
+            <th class="text-center">Couleur</th>
+            <th class="text-center">Stock</th>
             <th class="text-center">Action</th>
         </tr>
         </thead>
         <tbody>
         
+
         {% for data in chaussure %}
+        {% set compteur = 0 %}
+            {# <p>Chaussure</p>
+            {{dump(data)}}
+            <hr>
+
+            {% for couleurs in data.couleurs %}$
+                <p>Couleur</p>
+                {{dump(couleurs.nomCouleur)}}
+                <hr>
+                {% for stock in couleurs.tailles %}
+                <p>Stock/couleur/chaussure</p>
+                    {{dump(stock)}}
+                {% endfor %}
+            {% endfor %} #}
         <tr> 
             
             <td class="text-center align-middle">{{data.marque}}</td>
@@ -54,13 +73,33 @@
             <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
             <td class="text-center align-middle">{{data.prix}}</td>
             <td class="text-center align-middle">{{data.sexe}}</td>
-            {# <td class="text-center align-middle">{{data.top}}</td> #}
-             {% if data.top != "top"  %}
-                    <td class="text-center"> normal </td>
-                {% else %}
-                    <td class="text-center"> top </td>
-                {% endif %}  
+
+
+
+            <td class="text-center">Couleur disponible : 
+                {% for couleurs in data.couleurs %}
+                    <p>- {{couleurs.nomCouleur}}</p>
+                {% endfor %}
+            </td>
+            <td class="text-center">Stock total par chaussure
+                {% for couleurs in data.couleurs %}
+                    
+                    {% for stock in couleurs.tailles %}
+                    
+                        {% set compteur = compteur + stock.stock %}
+                        
+                    {% endfor %}
+                    
+                {% endfor %}
+                
+                {{compteur}}
+                
+            </td>
+
+            <td class="text-center align-middle">{{data.top}}</td>
+
             
+
             
             <td class="">
                 <div class="d-flex flex-row nowrap justify-content-center">
@@ -69,6 +108,7 @@
                 <div>
             </td>            
         </tr>
+        {% set compteur = compteur + 1 %}
         {% endfor %}    
         <tbody>
     </table>
