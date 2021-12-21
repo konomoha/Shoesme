@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ChaussureRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DetailsArticlesController extends AbstractController
 {
     #[Route('/details_articles', name: 'details_articles')]
-    public function index(): Response
+    public function index(ChaussureRepository $repoChaussure): Response
     {
-        return $this->render('details_articles/details_articles.html.twig', [
-            // 'controller_name' => 'DetailsArticlesController',
+        $chaussure = $repoChaussure->findAll(); // offset
+
+        return $this->render('shoes_me/home.html.twig', [
+            'chaussure'=> $chaussure
         ]);
     }
 }

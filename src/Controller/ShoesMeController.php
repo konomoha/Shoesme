@@ -41,11 +41,12 @@ class ShoesMeController extends AbstractController
             5, // la limite de chaussures à afficher
             0); // offset
         
-
         return $this->render('shoes_me/home.html.twig', [
             'chaussure_m' => $shoes_m,
             'chaussure_f' => $shoes_f,
         ]);
+
+
 
     }
 
