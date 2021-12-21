@@ -25,11 +25,6 @@ class Taille
     private $pointure;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $stock;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Couleur::class, inversedBy="tailles")
      */
     private $couleur;
@@ -39,10 +34,16 @@ class Taille
      */
     private $detailsCommandes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Stock::class, mappedBy="taille")
+     */
+    private $stocks;
+
     public function __construct()
     {
         $this->couleur = new ArrayCollection();
         $this->detailsCommandes = new ArrayCollection();
+        $this->stocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,18 +59,6 @@ class Taille
     public function setPointure(float $pointure): self
     {
         $this->pointure = $pointure;
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self
-    {
-        $this->stock = $stock;
 
         return $this;
     }
@@ -123,6 +112,33 @@ class Taille
             if ($detailsCommande->getTaille() === $this) {
                 $detailsCommande->setTaille(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stock[]
+     */
+    public function getStocks(): Collection
+    {
+        return $this->stocks;
+    }
+
+    public function addStock(Stock $stock): self
+    {
+        if (!$this->stocks->contains($stock)) {
+            $this->stocks[] = $stock;
+            $stock->addTaille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStock(Stock $stock): self
+    {
+        if ($this->stocks->removeElement($stock)) {
+            $stock->removeTaille($this);
         }
 
         return $this;

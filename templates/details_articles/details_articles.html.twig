@@ -126,9 +126,60 @@
 </div>
 
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
-
 <h2 class="text-center">Donnez votre avis</h2>
 
+{# {{dd(moyenne)}} #}
+<h3>Evaluation produit:</h3>
+{% if moyenne == 0 %}
+  <div> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i>
+  </div>
+
+  {% elseif moyenne >= 1 and moyenne < 2 %}
+    <div> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i>
+    </div>
+  {% elseif moyenne >= 2 and moyenne < 3 %}
+    <div> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i>
+    </div>
+  {% elseif moyenne >= 3 and moyenne < 4 %}
+      <div> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i>  
+        <i class="bi bi-star"></i> 
+        <i class="bi bi-star"></i>
+    </div>
+  {% elseif moyenne >= 4 and moyenne < 5 %}
+    <div> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i>  
+       <i class="bi bi-star-fill"></i>  
+        <i class="bi bi-star"></i>
+    </div>
+  {% else %}
+    <div> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i> 
+        <i class="bi bi-star-fill"></i>  
+        <i class="bi bi-star-fill"></i>  
+        <i class="bi bi-star-fill"></i> 
+    </div>
+{% endif %}
   {% if app.user %}
     <div class="col-4 mx-auto">
 
@@ -158,7 +209,7 @@
 
   {% for comment in chaussure.commentaires %}
         
-      {# {{ dump(comment) }} #}
+      {{ dump(comment) }}
       <div class="mb-3">
       
         <div class="col-4">
