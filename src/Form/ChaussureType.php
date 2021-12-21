@@ -99,6 +99,66 @@ class ChaussureType extends AbstractType
                     ])
                 ]
             ])
+
+            ->add('photo2', FileType::class, [
+                'label' => "",
+                'mapped' => true, 
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
+                    ])
+                ]
+            ])
+
+            ->add('photo3', FileType::class, [
+                'label' => "",
+                'mapped' => true, 
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
+                    ])
+                ]
+            ])
+
+            ->add('photo4', FileType::class, [
+                'label' => "Une petite dernière",
+                'mapped' => true, 
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
+                    ])
+                ]
+            ])
             ->add('prix', NumberType::class,[
                 'label' => 'Prix :',
                 'required' => false,
@@ -108,18 +168,18 @@ class ChaussureType extends AbstractType
                         ])
                     ]
             ])
-            ->add('top', ChoiceType::class, [
-                'choices' =>[
-                    'normal' => '',
-                    'top' => 'top'
-                    ],
-                    'expanded' => false,
-                    'multiple' => true,
-                    'label' => "Definir le role statut : ",
-                    'attr' => [
-                        'class' => 'select-top'
-                    ],
-            ])
+            // ->add('top', ChoiceType::class, [
+            //     'choices' =>[
+            //         'normal' => '',
+            //         'top' => 'top'
+            //         ],
+            //         'expanded' => false,
+            //         'multiple' => true,
+            //         'label' => "Definir le role statut : ",
+            //         'attr' => [
+            //             'class' => 'select-top'
+            //         ],
+            // ])
             // ->add('couleur', ChoiceType::class,[
             //     'choices'=>[
             //        new Couleur ('nomCouleur')],
