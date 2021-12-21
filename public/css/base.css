@@ -145,6 +145,9 @@ a{
     border: 2px solid white;
     padding: 20px !important;
     margin: auto !important;
+    margin-top: 100px !important;
+    box-shadow: rgba(0, 0, 0, 0.281)  0px 0px 10px 10px !important;
+    border-radius: 10px;
 }
 
 .trans{
