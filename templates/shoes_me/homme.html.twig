@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HommeController!{% endblock %}
+{% block title %}
+    Shoes Me | Homme
+{% endblock %}
 
 {% block body %}
 
@@ -16,7 +18,7 @@
             </div>
     </div>
 
-    <form method="post">
+    {# <form method="post">
         <label for="categorie">Catégories</label>
         <select name="categorie" id="categorie">
             <option value=""></option>
@@ -36,7 +38,7 @@
         <select name="couleur" id="couleur">
             <option value=""></option>
         </select>
-    </form>
+    </form> #}
 
 
 <img src="{{ asset('img/banniere.jpg') }}" alt="banniere" class="w-100">

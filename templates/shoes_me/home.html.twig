@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-  {% for message in app.flashes('success_register') %}
+
+    {% for message in app.flashes('success_register') %}
     
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
@@ -13,48 +14,39 @@
 
 <img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere" class="w-100">
 
-<div class="main">
-<div class="">
-  <div class="d-flex justify-content-around py-5">
 
-    <div class="" style="width: 28rem;">
-      <img src="../img/img1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Voir l'article</a>
+<div class="col-2 d-flex flex-row nowrap">
+  {% for data in chaussure %}
+    {% if data.top == 'top' %}   
+      <div>
+        <div class="" style="width: 20rem;">
+          <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="...">
+        </div>
       </div>
-    </div>
-
-    <div class="card" style="width: 28rem;">
-      <img src="../img/img2.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 28rem;">
-      <img src="../img/img3.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 28rem;">
-      <img src="../img/vegeta.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
+    {% endif %}
+  {% endfor %}
+  
 </div>
-</div>
+
+  
+
+<div class="ch1 mb-1 mt-5 row justify-content-around">
+
+        {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
+        
+        {% for data in chaussure %}
+
+ 
+        <div class="shoes_card card mb-5">
+            <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
+            <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
+            <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>     
+        </div>
+
+        {% endfor %}
+
+    </div>
+
 
 
     
