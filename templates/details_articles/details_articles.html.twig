@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% for message in app.flashes('success') %}
+{% for message in app.flashes('success_comment') %}
     
         <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
@@ -129,8 +129,6 @@
 
 <h2 class="text-center">Donnez votre avis</h2>
 
-{# {{dump(formComment.evaluation)}} #}
-
   {% if app.user %}
     <div class="col-4 mx-auto">
 
@@ -157,6 +155,7 @@
 <h2 class="text-center">Derniers avis</h2>
 
 {% if chaussure.commentaires is not empty %}
+
   {% for comment in chaussure.commentaires %}
         
       {# {{ dump(comment) }} #}

@@ -8,7 +8,11 @@ use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\CommentFormType;
 use App\Form\ContactFormType;
+
+use App\Repository\CommentaireRepository;
+
 use App\Repository\ChaussureRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,7 +69,7 @@ class ShoesMeController extends AbstractController
     }
 
     #[Route('/details_article/{id}', name:'details_article')]
-    public function detailArticle(Request $request, EntityManagerInterface $manager, Chaussure $chaussure):Response
+    public function detailArticle(CommentaireRepository $repoCommentaire, Request $request, EntityManagerInterface $manager, Chaussure $chaussure):Response
     {
         $commentaire = new Commentaire;
         
@@ -84,7 +88,7 @@ class ShoesMeController extends AbstractController
             $commentaire->setChaussure($chaussure);
             $manager->persist($commentaire);
             $manager->flush();
-            $this->addFlash('success', "Félicitations! Votre commentaire a bien été posté!");
+            $this->addFlash('success_comment', "Félicitations! Votre commentaire a bien été posté!");
             return $this->redirectToRoute('details_article', ['id'=> $chaussure->getId()]);
         }
 
@@ -94,6 +98,4 @@ class ShoesMeController extends AbstractController
         ]);
 
     }
-    
 }
-
