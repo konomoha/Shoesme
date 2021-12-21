@@ -108,6 +108,18 @@ class ChaussureType extends AbstractType
                         ])
                     ]
             ])
+            ->add('top', ChoiceType::class, [
+                'choices' =>[
+                    'normal' => '',
+                    'top' => 'top'
+                    ],
+                    'expanded' => false,
+                    'multiple' => true,
+                    'label' => "Definir le role statut : ",
+                    'attr' => [
+                        'class' => 'select-top'
+                    ],
+            ])
             // ->add('couleur', ChoiceType::class,[
             //     'choices'=>[
             //        new Couleur ('nomCouleur')],

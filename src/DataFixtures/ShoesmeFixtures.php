@@ -16,23 +16,23 @@ class ShoesmeFixtures extends Fixture
         $faker = \Faker\Factory::create('fr_FR');
 
 
-        // for($i=1; $i<4; $i++)
-        // {
-        //     $user = new User;
-        //     $user->setNom($faker->firstName)
-        //         ->setPrenom($faker->lastName)
-        //         ->setEmail($faker->email)
-        //         ->setAdresse("$i rue du test")
-        //         ->setTelephone("013478300$i")
-        //         ->setCodePostal("7898$i")
-        //         ->setVille($faker->country)
-        //         ->setDateNaissance($faker->dateTimeBetween())
-        //         ->setSexe("m")
-        //         ->setPassword("1234");
+        for($i=1; $i<4; $i++)
+        {
+            $user = new User;
+            $user->setNom($faker->firstName)
+                ->setPrenom($faker->lastName)
+                ->setEmail($faker->email)
+                ->setAdresse("$i rue du test")
+                ->setTelephone("013478300$i")
+                ->setCodePostal("7898$i")
+                ->setVille($faker->country)
+                ->setDateNaissance($faker->dateTimeBetween())
+                ->setSexe("m")
+                ->setPassword("1234");
 
-        //         $manager->persist($user);
-        // }
-        // $manager->flush();
+                $manager->persist($user);
+        }
+        $manager->flush();
 
         // for($j=1; $j<6; $j++)
         // {

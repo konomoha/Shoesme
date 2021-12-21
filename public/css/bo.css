@@ -70,3 +70,8 @@ th, td
 {
     width: 7vw;
 }
+
+.select-form-top{
+    height: 40px;
+    width: 10px;
+}

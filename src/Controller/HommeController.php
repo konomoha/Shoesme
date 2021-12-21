@@ -21,7 +21,7 @@ class HommeController extends AbstractController
             0); // offset
          
         return $this->render('homme/homme.html.twig', [
-            'chaussure'=>$chaussure
+            'chaussure'=> $chaussure
         ]);
     }
 }
