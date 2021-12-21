@@ -19,18 +19,16 @@ use Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy;
 class ShoesMeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index( ChaussureRepository $repoChaussure): Response
+    public function index( /*ChaussureRepository $repoChaussure*/): Response
     {
 
-        $chaussure = $repoChaussure->findBy(
-            array(), // condition where
-            array (), //order by
-            10, // la limite de chaussures à afficher
-            0); // offset
+        // $chaussure = $repoChaussure->findBy(
+        //     array(), // condition where
+        //     array (), //order by
+        //     10, // la limite de chaussures à afficher
+        //     0); // offset
 
-        return $this->render('shoes_me/home.html.twig', [
-            'chaussure'=> $chaussure
-        ]);
+        return $this->render('shoes_me/home.html.twig');
 
     }
 

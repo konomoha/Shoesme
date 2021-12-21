@@ -54,7 +54,12 @@
             <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
             <td class="text-center align-middle">{{data.prix}}</td>
             <td class="text-center align-middle">{{data.sexe}}</td>
-            <td class="text-center align-middle">{{data.top}}</td>
+            {# <td class="text-center align-middle">{{data.top}}</td> #}
+             {% if data.top != "top"  %}
+                    <td class="text-center"> normal </td>
+                {% else %}
+                    <td class="text-center"> top </td>
+                {% endif %}  
             
             
             <td class="">
