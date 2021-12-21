@@ -3,6 +3,7 @@
 {% block title %}Shoesme | Mon Panier {% endblock %}
 
 {% block body %}
+
 <h1 class="text-center mt-4 mb-5">
     {% if app.user %}
         Votre panier {{app.user.prenom|capitalize}}
@@ -79,7 +80,7 @@
 
 {% else %}
 
-<h2 class="text-center fst-italic mt-5"><i class="bi bi-bag"></i> Panier vide </h2>
+<h2 class="text-center mx-auto fst-italic my-5"><i class="bi bi-bag"></i> Panier vide </h2>
 
 {% endif %} 
     

@@ -92,7 +92,8 @@ class ChaussureType extends AbstractType
                             'image/jpeg',
                             'image/png',
                             'image/jpg',
-                            'image/gif'
+                            'image/gif',
+                            'image/webp'
                         ],
                         'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
                     ])
@@ -106,6 +107,18 @@ class ChaussureType extends AbstractType
                             'message' => 'Saisir une Marque'
                         ])
                     ]
+            ])
+            ->add('top', ChoiceType::class, [
+                'choices' =>[
+                    'normal' => '',
+                    'top' => 'top'
+                    ],
+                    'expanded' => false,
+                    'multiple' => true,
+                    'label' => "Definir le role statut : ",
+                    'attr' => [
+                        'class' => 'select-top'
+                    ],
             ])
             // ->add('couleur', ChoiceType::class,[
             //     'choices'=>[

@@ -73,6 +73,7 @@
             <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
             <td class="text-center align-middle">{{data.prix}}</td>
             <td class="text-center align-middle">{{data.sexe}}</td>
+
             <td class="text-center">Couleur disponible : 
                 {% for couleurs in data.couleurs %}
                     <p>- {{couleurs.nomCouleur}}</p>
@@ -92,6 +93,10 @@
                 {{compteur}}
                 
             </td>
+
+            <td class="text-center align-middle">{{data.top}}</td>
+            
+
             
             <td class="">
                 <div class="d-flex flex-row nowrap justify-content-center">
