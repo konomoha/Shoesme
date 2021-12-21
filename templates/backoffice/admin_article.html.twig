@@ -29,7 +29,7 @@
         <a href=" {{ path('backoffice_produit_ajout') }} " class="btn btn-outline-success col-10">Ajouter article</a>
     </div>
 
-    <table class="table table-light table-hover mt-5" id="table-article">
+    <table class="table table-stripped table-hover mt-5" id="table-article">
     <thead>
         <tr>
         {% for nom in colonneChaussure %}
@@ -73,6 +73,9 @@
             <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
             <td class="text-center align-middle">{{data.prix}}</td>
             <td class="text-center align-middle">{{data.sexe}}</td>
+            <td class="text-center align-middle">{{data.top}}</td>
+
+
 
             <td class="text-center">Couleur disponible : 
                 {% for couleurs in data.couleurs %}
@@ -94,7 +97,7 @@
                 
             </td>
 
-            <td class="text-center align-middle">{{data.top}}</td>
+
             
 
             

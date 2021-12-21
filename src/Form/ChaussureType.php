@@ -170,6 +170,7 @@ class ChaussureType extends AbstractType
             ])
             // ->add('top', ChoiceType::class, [
             //     'choices' =>[
+
             //         'normal' => '',
             //         'top' => 'top'
             //         ],

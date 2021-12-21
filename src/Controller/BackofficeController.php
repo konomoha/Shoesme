@@ -17,12 +17,14 @@ use App\Entity\Commentaire;
 
 use App\Form\ChaussureType;
 use App\Form\CommentFormType;
+use App\Form\TailleType;
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
 use App\Repository\CouleurRepository;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
+use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,8 +82,28 @@ class BackofficeController extends AbstractController
     {
         if($shoes)
         {
+            $infoPointure=[];
+            $infoStock=[];
+            // dd($shoes);
             $photoEnregistree = $shoes->getPhoto();
+            
+            foreach($shoes->getCouleurs() as $key => $value)
+            {
+                //Récupère les couleurs liées à une chaussure
+                $infoCouleur [] = $value->getNomCouleur();  
+                
+                foreach($value->getTailles() as $key2=>$value2)
+                {
+                    //Récupère toutes les pointures de la chaussure
+                    $infoPointure[] = $value2->getPointure();
+                    
+                    //Récupère tous les stock de toutes les pointures
+                    $infoStock[]=$value2->getStock();
+                }
+            }
+            
         }
+
         if(!$shoes)
         {
             $shoes = new Chaussure;
@@ -124,11 +146,17 @@ class BackofficeController extends AbstractController
 
             return $this->redirectToRoute('backoffice_produit');
         }
+        
+        // $formAdminStock=$this->createForm(TailleType::class, $infoStock);
+        // dump($formAdminStock);
 
         return $this->render('backoffice/admin_article_ajout.html.twig', [
             'formAdminShoes' => $formAdminShoes->createView(),
             'photoEnregistree' => $shoes->getPhoto(), 
-            'Modification' => $shoes->getId()
+            'Modification' => $shoes->getId(),
+            'pointure'=> $infoPointure,
+            'stock' => $infoStock,
+            
         ]);
     }
 
