@@ -92,7 +92,8 @@ class ChaussureType extends AbstractType
                             'image/jpeg',
                             'image/png',
                             'image/jpg',
-                            'image/gif'
+                            'image/gif',
+                            'image/webp'
                         ],
                         'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png/gif et taille maximum 5Mo'
                     ])
