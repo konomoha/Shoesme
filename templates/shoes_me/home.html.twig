@@ -37,7 +37,7 @@
         {% for data in chaussure %}
 
  
-        <div class="shoes_card card mb-5">
+        <div class="shoes_card card mb-5 ">
             <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
             <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
             <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>     
