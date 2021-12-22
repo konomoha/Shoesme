@@ -115,7 +115,7 @@
       </select>
     </form>
 
-    <button href="{{path('panier_add', {'id': chaussure.id })}}" class="btn btn-dark rounded-pill mt-2 mb-4 ms-3" style="width:180px;height:30px">Ajouter au panier</button>
+    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
 
     <div>
       <p class="mt-2 mb-4 ms-3">Livraison :<span class="text-success fs-5">Gratuite</span></p>
