@@ -20,7 +20,7 @@
     <div class="d-flex flex-row my-3">
       <div>
         <div class="mx-1" style="width: 20rem;">
-          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="..."></a>
+          <a href="{{path('details_article', {'id': data.id })}}"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="..."></a>
         </div>
       </div>
       </div>
