@@ -10,25 +10,38 @@
 
     {% endfor %}
 
+
+
+
+   {{dump(chaussure) }}
+
 <div class="d-flex ms-5 mt-5">
  
-       
+   {# {% for chaussure in chaussure %}    #}
+  
+    
     
     <div class="card mx-5" style="width: 30rem;">
 
-      <img src="{{ asset('img/nike/chaussure1/1.jpg') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo) }}" class="card-img-top" alt="chaussure_nike_1">
       
     </div>
 
     <div class="card" style="width: 30rem;">
 
-      <img src="{{ asset('img/nike/chaussure1/2.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo2) }}" class="card-img-top" alt="chaussure_nike_1">
      
     </div>
           <aside class="mx-auto">
-            <h1>Nike Air Max Plus</h1>
-            <h4>Chaussures pour Homme</h4><br>
-            <h5>169.99 €</h5><br>
+            <h1> {{ chaussure.marque }} </h1>
+
+            {% if chaussure.sexe == 'm' %}
+              <h4>Chaussure pour Homme</h4><br>
+            {% elseif chaussure.sexe == 'f' %}
+              <h4>Chaussure pour Femme</h4><br>
+            {% endif %}
+            
+            <h5>{{ chaussure.prix }} €</h5><br>
 
             <p>Sélectionnez la taille</p>
               {# <form> #}
@@ -42,22 +55,19 @@
                         <option value="3">45</option>
 
                     </select><br>
-                    <button class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
+
+                    <button href="{{path('panier_add', {'id': chaussure.id })}}" class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
+
               {# </form> #}
 <br><br>
                     <p>Livraison gratuite</p>
 <br>
-                    <h4>Revendiquez votre côté rebelle avec votre Nike Air</h4>
-                     <h4>Max Plus, un modèle Air novateur qui offre une</h4>
-                      <h4>stabilité optimale et un amorti exceptionnel.</h4>
-                       <h4>Reprenant les lignes ondulées, les détails en TPU et</h4>
-                        <h4>l'empeigne en mesh aéré du modèle OG, elle</h4>
-                         <h4>incarne un style rebelle.</h4>
+                    <p>{{ chaussure.descriptif }}</p>
 
 
 
             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-dark" chaussure-bs-toggle="modal" chaussure-bs-target="#exampleModal">
                               Afficher les détails du produit
                             </button>
 
@@ -68,9 +78,9 @@
                                         <div class="modal-header">
                                         <div class="d-block">
                                           <h5 class="modal-title" id="exampleModalLabel">Nike Air Max Plus </h5>
-                                          <h5 class="modal-title" id="exampleModalLabel">169.99€ </h5>
+                                          <h5 class="modal-title" id="exampleModalLabel">169.9 9€ </h5>
                                           </div>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          <button type="button" class="btn-close" chaussure-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body mx-auto">
                                           UN AIR REBELLE.
@@ -113,24 +123,26 @@
 <div class="d-flex ms-5 mt-5 mb-5">
 
     <div class="card mx-5" style="width: 30rem;">
-      <img src="{{ asset('img/nike/chaussure1/3.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo3) }}" class="card-img-top" alt="chaussure_nike_1">
     
     </div>
 
 
     <div class="card" style="width: 30rem;">
-      <img src="{{ asset('img/nike/chaussure1/4.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo4) }}" class="card-img-top" alt="chaussure_nike_1">
      
     </div>
 
 </div>
-
+{# {% endfor %}    #}
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
 <h2 class="text-center">Donnez votre avis</h2>
+
 
 {# {{dump(chaussure)}} #}
 <h3>Evaluation produit: </h3>
 {% if moyenne == 0 %}
+
   <div> 
         <i class="bi bi-star"></i> 
         <i class="bi bi-star"></i> 
@@ -179,8 +191,8 @@
         <i class="bi bi-star-fill"></i>  
         <i class="bi bi-star-fill"></i> 
     </div>
-{% endif %}
-  {% if app.user %}
+{% endif %} #}
+  {# {% if app.user %}
     <div class="col-4 mx-auto">
 
         {{form_start(formComment)}}
@@ -208,7 +220,7 @@
   {% for comment in chaussure.commentaires %}
         
       {# {{ dump(comment) }} #}
-      <div class="mb-3">
+      {# <div class="mb-3">
       
         <div class="col-4">
 
@@ -228,6 +240,7 @@
  {% else %} 
 
     <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
+
 
 {% endif %}  
 
