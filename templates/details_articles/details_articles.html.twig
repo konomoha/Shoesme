@@ -48,13 +48,8 @@
             <p>Sélectionnez la taille</p>
               {# <form> #}
                   <select class="form-select" aria-label="Default select example">
-                        <option selected>Taille</option>
-                        <option value="1">40</option>
-                        <option value="2">41</option>
-                        <option value="3">42</option>
-                        <option value="3">43</option>
-                        <option value="3">44</option>
-                        <option value="3">45</option>
+                        <option>{{ data.pointure }}</option>
+                        
 
                     </select><br>
                     <button href="{{path('panier_add', {'id': data.id })}}" class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
@@ -221,7 +216,7 @@
   {% for comment in data.commentaires %}
         
       {# {{ dump(comment) }} #}
-      <div class="mb-3">
+      {# <div class="mb-3">
       
         <div class="col-4">
 
@@ -235,17 +230,17 @@
 
         </div>
         
-      </div>
-  {% endfor %}
+      </div> #}
+  {# {% endfor %} #}
 
- {% else %} 
+ {# {% else %} 
 
     <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
 
-{% endif %}   #} 
+{% endif %}   
 
-{% endif %}   #}
+{% endif %}   #} 
 
 
 {% endblock %}
