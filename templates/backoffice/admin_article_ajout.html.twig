@@ -23,26 +23,38 @@
 </h1>
 
     <form action="" method="get">
-        
-        <h2 class="text-center">Voir si votre article a déjà des enregistrements :</h2>
-
-        <label for="marque">Voir la liste des modèles :</label>
+    
+        <label for="marque">Voir la liste des modèles déjà enregistrés :</label>
+        <br>
         <select name="model" id="model">
+            <option value=""></option>
             {% for item in Chaussure %}
                 <option value="{{item.model}}">{{item.marque}} {{item.model}}</option>
             {% endfor %}   
         </select>
+
         <button class="btn btn-dark ms-2" type="submit">Voir</button>
 
     </form>
-{# {{dump(selecteurModel)}} #}
+
     {% if selecteurModel %}
-        <table>
+        <table class="table table-stripped table-hover" id="tabAjout">
+            <tr>
+            {% for nom in colonneChaussure %}
+                {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
+                <th class="text-center">{{nom}}</th>
+                {% endif %}
+            {% endfor %}
+            </tr>
             {% for data in selecteurModel %}
-                <td>{{data.marque}}</td>
-                <td>{{data.model}}</td>
-                <td>{{data.couleur}}</td>
-                <td>{{data.pointure}}</td>
+            <tr>
+                    <td class="text-center">{{data.marque}}</td>
+                    <td class="text-center">{{data.model}}</td>        
+                    <td class="text-center">{{data.sexe}}</td>
+                    <td class="text-center">{{data.pointure}}</td>
+                    <td class="text-center">{{data.couleur}}</td>
+                    <td class="text-center">{{data.stock}}</td>
+            </tr>   
             {% endfor %}
         </table>
     {% endif %}
