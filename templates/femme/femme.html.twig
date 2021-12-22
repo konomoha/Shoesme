@@ -60,7 +60,8 @@
                     <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
                     <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
                     <p class="fst-italic text-center"> {{data.prix}} €</p>
-                    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>     
+                    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>
+                     <button class="btn btn-dark col-3 mx-auto mt-2"><a href="{{path('details_article', {'id': data.id })}}">Détails</a></button>   
                 </div>
             {% endif %} 
 
