@@ -140,8 +140,10 @@
 
 
 {# {{dd(moyenne)}} #}
-{# <h3>Evaluation produit: </h3>
-{% if moyenne == 0 %}
+
+<h3>Evaluation produit: </h3>
+{# {% if moyenne == 0 %}
+
   <div> 
         <i class="bi bi-star"></i> 
         <i class="bi bi-star"></i> 
@@ -190,8 +192,8 @@
         <i class="bi bi-star-fill"></i>  
         <i class="bi bi-star-fill"></i> 
     </div>
-{% endif %}
-  {% if app.user %}
+{% endif %} #}
+  {# {% if app.user %}
     <div class="col-4 mx-auto">
 
         {{form_start(formComment)}}
@@ -240,6 +242,10 @@
 
     <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
+
+{% endif %}   #} 
+
 {% endif %}   #}
+
 
 {% endblock %}
