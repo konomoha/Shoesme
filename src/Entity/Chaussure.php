@@ -255,7 +255,7 @@ class Chaussure
         return $this->photo2;
     }
 
-    public function setPhoto2(string $photo2): self
+    public function setPhoto2(?string $photo2): self
     {
         $this->photo2 = $photo2;
 
@@ -267,7 +267,7 @@ class Chaussure
         return $this->photo3;
     }
 
-    public function setPhoto3(string $photo3): self
+    public function setPhoto3(?string $photo3): self
     {
         $this->photo3 = $photo3;
 
@@ -279,7 +279,7 @@ class Chaussure
         return $this->photo4;
     }
 
-    public function setPhoto4(string $photo4): self
+    public function setPhoto4(?string $photo4): self
     {
         $this->photo4 = $photo4;
 

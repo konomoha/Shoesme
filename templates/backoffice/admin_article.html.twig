@@ -33,11 +33,14 @@
     <thead>
         <tr>
         {% for nom in colonneChaussure %}
-            {% if nom != 'id' and nom != 'photo2' and nom != 'photo3' and nom != 'photo4' %}
+            {% if nom != 'id' and nom != 'photo' and nom != 'photo2' and nom != 'photo3' and nom != 'photo4'  %}
                 <th class="text-center">{{nom}}</th> 
             {% endif %}
-                   
         {% endfor %}
+            <th class="text-center">Photo</th>
+            <th class="text-center">Photo 2</th>
+            <th class="text-center">Photo 3</th>
+            <th class="text-center">Photo 4</th>
             
             <th class="text-center">Action</th>
         </tr>
@@ -46,34 +49,24 @@
         
 
         {% for data in chaussure %}
-        <tr> 
-            {% if data != 'photo2' and data !='photo3' and data !='photo4' %}
-                
-            
-            <td class="text-center align-middle">{{data.marque}}</td>
-            <td class="text-center align-middle">{{data.model}}</td>
-            <td class="text-center align-middle">{{data.type}}</td>
-            
-            
-            <td class="text-center align-middle">{{data.matiere}}</td>
-            
-            <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
-            <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
-            <td class="text-center align-middle">{{data.prix}}</td>
-            <td class="text-center align-middle">{{data.sexe}}</td>
-            <td class="text-center align-middle">{{data.top}}</td>
-            <td class="text-center align-middle">{{data.pointure}}</td> 
-            <td class="text-center">{{data.couleur}} </td> 
-            <td class="text-center">{{data.stock}}</td>
-            {% endif %}
-
-            
-
-            
-
-
-            
-
+            <tr> 
+                {% if data %}
+                    <td class="text-center align-middle">{{data.marque}}</td>
+                    <td class="text-center align-middle">{{data.model}}</td>
+                    <td class="text-center align-middle">{{data.type}}</td>
+                    <td class="text-center align-middle">{{data.matiere}}</td>
+                    <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
+                    <td class="text-center align-middle">{{data.prix}}</td>
+                    <td class="text-center align-middle">{{data.sexe}}</td>
+                    <td class="text-center align-middle">{{data.top}}</td>
+                    <td class="text-center align-middle">{{data.pointure}}</td> 
+                    <td class="text-center">{{data.couleur}} </td> 
+                    <td class="text-center">{{data.stock}}</td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                {% endif %}
             
             <td class="">
                 <div class="d-flex flex-row nowrap justify-content-center">
@@ -81,7 +74,7 @@
                     <a href="{{path('backoffice_produit_suppression', {'id': data.id}) }}" class="btn btn-outline-danger mx-1" onclick="return(confirm('Etes-vous sur de vouloir supprimer l'article : {{ data.id }} ?' ))"><i class="bi bi-trash"></i></a>
                 <div>
             </td>            
-        </tr>
+            </tr>
         
         {% endfor %}    
         <tbody>
