@@ -59,10 +59,7 @@ class Chaussure
      */
     private $commentaires;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Couleur::class, mappedBy="chaussure")
-     */
-    private $couleurs;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -75,24 +72,39 @@ class Chaussure
     private $top;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo2;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo3;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo4;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pointure;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $couleur;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $stock;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
-        $this->couleurs = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -214,33 +226,6 @@ class Chaussure
         return $this;
     }
 
-    /**
-     * @return Collection|Couleur[]
-     */
-    public function getCouleurs(): Collection
-    {
-        return $this->couleurs;
-    }
-
-    public function addCouleur(Couleur $couleur): self
-    {
-        if (!$this->couleurs->contains($couleur)) {
-            $this->couleurs[] = $couleur;
-            $couleur->addChaussure($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCouleur(Couleur $couleur): self
-    {
-        if ($this->couleurs->removeElement($couleur)) {
-            $couleur->removeChaussure($this);
-        }
-
-        return $this;
-    }
-
     public function getSexe(): ?string
     {
         return $this->sexe;
@@ -297,6 +282,42 @@ class Chaussure
     public function setPhoto4(string $photo4): self
     {
         $this->photo4 = $photo4;
+
+        return $this;
+    }
+
+    public function getPointure(): ?float
+    {
+        return $this->pointure;
+    }
+
+    public function setPointure(float $pointure): self
+    {
+        $this->pointure = $pointure;
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(string $couleur): self
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }
