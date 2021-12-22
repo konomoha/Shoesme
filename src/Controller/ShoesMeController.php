@@ -86,8 +86,8 @@ class ShoesMeController extends AbstractController
         $commentaire = new Commentaire;
         $total= 0;
         $dataNote = [];
-        $moyenne="";
-        $resultat="";
+        $moyenne=0;
+        $resultat=0;
        
             foreach($chaussure->getCommentaires() as $key => $value)
             {
@@ -98,19 +98,17 @@ class ShoesMeController extends AbstractController
                     $dataNote[] = $note;
                     // dump($evaluation);
                     $total += $note;
+                    
+                    if(!empty($dataNote))
+                    {
+                        $resultat = $total / count($dataNote);
+                        $moyenne = round($resultat,1);
+                    }
+        
                 }
             }
-
-        
-        
         // dump(count($dataNote));
-        if(!empty($dataNote)){
-            $resultat = $total / count($dataNote);
-         }
-        $moyenne = round($resultat,1);
-
         // dump($moyenne);
-
         // dump($chaussure->getCommentaires());
         
         $id = $this->getUser();
@@ -120,7 +118,7 @@ class ShoesMeController extends AbstractController
         $datacom = $repoCommentaire->findAll();
         $total = 0;
 
-        if($formComment->isSubmitted() && $formComment->isValid())
+        if($formComment->isSubmitted())
         {
              
             $commentaire->setDate(new \DateTime());
