@@ -13,37 +13,35 @@
 
 
 
-  
+   {{dump(chaussure) }}
 
 <div class="d-flex ms-5 mt-5">
  
-   {% for data in chaussure %}
-
-
-     
+   {# {% for chaussure in chaussure %}    #}
+  
     
     
     <div class="card mx-5" style="width: 30rem;">
 
-      <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="data_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo) }}" class="card-img-top" alt="chaussure_nike_1">
       
     </div>
 
     <div class="card" style="width: 30rem;">
 
-      <img src="{{ asset('img/' ~ data.photo2) }}" class="card-img-top" alt="data_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo2) }}" class="card-img-top" alt="chaussure_nike_1">
      
     </div>
           <aside class="mx-auto">
-            <h1> {{ data.marque }} </h1>
+            <h1> {{ chaussure.marque }} </h1>
 
-            {% if data.sexe == 'm' %}
+            {% if chaussure.sexe == 'm' %}
               <h4>Chaussure pour Homme</h4><br>
-            {% elseif data.sexe == 'f' %}
+            {% elseif chaussure.sexe == 'f' %}
               <h4>Chaussure pour Femme</h4><br>
             {% endif %}
             
-            <h5>{{ data.prix }} €</h5><br>
+            <h5>{{ chaussure.prix }} €</h5><br>
 
             <p>Sélectionnez la taille</p>
               {# <form> #}
@@ -57,17 +55,17 @@
                         <option value="3">45</option>
 
                     </select><br>
-                    <button href="{{path('panier_add', {'id': data.id })}}" class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
+                    <button href="{{path('panier_add', {'id': chaussure.id })}}" class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
               {# </form> #}
 <br><br>
                     <p>Livraison gratuite</p>
 <br>
-                    <p>{{ data.descriptif }}</p>
+                    <p>{{ chaussure.descriptif }}</p>
 
 
 
             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-dark" chaussure-bs-toggle="modal" chaussure-bs-target="#exampleModal">
                               Afficher les détails du produit
                             </button>
 
@@ -80,7 +78,7 @@
                                           <h5 class="modal-title" id="exampleModalLabel">Nike Air Max Plus </h5>
                                           <h5 class="modal-title" id="exampleModalLabel">169.9 9€ </h5>
                                           </div>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          <button type="button" class="btn-close" chaussure-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body mx-auto">
                                           UN AIR REBELLE.
@@ -106,7 +104,7 @@
 
                                           Origines des Nike Air Max
 
-                                          La technologie Air révolutionnaire a été intégrée à la gamme de datas Nike en 1978. En 1987, la Air Max 1 intègre pour la première fois la technologie Air visible au talon. Désormais, en plus de ressentir l'amorti Air, chacun pouvait également le voir en action. Depuis, les datas Air Max nouvelle génération connaissent un succès constant auprès des athlètes et des collectionneurs, grâce à leurs associations de couleurs saisissantes et à leur foulée légère parfaitement amortie.
+                                          La technologie Air révolutionnaire a été intégrée à la gamme de chaussures Nike en 1978. En 1987, la Air Max 1 intègre pour la première fois la technologie Air visible au talon. Désormais, en plus de ressentir l'amorti Air, chacun pouvait également le voir en action. Depuis, les chaussures Air Max nouvelle génération connaissent un succès constant auprès des athlètes et des collectionneurs, grâce à leurs associations de couleurs saisissantes et à leur foulée légère parfaitement amortie.
 
 
 
@@ -123,18 +121,18 @@
 <div class="d-flex ms-5 mt-5 mb-5">
 
     <div class="card mx-5" style="width: 30rem;">
-      <img src="{{ asset('img/' ~ data.photo3) }}" class="card-img-top" alt="data_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo3) }}" class="card-img-top" alt="chaussure_nike_1">
     
     </div>
 
 
     <div class="card" style="width: 30rem;">
-      <img src="{{ asset('img/' ~ data.photo4) }}" class="card-img-top" alt="data_nike_1">
+      <img src="{{ asset('img/' ~ chaussure.photo4) }}" class="card-img-top" alt="chaussure_nike_1">
      
     </div>
 
 </div>
-{% endfor %}   
+{# {% endfor %}    #}
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
 <h2 class="text-center">Donnez votre avis</h2>
 
@@ -216,12 +214,12 @@
 {# <h2 class="text-center">Derniers avis</h2>
 
 
- {% if data.commentaires is not empty %} 
+ {% if chaussure.commentaires is not empty %} 
 
-  {% for comment in data.commentaires %}
+  {% for comment in chaussure.commentaires %}
         
       {# {{ dump(comment) }} #}
-      <div class="mb-3">
+      {# <div class="mb-3">
       
         <div class="col-4">
 
@@ -245,7 +243,7 @@
 
 {% endif %}   #} 
 
-{% endif %}   #}
+{# {% endif %} #}
 
 
 {% endblock %}
