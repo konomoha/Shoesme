@@ -10,6 +10,13 @@
     margin-left: 35% !important;
 } */
 
+.vvvvv{
+    border-top: 1px solid rgb(61, 61, 61);
+    border-bottom: 1px solid rgb(61, 61, 61);
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
 .hauteur-min{
     min-height: 800px !important;
 }
