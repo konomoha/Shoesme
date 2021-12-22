@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Couleur;
+
 use App\Entity\Chaussure;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -53,7 +53,7 @@ class ChaussureType extends AbstractType
                     ]
             ])
             ->add('type', TextType::class,[
-                'label' => 'Type :',
+                'label' => 'Catégorie :',
                 'required' => false,
                 'constraints' => [
                         new NotBlank([
@@ -101,7 +101,7 @@ class ChaussureType extends AbstractType
             ])
 
             ->add('photo2', FileType::class, [
-                'label' => "",
+                'label' => "Photo2",
                 'mapped' => true, 
                 'required' => false,
                 'data_class' => null,
@@ -121,7 +121,7 @@ class ChaussureType extends AbstractType
             ])
 
             ->add('photo3', FileType::class, [
-                'label' => "",
+                'label' => "Photo 3",
                 'mapped' => true, 
                 'required' => false,
                 'data_class' => null,
@@ -141,7 +141,7 @@ class ChaussureType extends AbstractType
             ])
 
             ->add('photo4', FileType::class, [
-                'label' => "Une petite dernière",
+                'label' => "Photo 4",
                 'mapped' => true, 
                 'required' => false,
                 'data_class' => null,
@@ -168,6 +168,15 @@ class ChaussureType extends AbstractType
                         ])
                     ]
             ])
+            ->add('pointure', NumberType::class,[
+                'label' => 'Pointure :',
+                'required' => false,
+                'constraints' => [
+                        new NotBlank([
+                            'message' => 'Saisir une Marque'
+                        ])
+                    ]
+            ])
             // ->add('top', ChoiceType::class, [
             //     'choices' =>[
 
@@ -181,13 +190,23 @@ class ChaussureType extends AbstractType
             //             'class' => 'select-top'
             //         ],
             // ])
-            // ->add('couleur', ChoiceType::class,[
-            //     'choices'=>[
-            //        new Couleur ('nomCouleur')],
-            //        'nomCouleur->getId()' => 'nomCouleur->getNomCouleur()',
-            //     'label'=> 'Couleur :',
-            //     'required'=>false,
-            // ])
+            ->add('couleur', ChoiceType::class,[
+                'choices'=>[
+                   'noir'=>'noir',
+                   'blanc'=>'blanc',
+                   'bleu'=>'bleu',
+                   'rouge'=>'rouge',
+                   'vert'=>'vert',
+                   'rose'=>'rose',
+                   'turquoise'=>'turquoise'],
+                'label'=> 'Couleur :',
+                'required'=>false,
+            ])
+            ->add('stock', NumberType::class,[
+                'label' => 'Stock :',
+                'required' => false,
+                
+            ])
             ;
             
         

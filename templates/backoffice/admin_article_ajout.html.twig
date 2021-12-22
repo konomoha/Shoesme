@@ -35,24 +35,18 @@
         {{form_row(formAdminShoes.photo2)}}
         {{form_row(formAdminShoes.photo3)}}
         {{form_row(formAdminShoes.photo4)}}
-
-
-
-        
         {{form_row(formAdminShoes.prix)}}
+        {{form_row(formAdminShoes.couleur)}}
+        {{form_row(formAdminShoes.pointure)}}
+        {{form_row(formAdminShoes.stock)}}
+
+
+        
+        
         
 
         
-            <table class="pointure table table-bordered col-5 mx-auto">
-                <tr><td>POINTURE</td>
-                {% for data in pointure %}
-                    <td>{{data}}</td>
-                {% endfor %}
-                </tr><td>STOCK</td>
-                {% for item in stock %}
-                    <td>{{item}}</td>
-                {% endfor %}
-            </table>
+            
         
 
         {# {{form_row(formAdminShoes._token)}} #}

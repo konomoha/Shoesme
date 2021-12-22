@@ -3,28 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Taille;
-
 use App\Entity\Contact;
-
-use App\Entity\Couleur;
-
-
 use App\Entity\Chaussure;
-
-
 use App\Entity\Commentaire;
 
 use App\Form\ChaussureType;
 use App\Form\CommentFormType;
-use App\Form\TailleType;
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
-use App\Repository\CouleurRepository;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
-use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,7 +40,7 @@ class BackofficeController extends AbstractController
     {
         //Affichage chaussures
         $titreColonneChaussure=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
-        $titreColonneCouleur=$manager->getClassMetadata(Couleur::class)->getFieldNames();
+        
         
         $shoes = $chaussureRepo->findAll();
 
@@ -69,7 +58,6 @@ class BackofficeController extends AbstractController
 
         return $this->render('backoffice/admin_article.html.twig', [
             'colonneChaussure'=>$titreColonneChaussure,
-            'colonneCouleur'=>$titreColonneCouleur,
             'chaussure'=>$shoes
         ]);
     }
@@ -82,25 +70,25 @@ class BackofficeController extends AbstractController
     {
         if($shoes)
         {
-            $infoPointure=[];
-            $infoStock=[];
+            
+            
             // dd($shoes);
             $photoEnregistree = $shoes->getPhoto();
             
-            foreach($shoes->getCouleurs() as $key => $value)
-            {
-                //Récupère les couleurs liées à une chaussure
-                $infoCouleur [] = $value->getNomCouleur();  
+            // foreach($shoes->getCouleurs() as $key => $value)
+            // {
+            //     //Récupère les couleurs liées à une chaussure
+            //     $infoCouleur [] = $value->getNomCouleur();  
                 
-                foreach($value->getTailles() as $key2=>$value2)
-                {
-                    //Récupère toutes les pointures de la chaussure
-                    $infoPointure[] = $value2->getPointure();
+            //     foreach($value->getTailles() as $key2=>$value2)
+            //     {
+            //         //Récupère toutes les pointures de la chaussure
+            //         $infoPointure[] = $value2->getPointure();
                     
-                    //Récupère tous les stock de toutes les pointures
-                    $infoStock[]=$value2->getStock();
-                }
-            }
+            //         //Récupère tous les stock de toutes les pointures
+            //         $infoStock[]=$value2->getStock();
+            //     }
+            // }
             
         }
 
@@ -154,9 +142,6 @@ class BackofficeController extends AbstractController
             'formAdminShoes' => $formAdminShoes->createView(),
             'photoEnregistree' => $shoes->getPhoto(), 
             'Modification' => $shoes->getId(),
-            'pointure'=> $infoPointure,
-            'stock' => $infoStock,
-            
         ]);
     }
 
