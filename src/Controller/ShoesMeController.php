@@ -85,21 +85,28 @@ class ShoesMeController extends AbstractController
     {
         $commentaire = new Commentaire;
         $total= 0;
-        foreach($chaussure->getCommentaires() as $key => $value)
-        {
-            if(!empty($value->getEvaluation()))
+        $dataNote = [];
+        $moyenne="";
+        $resultat="";
+       
+            foreach($chaussure->getCommentaires() as $key => $value)
             {
-                $note = $value->getEvaluation();
-                // dump($eval);
-                $dataNote[] = $note;
-                // dump($evaluation);
-                $total += $note;
+                if(!empty($value->getEvaluation()))
+                {
+                    $note = $value->getEvaluation();
+                    // dump($eval);
+                    $dataNote[] = $note;
+                    // dump($evaluation);
+                    $total += $note;
+                }
             }
-        }
 
-        dump(count($dataNote));
-
-        $resultat = $total / count($dataNote);
+        
+        
+        // dump(count($dataNote));
+        if(!empty($dataNote)){
+            $resultat = $total / count($dataNote);
+         }
         $moyenne = round($resultat,1);
 
         // dump($moyenne);

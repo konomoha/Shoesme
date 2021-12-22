@@ -68,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $sexe;
 
     /**
-     * @ORM\Column(type="integer", columnDefinition="UNSIGNED ZEROFILL")
+     * @ORM\Column(type="integer")
      */
     private $telephone;
 
