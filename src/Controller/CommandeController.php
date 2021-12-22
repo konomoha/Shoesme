@@ -50,9 +50,10 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/paiement', name: 'commande_paiement')]
-    public function commandePaiement(SessionInterface $session, ChaussureRepository $chaussureRepo, DetailsCommande $detailCommande=null, EntityManagerInterface $manager, User $user=null): Response
+    public function commandePaiement(SessionInterface $session, ChaussureRepository $chaussureRepo, Commande $commande=null, DetailsCommande $detailCommande=null, EntityManagerInterface $manager, User $user=null): Response
     {
         $commande = new Commande;
+        $detailCommande = new DetailsCommande;
         $panier = $session->get("panier", []);
         $total=0;
         
@@ -60,6 +61,8 @@ class CommandeController extends AbstractController
             $dataCommande = [];
             $total = 0;
             $qte = 0;
+            $prix ="";
+            $chaussure="";
             foreach($panier as $id=>$quantite)
             {
                 $chaussure= $chaussureRepo->find($id);
@@ -67,25 +70,48 @@ class CommandeController extends AbstractController
                     "Chaussure"=> $chaussure,
                     "Quantite"=>$quantite
                 ]; 
+                $prix = $chaussure->getPrix();
                 $total += $chaussure->getPrix() * $quantite; 
-
+                // dd($dataCommande);
             }
+            
+            $qte=0;
 
-           
-
+           foreach($dataCommande as $key=>$value)
+           {
+                // dd($value);
+                foreach($value as $key=>$data)
+                {
+                    if($key == 'Quantite')
+                    {
+                        // dd($data);
+                        $qte= $data;
+                        
+                    }
+                }
+           }
+          
             $commande->setMontant($total);
                 $commande->setEtat('envoyé');
                 $commande->setUser($user);
                 $manager->persist($commande);
                 $manager->flush();
-
-            
-            
-           dd($detailCommande);
-            
-  
-
         
+            $detailCommande->setQuantite($qte)
+                            ->setPrix($prix)
+                            ->setCommande($commande);
+            $manager->persist($detailCommande);
+            $manager->flush();
+
+        $nouveaustock = $chaussure->getStock() - $qte;
+        // dd($nouveaustock);
+        $chaussure->setStock($nouveaustock);
+        // dd($chaussure);
+        $manager->persist($chaussure);
+        $manager->flush();
+        //    dd($detailCommande);
+
+
         // else
         // {
         //     return $this->redirectToRoute('app_login');

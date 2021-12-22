@@ -186,8 +186,8 @@
         <i class="bi bi-star-fill"></i>  
         <i class="bi bi-star-fill"></i> 
     </div>
-{% endif %} #}
-  {# {% if app.user %}
+{% endif %} 
+  {% if app.user %}
     <div class="col-4 mx-auto">
 
         {{form_start(formComment)}}
@@ -209,13 +209,12 @@
 
 <h2 class="text-center">Derniers avis</h2>
 
-
  {% if chaussure.commentaires is not empty %} 
 
   {% for comment in chaussure.commentaires %}
         
       {# {{ dump(comment) }} #}
-      {# <div class="mb-3">
+      <div class="mb-3">
       
         <div class="col-4">
 
