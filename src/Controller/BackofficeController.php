@@ -66,7 +66,7 @@ class BackofficeController extends AbstractController
 /* ################## ROUTE AJOUT ET MODIFICATION ################## */
     #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
     #[Route('/backoffice/produit/modification/{id}', name: 'backoffice_produit_modification')]
-    public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager, SluggerInterface $slugger)
+    public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
     {
         if($shoes)
         {
@@ -170,6 +170,17 @@ class BackofficeController extends AbstractController
             return $this->redirectToRoute('backoffice_produit');
         }
 
+       
+        $test=$request->query->get('model');
+        $selecteurModel='';
+        if($test)
+        {
+            $selecteurModel= $repoChaussure->findBy(['model'=>$test]); 
+        } 
+
+        $chaussure=$repoChaussure->findAll();
+    
+
         return $this->render('backoffice/admin_article_ajout.html.twig', [
             'formAdminShoes' => $formAdminShoes->createView(),
             'photoEnregistree' => $shoes->getPhoto(),
@@ -177,6 +188,8 @@ class BackofficeController extends AbstractController
             'photoEnregistree3'=> $shoes->getPhoto3(),
             'photoEnregistree4'=> $shoes->getPhoto4(), 
             'Modification' => $shoes->getId(),
+            'Chaussure'=>$chaussure,
+            'selecteurModel'=>$selecteurModel
         ]);
     }
 
