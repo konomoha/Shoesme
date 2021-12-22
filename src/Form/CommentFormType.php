@@ -39,8 +39,8 @@ class CommentFormType extends AbstractType
                     
                 ],
                 'required' => false,
-                'expanded' => true,
-                'multiple' => false,
+                // 'expanded' => true,
+                // 'multiple' => false,
                 'label' => 'Note' 
             ]);
     }
