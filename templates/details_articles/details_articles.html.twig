@@ -46,13 +46,8 @@
             <p>Sélectionnez la taille</p>
               {# <form> #}
                   <select class="form-select" aria-label="Default select example">
-                        <option selected>Taille</option>
-                        <option value="1">40</option>
-                        <option value="2">41</option>
-                        <option value="3">42</option>
-                        <option value="3">43</option>
-                        <option value="3">44</option>
-                        <option value="3">45</option>
+                        <option>{{ data.pointure }}</option>
+                        
 
                     </select><br>
 
@@ -234,14 +229,18 @@
 
         </div>
         
-      </div>
-  {% endfor %}
+      </div> #}
+  {# {% endfor %} #}
 
- {% else %} 
+ {# {% else %} 
 
     <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
 
+
+{% endif %}   #} 
+
 {% endif %}  
+
 
 {% endblock %}
