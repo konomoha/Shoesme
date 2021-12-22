@@ -140,8 +140,8 @@ class ShoesMeController extends AbstractController
         return $this->render('details_articles/details_articles.html.twig', [
             'formComment' => $formComment->createView(),
             'chaussure'=> $chaussure,
-            'datacom'=>$datacom,
-            'moyenne'=>$moyenne
+            'datacom'=> $datacom,
+            'moyenne'=> $moyenne
         ]);
 
     }
