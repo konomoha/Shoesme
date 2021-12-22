@@ -6,22 +6,34 @@ use App\Entity\Chaussure;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PanierController extends AbstractController
 {
     #[Route('/panier', name: 'panier')]
-    public function index(SessionInterface $session, ChaussureRepository $chaussureRepo): Response
+    public function index(Request $request, SessionInterface $session, ChaussureRepository $chaussureRepo): Response
     {
         $panier = $session->get("panier", []);
 
         $dataPanier = [];
         $total = 0;
+
+        $test=$request->query->get('quantite');
+        $qte=0;
+        if($test)
+        {
+            $qte = $test;
+            // dd($qte);
+        }
+
         foreach($panier as $id=>$quantite)
         {
+            $quantite+=$qte;
             $chaussure= $chaussureRepo->find($id);
             $dataPanier[]= [
                 "Chaussure"=> $chaussure,
@@ -29,7 +41,6 @@ class PanierController extends AbstractController
             ]; 
             $total += $chaussure->getPrix() * $quantite; //le prix de l'article multiplié par la quantité
         }
-
         return $this->render('panier/panier.html.twig', [
             "dataPanier"=>$dataPanier,
             "total"=>$total
@@ -57,8 +68,7 @@ class PanierController extends AbstractController
       
       //sauvegarde du panier
       $session->set("panier", $panier);
-      $session->set("commande", $panier);
- 
+     
       $this->addFlash('success', "$model a bien été ajouté au panier!");
 
       return $this->redirectToRoute('panier');
@@ -119,5 +129,37 @@ class PanierController extends AbstractController
             'controller_name' => 'PanierController',
         ]);
     }
+
+//    #[Route('/panier/quantity/{id}', name:'panier_quantity')]
+//    public function quantity(ChaussureRepository $chaussureRepo, Chaussure $chaussure, SessionInterface $session, Request $request): Response
+//    {
+//         $test=$request->query->get('quantite');
+//         $qte=0;
+//         if($test)
+//         {
+//             dd($test);
+//         }
+
+//         $panier = $session->get("panier", []);
+
+//         $dataPanier = [];
+//         $total = 0;
+//         foreach($panier as $id=>$quantite)
+//         {
+//             $chaussure= $chaussureRepo->find($id);
+//             $dataPanier[]= [
+//                 "Chaussure"=> $chaussure,
+//                 "Quantite"=>$quantite + $test
+//             ]; 
+//             $total += $chaussure->getPrix() * $quantite; //le prix de l'article multiplié par la quantité
+//         }
+
+
+//         return $this->render('panier/panier.html.twig', [
+//             "dataPanier"=>$dataPanier,
+//             "total"=>$total
+//         ]
+//     );
+//    }
 
 }
