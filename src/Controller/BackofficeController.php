@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BackofficeController extends AbstractController
 {
@@ -40,14 +41,13 @@ class BackofficeController extends AbstractController
     {
         //Affichage chaussures
         $titreColonneChaussure=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
-        
-        
         $shoes = $chaussureRepo->findAll();
 
         //Suppression chaussures
         if($shoesRemove)
         {
-            $id=$shoesRemove->getId(). ' - ' . $shoesRemove->getMarque(). ' - ' . $shoesRemove->getModel();
+            $id=$shoesRemove->getId()//. ' - ' . $shoesRemove->getMarque(). ' - ' . $shoesRemove->getModel()
+            ;
             $manager->remove($shoesRemove);
             $manager->flush();
             $this->addFlash('suppression', "La chaussure n° $id a été supprimée");
@@ -66,30 +66,14 @@ class BackofficeController extends AbstractController
 /* ################## ROUTE AJOUT ET MODIFICATION ################## */
     #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
     #[Route('/backoffice/produit/modification/{id}', name: 'backoffice_produit_modification')]
-    public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager)
+    public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager, SluggerInterface $slugger)
     {
         if($shoes)
         {
-            
-            
-            // dd($shoes);
             $photoEnregistree = $shoes->getPhoto();
-            
-            // foreach($shoes->getCouleurs() as $key => $value)
-            // {
-            //     //Récupère les couleurs liées à une chaussure
-            //     $infoCouleur [] = $value->getNomCouleur();  
-                
-            //     foreach($value->getTailles() as $key2=>$value2)
-            //     {
-            //         //Récupère toutes les pointures de la chaussure
-            //         $infoPointure[] = $value2->getPointure();
-                    
-            //         //Récupère tous les stock de toutes les pointures
-            //         $infoStock[]=$value2->getStock();
-            //     }
-            // }
-            
+            $photoEnregistree2= $shoes->getPhoto2();
+            $photoEnregistree3= $shoes->getPhoto3();
+            $photoEnregistree4= $shoes->getPhoto4(); 
         }
 
         if(!$shoes)
@@ -102,28 +86,79 @@ class BackofficeController extends AbstractController
 
         if($formAdminShoes->isSubmitted() && $formAdminShoes->isValid())
         {
-           
+            // dd($formAdminShoes);
 
             if($shoes->getId() )
                 $txt = 'modifiée';
             else 
                 $txt = 'enregistrée';
-
-            //***Traitement Photo ***/ 
+            
+            //***Traitement Photos ***/ 
             $photo = $formAdminShoes->get('photo')->getData();
+            $photo2 = $formAdminShoes->get('photo2')->getData();
+            $photo3 = $formAdminShoes->get('photo3')->getData();
+            $photo4 = $formAdminShoes->get('photo4')->getData();
+
+            
             if($photo)
             {
                 $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                $nouveauNomFichier = $nomOriginePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                $securePhoto= $slugger->slug($nomOriginePhoto);
+                $nouveauNomFichier = $securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
                 $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
                 $shoes->setPhoto($nouveauNomFichier);
+                
             }
+            if($photo2)
+            {
+                $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
+                // $securePhoto2= $slugger->slug($nomOriginePhoto2);
+                $nouveauNomFichier2 = $nomOriginePhoto2 . '-' . uniqid() . '.' . $photo2->guessExtension();
+                $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
+                $shoes->setPhoto2($nouveauNomFichier2);
+                
+            }
+            if($photo3)
+            {
+                $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
+                // $securePhoto3= $slugger->slug($nomOriginePhoto3);
+                $nouveauNomFichier3 = $nomOriginePhoto3 . '-' . uniqid() . '.' . $photo3->guessExtension();
+                $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
+                $shoes->setPhoto3($nouveauNomFichier3);
+                
+            }
+            if($photo4)
+            {
+                $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
+                // $securePhoto4= $slugger->slug($nomOriginePhoto4);
+                $nouveauNomFichier4 = $nomOriginePhoto4 . '-' . uniqid() . '.' . $photo4->guessExtension();
+                $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
+                $shoes->setPhoto4($nouveauNomFichier4);
+                
+            }
+            
             else 
             { 
                 if(isset($photoEnregistree))
                     $shoes->setPhoto($photoEnregistree);
                 else  
                     $shoes->setPhoto(null);
+
+                if(isset($photoEnregistree2))
+                    $shoes->setPhoto2($photoEnregistree2);
+                else  
+                    $shoes->setPhoto2(null);
+
+                if(isset($photoEnregistree3))
+                    $shoes->setPhoto3($photoEnregistree3);
+                else  
+                    $shoes->setPhoto3(null);
+
+                if(isset($photoEnregistree4))
+                    $shoes->setPhoto4($photoEnregistree4);
+                else  
+                    $shoes->setPhoto4(null);
+
             }
             //***FIN Traitement Photo ***/ 
 
@@ -134,13 +169,13 @@ class BackofficeController extends AbstractController
 
             return $this->redirectToRoute('backoffice_produit');
         }
-        
-        // $formAdminStock=$this->createForm(TailleType::class, $infoStock);
-        // dump($formAdminStock);
 
         return $this->render('backoffice/admin_article_ajout.html.twig', [
             'formAdminShoes' => $formAdminShoes->createView(),
-            'photoEnregistree' => $shoes->getPhoto(), 
+            'photoEnregistree' => $shoes->getPhoto(),
+            'photoEnregistree2'=> $shoes->getPhoto2(),
+            'photoEnregistree3'=> $shoes->getPhoto3(),
+            'photoEnregistree4'=> $shoes->getPhoto4(), 
             'Modification' => $shoes->getId(),
         ]);
     }
@@ -149,31 +184,7 @@ class BackofficeController extends AbstractController
 
 
 
-/* ##################------------ DEBUT - CRUD - STOCK ------------################## */
 
-/* ################## ROUTE AFFICHAGE ET SUPPRESSION ################## */
-#[Route('backoffice/stock', name:'app_admin_stock')]
-public function backOfficeStock (EntityManagerInterface $manager, CouleurRepository $repoCouleur, ChaussureRepository $repoChaussure, Request $request, Couleur $couleur=null)
-{
-    $dataCouleur=$repoCouleur->findAll();
-    
-    
-    if($request->query->get('couleur'))
-    {
-        $selectionCouleur=$request->query->get('couleur');
-        
-        $dataChaussure=$repoChaussure->find($selectionCouleur);
-        // dd($dataChaussure);
-    }
-    
-
-    return $this->render('backoffice/admin_stock.html.twig', [
-        'dataCouleur'=>$dataCouleur,
-        // 'dataChaussure'=>$dataChaussure,
-    ]);
-}
-
-/* ##################------------ FIN - CRUD - STOCK ------------################## */
 
 
 

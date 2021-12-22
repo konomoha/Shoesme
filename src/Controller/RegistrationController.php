@@ -107,7 +107,7 @@ class RegistrationController extends AbstractController
             {   
                 $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);           
                 $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
-                $nouveauNomFichier = $nomOrigineAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
+                $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
 
                 try
                 {

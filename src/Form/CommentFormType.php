@@ -39,10 +39,10 @@ class CommentFormType extends AbstractType
                     'Super'=>'5'
                     
                 ],
-                'required' => false,
-                // 'expanded' => true,
-                // 'multiple' => false,
-                'label' => 'Note' 
+                // 'required' => false,
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'Notez ce produit' 
             ]);
     }
 
