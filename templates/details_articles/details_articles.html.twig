@@ -128,7 +128,7 @@
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
 <h2 class="text-center">Donnez votre avis</h2>
 
-{# {{dd(moyenne)}} #}
+{# {{dump(chaussure)}} #}
 <h3>Evaluation produit: </h3>
 {% if moyenne == 0 %}
   <div> 
@@ -182,7 +182,13 @@
 {% endif %}
   {% if app.user %}
     <div class="col-4 mx-auto">
-  
+
+        {{form_start(formComment)}}
+
+            {{form_row(formComment.contenu)}}
+            {{form_row(formComment.evaluation)}}
+          <button class="btn btn-dark">Envoyer!</button>
+        {{form_start(formComment)}}
 
     </div>
 
@@ -201,7 +207,7 @@
 
   {% for comment in chaussure.commentaires %}
         
-      {{ dump(comment) }}
+      {# {{ dump(comment) }} #}
       <div class="mb-3">
       
         <div class="col-4">

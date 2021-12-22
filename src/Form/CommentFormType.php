@@ -32,10 +32,11 @@ class CommentFormType extends AbstractType
             ])
             ->add('evaluation', ChoiceType::class, [
                 'choices' => [
-                    'bof' => '1',
-                    'Bien' => '2',
-                    'très bien' => '3',
-                    'Super'=> '4'
+                    'nul' => '1',
+                    'moyen' => '2',
+                    'bien' => '3',
+                    'Très bien'=> '4',
+                    'Super'=>'5'
                     
                 ],
                 'required' => false,
