@@ -21,14 +21,14 @@ class CommentFormType extends AbstractType
                 'label' => 'Saisir votre commentaire',
                 'attr'=> [
                     'placeholder' => "Saisir le contenu de l'article",
-                    'row' => 10
-                ],
-                // 'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir votre commentaire'
-                    ])
+                    'rows' => 5
                 ]
+                // 'required' => false,
+                // 'constraints' => [
+                //     new NotBlank([
+                //         'message' => 'Merci de saisir votre commentaire'
+                //     ])
+                // ]
             ])
             ->add('evaluation', ChoiceType::class, [
                 'choices' => [

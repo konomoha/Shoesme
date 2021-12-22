@@ -12,6 +12,7 @@
     {% endif %}
 </h1>
 {# {{dump(dataPanier)}} #}
+
 {% set test = 50 %}
  {% for key in dataPanier %}
     {# {{dump(key.Chaussure.stock)}} #}
@@ -25,6 +26,7 @@
 
 {% endfor %}
 
+
 <div class="d-flex flex-row">
 {% if dataPanier %}
 <div class="" style="width: 60%;">
@@ -36,7 +38,7 @@
             <a href="" class="p-0"><img class="img-fluid " src="{{ asset('img/' ~ data.Chaussure.photo) }}" alt=""></a>
         </div>
 
-        <div class=" col-5 ms-3 mt-3">
+        <div class=" col-5 ms-3 my-3">
             <strong class="my-3 fs-3">{{ data.Chaussure.marque }}</strong>
             <p class="my-2">{{ data.Chaussure.descriptif }}</p>
                 <div class="my-2 fs-4">Taille : 42</div>
@@ -51,7 +53,7 @@
                             </select> <button>Send</button>
                     </form>
 
-                    <a href="#" class="text-dark mx-auto">Détails article</a>
+                    <a href="{{path('details_article', {'id': data.Chaussure.id })}}" class="text-dark mx-auto">Détails article</a>
                     </div>
         </div>
 
@@ -77,9 +79,14 @@
             </div>
 
             <div class="d-flex flex-row justify-content-between">
-                <div class="fs-3 ms-5 my-5">Total</div> <div class="fs-3 me-5 my-5"><strong>{{total}} €</strong></div>
+                <div class="fs-3 ms-5 mt-5">Total</div><div class="fs-3 me-5 mt-5"><strong>{{total}} €</strong></div>
             </div>
-            <button > <a href="{{path('commande')}}">Test commande</a></button>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="fs-5 ms-5 mb-5">TVA inclus</div><div class="fs-5 me-5 mb-5">{{total}} €{#fonction calcul tva 20% #}</div>
+            </div>
+            <div class="fs-3 d-flex justify-content-center mt-5 mb-1">
+            <a href="{{path('commande')}}" class="bouton-commande mx-auto">Valider commande</a>
+            </div>
 
         </div>
     </div>

@@ -28,11 +28,17 @@
     overflow-x: auto;
     overflow-y: scroll;
 } */
+
+/* Photo du tableau affichage général */
 .photobo
 {
     width:8vw;
 }
-
+/* Tableau Ajout produit */
+#tabAjout
+{
+    width: 30vw;
+}
 .entete-comments{
     background-color: rgba(98, 20, 243, 0.418);
 }

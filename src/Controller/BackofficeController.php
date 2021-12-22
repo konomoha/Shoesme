@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Entity\Contact;
 use App\Entity\Chaussure;
 use App\Entity\Commentaire;
-
 use App\Form\ChaussureType;
 use App\Form\CommentFormType;
 use App\Repository\UserRepository;
@@ -68,6 +67,8 @@ class BackofficeController extends AbstractController
     #[Route('/backoffice/produit/modification/{id}', name: 'backoffice_produit_modification')]
     public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
     {
+        $titreColonneChaussure=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+
         if($shoes)
         {
             $photoEnregistree = $shoes->getPhoto();
@@ -170,12 +171,15 @@ class BackofficeController extends AbstractController
             return $this->redirectToRoute('backoffice_produit');
         }
 
-       
+       //Récupération et affichage du model sélectionné
         $test=$request->query->get('model');
         $selecteurModel='';
         if($test)
         {
-            $selecteurModel= $repoChaussure->findBy(['model'=>$test]); 
+            $selecteurModel= $repoChaussure->findBy(
+               ['model'=>$test], 
+            //    ['marque'=>'ASC']
+            ); 
         } 
 
         $chaussure=$repoChaussure->findAll();
@@ -189,7 +193,8 @@ class BackofficeController extends AbstractController
             'photoEnregistree4'=> $shoes->getPhoto4(), 
             'Modification' => $shoes->getId(),
             'Chaussure'=>$chaussure,
-            'selecteurModel'=>$selecteurModel
+            'selecteurModel'=>$selecteurModel,
+            'colonneChaussure'=>$titreColonneChaussure,
         ]);
     }
 
