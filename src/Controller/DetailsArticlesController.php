@@ -14,7 +14,7 @@ class DetailsArticlesController extends AbstractController
     {
         $chaussure = $repoChaussure->findAll(); // offset
 
-        return $this->render('shoes_me/home.html.twig', [
+        return $this->render('details_articles/details_articles.html.twig', [
             'chaussure'=> $chaussure
         ]);
     }
