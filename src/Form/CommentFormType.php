@@ -23,7 +23,7 @@ class CommentFormType extends AbstractType
                     'placeholder' => "Saisir le contenu de l'article",
                     'row' => 10
                 ],
-                'required' => false,
+                // 'required' => false,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de saisir votre commentaire'

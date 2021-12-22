@@ -22,7 +22,7 @@
 }
 
 .color-nav{
-    background-color: #DCA659;
+    background-color: black;
 }
 
 .color-nav2{
@@ -68,9 +68,10 @@
 }
 
 .nav-header-2:hover{
-    background: black;
-    color: white !important;
+    background: white;
+    color: black !important;
     text-decoration: underline !important;
+    border-radius: 7px;
 }
 
 .nav-footer:hover{
@@ -170,6 +171,13 @@ a{
 {
     width: 30%;
     height: auto;
+
+}
+
+.container1 {
+    display: flex;
+    width: 960px;
+    margin: 0 auto;
 
 }
 

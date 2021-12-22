@@ -41,7 +41,7 @@
         <div class="container-fluid d-flex justify-content-between">
             <div >
                 <a href="{{ path('home') }}"><img src="{{ asset('img/logo.jpg') }}" class="logo"></a>
-                <h4 class="text-center">ShoesMe</h4>
+                <h4 class="text-center text-white">ShoesMe</h4>
             </div>
             
             <div class="d-flex flex-row flex-end align-items-center pe-2">
@@ -49,7 +49,7 @@
                 <div class="">  
 
                  {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('backoffice') }}" class="text-dark nav-header-2">BACKOFFICE</a>
+                            <a href="{{ path('backoffice') }}" class="text-dark nav-header-2 text-white">BACKOFFICE</a>
                             {% endif %}               
                 
                     <a href="{{path('panier')}}"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>

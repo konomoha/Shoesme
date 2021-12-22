@@ -93,6 +93,7 @@
       </div>
     </div>
 
+
     {% if chaussure.sexe == 'm' %}
       <h4 class="mt-2 mb-4 ms-3">Chaussure pour Homme</h4>
     {% elseif chaussure.sexe == 'f' %}
@@ -165,7 +166,7 @@
       <h2 class="text-center my-3">Donnez votre avis</h2>
 
       {{form_start(formComment) }}
-
+      
         <div class="d-flex flex-row">
           <div class="col-md-6">
             {{form_row(formComment.contenu) }}
@@ -196,14 +197,18 @@
   <h2 class="text-center my-5">Derniers avis</h2>
 
 
+
   {% if chaussure.commentaires is not empty %} 
+
 
     {% for comment in chaussure.commentaires %}
           
         {# {{ dump(comment) }} #}
         <div class="mb-3">
         
+
           <div class="col-4">
+
 
             <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}})</small></p>
             
@@ -216,9 +221,11 @@
           </div>
           
         </div>
+        
     {% endfor %}
 
   {% else %} 
+
 
       <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
@@ -226,5 +233,7 @@
   {% endif %}  
 <div>
   
+
+
 
 {% endblock %}
