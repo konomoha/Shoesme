@@ -7,6 +7,10 @@
 
 {% block body %}
 
+<div class="d-flex justify-content-end">
+    <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
+</div>
+
     <h1 class="text-center my-4">Commentaires Utilisateurs</h1>
 
     {% for message in app.flashes ('success') %}
