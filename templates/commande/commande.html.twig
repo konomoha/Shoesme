@@ -5,7 +5,28 @@ ShoesMe | Commande
 {% endblock %}
 
 {% block body %}
-<h1>Récapitulatif commande</h1>
-{{dump(dataCommande)}}
-{# Il va falloir boucler... #}
+<h1 class="text-center">Récapitulatif de votre commande</h1>
+
+
+<table class="table-bordered text-center my-5 mx-auto">
+<tr>
+
+    <th class="p-3">Produit</th>
+    <th class="p-3">Prix</th>
+    <th class="p-3">Quantite</th>
+
+</tr>
+{% for data in dataCommande %}
+    {# {{dump(data)}} #}
+    <tr>
+        <td class="p-3">{{data.Chaussure.model}}</td>
+        <td class="p-3">{{data.Chaussure.prix}} €</td>
+        <td class="p-3">{{data.Quantite}}</td>
+        
+    </tr>
+    
+{% endfor %}<tr><th colspan="2">Total Commande</th><td class="p-3">{{total}} €</td></tr>
+</table>
+<button class="btn btn-dark col-1 mx-auto"><a href="{{path('commande_paiement')}}" onclick="return(confirm('Souhaitez-vous passer au paiement de votre commande?'));">Payer</a></button>
+
 {% endblock %}

@@ -43,7 +43,7 @@ class DetailsCommande
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setQuantite(?int $quantite): self
     {
         $this->quantite = $quantite;
 
