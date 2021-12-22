@@ -10,25 +10,40 @@
 
     {% endfor %}
 
+
+
+
+  
+
 <div class="d-flex ms-5 mt-5">
  
-       
+   {% for data in chaussure %}
+
+
+     
+    
     
     <div class="card mx-5" style="width: 30rem;">
 
-      <img src="{{ asset('img/nike/chaussure1/1.jpg') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="data_nike_1">
       
     </div>
 
     <div class="card" style="width: 30rem;">
 
-      <img src="{{ asset('img/nike/chaussure1/2.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ data.photo2) }}" class="card-img-top" alt="data_nike_1">
      
     </div>
           <aside class="mx-auto">
-            <h1>Nike Air Max Plus</h1>
-            <h4>Chaussures pour Homme</h4><br>
-            <h5>169.99 €</h5><br>
+            <h1> {{ data.marque }} </h1>
+
+            {% if data.sexe == 'm' %}
+              <h4>Chaussure pour Homme</h4><br>
+            {% elseif data.sexe == 'f' %}
+              <h4>Chaussure pour Femme</h4><br>
+            {% endif %}
+            
+            <h5>{{ data.prix }} €</h5><br>
 
             <p>Sélectionnez la taille</p>
               {# <form> #}
@@ -47,12 +62,7 @@
 <br><br>
                     <p>Livraison gratuite</p>
 <br>
-                    <h4>Revendiquez votre côté rebelle avec votre Nike Air</h4>
-                     <h4>Max Plus, un modèle Air novateur qui offre une</h4>
-                      <h4>stabilité optimale et un amorti exceptionnel.</h4>
-                       <h4>Reprenant les lignes ondulées, les détails en TPU et</h4>
-                        <h4>l'empeigne en mesh aéré du modèle OG, elle</h4>
-                         <h4>incarne un style rebelle.</h4>
+                    <p>{{ data.descriptif }}</p>
 
 
 
@@ -96,7 +106,7 @@
 
                                           Origines des Nike Air Max
 
-                                          La technologie Air révolutionnaire a été intégrée à la gamme de chaussures Nike en 1978. En 1987, la Air Max 1 intègre pour la première fois la technologie Air visible au talon. Désormais, en plus de ressentir l'amorti Air, chacun pouvait également le voir en action. Depuis, les chaussures Air Max nouvelle génération connaissent un succès constant auprès des athlètes et des collectionneurs, grâce à leurs associations de couleurs saisissantes et à leur foulée légère parfaitement amortie.
+                                          La technologie Air révolutionnaire a été intégrée à la gamme de datas Nike en 1978. En 1987, la Air Max 1 intègre pour la première fois la technologie Air visible au talon. Désormais, en plus de ressentir l'amorti Air, chacun pouvait également le voir en action. Depuis, les datas Air Max nouvelle génération connaissent un succès constant auprès des athlètes et des collectionneurs, grâce à leurs associations de couleurs saisissantes et à leur foulée légère parfaitement amortie.
 
 
 
@@ -113,18 +123,18 @@
 <div class="d-flex ms-5 mt-5 mb-5">
 
     <div class="card mx-5" style="width: 30rem;">
-      <img src="{{ asset('img/nike/chaussure1/3.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ data.photo3) }}" class="card-img-top" alt="data_nike_1">
     
     </div>
 
 
     <div class="card" style="width: 30rem;">
-      <img src="{{ asset('img/nike/chaussure1/4.png') }}" class="card-img-top" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ data.photo4) }}" class="card-img-top" alt="data_nike_1">
      
     </div>
 
 </div>
-
+{% endfor %}   
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
 <h2 class="text-center">Donnez votre avis</h2>
 
@@ -204,9 +214,9 @@
 {# <h2 class="text-center">Derniers avis</h2>
 
 
- {% if chaussure.commentaires is not empty %} 
+ {% if data.commentaires is not empty %} 
 
-  {% for comment in chaussure.commentaires %}
+  {% for comment in data.commentaires %}
         
       {# {{ dump(comment) }} #}
       <div class="mb-3">

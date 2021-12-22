@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DetailsArticlesController extends AbstractController
 {
-    #[Route('/details_articles', name: 'details_articles')]
+    #[Route('/details_articles/{id}', name: 'details_articles')]
     public function index(ChaussureRepository $repoChaussure): Response
     {
         $chaussure = $repoChaussure->findAll(); // offset
