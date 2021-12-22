@@ -42,7 +42,7 @@
                         <option value="3">45</option>
 
                     </select><br>
-                    <button href="{{path('panier_add', {'id': data.id })}}" class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
+                    <button class="btn btn-dark rounded-pill" style="width:180px;height:30px">Ajouter au panier</button>
               {# </form> #}
 <br><br>
                     <p>Livraison gratuite</p>
@@ -128,9 +128,8 @@
 {# ########################################  FORMULAIRE COMMENTAIRE ARTICLE  #################################}
 <h2 class="text-center">Donnez votre avis</h2>
 
-
-{# {{dd(moyenne)}} #}
-{# <h3>Evaluation produit: </h3>
+{# {{dump(chaussure)}} #}
+<h3>Evaluation produit: </h3>
 {% if moyenne == 0 %}
   <div> 
         <i class="bi bi-star"></i> 
@@ -197,11 +196,11 @@
 
     <p class="text-secondary"> <a class="link-secondary" href="{{path('app_login')}}">Identifiez-vous</a> ou <a class="link-secondary" href="{{path('app_register')}}">créez votre compte</a>  pour poster un commentaire</p>
         
-  {% endif %} #}
+  {% endif %}
 
 {# ############################################# COMMENTAIRES ############################################### #}
 
-{# <h2 class="text-center">Derniers avis</h2>
+<h2 class="text-center">Derniers avis</h2>
 
 
  {% if chaussure.commentaires is not empty %} 
@@ -230,6 +229,6 @@
 
     <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
-{% endif %}   #}
+{% endif %}  
 
 {% endblock %}
