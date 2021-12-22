@@ -25,14 +25,14 @@ class ChaussureType extends AbstractType
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'm',
-                    'Femme' => 'f'                    
+                    'Femme' => 'f',
+                    'Garçon' => 'g',
+                    'Fille' => 'fille',
+                    'Mixte' => 'Mixte'                   
                 ],
-                // 'attr' => [
-                //     'style' => 'margin-left: 10px;'
-                // ],
                 'expanded' => true,
                 'multiple' => false,
-                'label' => 'Civilité' 
+                'label' => 'Genre' 
             ])
             ->add('marque', TextType::class,[
                 'label' => 'Marque :',
@@ -52,8 +52,17 @@ class ChaussureType extends AbstractType
                         ])
                     ]
             ])
-            ->add('type', TextType::class,[
+            ->add('type', ChoiceType::class,[
                 'label' => 'Catégorie :',
+                'choices' => [
+                    'sneakers' => 'sneakers',
+                    'derby' => 'derby',
+                    'bottines' => 'bottines',
+                    'bottes' => 'bottes',
+                    'escarpin'=>'escarpin',
+                    'chaussure de marche' => 'chaussure de marche',
+                    'chausson' => 'chausson'
+                ],
                 'required' => false,
                 'constraints' => [
                         new NotBlank([
@@ -168,28 +177,39 @@ class ChaussureType extends AbstractType
                         ])
                     ]
             ])
-            ->add('pointure', NumberType::class,[
+            ->add('pointure', ChoiceType::class,[
                 'label' => 'Pointure :',
                 'required' => false,
+                'choices' => [
+                    '25'=>'25',
+                    '26'=>'26',
+                    '27'=>'27',
+                    '28'=>'28',
+                    '29'=>'29',
+                    '30'=>'30',
+                    '31'=>'31',
+                    '32'=>'32',
+                    '33'=>'33',
+                    '34'=>'34',
+                    '35'=>'35',
+                    '36'=>'36',
+                    '37'=>'37',
+                    '38'=>'38',
+                    '39'=>'39',
+                    '40'=>'40',
+                    '41'=>'41',
+                    '42'=>'42',
+                    '43'=>'43',
+                    '44'=>'44',
+                    '45'=>'45',
+                    '46'=>'46',
+                ],
                 'constraints' => [
                         new NotBlank([
                             'message' => 'Saisir une Marque'
                         ])
                     ]
             ])
-            // ->add('top', ChoiceType::class, [
-            //     'choices' =>[
-
-            //         'normal' => '',
-            //         'top' => 'top'
-            //         ],
-            //         'expanded' => false,
-            //         'multiple' => true,
-            //         'label' => "Definir le role statut : ",
-            //         'attr' => [
-            //             'class' => 'select-top'
-            //         ],
-            // ])
             ->add('couleur', ChoiceType::class,[
                 'choices'=>[
                    'noir'=>'noir',
