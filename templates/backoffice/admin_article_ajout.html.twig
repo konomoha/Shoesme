@@ -6,59 +6,57 @@
 
 {% block body %}
 
-<div class="d-flex justify-content-end">
-    <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
-</div>
+
 
 
 <div class="main-inscription">
     <div class="div-inscription p-4">
 
-    <h1 class="text-center my-4">
-                    {% if Modification %}
-                        Modification chaussure {{Modification}}
-                    {% else %}
-                        Ajout nouvelle chaussure
-                    {% endif %}
-                </h1>
+        <div class="d-flex justify-content-end">
+            <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
+        </div>
+
+        <h1 class="text-center my-4">
+            {% if Modification %}
+                Modification chaussure {{Modification}}
+            {% else %}
+                Ajout nouvelle chaussure
+            {% endif %}
+        </h1>
+
         <div class="col-md-12 d-flex flex-row justify-content-between mx-3">
 
             <div class="col-md-4 mx-4">
-                
+                <form action="" method="get">                
+                    <label for="marque" class="my-2">Voir la liste des modèles déjà enregistrés :</label>
+                    <select name="model" id="model">
+                        <option value=""></option>
+                        {% for item in Chaussure %}
+                            <option value="{{item.model}}">{{item.marque}} {{item.model}}</option>
+                        {% endfor %}   
+                    </select>
 
-                    <form action="" method="get">
-                    
-                        <label for="marque">Voir la liste des modèles déjà enregistrés :</label>
-                        <br>
-                        <select name="model" id="model">
-                            <option value=""></option>
-                            {% for item in Chaussure %}
-                                <option value="{{item.model}}">{{item.marque}} {{item.model}}</option>
-                            {% endfor %}   
-                        </select>
-
-                        <button class="btn btn-dark ms-2" type="submit">Voir</button>
-
-                    </form>
+                    <button class="btn btn-dark ms-2" type="submit">Voir</button>
+                </form>
 
                 {% if selecteurModel %}
                     <table class="table table-stripped table-hover" id="tabAjout">
                         <tr>
-                        {% for nom in colonneChaussure %}
-                            {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
-                            <th class="text-center">{{nom}}</th>
-                            {% endif %}
-                        {% endfor %}
+                            {% for nom in colonneChaussure %}
+                                {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
+                                <th class="text-center">{{nom}}</th>
+                                {% endif %}
+                            {% endfor %}
                         </tr>
                         {% for data in selecteurModel %}
-                        <tr>
+                            <tr>
                                 <td class="text-center">{{data.marque}}</td>
                                 <td class="text-center">{{data.model}}</td>        
                                 <td class="text-center">{{data.sexe}}</td>
                                 <td class="text-center">{{data.pointure}}</td>
                                 <td class="text-center">{{data.couleur}}</td>
                                 <td class="text-center">{{data.stock}}</td>
-                        </tr>   
+                            </tr>   
                         {% endfor %}
                     </table>
                 {% endif %}
@@ -85,13 +83,13 @@
                     {# {{form_row(formAdminShoes._token)}} #}
 
                     <div class="text-center">
-                    <button class="btn btn-dark">
-                    {% if Modification %}
-                        Enregistrer les modifications
-                    {% else %}
-                        Enregistrer
-                    {% endif %}
-                    </button>
+                        <button class="btn btn-dark">
+                            {% if Modification %}
+                                Enregistrer les modifications
+                            {% else %}
+                                Enregistrer
+                            {% endif %}
+                        </button>
                     </div>
 
                 {{form_end(formAdminShoes)}}
