@@ -6,7 +6,8 @@
 
 {% block body %}
 
-
+<div class="clara">
+<div class="main-bo-2">
 <div class="d-flex justify-content-end">
     <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
 </div>
@@ -14,7 +15,7 @@
 <h1 class="text-center my-3">Bienvenue dans le gestionnaire</h1>
 
    <div class="col-8 mx-auto d-flex justify-content-around flex-wrap">             
-    <a href="{{path('backoffice_produit')}}" class="btn btn-outline-secondary align-items-center p-5 fs-5 m-5">
+    <a href="{{path('backoffice_produit')}}" class="btn btn-outline-dark align-items-center p-5 fs-5 m-5">
     Articles liste
     </a>
 
@@ -30,7 +31,7 @@
     Ajouter categorie
     </a>
 
-    <a href="" class="btn btn-outline-dark p-5 fs-5 m-5">
+    <a href="{{ path('app_message') }}" class="btn btn-outline-dark p-5 fs-5 m-5">
     Gestion Commentaires
     </a>
 
@@ -41,6 +42,8 @@
     <a href=" {{ path('app_admin_user') }} " class="btn btn-outline-dark p-5 fs-5 m-5">
     Utilisateurs
     </a>
+</div>
+</div>
 </div>
 
 

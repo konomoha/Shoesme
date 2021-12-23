@@ -16,6 +16,17 @@
     padding: 0 !important;
 }
 
+.main-bo-2{
+    background-color: rgba(240, 248, 255, 0.50);
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.clara{
+    background-image: url("../img/cm-3.jpg");
+    background-size: cover;
+}
+
 
 /* CRUD CHAUSSURE */
 .icone-tableau
