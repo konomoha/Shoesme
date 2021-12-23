@@ -290,6 +290,121 @@ class RegistrationFormType extends AbstractType
                     
             ;
         }
+
+        elseif($options['roleUpdate'] == true)
+        {
+            $builder
+            ->add('roles', ChoiceType::class, [
+                'choices'=>[
+                    'Utilisateur'=>'',
+                    'Administrateur'=>'ROLE_ADMIN'
+                ],
+                'expanded'=>false,
+                'multiple'=>true,
+                'label'=>"Définir le role de l'utilisateur"
+                
+            ])
+            
+            ->add('nom', TextType::class,[
+                'required'=> false,
+                'constraints' => [
+                    new NotBlank([
+                        'message'=>"Veuillez renseigner votre nom."
+                    ])
+                ]
+            ])
+
+            ->add('prenom', TextType::class,[
+                'required'=> false,
+                'constraints' => [
+                    new NotBlank([
+                        'message'=>"Veuillez renseigner votre prenom."
+                    ])
+                ]
+            ])
+
+            ->add('adresse', TextType::class,[
+                'required'=> false,
+                'constraints' => [
+                    new NotBlank([
+                        'message'=>"Veuillez renseigner votre adresse."
+                    ])
+                ]
+            ])
+
+            ->add('telephone', TextType::class,[
+                'required'=>false,
+                'constraints'=>[
+                    //Regex qui prend en compte le '0' initial des numéros de tel
+                    new Regex ([
+                        'pattern'=>'/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
+                        'match'=>true,
+                        'message'=> "Veuillez entrer un numéro de téléphone valide"
+                ])
+                
+                ]
+            ])
+
+            ->add('codePostal', NumberType::class,[
+                'required'=>false,
+                'constraints'=>[
+                    new Length([
+                        'min' => 5, 
+                        'max' => 5,
+                        'minMessage' => "Veuillez entrer un code postal à 5 chiffres",
+                        'maxMessage'=> "Veuillez entrer un code postal à 5 chiffres"
+                    ]),
+                ]
+            ])
+
+            ->add('ville', TextType::class,[
+                'required'=> false,
+                'constraints' => [
+                    new NotBlank([
+                        'message'=>"Veuillez renseigner votre ville."
+                    ])
+                ]
+            ])
+
+            ->add('dateNaissance', BirthdayType::class, [
+                'label' => "Date de Naissance",
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                ],
+            ])
+
+            ->add('avatar', FileType::class, [
+                'label' => "Uploader une photo",
+                'mapped' => true, 
+                'data_class'=> null,
+                'required'=>false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
+                    ])
+                ]
+            ])
+            
+            ->add('sexe', ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'm',
+                    'Femme' => 'f'                    
+                ],
+                // 'attr' => [
+                //     'style' => 'margin-left: 10px;'
+                // ],
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'Civilité' 
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -297,7 +412,8 @@ class RegistrationFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'userRegister' => false,
-            'userUpdate' => false
+            'userUpdate' => false,
+            'roleUpdate'=> false
         ]);
     }
 }

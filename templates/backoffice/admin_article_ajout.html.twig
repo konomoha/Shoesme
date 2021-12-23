@@ -6,92 +6,95 @@
 
 {% block body %}
 
-<div class="d-flex justify-content-end">
-    <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
-</div>
-
-
-<div class="main-inscription" id="MainStock">
-<div class="div-inscription p-4">
-
-<h1 class="text-center">
-    {% if Modification %}
-        Modification chaussure {{Modification}}
-    {% else %}
-        Ajout nouvelle chaussure
-    {% endif %}
-</h1>
-
-    <form action="" method="get">
-    
-        <label for="marque">Voir la liste des modèles déjà enregistrés :</label>
-        <br>
-        <select name="model" id="model">
-            <option value=""></option>
-            {% for item in Chaussure %}
-                <option value="{{item.model}}">{{item.marque}} {{item.model}}</option>
-            {% endfor %}   
-        </select>
-
-        <button class="btn btn-dark ms-2" type="submit">Voir</button>
-
-    </form>
-
-    {% if selecteurModel %}
-        <table class="table table-stripped table-hover" id="tabAjout">
-            <tr>
-            {% for nom in colonneChaussure %}
-                {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
-                <th class="text-center">{{nom}}</th>
-                {% endif %}
-            {% endfor %}
-            </tr>
-            {% for data in selecteurModel %}
-            <tr>
-                    <td class="text-center">{{data.marque}}</td>
-                    <td class="text-center">{{data.model}}</td>        
-                    <td class="text-center">{{data.sexe}}</td>
-                    <td class="text-center">{{data.pointure}}</td>
-                    <td class="text-center">{{data.couleur}}</td>
-                    <td class="text-center">{{data.stock}}</td>
-            </tr>   
-            {% endfor %}
-        </table>
-    {% endif %}
-    
 
 
 
-    {{form_start(formAdminShoes, {'attr': {'class': 'col-5  mx-auto my-5 bg-white form-inscription'}} ) }}
+<div class="main-inscription">
+    <div class="div-inscription p-4">
 
-        {{form_row(formAdminShoes.sexe, {'attr': {'class': 'col-10 d-flex flex-row justify-content-between'}} ) }}  
-        {{form_row(formAdminShoes.marque)}}
-        {{form_row(formAdminShoes.model)}}
-        {{form_row(formAdminShoes.type)}}
-        {{form_row(formAdminShoes.matiere)}}
-        {{form_row(formAdminShoes.descriptif)}}
-        {{form_row(formAdminShoes.photo)}}
-        {{form_row(formAdminShoes.photo2)}}
-        {{form_row(formAdminShoes.photo3)}}
-        {{form_row(formAdminShoes.photo4)}}
-        {{form_row(formAdminShoes.prix)}}
-        {{form_row(formAdminShoes.couleur)}}
-        {{form_row(formAdminShoes.pointure)}}
-        {{form_row(formAdminShoes.stock)}}
-
-        {# {{form_row(formAdminShoes._token)}} #}
-
-        <div class="text-center">
-        <button class="btn btn-dark">
-        {% if Modification %}
-            Enregistrer les modifications
-        {% else %}
-            Enregistrer
-        {% endif %}
-        </button>
+        <div class="d-flex justify-content-end">
+            <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
         </div>
 
-    {{form_end(formAdminShoes)}}
+        <h1 class="text-center my-4">
+            {% if Modification %}
+                Modification chaussure {{Modification}}
+            {% else %}
+                Ajout nouvelle chaussure
+            {% endif %}
+        </h1>
+
+        <div class="col-md-12 d-flex flex-row justify-content-between mx-3">
+
+            <div class="col-md-4 mx-4">
+                <form action="" method="get">                
+                    <label for="marque" class="my-2">Voir la liste des modèles déjà enregistrés :</label>
+                    <select name="model" id="model">
+                        <option value=""></option>
+                        {% for item in Chaussure %}
+                            <option value="{{item.model}}">{{item.marque}} {{item.model}}</option>
+                        {% endfor %}   
+                    </select>
+
+                    <button class="btn btn-dark ms-2" type="submit">Voir</button>
+                </form>
+
+                {% if selecteurModel %}
+                    <table class="table table-stripped table-hover" id="tabAjout">
+                        <tr>
+                            {% for nom in colonneChaussure %}
+                                {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
+                                <th class="text-center">{{nom}}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% for data in selecteurModel %}
+                            <tr>
+                                <td class="text-center">{{data.marque}}</td>
+                                <td class="text-center">{{data.model}}</td>        
+                                <td class="text-center">{{data.sexe}}</td>
+                                <td class="text-center">{{data.pointure}}</td>
+                                <td class="text-center">{{data.couleur}}</td>
+                                <td class="text-center">{{data.stock}}</td>
+                            </tr>   
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+
+            <div class="col-md-7 ">
+                {{form_start(formAdminShoes, {'attr': {'class': 'col-10  mx-4 my-5 bg-white form-inscription'}} ) }}
+
+                    {{form_row(formAdminShoes.sexe, {'attr': {'class': 'col-10 d-flex flex-row justify-content-between'}} ) }}  
+                    {{form_row(formAdminShoes.marque)}}
+                    {{form_row(formAdminShoes.model)}}
+                    {{form_row(formAdminShoes.type)}}
+                    {{form_row(formAdminShoes.matiere)}}
+                    {{form_row(formAdminShoes.descriptif)}}
+                    {{form_row(formAdminShoes.photo)}}
+                    {{form_row(formAdminShoes.photo2)}}
+                    {{form_row(formAdminShoes.photo3)}}
+                    {{form_row(formAdminShoes.photo4)}}
+                    {{form_row(formAdminShoes.prix)}}
+                    {{form_row(formAdminShoes.couleur)}}
+                    {{form_row(formAdminShoes.pointure)}}
+                    {{form_row(formAdminShoes.stock)}}
+
+                    {# {{form_row(formAdminShoes._token)}} #}
+
+                    <div class="text-center">
+                        <button class="btn btn-dark">
+                            {% if Modification %}
+                                Enregistrer les modifications
+                            {% else %}
+                                Enregistrer
+                            {% endif %}
+                        </button>
+                    </div>
+
+                {{form_end(formAdminShoes)}}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

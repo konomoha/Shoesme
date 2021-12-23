@@ -33,6 +33,7 @@
       <div>
         <h2 class="mt-4 mb-2 ms-3"> {{ datachaussure.0.marque }} </h2>
       </div>
+      
 
       <div class="mt-2 me-5">
         <div class="d-flex flex-column justify-content-end">
@@ -96,6 +97,10 @@
       </div>
     </div>
 
+    <div>
+        <h5 class="mt-1 mb-4 ms-3"> {{ chaussure.model }} </h5>
+    </div>
+
 
     {% if datachaussure.0.sexe == 'm' %}
       <h4 class="mt-2 mb-4 ms-3">Chaussure pour Homme</h4>
@@ -152,6 +157,7 @@
 
     </form>
 
+
 {# Mise en place d'une condition pour afficher le boutton ajouter au panier: si la chaussure a du stock, on affiche un boutton qui redirige vers le panier, sinon, on affiche un message de rupture de stock (il faudra voir plus tard pour permettre à l'utilisateur de refaire une sélection, ou plus simplement, afficher dans le sélecteur les chaussures ayant du stock?) #}
 
 {% if couleurChaussure %}
@@ -167,7 +173,7 @@
   {% endif %}
   
 {% endif %}
-    
+
 
     <div>
       <p class="mt-2 mb-4 ms-3">Livraison :<span class="text-success fs-5">Gratuite</span></p>
@@ -176,9 +182,11 @@
       {{ datachaussure.0.descriptif }}
     </div>
 
-    <button type="button" class="btn btn-dark mt-2 mb-4 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button class="btn btn-dark col-3 ms-5 p-3 bouton-ajout-panier"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
+
+    {# <button type="button" class="btn btn-dark mt-2 mb-4 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Afficher les détails du produit
-    </button>
+    </button> #}
     
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -229,7 +237,7 @@
         </div>
 
         <div class="d-flex justify-content-center mb-3">
-          <button class="btn btn-dark">Envoyer!</button>
+          <button class="btn btn-dark p-2 ">Envoyer</button>
         </div>
       {{form_start(formComment)}}
 

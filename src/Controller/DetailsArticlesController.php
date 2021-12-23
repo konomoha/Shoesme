@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DetailsArticlesController extends AbstractController
 {
+
     #[Route('/details_article/{id}', name:'details_article')]
     public function detailArticle(CommentaireRepository $repoCommentaire, Request $request, EntityManagerInterface $manager, Chaussure $chaussure, ChaussureRepository $chaussureRepo):Response
     {
@@ -68,6 +69,16 @@ class DetailsArticlesController extends AbstractController
                         $resultat = $total / count($dataNote);
                         $moyenne = round($resultat,1);
                     }
+
+    // #[Route('/details_articles/{id}', name: 'details_articles')]
+    // public function index(ChaussureRepository $repoChaussure, Chaussure $chaussure): Response
+    // {
+        
+
+    //     $chaussure1 = $repoChaussure->findAll(); // offset
+
+    //     $shoes = $chaussure->getId();
+
         
                 }
             }
@@ -75,6 +86,7 @@ class DetailsArticlesController extends AbstractController
         // dump($moyenne);
         // dump($chaussure->getCommentaires());
         
+
         $id = $this->getUser();
         // $idshoes = $chaussure;
         $formComment = $this->createForm(CommentFormType::class, $commentaire);
@@ -110,4 +122,11 @@ class DetailsArticlesController extends AbstractController
         ]);
 
     }
+
+    //     return $this->render('details_articles/details_articles.html.twig', [
+    //         'chaussure'=> $chaussure1,
+    //         'id' => $shoes
+    //     ]);
+    // }
+
 }
