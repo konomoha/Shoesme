@@ -10,6 +10,20 @@
     margin-left: 35% !important;
 } */
 
+.img-fond-profil{
+    margin: 0 !important;
+    padding: 0 !important;
+    background-image: url("../img/img2.jpg");
+    background-size: contain;
+}
+
+.img-fond-connex{
+    margin: 0 !important;
+    padding: 0 !important;
+    background-image: url("../img/img-4.jpg");
+    /* background-size: contain; */
+}
+
 .bouton-ajout-panier:hover{
     color: white !important;
     font-size: 2rem !important;
@@ -31,10 +45,6 @@
     border-bottom: 1px solid rgb(61, 61, 61);
     padding-top: 5px !important;
     padding-bottom: 5px !important;
-}
-
-.hauteur-min{
-    min-height: 800px !important;
 }
 
 .color-nav{
@@ -59,6 +69,12 @@
     background-image: url("../img/img2.jpg");
     background-size: contain;
 }
+
+.main-connex{
+    background-image: url("../img/img-4.jpg");
+    background-size: cover;
+}
+
 
 .div-inscription{
     background-color: rgba(240, 248, 255, 0.548) !important;
@@ -154,8 +170,6 @@ a{
 
 .ch1{
     display: flex;
-    
-    
 }
 
 .H{
@@ -165,17 +179,29 @@ a{
 
 #connexion{
     width: 400px !important;
-    height: 300px !important;
     border: 2px solid white;
+    padding: 20px !important;
+    margin: 60px auto !important;
+    margin-bottom: 100px !important;
+    box-shadow: rgba(0, 0, 0, 0.281)  0px 0px 10px 10px !important;
+    border-radius: 10px;
+}
+
+#connexion-2{
+    width: 400px !important;
+    height: 510px !important;
+    /* border: 2px solid rgb(19, 18, 18); */
     padding: 20px !important;
     margin: auto !important;
     margin-top: 100px !important;
     box-shadow: rgba(0, 0, 0, 0.281)  0px 0px 10px 10px !important;
     border-radius: 10px;
+    background-color: #F8FBFA;
 }
 
 .trans{
     background-color: #f8fbfa28;
+    min-height: 700px;
 }
 
 .lien-inscrip:hover{
@@ -187,7 +213,6 @@ a{
 {
     width: 30%;
     height: auto;
-
 }
 
 .container1 {
@@ -202,18 +227,16 @@ a{
     text-decoration: underline;
 }
 
-.modal{
-    
-        width: 1000px;
-        height: 1000px;
-        position: absolute;
-        left: 50%;
-        top: 50%; 
-        margin-left: -150px;
-        /* margin-right: 150px; */
-        margin-top: -150px;
-        justify-content: center;
-     
+.modal{    
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    margin-left: -150px;
+    /* margin-right: 150px; */
+    margin-top: -150px;
+    justify-content: center;     
 }
 
 /*################# carte article panier #####################*/

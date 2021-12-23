@@ -4,66 +4,54 @@
 
 {% block body %}
 
-<div class="trans">
+<div class="main-connex">
+    <div class="div-inscription p-4">
+            {% if error %}
+                <div class="alert alert-danger text-center col-2 mx-auto mt-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% for message in app.flashes('success_edit') %}
+
+            <div class="bg-success text-center p-3 mx-auto col-5 ">{{ message }}</div>
+            
+
+            {% endfor %}
 
 
-    {% if error %}
-        <div class="alert alert-danger text-center col-2 mx-auto mt-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    Bienvenue {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </div>
+            {% endif %}
 
-    {% for message in app.flashes('success_edit') %}
+            <div id="connexion" class="bg-white">
+                <h1 class="h-3 my-4 font-weight-normal text-center">Connexion</h1>
+                <form method="post" class="mb-5">
+                    <div class="my-3">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mt-1" autocomplete="email" required autofocus>
+                    </div>
+                    <div  class="my-3">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control mt-1" autocomplete="current-password" required>
+                        <div class="d-flex justify-content-end">
+                            <a href="" class="text-black lien-inscrip fs-sm">Mot de passe oublié ?</a>
+                        </div>
+                    </div>
 
-    <div class="bg-success text-center p-3 mx-auto col-5 ">{{ message }}</div>
-    
+                    <div class="d-flex justify-content-end">
+                        <input type="hidden" name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}">
 
-    {% endfor %}
-
-
-    {% if app.user %}
-        <div class="mb-3">
-            Bienvenue {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                        <button class="btn btn-lg btn-dark py-2 px-4 my-5 mx-auto" type="submit">
+                            Se connecter
+                        </button>
+                    </div>
+                    <p class="text-center mt-4 mb-4">Pas encore de compte ? <a href="{{ path('app_register') }}" class="text-black lien-inscrip">S'inscrire</a></p>
+                </form>
+                
+            </div>
         </div>
-    {% endif %}
-
-<div id="connexion">
-<form method="post">
-
-    <h1 class="h-3 mb-3 font-weight-normal text-center">Connexion</h1>
-    <div class="my-3">
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mt-1" autocomplete="email" required autofocus>
     </div>
-    <div  class="my-3">
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control mt-1" autocomplete="current-password" required>
-    <div class="d-flex justify-content-end">
-    <a href="" class="text-black lien-inscrip fs-sm">Mot de passe oublié ?</a>
-    </div>
-    </div>
-
-    <div class="d-flex justify-content-end">
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary px-2 mb-5 mx-auto" type="submit">
-        Se connecter
-    </button>
-    </div>
-</form>
-<p class="text-center">Pas encore de compte ? <a href="{{ path('app_register') }}" class="text-black lien-inscrip">S'inscrire</a></p>
-</div>
-</div>
 
 {% endblock %}

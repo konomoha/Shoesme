@@ -48,36 +48,32 @@
                 
                 <div class="">  
 
-                 {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('backoffice') }}" class="text-dark nav-header-2 text-white">BACKOFFICE</a>
-                            {% endif %}               
-                
-                    <a href="{{path('panier')}}"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
-                
-                {% if app.user %}
-                <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{ app.user.prenom|upper }} {#{{app.user.nom}} #}</strong></a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('backoffice') }}" class="text-dark nav-header-2 text-white">BACKOFFICE</a>
+                    {% endif %} 
+                        <a href="{{path('panier')}}"><i class="bi bi-cart2 icon-logo-2 mx-2 icon-1"></i></a>
+                    {% if app.user %}
+
+                    <a class="text-white" href="{{path('app_profil')}}">Bonjour <strong>{{ app.user.prenom|upper }} {#{{app.user.nom}} #}</strong></a>
+
                 </div>
 
                 <div class="flex-shrink-0 dropdown ">             
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('img/vegeta.jpg') }}" alt="mdo" width="50" height="50" class="rounded-circle"></a>
 
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="{{path('panier')}}">Mon panier</a></li>
                         <li><a class="dropdown-item" href="{{path('app_profil')}}">Mon profil</a></li>
                         <li><a class="dropdown-item" href="#">Mes commandes</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                           
+                        <li><hr class="dropdown-divider"></li>                           
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ path('app_logout')}}">Deconnexion</a></li>
                     </ul>
                 </div>
                     
                 {% else %}
-
-
-                 <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a> 
-              
+                <a href="{{ path('app_register') }}" class="lien nav-header-1">S'inscrire</a>               
                 {% endif %}
 
                 {% if app.user %}                    
@@ -96,75 +92,74 @@
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Enfant</a>
             <a href="#" class="nav-header nav-link link-dark mx-2 text-dark">Promotions</a>
         </div>
-    
-    
-    <div class="hauteur-min">    
+
+    <div class="hauteur-min">  
     {% block body %}
             
     {% endblock %}
     </div>
 
     
-<footer class="py-2 pb-1 bg-black" style="width: 100%;">
-    <div class="row col-12">
-        <div class="col-1">
+    <footer id="footer-d" class="py-2 pb-1 bg-black" style="width: 100%;">
+        <div class="row col-12">
+            <div class="col-1">
 
-        </div>
+            </div>
 
-        <div class="col-3 my-2">
-            <h5 class=" text-white mb-2">Categories</h5>
-            <div class="nav flex-column">
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Homme</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Femme</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Enfant</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
+            <div class="col-3 my-2">
+                <h5 class=" text-white mb-2">Categories</h5>
+                <div class="nav flex-column">
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Homme</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Femme</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Enfant</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
+                </div>
+            </div>
+
+            <div class="col-3 my-2">
+                <h5 class="text-white mb-2">Administratifs</h5>
+                <div class="nav flex-column">
+                    <a href="{{ path('contact') }}" class="nav-footer nav-link p-0 text-muted text-white">Contact</a>
+                    <a href="registration/mentions-legales.html.twig" class="nav-footer nav-link p-0 text-muted text-white">Mentions légales</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Conditions générales de vente</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
+                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
+                </div>
+            </div>
+
+            <div class="col-5 text-center my-2">
+
+                <h4 class="text-white my-3">Nous suivre</h4>
+                {# <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of whats new and exciting from us.</p>
+                <div class="d-flex w-100 gap-2">
+                    <label for="newsletter1" class="visually-hidden">Email address</label>
+                    <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+                </form> #}
+                <a href="https://fr-fr.facebook.com/"><i class="bi bi-facebook icon-logo-soc"></i></a>
+                <a href="https://twitter.com/?lang=fr"><i class="bi bi-twitter icon-logo-soc"></i></a>
+                <a href="https://www.instagram.com/?hl=fr"><i class="bi bi-instagram icon-logo-soc"></i></a>
+
+            </div>
+
+            <div class="col-12 border-top">
+                <p class="text-center text-white">&copy; 2021 Company, Inc. All rights reserved.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="col-3 my-2">
-            <h5 class="text-white mb-2">Administratifs</h5>
-            <div class="nav flex-column">
-                <a href="{{ path('contact') }}" class="nav-footer nav-link p-0 text-muted text-white">Contact</a>
-                <a href="registration/mentions-legales.html.twig" class="nav-footer nav-link p-0 text-muted text-white">Mentions légales</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Conditions générales de vente</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
-                <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
-            </div>
-        </div>
-
-        <div class="col-5 text-center my-2">
-
-            <h4 class="text-white my-3">Nous suivre</h4>
-            {# <form>
-            <h5>Subscribe to our newsletter</h5>
-            <p>Monthly digest of whats new and exciting from us.</p>
-            <div class="d-flex w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
-            </div>
-            </form> #}
-            <a href="https://fr-fr.facebook.com/"><i class="bi bi-facebook icon-logo-soc"></i></a>
-            <a href="https://twitter.com/?lang=fr"><i class="bi bi-twitter icon-logo-soc"></i></a>
-            <a href="https://www.instagram.com/?hl=fr"><i class="bi bi-instagram icon-logo-soc"></i></a>
-
-        </div>
-
-        <div class="col-12 border-top">
-            <p class="text-center text-white">&copy; 2021 Company, Inc. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
     {% block javascripts %}
         
     {% endblock %}
 
-  
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   </body>
 </html>
