@@ -8,6 +8,7 @@ use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\ChaussureType;
 use App\Form\CommentFormType;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Repository\ContactRepository;
 use App\Repository\ChaussureRepository;
@@ -33,7 +34,7 @@ class BackofficeController extends AbstractController
 
 /* ##################------------ CRUD - CHAUSSURE ------------################## */   
 
-/* ################## ROUTE AFFICHAGE ET SUPPRESSION ################## */
+/* ################## ROUTE AFFICHAGE ET SUPPRESSION CHAUSSURE ################## */
     #[Route('/backoffice/produit', name: 'backoffice_produit')]
     #[Route('/backoffice/produit/suppression/{id}', name: 'backoffice_produit_suppression')]
     public function backOfficeProduit(EntityManagerInterface $manager, Chaussure $shoesRemove=null, ChaussureRepository $chaussureRepo)
@@ -62,7 +63,7 @@ class BackofficeController extends AbstractController
     }
 
 
-/* ################## ROUTE AJOUT ET MODIFICATION ################## */
+/* ################## ROUTE AJOUT ET MODIFICATION CHAUSSURE ################## */
     #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
     #[Route('/backoffice/produit/modification/{id}', name: 'backoffice_produit_modification')]
     public function backOfficeProduitForm(Chaussure $shoes=null, Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
@@ -176,8 +177,7 @@ class BackofficeController extends AbstractController
         $selecteurModel='';
         if($test)
         {
-            $selecteurModel= $repoChaussure->findBy(
-               ['model'=>$test], 
+            $selecteurModel= $repoChaussure->findBy(['model'=>$test],
             //    ['marque'=>'ASC']
             ); 
         } 
@@ -199,10 +199,6 @@ class BackofficeController extends AbstractController
     }
 
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
-
-
-
-
 
 
 
@@ -242,30 +238,6 @@ class BackofficeController extends AbstractController
        
     }
 
-    #[Route('backoffice/user', name: 'app_admin_user')]
-    public function userView(EntityManagerInterface $manager, UserRepository $repoUser, )
-    {
-
-        $colonnes = $manager->getclassMetadata(User::class)->getFieldNames();
-
-        $cellules = $repoUser->findAll();
-
-        return $this->render('backoffice/admin_user.html.twig', [
-            'colonnes' => $colonnes,
-            'cellules' => $cellules
-        ]);
-      
-    }
-
-   
-
-    // #[Route('backoffice/user/{id}/update', name: 'app_admin_user_update')]
-    // public function roleUser()
-    // {
-
-
-    //     return $this->render('backoffice/admin_user.html.twig');
-    // }
 
     // ############################################ AFFICHAGE DES COMMENTAIRES #################################
 

@@ -36,25 +36,21 @@
             <tbody>
 
                 {% for data in cellules %} 
-                    
+                    {# {{dump(data)}} #}
                     <tr class="">
                         {% if data != 'password' %}  
 
                             <td class="text-center"> {{ data.id}} </td>
-                            <td class="text-center"> {{ data.email}} </td>                            
-                            {# {% if data.roles[0] != "ROLE_ADMIN"  %}
-                                <td class="text-center"> USER </td>
-                            {% else %}
-                                <td class="text-center"> ADMIN </td>
-                            {% endif %}  #}
+                            <td class="text-center"> {{ data.email}} </td>   
                             <td>
-                                <form>
-                                    <select name="roles" id="roles">
-                                        <option value="ROLE_ADMIN">Admin</option>   
-                                        <option value="">User</option>                                        
-                                    </select>
-                                </form>
-                            </td>
+                                {% for role in data.roles %}           
+                                    {% if role == 'ROLE_ADMIN'%}
+                                    Administrateur
+                                    {% elseif role == null %}
+                                    Utilisateur
+                                    {% endif %}
+                                {% endfor %}
+                            </td>                         
                             <td class="text-center"> {{ data.prenom|capitalize}} </td>
                             <td class="text-center"> {{ data.nom|upper}} </td>
                             <td class="text-center"> {{ data.adresse}} </td>
@@ -69,8 +65,11 @@
                                 <td class="text-danger">Aucun avatar uplodé</td>
                             {% endif %}
 
-                            <td><a href="" class="btn bg-success">Valider</a></td>
-                            {# <td class="textcenter"><a href="" class="btn btn-outline-success "><i class="bi bi-pen"></i></a></td> #}
+                            <td>
+                            <a href="{{path('app_admin_user_update', {'id': data.id}) }}?op=roleUpdate" class="btn bg-warning"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{path('app_admin_user_remove', {'id': data.id}) }}?op=supprimer" class="btn bg-danger"><i class="bi bi-person-x-fill"></i></a>
+                            </td>
+                            
                         {% endif %}
                     </tr> 
 
@@ -79,5 +78,28 @@
         </table>
     </div>
 
-    
+    {% if formulaire != null %}    
+
+        <div class="mx-auto col-6">
+        {{form_start(formulaire)}}
+
+            {{form_row(formulaire.roles)}}
+            {{form_row(formulaire.sexe)}}
+            {{form_row(formulaire.nom)}}  
+            {{form_row(formulaire.prenom)}}
+            {{form_row(formulaire.adresse)}}
+            {{form_row(formulaire.codePostal)}}
+            {{form_row(formulaire.ville)}}
+            {{form_row(formulaire.telephone)}}
+            {{form_row(formulaire.dateNaissance)}}
+            {{form_row(formulaire.avatar)}}
+            
+            <div class="text-center my-5">
+            <button class="btn btn-dark">Valider</button>
+            </div>
+        {{form_end(formulaire)}} 
+        
+        </div>
+    {% endif %} 
+
 {% endblock %}

@@ -152,5 +152,65 @@ class RegistrationController extends AbstractController
             'avatarActuel'=>$user->getAvatar()]);
     }
 
+
+/* ############################################ GESTION UTILISATEUR BO ############################################ */  
+    #[Route('backoffice/user/{id}/Supprimer', name: 'app_admin_user_remove')]
+    #[Route('backoffice/user/{id}/update', name: 'app_admin_user_update')]
+    #[Route('backoffice/user', name: 'app_admin_user')]
+    public function userView(EntityManagerInterface $manager, UserRepository $repoUser, User $user=null, Request $request, RegistrationFormType $userFormBack )
+    {
+        $userFormBack="";
+        if($user)
+        {
+            if($request->query->get('op') == 'roleUpdate')
+            {
+                
+
+                $userFormBack = $this->createForm(RegistrationFormType::class, $user, ['roleUpdate'=>true]);
+                // dd($userFormBack);
+
+                $userFormBack->handleRequest($request);
+
+                if($userFormBack->isSubmitted() //&& $userFormBack->isValid() 
+                )
+                {
+                    $infos=$user->getPrenom().' '.$user->getNom();
+
+                    $manager->persist($user);
+                    $manager->flush();
+
+                    $this->addFlash('success', "L'utilisateur $infos est maintnenant un admin beau gosse !");
+
+                    return $this->redirectToRoute('app_admin_user');
+                }
+                
+            }
+            elseif ($request->query->get('op')=='supprimer')
+            {
+                $utilisateur=$user->getPrenom().' '.$user->getNom();
+                $manager->remove($user);
+                $manager->flush();
+
+                $this->addFlash('success', "Ce n'est qu'un au-revoir $utilisateur !");
+                
+                return $this->redirectToRoute('app_admin_user');
+            }
+        }
+            
+        //Récupération et affichage des infos pour le tableau d'affichage
+        $colonnes = $manager->getclassMetadata(User::class)->getFieldNames();
+        $cellules = $repoUser->findAll();
+
+        return $this->render('backoffice/admin_user.html.twig', [
+            'colonnes' => $colonnes,
+            'cellules' => $cellules,
+            'formulaire' => ($request->query->get('op')=='roleUpdate') ? $userFormBack->createView() : '', 
+            
+        ]);
+      
+    }
+
+   
+
     
 }
