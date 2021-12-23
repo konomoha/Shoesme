@@ -4,29 +4,34 @@
 
 {% block body %}
 
-{# {{dump(profildata)}} #}
+<div class="img-fond-profil">
+    <div class="trans-1 pb-5">
+        <div id="connexion-2">
+            <h2 class="text-center my-4">Bienvenue <span class="text-danger">{{profildata.prenom|upper}}</h2>
 
-<h2 class="text-center my-4">Bienvenue <span class="text-danger">{{profildata.prenom|upper}}</h2>
-
-   {% if profildata.roles.0 == 'ROLE_ADMIN' %}
-        {% if profildata.sexe == 'm' %}
-            <p class="text-center text-secondary fs-5 mb-5">Tu es tellement un beau gosse que tu es <span class="text-success">ADMINISTRATEUR</span> du site</p>
-            {% else %}
-             <p class="text-center text-secondary fs-5 mb-5">Tu es tellement une bombasse que tu es <span class="text-success">ADMINISTRATRICE</span> du site</p>
-        {% endif %}
-       
-   {% endif %}
+            {% if profildata.roles.0 == 'ROLE_ADMIN' %}
+                    {% if profildata.sexe == 'm' %}
+                        <p class="text-center text-secondary fs-5 mb-5">Tu es tellement un beau gosse que tu es <span class="text-success">ADMINISTRATEUR</span> du site</p>
+                        {% else %}
+                        <p class="text-center text-secondary fs-5 mb-5">Tu es tellement une bombasse que tu es <span class="text-success">ADMINISTRATRICE</span> du site</p>
+                    {% endif %}
+                
+            {% endif %}
 
 
-<div class="mx-auto text-center my-4">
-   <h5 class="text-center my-4 fs-5">Vos informations :</h5>
-      <p><span>Nom:</span> {{ profildata.nom|upper}}</p>
-      <p><span>prenom:</span> {{ profildata.prenom|capitalize }}</p>
-      <p><span>adresse:</span> {{ profildata.adresse }}</p>
-      <p><span>ville:</span> {{ profildata.ville|upper }}</p>
-      <p><span>codepostal:</span> {{ profildata.codepostal }}</p>
+            <div class="mx-auto text-center my-4">
+                <h5 class="text-center my-4 fs-5">Vos informations :</h5>
 
-      <a href="{{path('app_profil_edit', {'id': profildata.id})}} " class="btn btn-outline-secondary my-3">Modifier</a>    
+                <p class="my-2"><span>Nom:</span> {{ profildata.nom|upper}}</p>
+                <p class="my-2"><span>Prenom:</span> {{ profildata.prenom|capitalize }}</p>
+                <p class="my-2"><span>Adresse:</span> {{ profildata.adresse }}</p>
+                <p class="my-2"><span>Ville:</span> {{ profildata.ville|upper }}</p>
+                <p class="my-2"><span>Codepostal:</span> {{ profildata.codepostal }}</p>
+
+                <a href="{{path('app_profil_edit', {'id': profildata.id})}} " class="btn btn-outline-secondary my-3">Modifier</a>    
+            </div>
+        </div>
+    </div>
 </div>
 
   {# <div class="col-6 mx-auto accordion mb-5" id="accordionExample">
