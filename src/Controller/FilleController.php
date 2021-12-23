@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EnfantController extends AbstractController
+class FilleController extends AbstractController
 {
-    #[Route('/enfant', name: 'enfant')]
+    #[Route('/fille', name: 'fille')]
     public function index(ChaussureRepository $repoChaussure): Response
     {
         ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
@@ -20,8 +20,10 @@ class EnfantController extends AbstractController
             57, // la limite de chaussures à afficher
             0); // offset
          
-        return $this->render('enfant/enfant.html.twig', [
+        return $this->render('fille/fille.html.twig', [
             'chaussure'=> $chaussure
         ]);
     }
+
+
 }
