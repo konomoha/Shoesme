@@ -8,7 +8,6 @@
 /var/
 /vendor/
 /public/avatar
-
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
