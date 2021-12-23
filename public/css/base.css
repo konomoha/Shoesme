@@ -10,6 +10,11 @@
     margin-left: 35% !important;
 } */
 
+.bouton-ajout-panier:hover{
+    color: white !important;
+    font-size: 2rem !important;
+}
+
 .bouton-commande{
     background-color: black;
     color: white;
