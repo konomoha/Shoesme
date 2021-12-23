@@ -9,18 +9,21 @@
     <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
   {% endfor %}   
+    {{dump(couleurChaussure)}}
+    {{dump(app.request.query.get('pointure'))}}
     
 <div class="d-flex flex-row mx-5 mt-5">
+  
 
   <div class="col-md-6 d-flex flex-row flex-wrap">
 
-    <img src="{{ asset('img/' ~ chaussure.photo) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+    <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
 
-    <img src="{{ asset('img/' ~ chaussure.photo2) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+    <img src="{{ asset('img/' ~ datachaussure.0.photo2) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
 
-    <img src="{{ asset('img/' ~ chaussure.photo3) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+    <img src="{{ asset('img/' ~ datachaussure.0.photo3) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
 
-    <img src="{{ asset('img/' ~ chaussure.photo4) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+    <img src="{{ asset('img/' ~ datachaussure.0.photo4) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
     
   </div>
     
@@ -28,7 +31,7 @@
     
     <div class="d-flex flex-row justify-content-between">
       <div>
-        <h2 class="mt-4 mb-2 ms-3"> {{ chaussure.marque }} </h2>
+        <h2 class="mt-4 mb-2 ms-3"> {{ datachaussure.0.marque }} </h2>
       </div>
 
       <div class="mt-2 me-5">
@@ -94,34 +97,83 @@
     </div>
 
 
-    {% if chaussure.sexe == 'm' %}
+    {% if datachaussure.0.sexe == 'm' %}
       <h4 class="mt-2 mb-4 ms-3">Chaussure pour Homme</h4>
-    {% elseif chaussure.sexe == 'f' %}
+    {% elseif datachaussure.0.sexe == 'f' %}
       <h4 class="mt-2 mb-4 ms-3">Chaussure pour Femme</h4>
     {% endif %}
     
-    <h5 class="mt-2 mb-4 ms-3">{{ chaussure.prix }} €</h5>
+    <h5 class="mt-2 mb-4 ms-3">{{ datachaussure.0.prix }} €</h5>
+    {# Il faudra générer l'affichage en fonction du stock disponible #}
+
+    <form method="get" class="col-3 m-0 p-0">
+      {% if tailleChaussure == null %}
+        
+        <label for="pointure">Sélectionnez une taille</label>
+
+        <select name="pointure" id="pointure">
+        {# Je défini ici une boucle d'options basée sur le nombre de pointure disponible via le tableau dataChaussure (cette data n'a pour filtre que le modèle, donc elle prend en compte toutes les tailles et couleurs). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
+          {% for data in datachaussure %}
+
+            {% if data.pointure %}
+              <option value="{{data.pointure}}">{{data.pointure}}</option>
+            {% endif %}
+            
+          {% endfor %}
+          
+        </select> 
+
+        <button>Valider</button>
+
+      {% else %}
+
+        <p>Taille Choisie: {{app.request.query.get('pointure')}}</p>
+
+        <button><a href="{{path('details_article', {'id': chaussure.id })}}">Modifier</a></button>  
+
+        <label for="pointure">Sélectionnez une couleur</label>
+
+        {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via dataChaussure). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
+
+        <select name="couleur" id="couleur">
+
+          {% for data in tailleChaussure %}
+
+            {% if data.couleur %}
+              <option value="{{data.couleur}}">{{data.couleur}}</option>
+            {% endif %}
+            
+          {% endfor %}
+        </select>
+
+        <button>Valider</button>
     
-    <form method="post" class="col-md-3 mt-2 mb-4 ms-3">
-      <label for="taille" class="form-label">Séléctionner votre taille :</label>
-      <select class="form-select mt-2" style="width:100px;">
-        <option selected>Taille</option>
-        <option value="1">40</option>
-        <option value="2">41</option>
-        <option value="3">42</option>
-        <option value="3">43</option>
-        <option value="3">44</option>
-        <option value="3">45</option>
-      </select>
+      {% endif %} 
+
     </form>
 
-    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
+{# Mise en place d'une condition pour afficher le boutton ajouter au panier: si la chaussure a du stock, on affiche un boutton qui redirige vers le panier, sinon, on affiche un message de rupture de stock (il faudra voir plus tard pour permettre à l'utilisateur de refaire une sélection, ou plus simplement, afficher dans le sélecteur les chaussures ayant du stock?) #}
+
+{% if couleurChaussure %}
+
+  {% if couleurChaussure.0.stock != null %}
+
+    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': couleurChaussure.0.id })}}?id={{ couleurChaussure.0.id }}">Ajouter au panier</a></button>
+
+  {% else %}
+
+    <em class="text-danger fst-italic">Produit en rupture de stock</em>
+
+  {% endif %}
+  
+{% endif %}
+    
 
     <div>
       <p class="mt-2 mb-4 ms-3">Livraison :<span class="text-success fs-5">Gratuite</span></p>
     </div>
     <div class="mt-2 mb-4 ms-3">
-      {{ chaussure.descriptif }}
+      {{ datachaussure.0.descriptif }}
     </div>
 
     <button type="button" class="btn btn-dark mt-2 mb-4 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -198,10 +250,10 @@
 
 
 
-  {% if chaussure.commentaires is not empty %} 
+  {% if datachaussure.0.commentaires is not empty %} 
 
 
-    {% for comment in chaussure.commentaires %}
+    {% for comment in datachaussure.0.commentaires %}
           
         {# {{ dump(comment) }} #}
         <div class="mb-3">
