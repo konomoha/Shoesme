@@ -27,7 +27,8 @@
         <div class="col-md-12 d-flex flex-row justify-content-between mx-3">
 
             <div class="col-md-4 mx-4">
-                <form action="" method="get">                
+            <div class="text-center">
+                <form action="" method="get" class="my-4 d-flex flex-row color-form">                
                     <label for="marque" class="my-2">Voir la liste des modèles déjà enregistrés :</label>
                     <select name="model" id="model">
                         <option value=""></option>
@@ -38,9 +39,10 @@
 
                     <button class="btn btn-dark ms-2" type="submit">Voir</button>
                 </form>
-
+            </div>
                 {% if selecteurModel %}
-                    <table class="table table-stripped table-hover" id="tabAjout">
+                    <table class="table table-stripped table-hover my-4 bg-white" id="tabAjout">
+                    <thead>
                         <tr>
                             {% for nom in colonneChaussure %}
                                 {% if nom == 'marque' or nom =='model' or nom =='couleur' or nom =='pointure' or nom =='stock' or nom =='sexe' %}
@@ -48,6 +50,8 @@
                                 {% endif %}
                             {% endfor %}
                         </tr>
+                        </thead>
+                        <tboby>
                         {% for data in selecteurModel %}
                             <tr>
                                 <td class="text-center">{{data.marque}}</td>
@@ -58,6 +62,7 @@
                                 <td class="text-center">{{data.stock}}</td>
                             </tr>   
                         {% endfor %}
+                        </tbody>
                     </table>
                 {% endif %}
             </div>
