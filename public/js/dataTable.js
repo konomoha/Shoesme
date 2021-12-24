@@ -42,12 +42,14 @@ $(document).ready(function() {
     });
 });
 
-
-// $(function() {
-//     // Sections height
-//     $(window).resize(function() {
-//         var sH = $(window).height();
-//         $('.NomDeTaClass').css('height', sH + 'px');
-//     });        
-// });
+$(document).ready(function() {
+    $('#tabAjout').DataTable({
+        language: {
+            url: '/js/dataTable.french.json'
+        },
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [] }
+        ]
+    });
+});
 

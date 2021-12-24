@@ -3,28 +3,22 @@
     
 }
 
-/* .main-23{
-     background-image: url("../img/img3.jpg");
-    background-size: cover no-repeat; 
-     position: fixed; 
-     height: auto;
-} */
+.color-form{
+    background-color: rgba(0, 100, 0, 0.24);
+    padding: 10px !important;
+    border-radius: 5px;
+}
+
 
 .main-bo{
-    background-color: rgba(240, 248, 255, 0.87);
     margin: 0 !important;
     padding: 0 !important;
 }
 
 .main-bo-2{
-    background-color: rgba(240, 248, 255, 0.50);
     margin: 0 !important;
     padding: 0 !important;
-}
-
-.clara{
-    background-image: url("../img/cm-3.jpg");
-    background-size: cover;
+    height: contain !important;
 }
 
 

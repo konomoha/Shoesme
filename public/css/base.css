@@ -71,13 +71,14 @@
 }
 
 .main-connex{
-    background-image: url("../img/img-4.jpg");
-    background-size: cover;
+    background-image: url("../img/img2.jpg");
+    background-size: contain;
 }
 
 
 .div-inscription{
-    background-color: rgba(240, 248, 255, 0.548) !important;
+    background-color: rgba(255, 255, 255, 0.548) !important;
+    height: 100% !important;
 }
 
 .form-inscription{
@@ -253,4 +254,31 @@ a{
     border: 1px solid black;
     margin-left: 10% !important;
     margin-right: 30% !important;
+}
+
+/*##############################Footer##################################*/
+
+body, html{
+    height:100%;
+} 
+
+#main{
+min-height:100%;
+margin:0 auto;
+position:relative;
+}
+
+ 
+
+footer{
+background:#ccc;
+position:absolute;
+bottom:0;
+width:100%;
+padding-top:50px;
+margin-top: 50px !important;
+}
+
+.footer-padding{
+    padding-top: 200px !important;
 }
