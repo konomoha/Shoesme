@@ -19,25 +19,27 @@ class PanierController extends AbstractController
     public function index(Request $request, SessionInterface $session, ChaussureRepository $chaussureRepo): Response
     {
         $panier = $session->get("panier", []);
-        
-        $dataPanier = [];
-        $total =0;
 
-        //On réceptionne ici la quantité transmise dans l'URL via la méthode GET (indice 'quantite'), dans une variable qte
-        
+        $dataPanier = [];
+        $total = 0;
+
+        $test=$request->query->get('quantite');
+        $qte=0;
+        if($test)
+        {
+            $qte = $test;
+            // dd($qte);
+        }
+
         foreach($panier as $id=>$quantite)
         {
-            
             $chaussure= $chaussureRepo->find($id);
             $dataPanier[]= [
                 "Chaussure"=> $chaussure,
                 "Quantite"=>$quantite
             ]; 
             $total += $chaussure->getPrix() * $quantite; //le prix de l'article multiplié par la quantité
-           
-            
         }
-
         return $this->render('panier/panier.html.twig', [
             "dataPanier"=>$dataPanier,
             "total"=>$total
