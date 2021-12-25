@@ -5,8 +5,9 @@ ShoesMe | Commande
 {% endblock %}
 
 {% block body %}
-<h1 class="text-center">Récapitulatif de votre commande</h1>
-
+ 
+<h1 class="text-center">Récapitulatif de votre commande {{app.user.prenom}}</h1>
+{# {{dump(app.user)}} #}
 
 <table class="table-bordered text-center my-5 mx-auto">
 <tr>
@@ -27,6 +28,9 @@ ShoesMe | Commande
     
 {% endfor %}<tr><th colspan="2">Total Commande</th><td class="p-3">{{total}} €</td></tr>
 </table>
-<button class="btn btn-dark col-1 mx-auto"><a href="{{path('commande_paiement')}}" onclick="return(confirm('Souhaitez-vous passer au paiement de votre commande?'));">Payer</a></button>
+<div class="d-flex flex-column align-items-center justify-content-around col-5 mx-auto">
+    <button class="btn btn-warning col-2 mb-3 text-center text-dark"><a href="{{path('panier')}}" class="text-dark">Modifier</a> </button>
+    <button class="btn btn-success col-2 "><a href="{{path('commande_paiement')}}" onclick="return(confirm('Souhaitez-vous passer au paiement de votre commande?'));">Payer</a></button>
+</div>
 
 {% endblock %}

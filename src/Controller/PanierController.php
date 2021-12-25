@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use PDOException;
+use App\Entity\User;
 use App\Entity\Chaussure;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +21,6 @@ class PanierController extends AbstractController
     public function index(Request $request, SessionInterface $session, ChaussureRepository $chaussureRepo): Response
     {
         $panier = $session->get("panier", []);
-
         $dataPanier = [];
         $total = 0;
 
@@ -48,30 +49,41 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/add/{id}', name: 'panier_add')]
-    public function addPanier(Chaussure $chaussure, SessionInterface $session, EntityManagerInterface $manager): Response
+    public function addPanier(Chaussure $chaussure, ChaussureRepository $chaussureRepo, SessionInterface $session, EntityManagerInterface $manager): Response
     {
-        $id = $chaussure->getId();
-        $model = $chaussure->getModel();
-        $panier = $session->get("panier", []);
-        
-        if(!empty($panier[$id]))
+        if($this->getUser())
         {
-            $panier[$id]++;
-        }
+            $id = $chaussure->getId();
+            // dd($id);
 
+            $model = $chaussure->getModel();
+            $panier = $session->get("panier", []);
+            
+        
+            if(!empty($panier[$id]))
+            {
+                $panier[$id]++;
+            }
+
+            else
+            {
+                $panier[$id] = 1;
+
+            }
+            
+            //sauvegarde du panier
+            $session->set("panier", $panier);
+            
+            $this->addFlash('success', "$model a bien été ajouté au panier!");
+
+            return $this->redirectToRoute('panier');
+        }
+        
         else
         {
-            $panier[$id] = 1;
-
+            return $this->redirectToRoute('app_login');
         }
-      
-      //sauvegarde du panier
-      $session->set("panier", $panier);
-     
-      $this->addFlash('success', "$model a bien été ajouté au panier!");
-
-      return $this->redirectToRoute('panier');
-
+        
         return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
         ]);

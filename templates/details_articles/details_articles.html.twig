@@ -9,7 +9,9 @@
     <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
   {% endfor %}   
+
     {# {{dump(tailleChaussure)}}
+    {{dump(datachaussure)}}
     {{dump(app.request.query.get('pointure'))}} #}
     
 <div class="d-flex flex-row mx-5 mt-5">
@@ -112,7 +114,7 @@
     {# Il faudra générer l'affichage en fonction du stock disponible #}
 
    
-    {% if tailleChaussure == null and couleurChaussure == null %}
+   
     
       {# Je défini ici une boucle basée sur le nombre de pointure disponible via le tableau dataChaussure (cette data n'a pour filtre que le modèle, donc elle prend en compte toutes les tailles et couleurs). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
         <div class="col-5 border row justify-content-around p-3"> 
@@ -120,60 +122,55 @@
         {% for data in datachaussure %}
 
           {% if data.pointure %}
-            <div class="col-2 border border-dark"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+
+            {% if data.pointure == app.request.query.get('pointure') %}
+               <div class="col-2 border border-dark bg-success mx-2 my-1"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+               {% else %}
+               <div class="col-2 border border-dark"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+            {% endif %}
+            
           {% endif %}
           
         {% endfor %}
         
       </div> 
 
-      
-
-    {% else %}
-      <div class="col-5 border row justify-content-around p-3 my-3"> 
-        <p class="text-center">Taille Choisie: {{datachaussure.0.pointure}}</p>
-
-        <button class="btn btn-dark col-5 mt-2"><a href="{{path('details_article', {'id': chaussure.id })}}">Modifier</a></button>  
-      </div>
-
-        
-
     {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via dataChaussure). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
+    {% if tailleChaussure %}
+      
+      <div class="col-5 border row justify-content-around p-3 my-3"> 
 
-        <div class="col-5 border row justify-content-around p-3 my-3"> 
+        <p class="text-center">Couleurs </p>
 
-          {% for data in tailleChaussure %}
-            <p class="text-center">Couleurs </p>
-            {% if data.couleur %}
-              <div class="col-3 border border-dark"> <a href="?couleur={{data.couleur}}" class="text-dark text-center">{{data.couleur}}</a></div>
-            {% endif %}
-            
-          {% endfor %}
-        </div>
+        {% for data in tailleChaussure %}
 
-      {% endif %} 
+          {% if data.couleur %}
+          
+            <div class="col-3 mx-2 my-1 border border-dark {{(data.couleur == app.request.query.get('couleur'))? 'bg-success':''}}"> <a href="?pointure={{data.pointure}}&couleur={{data.couleur}}" class="text-dark text-center">{{data.couleur}}</a></div>
 
-    {# Mise en place d'une condition pour afficher le boutton ajouter au panier: si la chaussure a du stock, on affiche un boutton qui redirige vers le panier, sinon, on affiche un message de rupture de stock (il faudra voir plus tard pour permettre à l'utilisateur de refaire une sélection, ou plus simplement, afficher dans le sélecteur les chaussures ayant du stock?) #}
+          {% endif %}
 
-    {% if couleurChaussure %}
+        {% endfor %}
 
-      {% if couleurChaussure.0.stock != null %}
-
-        <div class="col-5 border row justify-content-around p-3 my-3">
-              <p class="text-center">Couleur Choisie: {{app.request.query.get('couleur')}}</p>
-              <button class="btn btn-dark col-5 mt-2"><a href="{{path('details_article', {'id': chaussure.id })}}?pointure={{datachaussure.0.pointure}}">Modifier</a></button>  
-        </div>
-
-        <button class="btn btn-dark col-3 mx-auto my-2"><a href="{{path('panier_add', {'id': couleurChaussure.0.id })}}?id={{ couleurChaussure.0.id }}">Ajouter au panier</a></button>
-
-      {% else %}
-
-        <em class="text-danger fst-italic">Produit en rupture de stock!</em>
-
-      {% endif %}
+      </div>
       
     {% endif %}
 
+    {# Mise en place d'une condition pour afficher le boutton ajouter au panier: si la chaussure a du stock, on affiche un boutton qui redirige vers le panier, sinon, on affiche un message de rupture de stock #}
+
+    {% if couleurChaussure %} 
+ 
+        {% if couleurChaussure.0.stock != null %}
+
+          <button class="btn btn-dark col-3 ms-5 p-3 bouton-ajout-panier"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
+
+        {% else %}
+
+          <em class="text-danger text-center fst-italic">Produit en rupture de stock!</em>
+
+        {% endif %}
+
+    {% endif %}
 
     <div>
       <p class="mt-4 mb-4 ms-3">A partir de 100 € d'achat livraison Gratuite</p>
@@ -182,8 +179,7 @@
       {{ datachaussure.0.descriptif }}
     </div>
 
-    <button class="btn btn-dark col-3 ms-5 p-3 bouton-ajout-panier"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
-
+      
     {# <button type="button" class="btn btn-dark mt-2 mb-4 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Afficher les détails du produit
     </button> #}
@@ -270,7 +266,7 @@
           <div class="col-4">
 
 
-            <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}})</small></p>
+            <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}} à {{ comment.date|date('H:i:s')}})</small></p>
             
           </div>
 
