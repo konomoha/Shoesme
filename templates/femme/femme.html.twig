@@ -17,7 +17,7 @@
             </div>
     </div>
 
-    <form method="post">
+    {# <form method="post">
         <label for="categorie">Catégories</label>
         <select name="categorie" id="categorie">
             <option value=""></option>
@@ -37,7 +37,7 @@
         <select name="couleur" id="couleur">
             <option value=""></option>
         </select>
-    </form>
+    </form> #}
 
 
 <img src="{{ asset('img/banniere_2.jpg') }}" alt="banniere" class="w-100">
@@ -56,13 +56,16 @@
         
         {% for data in chaussure %}
             {% if data.sexe == 'f' %}
-                <div class="shoes_card card mb-5">
-                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
-                    <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
-                    <p class="fst-italic text-center"> {{data.prix}} €</p>
-                    <button class="btn btn-dark col-3 mx-auto"><a href="{{path('panier_add', {'id': data.id })}}"> Test ajout panier</a></button>
-                    <button class="btn btn-dark col-3 mx-auto mt-2"><a href="{{path('details_article', {'id': data.id })}}">Détails</a></button>   
-                </div>
+                 <div class="shoes_card card mb-5">
+                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary">
+                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1" >
+                    <div class="d-flex justify-content-between">
+                        <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                        <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+                    </div>
+                    <p class="ms-3">Chaussure pour Femme</p>
+                </a>
+            </div>
             {% endif %} 
 
         {% endfor %}
