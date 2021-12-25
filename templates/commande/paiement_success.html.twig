@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Shoesme | Paiement
+{% endblock %}
+
+{% block body %}
+{# {{dump(panier)}} #}
+
+{% for message in app.flashes('success_payment') %}
+
+    <div class="col-4 mx-auto text-center alert alert-success p-3 mt-5">{{message}}</div>
+    
+{% endfor %}
+
+<div class="col-5 mx-auto row justify-content-around my-5">
+    <button class="btn btn-warning col-3 p-3 text-center "><a href="{{path('home')}}" class="text-dark">Retourner à l'accueil</a></button>
+</div>
+
+
+
+
+{% endblock %}

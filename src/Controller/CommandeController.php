@@ -43,8 +43,7 @@ class CommandeController extends AbstractController
         
             return $this->render('commande/commande.html.twig', [
                 "dataCommande"=>$dataCommande,
-                "total"=>$total,
-               
+                "total"=>$total, 
             ]
         );
     }
@@ -52,74 +51,96 @@ class CommandeController extends AbstractController
     #[Route('/commande/paiement', name: 'commande_paiement')]
     public function commandePaiement(SessionInterface $session, ChaussureRepository $chaussureRepo, Commande $commande=null, DetailsCommande $detailCommande=null, EntityManagerInterface $manager, User $user=null): Response
     {
-        $commande = new Commande;
-        $detailCommande = new DetailsCommande;
-        $panier = $session->get("panier", []);
-        $total=0;
-        
-        $user = $this->getUser();
+        if($this->getUser())
+        {
+            $commande = new Commande;
+            $detailCommande = new DetailsCommande;
+            $panier = $session->get("panier", []);
+            $total=0;
+            
+            $user = $this->getUser();
+            $prenom = $this->getUser()->getPrenom(); 
+            
+            // la méthode getPrenom est considérée comme inconnue, mais elle existe bel et bien.
+            // dd($prenom);
+
             $dataCommande = [];
             $total = 0;
             $qte = 0;
             $prix ="";
             $chaussure="";
-            foreach($panier as $id=>$quantite)
-            {
-                $chaussure= $chaussureRepo->find($id);
-                $dataCommande[]= [
-                    "Chaussure"=> $chaussure,
-                    "Quantite"=>$quantite
-                ]; 
-                $prix = $chaussure->getPrix();
-                $total += $chaussure->getPrix() * $quantite; 
-                // dd($dataCommande);
-            }
-            
-            $qte=0;
 
-           foreach($dataCommande as $key=>$value)
-           {
-                // dd($value);
-                foreach($value as $key=>$data)
+            if(!empty($panier))
+            {
+
+                foreach($panier as $id=>$quantite)
                 {
-                    if($key == 'Quantite')
+                    $chaussure= $chaussureRepo->find($id);
+                    $dataCommande[]= [
+                        "Chaussure"=> $chaussure,
+                        "Quantite"=>$quantite
+                    ]; 
+                    $prix = $chaussure->getPrix();
+                    $total += $chaussure->getPrix() * $quantite; 
+                    // dd($dataCommande);
+                }
+                
+                $qte=0;
+
+                foreach($dataCommande as $key=>$value)
+                {
+                    // dd($value);
+                    foreach($value as $key=>$data)
                     {
-                        // dd($data);
-                        $qte= $data;
-                        
+                        if($key == 'Quantite')
+                        {
+                            // dd($data);
+                            $qte= $data;
+                            
+                        }
                     }
                 }
-           }
-          
-            $commande->setMontant($total);
-                $commande->setEtat('envoyé');
-                $commande->setUser($user);
+                
+                $commande->setMontant($total)
+                            ->setEtat('envoyé')
+                            ->setUser($user);
                 $manager->persist($commande);
                 $manager->flush();
-        
-            $detailCommande->setQuantite($qte)
-                            ->setPrix($prix)
-                            ->setCommande($commande);
-            $manager->persist($detailCommande);
-            $manager->flush();
+            
+                $detailCommande->setQuantite($qte)
+                                ->setPrix($prix)
+                                ->setCommande($commande);
+                $manager->persist($detailCommande);
+                $manager->flush();
 
-        $nouveaustock = $chaussure->getStock() - $qte;
-        // dd($nouveaustock);
-        $chaussure->setStock($nouveaustock);
-        // dd($chaussure);
-        $manager->persist($chaussure);
-        $manager->flush();
-        //    dd($detailCommande);
+                $nouveaustock = $chaussure->getStock() - $qte;
+                // dd($nouveaustock);
+                $chaussure->setStock($nouveaustock);
+                // dd($chaussure);
+                $manager->persist($chaussure);
+                $manager->flush();
+                //    dd($detailCommande); 
 
+                $this->addFlash('success_payment', "Félicitations $prenom! Votre paiement a bien été effectué!");
 
-        // else
-        // {
-        //     return $this->redirectToRoute('app_login');
-        // }
+                $session->remove("panier"); //On vide le panier une fois le paiement effectué et la commande enregistré en bdd
+            }
+            
+            //Si le panier est vide, on redirige vers l'accueil
+            else
+            {
+                return $this->redirectToRoute('home');
+            }
+        }
 
-        
+        else
+        {
+            return $this->redirectToRoute('home');
+        }
 
-        return $this->render('commande/paiement.html.twig'
+        return $this->render('commande/paiement_success.html.twig',[
+            "panier"=>$panier
+        ]
     );
     }
 
