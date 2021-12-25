@@ -9,8 +9,10 @@
     <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
 
   {% endfor %}   
+
      {# {{dump(datacom)}} #}
     {#{{dump(app.request.query.get('pointure'))}} #}
+
     
 <div class="d-flex flex-row mx-5 mt-5">
   
@@ -171,7 +173,7 @@
     {% endif %}
 
     <div>
-      <p class="mt-2 mb-4 ms-3">Livraison :<span class="text-success fs-5">Gratuite</span></p>
+      <p class="mt-4 mb-4 ms-3">A partir de 100 € d'achat livraison Gratuite</p>
     </div>
     <div class="mt-2 mb-4 ms-3">
       {{ datachaussure.0.descriptif }}
