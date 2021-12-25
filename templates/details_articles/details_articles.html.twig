@@ -257,7 +257,7 @@
   {% if datachaussure.0.commentaires is not empty %} 
    
 
-      {% for comment in (app.request.query.get('comment'))? datachaussure.0.commentaires : datacom %}
+      {% for comment in datachaussure.0.commentaires %}
             
           {# {{ dump(comment) }} #}
           <div class="mb-3">
@@ -280,13 +280,6 @@
           
       {% endfor %}
     
-    {% if app.request.query.get('comment') is null %}
-
-      <button class="btn btn-warning p-2 col-2 my-4 mx-auto d-block"><a href="?comment=all" class="text-dark">Voir tous les commentaires</a></button>
-
-    {% endif %}
-      
-
   {% else %} 
 
 

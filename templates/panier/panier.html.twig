@@ -48,7 +48,11 @@
                                 </form> #}
                                 <a href="{{path('panier_remove', {id: data.Chaussure.id})}}" class=""><i class="bi bi-dash-square text-secondary fs-5"></i>{#<i class="bi bi-cart-dash"></i>#}</a>
                                 <div class="mx-2">{{data.Quantite}}</div>
-                                <a href="{{path('panier_add', {id: data.Chaussure.id})}}" class="{{(data.Quantite == data.Chaussure.stock)? 'disabled':''}}"><i class="bi bi-plus-square text-secondary fs-5"></i>{#<i class="bi bi-cart-plus"></i>#}</a>
+                                {% if data.Quantite == data.Chaussure.stock  %}
+                                    {% else %}
+                                    <a href="{{path('panier_add', {id: data.Chaussure.id})}}" class=""><i class="bi bi-plus-square text-secondary fs-5"></i>{#<i class="bi bi-cart-plus"></i>#}</a>
+                                {% endif %}
+                                
                                 
                                     
                                 <a href="{{path('details_article', {'id': data.Chaussure.id })}}" class="text-dark mx-auto">Détails article</a>
