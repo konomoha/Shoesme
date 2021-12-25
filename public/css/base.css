@@ -24,9 +24,9 @@
     /* background-size: contain; */
 }
 
-.bouton-ajout-panier:hover{
+.bouton-ajout-panier:hover a{
     color: white !important;
-    font-size: 2rem !important;
+    text-decoration: underline!important;
 }
 
 .bouton-commande{
@@ -119,10 +119,10 @@
 }
 
 .nav-header:hover{
-    border: 1px solid white;
+    /* border: 1px solid white; */
     background-color: black;
     color: white !important;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .nav-link{
@@ -254,6 +254,7 @@ a{
     border: 1px solid black;
     margin-left: 10% !important;
     margin-right: 30% !important;
+    margin-bottom: 10% !important;
 }
 
 /*##############################Footer##################################*/

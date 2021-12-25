@@ -57,23 +57,22 @@
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in chaussure %}
-        {% if data.sexe == 'm' %}
- 
-        <div class="shoes_card card mb-5">
-            <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1"></a>
-            <p class="fst-italic text-center"> {{data.marque}} {{data.model}}</p> 
-            <p class="fst-italic text-center"> {{data.prix}} €</p>
-
-            <button class="btn btn-dark col-3 mx-auto mt-2"><a href="{{path('details_article', {'id': data.id })}}">Détails</a></button> 
-        </div>
-        {% endif %}
+            {% if data.sexe == 'm' %}
+        
+            <div class="shoes_card card mb-5">
+                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
+                    <div class="d-flex justify-content-between">
+                        <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                        <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+                    </div>
+                    <p class="ms-3">Chaussure pour Homme</p>
+                </a>
+            </div>
+        
+            {% endif %}
         {% endfor %}
 
     </div>
-
-
-
-
 
     {# <div class="ch1 mb-1 mt-5">
 
