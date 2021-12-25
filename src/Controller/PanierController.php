@@ -63,12 +63,13 @@ class PanierController extends AbstractController
             if(!empty($panier[$id]))
             {
                 $panier[$id]++;
+
             }
 
             else
             {
                 $panier[$id] = 1;
-
+             
             }
             
             //sauvegarde du panier
@@ -101,10 +102,12 @@ class PanierController extends AbstractController
             if($panier[$id] > 1)
             {
                 $panier[$id]--;
+
             }
             else
             {
-                 unset($panier[$id]);
+                unset($panier[$id]);
+               
             }
             
         }

@@ -91,7 +91,13 @@ class DetailsArticlesController extends AbstractController
         // $idshoes = $chaussure;
         $formComment = $this->createForm(CommentFormType::class, $commentaire);
         $formComment->handleRequest($request);
-        $datacom = $repoCommentaire->findAll();
+
+        $datacom = $repoCommentaire->findBy(
+            array(), 
+            array (), 
+            10, 
+            0);
+
         $total = 0;
 
         if($formComment->isSubmitted())
