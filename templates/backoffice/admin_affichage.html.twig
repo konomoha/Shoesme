@@ -1,0 +1,80 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    Shoesme | BO - Affichage Chaussures
+{% endblock %}
+
+
+{% block body %}
+<h1 class="text-center">Affichage Général des produits</h1>
+
+<h3>Sélectionner un produit pour filtrer les résultats :</h3>
+    <div class="col-4 mb-5 d-flex">
+    <form action="" method="POST" class="d-flex">
+        <select name="produit" id="produit" class="form-select">
+            
+            <option value="">Sélectionner un produit</option>
+            {% for item in chaussure %}
+            <option value="{{item.model}}">{{item.marque}} - {{item.model}}</option>   
+            {% endfor %}
+
+        </select>
+        <button type="submit" class="btn btn-dark ms-3">Valider</button>
+    </form>
+    <a href="{{path('backoffice_affichage_general')}}" class="btn btn-danger ms-5 text-nowrap" {{hidden}}>Supprimer le filtre</button></a>
+    </div>
+
+
+<table class="table table-stripped table-hover mt-5" id="table-article">
+    <thead>
+        <tr>
+        {% for nom in titreColonne %}
+            {% if nom != 'id' and nom != 'photo' and nom != 'photo2' and nom != 'photo3' and nom != 'photo4'  %}
+                <th class="text-center">{{nom}}</th> 
+            {% endif %}
+        {% endfor %}
+            <th class="text-center">Photo</th>
+            <th class="text-center">Photo 2</th>
+            <th class="text-center">Photo 3</th>
+            <th class="text-center">Photo 4</th>
+            
+            <th class="text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+
+        {% for data in chaussure %}
+            <tr> 
+                {% if data %}
+                    <td class="text-center align-middle">{{data.marque}}</td>
+                    <td class="text-center align-middle">{{data.model}}</td>
+                    <td class="text-center align-middle">{{data.type}}</td>
+                    <td class="text-center align-middle">{{data.matiere}}</td>
+                    <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
+                    <td class="text-center align-middle">{{data.prix}}</td>
+                    <td class="text-center align-middle">{{data.sexe}}</td>
+                    <td class="text-center align-middle">{{data.top}}</td>
+                    <td class="text-center align-middle">{{data.pointure}}</td> 
+                    <td class="text-center">{{data.couleur}} </td> 
+                    <td class="text-center">{{data.stock}}</td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
+                {% endif %}
+            
+            <td class="">
+                <div class="text-center">
+                    <a href="{{path('backoffice_affichage_article', {'id': data.id}) }}" class="btn btn-outline-success my-1"><i class="bi bi-eye-fill"></i></a><br>
+                    <a href="{{path('backoffice_produit_modification',{'id': data.id}) }}" class="btn btn-outline-warning my-1"><i class="bi bi-pen"></i></a><br>
+                    <a href="{{path('backoffice_produit_suppression', {'id': data.id}) }}" class="btn btn-outline-danger my-1" onclick="return(confirm('Etes-vous sur de vouloir supprimer l'article : {{ data.id }} ?' ))"><i class="bi bi-trash"></i></a>
+                <div>
+            </td>            
+            </tr>
+        
+        {% endfor %}    
+        <tbody>
+    </table>
+
+{% endblock %}

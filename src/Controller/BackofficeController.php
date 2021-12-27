@@ -198,6 +198,84 @@ class BackofficeController extends AbstractController
         ]);
     }
 
+
+
+
+/* ################## Affichage de toute la BDD ################## */
+#[Route('backoffice/affichage', name: 'backoffice_affichage_general')]
+public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request):Response
+{
+    $hidden="hidden";
+    //Récupération des titres des champs
+    $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+
+    //Affichage global ou article sélectionné dans le selecteur produit.
+    if($request->get('produit'))
+    {
+        // dd($request->get('produit'));
+        $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['model'=>'ASC','couleur'=>'ASC', 'pointure'=>'ASC']); 
+        $hidden ='';
+    }
+    else
+    {
+        $shoes = $shoesRepo->findAll();
+    }
+
+    return $this->render('backoffice/admin_affichage.html.twig', [
+        'titreColonne'=> $titreColonneShoes,
+        'chaussure'=> $shoes,
+        'hidden'=>$hidden,
+    ]);
+}
+
+
+/* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
+#[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
+public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request, Chaussure $shoes):Response
+{
+    $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+
+    $couleur=[];//on déclare couleur à vide pour pouvoir l'envoyer au template.
+    $stocktotal=0;
+    $pointure=[];
+
+    //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
+    $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
+    
+    //On récupère les couleurs, les pointures et les stocks disponibles pour le model sélectionné.
+    foreach($shoesModel as $key=>$value)
+    {
+        $stocktotal+=$value->getStock();
+
+       if($value->getPointure()!=NULL && !(in_array($value->getPointure(), $couleur)))
+       {
+           $pointure[]=$value->getPointure();
+       }
+
+        //Si la valeur de la couleur n'est pas nulle et qu'elle n'est pas déjà dans le tableau couleur alors on l'ajoute au tableau.
+        if($value->getCouleur()!=NULL && !(in_array($value->getCouleur(), $couleur)) )
+        {
+            $couleur[]=$value->getCouleur();  
+        }
+        
+    }
+    //on récupère le nombre de couleur disponible
+    $nbcouleur=count($couleur);
+    $nbpointure=count($pointure);
+
+    return $this->render('backoffice/admin_affichage_article.html.twig', [
+        'chaussure'=>$shoesModel,
+        'titreColonne'=> $titreColonneShoes,
+        'couleur'=>$couleur,
+        'nbcouleur'=>$nbcouleur,
+        'stockTotal'=>$stocktotal,
+        'pointure'=>$pointure,
+        'nbpointure'=>$nbpointure,
+
+    ]);
+}
+
+
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 
 
