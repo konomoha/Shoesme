@@ -23,7 +23,7 @@ class PanierController extends AbstractController
         $panier = $session->get("panier", []);
         $dataPanier = [];
         $total = 0;
-
+        
         foreach($panier as $id=>$quantite)
         {
             $chaussure= $chaussureRepo->find($id);
