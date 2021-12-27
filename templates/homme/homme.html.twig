@@ -60,12 +60,42 @@
             {% if data.sexe == 'm' %}
         
             <div class="shoes_card card mb-5">
-                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
+                    
                     <div class="d-flex justify-content-between">
                         <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
                         <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
                     </div>
                     <p class="ms-3">Chaussure pour Homme</p>
+                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">Details article</a>
+
+                        <!-- Button trigger modal -->
+                        <a class="{{path('panier_add', {'id': data.id })}}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Ajouter au panier
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">                                
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary"><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                                    <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                 </a>
             </div>
         
