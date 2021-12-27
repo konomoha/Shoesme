@@ -47,4 +47,15 @@ class ChaussureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findSize($model)
+    {
+        $query = $this->createQueryBuilder(alias:'c')
+                        ->where(predicates:'c.model = :model')
+                        ->setParameters(['model'=>$model]
+                        )
+                        ->groupBy('c.pointure') 
+                        ->getQuery();
+        return $query->getResult();
+    }
 }

@@ -54,7 +54,7 @@ class CommandeController extends AbstractController
         if($this->getUser())
         {
             $commande = new Commande;
-            $detailCommande = new DetailsCommande;
+            
             $panier = $session->get("panier", []);
             $total=0;
             
@@ -66,8 +66,6 @@ class CommandeController extends AbstractController
 
             $dataCommande = [];
             $total = 0;
-            $qte = 0;
-            $prix ="";
             $chaussure="";
 
             if(!empty($panier))
@@ -80,25 +78,8 @@ class CommandeController extends AbstractController
                         "Chaussure"=> $chaussure,
                         "Quantite"=>$quantite
                     ]; 
-                    $prix = $chaussure->getPrix();
                     $total += $chaussure->getPrix() * $quantite; 
                     // dd($dataCommande);
-                }
-                
-                $qte=0;
-
-                foreach($dataCommande as $key=>$value)
-                {
-                    // dd($value);
-                    foreach($value as $key=>$data)
-                    {
-                        if($key == 'Quantite')
-                        {
-                            // dd($data);
-                            $qte= $data;
-                            
-                        }
-                    }
                 }
                 
                 $commande->setMontant($total)
@@ -106,20 +87,25 @@ class CommandeController extends AbstractController
                             ->setUser($user);
                 $manager->persist($commande);
                 $manager->flush();
-            
-                $detailCommande->setQuantite($qte)
-                                ->setPrix($prix)
-                                ->setCommande($commande);
-                $manager->persist($detailCommande);
-                $manager->flush();
 
-                $nouveaustock = $chaussure->getStock() - $qte;
-                // dd($nouveaustock);
-                $chaussure->setStock($nouveaustock);
-                // dd($chaussure);
-                $manager->persist($chaussure);
-                $manager->flush();
-                //    dd($detailCommande); 
+                foreach($dataCommande as $data)
+                {
+                    // dump($data["Chaussure"]->getPrix());
+                    $detailCommande = new DetailsCommande;//une nouvelle ligne detailscommande par référence
+                    $detailCommande->setQuantite($data["Quantite"])
+                                ->setPrix($data["Chaussure"]->getPrix())
+                                ->setCommande($commande);
+                    $manager->persist($detailCommande);
+                    $manager->flush();
+
+                    $nouveaustock = $chaussure->getStock() - $data["Quantite"];
+                    // dd($nouveaustock);
+                    $chaussure->setStock($nouveaustock);
+                    // dd($chaussure);
+                    $manager->persist($chaussure);
+                    $manager->flush();
+                    //    dump($detailCommande);
+                }
 
                 $this->addFlash('success_payment', "Félicitations $prenom! Votre paiement a bien été effectué!");
 
