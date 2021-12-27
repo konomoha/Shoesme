@@ -101,9 +101,16 @@ class Chaussure
      */
     private $stock;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="chaussure")
+     */
+    private $detailsCommandes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->detailsCommandes = new ArrayCollection();
+      
         
     }
 
@@ -321,4 +328,36 @@ class Chaussure
 
         return $this;
     }
+
+    /**
+     * @return Collection|DetailsCommande[]
+     */
+    public function getDetailsCommandes(): Collection
+    {
+        return $this->detailsCommandes;
+    }
+
+    public function addDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes[] = $detailsCommande;
+            $detailsCommande->setChaussure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if ($this->detailsCommandes->removeElement($detailsCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getChaussure() === $this) {
+                $detailsCommande->setChaussure(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

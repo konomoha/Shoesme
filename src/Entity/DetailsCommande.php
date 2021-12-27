@@ -33,6 +33,12 @@ class DetailsCommande
      */
     private $commande;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Chaussure::class, inversedBy="detailsCommandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $chaussure;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,4 +79,17 @@ class DetailsCommande
 
         return $this;
     }
+
+    public function getChaussure(): ?Chaussure
+    {
+        return $this->chaussure;
+    }
+
+    public function setChaussure(?Chaussure $chaussure): self
+    {
+        $this->chaussure = $chaussure;
+
+        return $this;
+    }
+
 }

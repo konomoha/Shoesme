@@ -94,7 +94,8 @@ class CommandeController extends AbstractController
                     $detailCommande = new DetailsCommande;//une nouvelle ligne detailscommande par référence
                     $detailCommande->setQuantite($data["Quantite"])
                                 ->setPrix($data["Chaussure"]->getPrix())
-                                ->setCommande($commande);
+                                ->setCommande($commande)
+                                ->setChaussure($data["Chaussure"]);
                     $manager->persist($detailCommande);
                     $manager->flush();
 
