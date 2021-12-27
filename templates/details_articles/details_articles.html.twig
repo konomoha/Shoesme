@@ -6,11 +6,11 @@
 
   {% for message in app.flashes('success_comment') %}
       
-    <div class="col-6 mx-auto text-center alert alert-success">{{message}}</div>
+    <div class="col-6 mx-auto text-center alert alert-success p-3">{{message}}</div>
 
   {% endfor %}   
 
-     {# {{dump(datacom)}} #}
+     {# {{dump(sizeGroup)}} #}
     {#{{dump(app.request.query.get('pointure'))}} #}
 
     
@@ -116,15 +116,15 @@
    
    
     
-      {# Je défini ici une boucle basée sur le nombre de pointure disponible via le tableau dataChaussure (cette data n'a pour filtre que le modèle, donc elle prend en compte toutes les tailles et couleurs). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
+      {# Je défini ici une boucle basée sur le nombre de pointure disponible via le tableau sizeGroup (cette data n'a pour filtre que le modèle, elle regroupe également par tailles les chaussures). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
         <div class="col-5 border row justify-content-around p-3"> 
         <p class="text-center">Tailles </p>
-        {% for data in datachaussure %}
+        {% for data in sizeGroup %}
 
           {% if data.pointure %}
 
             {% if data.pointure == app.request.query.get('pointure') %}
-               <div class="col-2 border border-dark bg-success mx-2 my-1"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+               <div class="col-2 border border-dark bg-success mx-2 my-1"><a href="{{path('details_article', {'id': data.id })}}?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
                {% else %}
                <div class="col-2 border border-dark"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
             {% endif %}
@@ -135,7 +135,7 @@
         
       </div> 
 
-    {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via dataChaussure). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
+    {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via sizeGroup). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
     {% if tailleChaussure %}
       
       <div class="col-5 border row justify-content-around p-3 my-3"> 
@@ -146,7 +146,7 @@
 
           {% if data.couleur %}
           
-            <div class="col-3 mx-2 my-1 border border-dark {{(data.couleur == app.request.query.get('couleur'))? 'bg-success':''}}"> <a href="?pointure={{data.pointure}}&couleur={{data.couleur}}" class="text-dark text-center">{{data.couleur}}</a></div>
+            <div class="col-3 mx-2 my-1 border border-dark {{(data.couleur == app.request.query.get('couleur'))? 'bg-success':''}}"> <a href="{{path('details_article', {'id': data.id })}}?pointure={{data.pointure}}&couleur={{data.couleur}}" class="text-dark text-center">{{data.couleur}}</a></div>
 
           {% endif %}
 
@@ -160,9 +160,9 @@
 
     {% if couleurChaussure %} 
  
-        {% if couleurChaussure.0.stock != null %}
+        {% if couleurChaussure.0.stock >0 %}
 
-          <button class="btn btn-dark col-3 ms-5 p-3 bouton-ajout-panier"><a href="{{path('panier_add', {'id': chaussure.id })}}">Ajouter au panier</a></button>
+          <button class="btn btn-dark col-3 ms-5 p-3 bouton-ajout-panier"><a href="{{path('panier_add', {'id': couleurChaussure.0.id })}}">Ajouter au panier</a></button>
 
         {% else %}
 

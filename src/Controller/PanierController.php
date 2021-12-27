@@ -24,14 +24,6 @@ class PanierController extends AbstractController
         $dataPanier = [];
         $total = 0;
 
-        $test=$request->query->get('quantite');
-        $qte=0;
-        if($test)
-        {
-            $qte = $test;
-            // dd($qte);
-        }
-
         foreach($panier as $id=>$quantite)
         {
             $chaussure= $chaussureRepo->find($id);
@@ -53,31 +45,39 @@ class PanierController extends AbstractController
     {
         if($this->getUser())
         {
-            $id = $chaussure->getId();
-            // dd($id);
-
-            $model = $chaussure->getModel();
-            $panier = $session->get("panier", []);
-            
-        
-            if(!empty($panier[$id]))
+            if($chaussure->getStock() > 0)
             {
-                $panier[$id]++;
+                $id = $chaussure->getId();
+                // dd($id);
 
+                $model = $chaussure->getModel();
+                $panier = $session->get("panier", []);
+                
+            
+                if(!empty($panier[$id]))
+                {
+                    $panier[$id]++;
+
+                }
+
+                else
+                {
+                    $panier[$id] = 1;
+                
+                }
+                
+                //sauvegarde du panier
+                $session->set("panier", $panier);
+                
+                $this->addFlash('success', "$model a bien été ajouté au panier!");
+
+                return $this->redirectToRoute('panier');
             }
 
-            else
+            else //si un utilisateur tente d'ajouter manuellement des produit sur une référence au stock nul, on le redirige vers le panier.
             {
-                $panier[$id] = 1;
-             
+                return $this->redirectToRoute('panier');
             }
-            
-            //sauvegarde du panier
-            $session->set("panier", $panier);
-            
-            $this->addFlash('success', "$model a bien été ajouté au panier!");
-
-            return $this->redirectToRoute('panier');
         }
         
         else

@@ -27,25 +27,30 @@ class DetailsArticlesController extends AbstractController
                     'model'=>$model
                     // 'pointure'=>$pointure,
                     // 'couleur'=>$couleur
-                    ]
+                    ],
+                    
             
                 );
-      
+        
+        $sizeGroup = $chaussureRepo->findSize($model);
+
         //2eme filtrage : On récupère la valeur de l'indice 'pointure' passé dans l'URL via un formulaire en méthode 'get'
         $pointure=$request->query->get('pointure');
 
         //On effectue une seconde recherche du même modèle de chaussure mais en appliquant une taille spécifique. Le résultat est stocké dans'tailleChaussure' puis transmit au template 'details_article'
         $tailleChaussure = $chaussureRepo->findBy([
+            'model'=>$model,
             'pointure'=>$pointure
         ]);
         
         //3ème filtrage : On récupère la valeur de l'indice 'couleur' passé dans l'URL via un formulaire en méthode 'get'
         $couleur=$request->query->get('couleur');
 
-        //On effectue une troisième recherche du même modèle de chaussure mais ajoutant à la taille sélectionnée auparavant une couleur spécifique. Le résulta est stocké dans 'couleurChaussure' puis transmit au template 'details_articles'
+        //On effectue une troisième recherche du même modèle de chaussure mais ajoutant à la taille sélectionnée auparavant une couleur spécifique. Le résultat est stocké dans 'couleurChaussure' puis transmit au template 'details_articles'
         $couleurChaussure = $chaussureRepo->findBy([
-            'couleur'=>$couleur
-            
+            'couleur'=>$couleur,
+            'pointure'=>$pointure,
+            'model'=>$model
         ]);
        
         $commentaire = new Commentaire;
@@ -124,7 +129,8 @@ class DetailsArticlesController extends AbstractController
             'tailleChaussure'=>$tailleChaussure,
             'couleurChaussure'=>$couleurChaussure,
             'datacom'=> $datacom,
-            'moyenne'=> $moyenne
+            'moyenne'=> $moyenne,
+            'sizeGroup'=>$sizeGroup
         ]);
 
     }
