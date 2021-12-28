@@ -257,6 +257,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         {
             $couleur[]=$value->getCouleur();  
         }
+        /* ******************************AJOUTER TRAITEMENT RECUPERATION ADRESSE PHOTO / COULEUR ***********************************/
         
     }
     //on récupère le nombre de couleur disponible

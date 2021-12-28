@@ -6,16 +6,17 @@
 
 
 {% block body %}
-{{dump(chaussure)}}
-<h1 class="text-center">{{chaussure.0.model}}</h1>
+
+
+<h1 class="text-center">{{chaussure.0.marque ~ chaussure.0.model}} - Genre (si j'arrive à faire mon switch )</h1>
 <h3><ul>
-    <li>{{nbcouleur}} couleurs disponibles :
+    <li>{{nbcouleur}} couleurs disponibles (affiché des ronds de la couleur correspondante si on a le temps):
         {% for item in couleur %}
-        {{item}} 
+        {{item}}
         {% endfor %}
     </li> 
 
-    <li>stock total : {{stockTotal}} unités pour ce model</li>
+    <li>stock total : {{stockTotal}} unités pour ce modèle</li>
 
     <li>{{nbpointure}} pointures disponibles : 
         {% for data in pointure %}
@@ -23,9 +24,31 @@
         {% endfor %}
     </li>
 </ul></h3>
+{# Affichage personnalisé #}
+
+{# On calcule la largeur de la colonne en largeur bootstrap, ici arrondi à l'inférieur #}
+{% set col = 12 // nbcouleur %}
 
 
-<table class="table table-stripped table-hover mt-5" id="table-article">
+{% for color in couleur %}
+    <section class="couleur border-start border-end border border-info col-{{col}} mx-auto">
+        <div class="mx-auto">{{color}}</div>
+        <div>
+        {% for data in chaussure %}
+            {% if color == data.couleur %}{% endif %}
+        {% endfor %}
+            <div><img src="" alt=""></div>
+            <div><img src="" alt=""></div>
+            <div><img src="" alt=""></div>
+            <div><img src="" alt=""></div>
+        </div>
+    </section>
+{% endfor %}
+
+
+
+{# Affichage par tableau #}
+{# <table class="table table-stripped table-hover mt-5" id="table-article">
     <thead>
         <tr>
         {% for nom in titreColonne %}
@@ -37,7 +60,6 @@
             <th class="text-center">Photo 2</th>
             <th class="text-center">Photo 3</th>
             <th class="text-center">Photo 4</th>
-            
             <th class="text-center">Action</th>
         </tr>
         </thead>
@@ -54,7 +76,7 @@
                     <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
                     <td class="text-center align-middle">{{data.prix}}</td>
                     <td class="text-center align-middle">{{data.sexe}}</td>
-                    <td class="text-center align-middle">{{data.top}}</td>
+                    <td class="text-center align-middle">{{data.affichage}}</td>
                     <td class="text-center align-middle">{{data.pointure}}</td> 
                     <td class="text-center">{{data.couleur}} </td> 
                     <td class="text-center">{{data.stock}}</td>
@@ -75,5 +97,5 @@
         
         {% endfor %}    
         <tbody>
-    </table>
+    </table> #}
 {% endblock %}

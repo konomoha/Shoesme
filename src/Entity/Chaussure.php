@@ -69,7 +69,7 @@ class Chaussure
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $top;
+    private $affichage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -238,14 +238,14 @@ class Chaussure
         return $this;
     }
 
-    public function getTop(): ?string
+    public function getAffichage(): ?string
     {
-        return $this->top;
+        return $this->affichage;
     }
 
-    public function setTop(?string $top): self
+    public function setAffichage(?string $affichage): self
     {
-        $this->top = $top;
+        $this->affichage = $affichage;
 
         return $this;
     }
