@@ -8,43 +8,92 @@
 {% block body %}
 
 
-<h1 class="text-center">{{chaussure.0.marque ~ chaussure.0.model}} - Genre (si j'arrive à faire mon switch )</h1>
-<h3><ul>
-    <li>{{nbcouleur}} couleurs disponibles (affiché des ronds de la couleur correspondante si on a le temps):
+<h2 class="text-center">{{chaussure.0.marque ~ chaussure.0.model}} </h2>
+
+{# Récapitulatif des infos du modèle sélectionné #}
+<section class="d-flex flex-column justify-content-center align-items-center my-5">
+    <h3>
+        Disponible pour  
+        {% for item in sexe %}
+            {{item|capitalize}} 
+        {% endfor %} </p>
+    </h3>
+
+    <h3>
+        {{nbcouleur}} couleurs disponibles (affiché des ronds de la couleur correspondante si on a le temps):
         {% for item in couleur %}
-        {{item}}
+        {{item|capitalize}} 
         {% endfor %}
-    </li> 
+    </h3>   
 
-    <li>stock total : {{stockTotal}} unités pour ce modèle</li>
-
-    <li>{{nbpointure}} pointures disponibles : 
+    <h3>
+        {{nbpointure}} pointures disponibles : 
         {% for data in pointure %}
             {{data}} 
         {% endfor %}
-    </li>
-</ul></h3>
-{# Affichage personnalisé #}
+    </h3>    
+
+    <h3>
+        stock total : {{stockTotal}} unités 
+    </h3>    
+
+</section>
 
 {# On calcule la largeur de la colonne en largeur bootstrap, ici arrondi à l'inférieur #}
 {% set col = 12 // nbcouleur %}
 
 
+{# Affichage Pointure + stock par couleur #}
+<section class="mx-auto d-flex flex-row justify-content-around">
 {% for color in couleur %}
-    <section class="couleur border-start border-end border border-info col-{{col}} mx-auto">
-        <div class="mx-auto">{{color}}</div>
-        <div>
-        {% for data in chaussure %}
-            {% if color == data.couleur %}{% endif %}
-        {% endfor %}
-            <div><img src="" alt=""></div>
-            <div><img src="" alt=""></div>
-            <div><img src="" alt=""></div>
-            <div><img src="" alt=""></div>
-        </div>
-    </section>
-{% endfor %}
+    
+        <div class="border-start border-end border-info col-{{col}}">
+            <h3 class="text-center">{{color|upper}}</h3>
 
+            <div class="d-flex justify-content-around my-3">
+                <div><img src="" alt="Photo1"></div>
+                <div><img src="" alt="Photo2"></div>
+                <div><img src="" alt="Photo3"></div>
+                <div><img src="" alt="Photo4"></div>
+            </div>
+
+            <div class="d-flex flex-column justify-content-center">
+
+                <div class="d-flex justify-content-center">
+                    <h4 class="me-5">Pointures :</h4>
+                    <h4 class="ms-5">Stock :</h4>
+                </div>
+
+               
+            {% for data in chaussure %}
+                {% if color == data.couleur %}
+                <div class="d-flex justify-content-center">
+
+                    <div class="form-check pt-2 me-2">
+                        <input class="form-check-input" type="checkbox" value="{{data.pointure}}" id="{{data.pointure}}">
+                        <label class="form-check-label" for="{{data.pointure}}">
+                            {{data.pointure}}
+                        </label>
+                    </div>
+
+                    <div class="form-check col-2 ms-5">
+                        <input class="form-control" type="text" value="{{data.stock}}" id="{{data.stock}}">
+                    </div>
+        
+                </div>   
+                    
+                {% endif %}
+            {% endfor %}    
+                              
+            </div>
+        
+        
+        </div>
+        
+        
+    
+{% endfor %}
+</section>
 
 
 {# Affichage par tableau #}
