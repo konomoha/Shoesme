@@ -236,8 +236,10 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
 
     $couleur=[];//on déclare couleur à vide pour pouvoir l'envoyer au template.
-    $stocktotal=0;
     $pointure=[];
+    $sexe=[];
+    $stocktotal=0;
+    
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
@@ -246,8 +248,9 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     foreach($shoesModel as $key=>$value)
     {
         $stocktotal+=$value->getStock();
-
-       if($value->getPointure()!=NULL && !(in_array($value->getPointure(), $couleur)))
+        
+        //Si la pointure n'est pas nulle et qu'elle n'est pas déjà dans le tableau on l'ajoute.
+       if($value->getPointure()!=NULL && !(in_array($value->getPointure(), $pointure)))
        {
            $pointure[]=$value->getPointure();
        }
@@ -256,6 +259,32 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         if($value->getCouleur()!=NULL && !(in_array($value->getCouleur(), $couleur)) )
         {
             $couleur[]=$value->getCouleur();  
+        }
+
+        //Ici on stocke les genres disponibles pour ce modèle de chaussure.
+        if($value->getSexe()!=NULL)
+        {
+            $genre=$value->getSexe();  
+            switch($genre)
+            {
+                case 'm':
+                    if( !(in_array("homme", $sexe)) )
+                    $sexe[]="homme";
+                    break;
+                case 'f':
+                    if( !(in_array("femme", $sexe)) )
+                    $sexe[]="femme";
+                    break;
+                case 'g':
+                    if( !(in_array("garçon", $sexe)) )
+                    $sexe[]="garçon";
+                    break;
+                case 'fille':
+                    if( !(in_array("fille", $sexe)) )
+                    $sexe[]="fille";
+                    break;
+            }
+            
         }
         /* ******************************AJOUTER TRAITEMENT RECUPERATION ADRESSE PHOTO / COULEUR ***********************************/
         
@@ -272,6 +301,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         'stockTotal'=>$stocktotal,
         'pointure'=>$pointure,
         'nbpointure'=>$nbpointure,
+        'sexe'=>$sexe,
 
     ]);
 }
