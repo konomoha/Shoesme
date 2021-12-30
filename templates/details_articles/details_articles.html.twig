@@ -22,29 +22,29 @@
 <div class="d-flex justify-content-around mx-3 mt-5 main-conteneur">
   
 
-  <div class="col-6 d-flex row justify-content-center border border-dark conteneur-photo">
+  <div class="col-6 d-flex row justify-content-center conteneur-photo">
     
-     <div class="border border-dark col-6 " >
+     <div class="col-6 " >
       <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
      </div> 
     
-     <div class="border border-dark col-6 ">
+     <div class="col-6 ">
       <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
 
-      <div class="border border-dark col-6 ">
+      <div class="col-6 ">
       <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
 
-      <div class="border border-dark col-6 ">
+      <div class="col-6 ">
       <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
     
   </div>
     
-  <div class="col-md-5 ms-2 mt-5 border border-dark conteneur-choix">
+  <div class="col-md-5 ms-2 mt-5 conteneur-choix">
     
-    <div class="d-flex flex-row justify-content-between border border-dark">
+    <div class="d-flex flex-row justify-content-between">
       <div>
         <h2 class="mt-4 mb-2 ms-3"> {{ datachaussure.0.marque }} </h2>
       </div>
@@ -130,7 +130,7 @@
    
     
       {# Je défini ici une boucle basée sur le nombre de pointure disponible via le tableau sizeGroup (cette data n'a pour filtre que le modèle, elle regroupe également par tailles les chaussures). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
-      <div class="col-5 row justify-content-around p-3 border border-dark tailleselec"> 
+      <div class="col-5 row justify-content-around p-3 tailleselec"> 
         <p class="text-center">Tailles </p>
         {% for data in sizeGroup %}
 
@@ -151,7 +151,7 @@
     {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via sizeGroup). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
     {% if tailleChaussure %}
       
-      <div class="col-5 row justify-content-around p-3 my-3border border-dark colorselec"> 
+      <div class="col-5 row justify-content-around p-3 my-3 colorselec"> 
 
         <p class="text-center">Couleurs </p>
 
@@ -185,7 +185,7 @@
 
     {% endif %}
 
-    <div class="border border-dark">
+    <div>
       <p class="mt-4 mb-4 ms-3">A partir de 100 € d'achat livraison Gratuite</p>
     </div>
     <div class="mt-2 mb-4 ms-3 description">
@@ -230,7 +230,7 @@
 
     {% if app.user %}
       
-    <div class="col-md-10 mt-5 ms-5 vvvvv champcom border border-dark">
+    <div class="col-md-10 mt-5 ms-5 vvvvv champcom">
 
       <h2 class="text-center my-3">Donnez votre avis</h2>
 
@@ -262,7 +262,7 @@
 
 {# ############################################# COMMENTAIRES ############################################### #}
 
-<div class="row justify-content-around border border-dark conteneur-avis">
+<div class="row justify-content-around conteneur-avis">
   <h2 class="text-center my-5">Derniers avis</h2>
 
 
@@ -273,7 +273,7 @@
       {% for comment in datachaussure.0.commentaires %}
             
           {# {{ dump(comment) }} #}
-          <div class="mb-3 border border-dark">
+          <div class="mb-3">
           
 
             <div class="">
