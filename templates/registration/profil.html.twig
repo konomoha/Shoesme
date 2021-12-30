@@ -2,6 +2,11 @@
 
 {% block title %}Blog Symfony | Profil{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="img-fond-profil">
@@ -19,7 +24,7 @@
             {% endif %}
 
 
-            <div class="mx-auto text-center my-4">
+            <div class="mx-auto text-center my-4 infos">
                 <h5 class="text-center my-4 fs-5">Vos informations :</h5>
 
                 <p class="my-2"><span>Nom:</span> {{ profildata.nom|upper}}</p>

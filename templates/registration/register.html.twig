@@ -4,6 +4,11 @@
     Shoesme| Inscription
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
 
@@ -16,7 +21,11 @@
 
     {{form_start(registrationForm, {'attr': {'class': 'col-5  mx-auto my-5 bg-white form-inscription'}} ) }}
 
-            {{form_row(registrationForm.sexe, {'attr': {'class': 'd-flex flex-row'}} ) }}
+        <div class="civilite">
+
+            {{form_row(registrationForm.sexe, {'attr': {'class': 'd-flex flex-row justify-content-between champsex'}} ) }}
+
+        </div>
 
         <div class="col-12">
             {{form_row(registrationForm.nom)}}
@@ -28,7 +37,7 @@
             {{form_row(registrationForm.dateNaissance)}}
             {{form_row(registrationForm.adresse)}}
         </div>
-         <div class='d-flex flex-row justify-content-between'>  
+         <div class='d-flex flex-row justify-content-between coordonnees'>  
             <div class="col-5">     
                 {{form_row(registrationForm.ville) }}
             </div> 
@@ -36,7 +45,7 @@
                 {{form_row(registrationForm.codePostal) }}
             </div> 
         </div>
-        <div class='col-5'>
+        <div class='col-5 champtel'>
             {{form_row(registrationForm.telephone)}} 
         </div>
        

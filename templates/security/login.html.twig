@@ -2,17 +2,22 @@
 
 {% block title %}Log in!{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="main-connex">
     <div class="div-inscription p-4">
             {% if error %}
-                <div class="alert alert-danger text-center col-2 mx-auto mt-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger text-center col-4 mx-auto mt-4 p-2 mess">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
             {% for message in app.flashes('success_edit') %}
 
-            <div class="bg-success text-center p-3 mx-auto col-5 ">{{ message }}</div>
+            <div class="bg-success text-center p-3 mx-auto col-4 mess">{{ message }}</div>
             
 
             {% endfor %}
