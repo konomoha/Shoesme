@@ -2,6 +2,11 @@
 
 {% block title %}Hello DetailsArticlesController!{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
   {% for message in app.flashes('success_comment') %}
@@ -14,24 +19,32 @@
     {#{{dump(app.request.query.get('pointure'))}} #}
 
     
-<div class="d-flex flex-row mx-5 mt-5">
+<div class="d-flex justify-content-around mx-5 mt-5">
   
 
-  <div class="col-md-6 d-flex flex-row flex-wrap">
+  <div class="col-6 d-flex row justify-content-center {#border border-dark#} conteneur-photo">
+    
+     <div class="{#border border-dark#} col-5 m-1" >
+      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+     </div> 
+    
+     <div class="{#border border-dark#} col-5 m-1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+     </div>
 
-    <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+      <div class="{#border border-dark#} col-5 m-1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+     </div>
 
-    <img src="{{ asset('img/' ~ datachaussure.0.photo2) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
-
-    <img src="{{ asset('img/' ~ datachaussure.0.photo3) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
-
-    <img src="{{ asset('img/' ~ datachaussure.0.photo4) }}" class="m-4" style="width: 20rem;" alt="chaussure_nike_1">
+      <div class="{#border border-dark#} col-5 m-1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+     </div>
     
   </div>
     
-  <div class="col-md-5 ms-5 mt-5">
+  <div class="col-md-5 ms-2 mt-5 {#border border-dark#} conteneur-choix">
     
-    <div class="d-flex flex-row justify-content-between">
+    <div class="d-flex flex-row justify-content-between {#border border-dark#}">
       <div>
         <h2 class="mt-4 mb-2 ms-3"> {{ datachaussure.0.marque }} </h2>
       </div>
@@ -117,16 +130,16 @@
    
     
       {# Je défini ici une boucle basée sur le nombre de pointure disponible via le tableau sizeGroup (cette data n'a pour filtre que le modèle, elle regroupe également par tailles les chaussures). Ce formulaire envoie dans l'URL un indice 'pointure' ayant une valeur précise. cet indice est récupéré dans le controlleur DetailsArticlesController #}
-        <div class="col-5 border row justify-content-around p-3"> 
+      <div class="col-5 row justify-content-around p-3 {#border border-dark#} tailleselec"> 
         <p class="text-center">Tailles </p>
         {% for data in sizeGroup %}
 
           {% if data.pointure %}
 
             {% if data.pointure == app.request.query.get('pointure') %}
-               <div class="col-2 border border-dark bg-success mx-2 my-1"><a href="{{path('details_article', {'id': data.id })}}?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+               <div class="col-2 border border-dark bg-success mx-1 my-1 "><a href="{{path('details_article', {'id': data.id })}}?pointure={{data.pointure}}" class="text-dark text-center">{{data.pointure}}</a></div>
                {% else %}
-               <div class="col-2 border border-dark"><a href="?pointure={{data.pointure}}" class="text-dark">{{data.pointure}}</a></div>
+               <div class="col-2 border border-dark mx-1 my-1"><a href="?pointure={{data.pointure}}" class="text-dark text-center">{{data.pointure}}</a></div>
             {% endif %}
             
           {% endif %}
@@ -138,7 +151,7 @@
     {# Nouvelle boucle d'option basée cette fois sur le tableau 'tailleChaussure' ce tableau ne contient que les modèles de chaussures ayant une taille précise (taille sélectionnée via sizeGroup). Le formulaire génère toutes les couleurs disponible pour une Chaussure de taille X #}
     {% if tailleChaussure %}
       
-      <div class="col-5 border row justify-content-around p-3 my-3"> 
+      <div class="col-5 row justify-content-around p-3 my-3{#border border-dark#}"> 
 
         <p class="text-center">Couleurs </p>
 
@@ -172,7 +185,7 @@
 
     {% endif %}
 
-    <div>
+    <div class="{#border border-dark#}">
       <p class="mt-4 mb-4 ms-3">A partir de 100 € d'achat livraison Gratuite</p>
     </div>
     <div class="mt-2 mb-4 ms-3">
@@ -217,7 +230,7 @@
 
     {% if app.user %}
       
-    <div class="col-md-10 mt-5 ms-5 vvvvv">
+    <div class="col-md-10 mt-5 ms-5 vvvvv {#border border-dark#}">
 
       <h2 class="text-center my-3">Donnez votre avis</h2>
 
@@ -249,7 +262,7 @@
 
 {# ############################################# COMMENTAIRES ############################################### #}
 
-<div>
+<div class="{#border border-dark#}">
   <h2 class="text-center my-5">Derniers avis</h2>
 
 
@@ -260,7 +273,7 @@
       {% for comment in datachaussure.0.commentaires %}
             
           {# {{ dump(comment) }} #}
-          <div class="mb-3">
+          <div class="mb-3 border border-dark">
           
 
             <div class="col-4">

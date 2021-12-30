@@ -2,13 +2,18 @@
 
 {% block title %}Hello FemmeController!{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
 
 <div class="">
         <h3 class="text-center">Femme</h3>
         
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center liens_categories">
                 <a href="#" class="H">Promotions</a>
                 <a href="#" class="H">Sneakers</a>
                 <a href="#" class="H">Derbies</a>
@@ -42,7 +47,7 @@
 
 <img src="{{ asset('img/banniere_2.jpg') }}" alt="banniere" class="w-100">
 
-<h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1>
+<h1 class="text-center mt-5 mb-2">Nouvelles tendances</h1>
 
 {# {% for message in app.flashes('success') %}
     <div class="col-3 p-2 mx-auto text-center alert alert-success">
@@ -56,20 +61,23 @@
         
         {% for data in chaussure %}
             {% if data.sexe == 'f' %}
-                 <div class="shoes_card card mb-5">
-                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary">
-                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top" alt="chaussure1" >
-                    <div class="d-flex justify-content-between">
+                 <div class="shoes_card card mb-5 carte_chaussure">
+
+                    <div class="d-flex justify-content-between details_chaussure">
                         <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
                         <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
                     </div>
+
                     <p class="ms-3">Chaussure pour Femme</p>
-                </a>
-            </div>
+
+                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
+                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top img-fluid" alt="chaussure1" >Details article</a>
+                    
+                </div>
             {% endif %} 
 
         {% endfor %}
     </div>
-
+<h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
 
 {% endblock %}

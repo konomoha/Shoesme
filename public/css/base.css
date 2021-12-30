@@ -259,9 +259,9 @@ a{
 
 /*##############################Footer##################################*/
 
-body, html{
+/* body, html{
     height:100%;
-} 
+}  */
 
 #main{
 min-height:100%;
@@ -269,19 +269,23 @@ margin:0 auto;
 position:relative;
 }
 
- 
 
 footer{
 background:#ccc;
 position:absolute;
 bottom:0;
-width:100%;
-padding-top:50px;
+width:100%!important;
+/* padding-top:50px; */
 margin-top: 50px !important;
 }
 
 .footer-padding{
     padding-top: 200px !important;
+}
+
+.conteneur_foot{
+    display: flex!important;
+    justify-content: space-around!important;
 }
 
 
@@ -335,13 +339,11 @@ margin-top: 50px !important;
     }
 
     .conteneur_categories div a{
-        font-size: 1.4rem!important;
+        font-size: 1.3rem!important;
     }
 
     .social_media{
-        display: flex!important;
-        flex-direction: column!important;
-        align-items: center!important;
+       
         width: 30%;
     }
 
@@ -355,8 +357,11 @@ margin-top: 50px !important;
 
     .conteneur_foot{
         display: flex!important;
-       
         justify-content: space-around!important;
+    }
+
+    .administratif{
+        width: 40%!important;
     }
 }
 
@@ -384,28 +389,12 @@ margin-top: 50px !important;
     }
 }
 
-@media screen and (max-width:500px){
-    /* .social_media{
-        display: flex!important;
-        flex-direction: column!important;
-        align-items: center!important;
-        width: 30%;
-    }
-
-    .social_media a i{
-        margin: 5px!important;
-    }
-
-    .social_media h4{
-        margin-bottom: 0.4rem!important;
-    }
-
+/* @media screen and (max-width:380px){
     .conteneur_foot{
         display: flex!important;
-       
-        justify-content: center!important;
-    } */
-}
+        flex-direction: column!important;
+    }
+} */
 
 @media screen and (max-width:380px){
     #bloc_logo{
@@ -421,9 +410,18 @@ margin-top: 50px !important;
         margin: 5px 0px 5px 20px!important;
     }
 
-    .conteneur_foot{
+    .social_media a i{
+
+        font-size: 1.5rem!important;
+    }
+
+    .administratif, .categories{
+        text-align: center!important;
+    }
+
+    /* .conteneur_foot{
         display: flex!important;
         padding: 5px!important;
         justify-content: space-between!important;
-    }
+    } */
 }

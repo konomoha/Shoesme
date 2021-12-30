@@ -48,7 +48,7 @@
   {% for data in chaussure_m %}
     <div class="d-flex mx-1 my-3 conteneur_image">
 
-          <a href="{{path('details_article', {'id': data.id })}}" ><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top d-block best_seller" alt="..."></a>
+          <a href="{{path('details_article', {'id': data.id })}}" ><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top d-block best_seller img-fluid" alt="..."></a>
 
     </div>
   {% endfor %}
@@ -60,7 +60,7 @@
     
     <div class="d-flex mx-1 my-3 test conteneur_image">
       
-          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top best_seller" alt="..."></a>
+          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top best_seller img-fluid" alt="..."></a>
 
     </div>
 

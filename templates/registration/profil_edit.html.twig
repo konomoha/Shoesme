@@ -3,6 +3,11 @@
     ShoesMe | Profil Edit
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="main-inscription">
@@ -10,7 +15,9 @@
 
         {{form_start(profilUpdate, {'attr': {'class': 'col-4  mx-auto my-5 bg-white form-inscription'}} ) }}
 
-            {{form_row(profilUpdate.sexe, {'attr': {'class': 'd-flex flex-row'}} ) }}
+            <div class="civilite">
+                {{form_row(profilUpdate.sexe, {'attr': {'class': 'd-flex flex-row justify-content-between champsex'}} ) }}
+            </div>
 
             <div class="col-12">
                 {{form_row(profilUpdate.nom)}}
@@ -19,7 +26,7 @@
                 {{form_row(profilUpdate.dateNaissance)}}
                 {{form_row(profilUpdate.adresse)}}
             </div>
-            <div class='d-flex flex-row justify-content-between'>  
+            <div class='d-flex flex-row justify-content-between coordonnees'>  
                 <div class="col-5">     
                     {{form_row(profilUpdate.ville) }}
                 </div> 
@@ -27,7 +34,7 @@
                     {{form_row(profilUpdate.codePostal) }}
                 </div> 
             </div>
-            <div class='col-5'>
+            <div class='col-5 champtel'>
                 {{form_row(profilUpdate.telephone)}} 
             </div>
         
@@ -37,13 +44,13 @@
 
             {% if avatarActuel %}
             <p class="text-center">
-                <em>Vous pouvez uploader une nouvelle photo si vous souhaitez la modifier</em>
-                <img src="{{ asset('avatar/' ~ avatarActuel)}}"  class=""  height='200px'>
+                <div class="mb-2 text-center"><em>Vous pouvez uploader une nouvelle photo si vous souhaitez la modifier</em></div>
+                <img src="{{ asset('avatar/' ~ avatarActuel)}}"  class="img-fluid"  height='200px'>
             </p>
 
             {% endif %}
 
-            <div class="mx-auto text-center">
+            <div class="mx-auto text-center mt-2">
                 <button class="col-4 btn btn-dark text-white">Valider</button>
             </div>
 

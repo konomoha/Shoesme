@@ -3,35 +3,352 @@
     flex-wrap: wrap!important;
 }
 
-.best_seller{
-    width: 350px!important;
-    height: 370px!important;
+.conteneur_image{
+    width: 17%!important;
+    height: auto!important;
 }
 
-@media screen and (max-width:1050px) {
+.liens_categories{
+    display: flex!important;
+    flex-wrap: wrap!important;
+}
 
-    .conteneur_best_seller
-    {
+.liens_categories a{
+    margin: 4px 0!important;
+}
+
+.civilite{
+    width:25%!important;
+}
+
+.civilite fieldset legend{
+    margin-bottom: 5px!important;
+}
+
+.conteneur-photo{
+    display: flex!important;
+    /* justify-content: space-around!important; */
+    align-items: center!important;
+    flex-wrap: wrap!important;
+}
+
+/* .conteneur-photo img{
+    width: 45%!important;
+    height: 45%!important;
+} */
+
+.conteneur-choix{
+    width: 45%!important;
+}
+
+.tailleselec{
+    display: flex!important;
+    flex-wrap: wrap!important;
+}
+
+/* ///////////////////////////////////////////////////MEDIA QUERIES HOME ///////////////////////////// */
+@media screen and (max-width:1300px){
+    .conteneur_image{
+        width: 30%!important;
+        height: auto!important;
+       
+    }
+}
+
+
+@media screen and (max-width:800px){
+    .conteneur_image{
+        width: 40%!important;
+        height: auto!important;
+       
+    }
+}
+
+@media screen and (max-width:590px){
+    .conteneur_image{
+        width: 95%!important;
+        height: auto!important;
+        margin-bottom: 3px!important;
+       
+    }
+}
+
+/* ///////////////////////////////////////////////////MEDIA QUERIES CATEGORIES ///////////////////////////// */
+
+@media screen and (max-width:940px){
+    .details_chaussure{
         display: flex!important;
+        flex-direction: column!important;
+        align-items: center!important;
+    }
+
+    p{
+        text-align: center!important;
+    }
+}
+
+@media screen and (max-width:780px){
+    .carte_chaussure{
+        width: 45%!important;
+        margin-top: 2rem!important;
+
+    }
+}
+
+@media screen and (max-width:590px){
+    .carte_chaussure{
+        width: 90%!important;
+        margin-bottom: 5px!important;
+
+    }
+
+}
+
+@media screen and (max-width:400px){
+    .liens_categories{
+        font-size: 1.25rem!important;
+    }
+
+   
+}
+
+/* //////////////////////////////////////////////// MEDIA QUERIES PAGE INSCRIPTION /////////////////////////// */
+
+@media screen and (max-width:1350px){
+    .form-inscription{
+        width: 70%!important;
+    }
+
+    .civilite{
+        width:22%!important;
+    }
+}
+
+@media screen and (max-width:1150px){
+
+    .civilite{
+        width: 20%!important;
+    }
+}
+
+@media screen and (max-width:990px){
+
+    .civilite{
+        width: 30%!important;
+    }
+}
+
+@media screen and (max-width:780px){
+    .form-inscription{
+        width: 80%!important;
+    }
+
+    .civilite{
+        width: 30%!important;
+    }
+}
+
+@media screen and (max-width:640px){
+    .civilite{
+        width: 40%!important;
+        margin: 0 auto!important;
+        text-align: center!important;
+    }
+}
+
+@media screen and (max-width:550px){
+    .form-inscription{
+        width: 90%!important;
+    }
+
+    .coordonnees{
+        display: flex!important;
+        flex-direction: column!important;
+
+    }
+
+    .coordonnees div, .champtel{
+        width: 100%!important;
+    }
+
+    
+}
+
+@media screen and (max-width:460px){
+    .form-inscription{
+        width: 100%!important;
+        padding:15px!important;
+    }
+
+    .champsex{
+        display: flex!important;
+        flex-direction: column!important;
+       
+    }
+
+    .champsex div{
+        display: flex!important;
+        margin-bottom: 8px!important;
         justify-content: center!important;
     }
-    
-    .conteneur_image{
-        width:30%!important;
-        height: 30%!important;
-        margin: 8px 4px!important;
 
+    .champsex div label{
+        margin-left: 7px!important;
     }
 
-    .conteneur_image a{
-        width: 100%!important;
-        height: 100%!important;
-        padding: 0!important;
-        /* display: block!important; */
-    }
-
-    .best_seller{
-        width: 305px!important;
-        height: 330px!important;
+    button{
+        width: 60%!important;
     }
 }
+ /* ///////////////////////////////////////////////PAGE CONNEXION/////////////////////////////////////////// */
+
+ @media screen and (max-width:1150px){
+     .mess{
+         width: 55%!important;
+     }
+ }
+ @media screen and (max-width:470px){
+
+     #connexion{
+         width: 80%!important;
+     }
+
+     .mess{
+        width: 80%!important;
+    }
+ }
+
+ @media screen and (max-width:400px){
+
+    #connexion{
+        width: 90%!important;
+    }
+
+    button{
+        width: 65%!important;
+    }
+}
+
+@media screen and (max-width:335px){
+
+    #connexion{
+        width: 95%!important;
+    }
+
+    button{
+        width: 80%!important;
+    }
+
+    .div-inscription{
+        height: 70%!important;
+    }
+}
+
+/* ///////////////////////////////////////////////PROFIL/////////////////////////////////////////// */
+
+@media screen and (max-width:550px){
+
+    #connexion-2 h5{
+        font-size: 1.5rem!important;
+        margin-bottom: 8px!important;
+    }
+
+    .infos p{
+        font-size: 1.2rem!important;
+    }
+}
+
+@media screen and (max-width:450px){
+    #connexion-2{
+        width: 95%!important;
+    }
+
+    #connexion-2 p{
+        width: 90%!important;
+        margin:0 auto!important;
+    }
+
+    #connexion-2 a{
+        width: 60%!important;
+        display: block!important;
+        margin: 10px auto!important;
+        
+    }
+
+    .infos{
+        height: 70%!important;
+        display: flex!important;
+        flex-direction: column!important;
+        justify-content: space-around!important;
+    }
+
+    #connexion-2 h5{
+        margin-top: 5px!important;
+    }
+}
+
+/* ///////////////////////////////////////////// MEDIAQUERIES DETAILS ARTICLE ////////////////////////*/
+
+@media screen and (max-width:1600px){
+
+    .conteneur-photo div{
+        height: 45%!important;
+    }
+  
+    .conteneur-photo div img{
+        width: 100%!important;
+        height: 100%!important;
+    }
+}
+
+@media screen and (max-width:1450px){
+    .tailleselec{
+        width: 60%!important;
+    }
+
+    
+}
+
+
+
+@media screen and (max-width:1350px){
+    .tailleselec{
+        width: 80%!important;
+    }
+
+    .conteneur-photo div{
+        width: 70%!important;
+        height: 20%!important;
+        margin:0 5px!important;
+    }
+   .conteneur-photo{
+        display: flex!important;
+        flex-direction: column!important;
+        justify-content: space-around!important;
+    }
+
+}
+
+@media screen and (max-width:900px){
+    .tailleselec{
+        width: 100%!important;
+    }
+}
+
+@media screen and (max-width:750px){
+    .tailleselec div{
+        width: 35%!important;
+    }
+    .conteneur-photo{
+        width:40%!important;
+    }
+   
+}
+
+/* @media screen and (max-width:700px){
+    .tailleselec div{
+        width: 35%!important;
+    }
+
+   
+} */
