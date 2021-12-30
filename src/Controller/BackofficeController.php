@@ -236,9 +236,12 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
 
     $couleur=[];//on déclare couleur à vide pour pouvoir l'envoyer au template.
-    $pointure=[];
-    $sexe=[];
-    $stocktotal=0;
+    $pointure=[];//idem pour les pointures
+    $sexe=[];//idem pour le genre
+    $adressePhoto=[];//idem pour les photos
+    $stocktotal=0;//
+    $element=[];//variable de stockage
+    
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
@@ -286,9 +289,31 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
             }
             
         }
-        /* ******************************AJOUTER TRAITEMENT RECUPERATION ADRESSE PHOTO / COULEUR ***********************************/
         
     }
+    
+    //Récupération de l'adresse des photos : 
+    foreach ($couleur as $value)
+    {
+        $element[]=$shoesRepo->findOneBy(['couleur'=>$value]);
+    }
+    if($element)
+    {
+        foreach ($element as $key=>$value)
+        {
+        $adressePhoto[]=[
+            'couleur'=>$value->getCouleur(),
+            'photo'=>$value->getPhoto(),
+            'photo2'=>$value->getPhoto2(),
+            'photo3'=>$value->getPhoto3(),
+            'photo4'=>$value->getPhoto4()
+        ];
+        }
+    }
+    
+    
+
+
     //on récupère le nombre de couleur disponible
     $nbcouleur=count($couleur);
     $nbpointure=count($pointure);
@@ -302,6 +327,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         'pointure'=>$pointure,
         'nbpointure'=>$nbpointure,
         'sexe'=>$sexe,
+        'photo'=>$adressePhoto,
 
     ]);
 }

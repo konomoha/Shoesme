@@ -40,7 +40,10 @@
 </section>
 
 {# On calcule la largeur de la colonne en largeur bootstrap, ici arrondi à l'inférieur #}
-{% set col = 12 // nbcouleur %}
+{% if nbcouleur %}
+    {% set col = 12 // nbcouleur %}
+{% endif %}
+
 
 
 {# Affichage Pointure + stock par couleur #}
@@ -50,12 +53,17 @@
         <div class="border-start border-end border-info col-{{col}}">
             <h3 class="text-center">{{color|upper}}</h3>
 
-            <div class="d-flex justify-content-around my-3">
-                <div><img src="" alt="Photo1"></div>
-                <div><img src="" alt="Photo2"></div>
-                <div><img src="" alt="Photo3"></div>
-                <div><img src="" alt="Photo4"></div>
-            </div>
+            {% for data in photo %}
+                {% if color == data.couleur %}
+                <div class="d-flex justify-content-around my-3">
+                <div><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt=""></div>
+                <div><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt=""></div>
+                <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
+                <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            
 
             <div class="d-flex flex-column justify-content-center">
 
