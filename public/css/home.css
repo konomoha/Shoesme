@@ -27,23 +27,31 @@
 
 .conteneur-photo{
     display: flex!important;
-    /* justify-content: space-around!important; */
-    align-items: center!important;
-    flex-wrap: wrap!important;
+    /* flex-direction: column!important; */
+    justify-content: space-around!important;
+    height: 70%!important;
 }
 
-/* .conteneur-photo img{
-    width: 45%!important;
-    height: 45%!important;
-} */
+.conteneur-photo img{
+    width: 100%!important;
+    height: 100%!important;
+}
 
 .conteneur-choix{
     width: 45%!important;
 }
 
-.tailleselec{
+.tailleselec, .colorselec{
     display: flex!important;
     flex-wrap: wrap!important;
+}
+
+.tailleselec div{
+    text-align: center;
+}
+
+.colorselec div{
+    text-align: center;
 }
 
 /* ///////////////////////////////////////////////////MEDIA QUERIES HOME ///////////////////////////// */
@@ -66,10 +74,7 @@
 
 @media screen and (max-width:590px){
     .conteneur_image{
-        width: 95%!important;
-        height: auto!important;
-        margin-bottom: 3px!important;
-       
+        width: 70%!important; 
     }
 }
 
@@ -82,7 +87,7 @@
         align-items: center!important;
     }
 
-    p{
+    .carte_chaussure p{
         text-align: center!important;
     }
 }
@@ -95,7 +100,7 @@
     }
 }
 
-@media screen and (max-width:590px){
+@media screen and (max-width:400px){
     .carte_chaussure{
         width: 90%!important;
         margin-bottom: 5px!important;
@@ -289,66 +294,141 @@
 
 /* ///////////////////////////////////////////// MEDIAQUERIES DETAILS ARTICLE ////////////////////////*/
 
-@media screen and (max-width:1600px){
+@media screen and (max-width:1450px){
+    .tailleselec, .colorselec{
+        width: 60%!important;
+    }
+    
+    .champcom{
+        width: 95%!important;
+        margin: 0 auto!important;
+    }
+
+    .notation{
+        width: 30%!important;
+    }
+
+    .message{
+        width: 70%!important;
+    }
+    
+}
+
+
+@media screen and (max-width:1350px){
+    .tailleselec, .colorselec{
+        width: 80%!important;
+    }
+
+    .bouton-ajout-panier{
+        width: 35%!important;
+    }
+}
+
+@media screen and (max-width:1100px){
+    .conteneur-com{
+        display: flex!important;
+        flex-direction: column!important;
+
+    }
+    
+    .message{
+        width: 100%!important;
+    }
+
+    .notation{
+        width: 100%!important;
+    }
+
+    .notation fieldset legend{
+        text-align: center!important;
+    }
+}
+
+
+@media screen and (max-width:900px){
+    .tailleselec, .colorselec{
+        width: 100%!important;
+    }
+
+    .champcom{
+        width: 100%!important;
+    }
+
+    .bouton-ajout-panier{
+        width: 45%!important;
+    }
+
+}
+
+@media screen and (max-width:750px){
+    .tailleselec div{
+        width: 23%!important;
+        
+    }
+
+    .colorselec div{
+        width: 27%!important;
+        
+    }
+
+    .conteneur-photo{
+        width:50%!important;
+    }
+   
+}
+
+@media screen and (max-width:650px){
 
     .conteneur-photo div{
+        width: 80%!important;
         height: 45%!important;
+        margin:5px!important;
     }
-  
+
     .conteneur-photo div img{
         width: 100%!important;
         height: 100%!important;
     }
 }
 
-@media screen and (max-width:1450px){
-    .tailleselec{
-        width: 60%!important;
-    }
+@media screen and (max-width:480px){
+    .main-conteneur{
+        display: flex!important;
+        flex-direction: column!important;
+        align-items: center!important;
+        margin: 15px 0px!important;
+        
+    } 
 
-    
-}
-
-
-
-@media screen and (max-width:1350px){
-    .tailleselec{
-        width: 80%!important;
+    .conteneur-photo{
+        width: 95%!important;
     }
 
     .conteneur-photo div{
-        width: 70%!important;
-        height: 20%!important;
-        margin:0 5px!important;
+        width: 45%!important;
+        height: 45%!important;
     }
-   .conteneur-photo{
-        display: flex!important;
-        flex-direction: column!important;
-        justify-content: space-around!important;
+
+    .conteneur-choix{
+        width: 95%!important;
+        margin: 15px 0!important;
+    }
+
+    .conteneur-choix h4, .conteneur-choix h5{
+        text-align: center!important;
+    }
+    .description{
+        text-align: center!important;
+        margin: 5px 5px!important;
+    }
+
+    .tailleselec div {
+        width: 15%!important;
+    }
+
+    .colorselec div {
+        width: 20%!important;
     }
 
 }
-
-@media screen and (max-width:900px){
-    .tailleselec{
-        width: 100%!important;
-    }
-}
-
-@media screen and (max-width:750px){
-    .tailleselec div{
-        width: 35%!important;
-    }
-    .conteneur-photo{
-        width:40%!important;
-    }
-   
-}
-
-/* @media screen and (max-width:700px){
-    .tailleselec div{
-        width: 35%!important;
-    }
-
-   
-} */
