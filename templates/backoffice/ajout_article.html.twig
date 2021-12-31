@@ -1,0 +1,40 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    Shoesme | Ajout - Chaussures
+{% endblock %}
+
+{% block body %}
+
+<div class="main-inscription">
+    <div class="div-inscription p-4">
+
+        <div class="d-flex justify-content-end">
+            <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
+        </div>
+
+
+        {{form_start(shoesForm, {'attr': {'class': 'col-10  mx-4 my-5 bg-white form-inscription'}}) }}
+            {{form_row(shoesForm.sexe, {'attr': {'class': 'text-center d-flex flex-row flex-wrap justify-content-center'}} ) }}
+            {{form_row(shoesForm.type)}}
+            {{form_row(shoesForm.marque)}}
+            {{form_row(shoesForm.model)}}
+            {{form_row(shoesForm.matiere)}}
+            {{form_row(shoesForm.affichage)}}
+            {{form_row(shoesForm.descriptif)}}
+            {{form_row(shoesForm.couleur, {'attr': {'class': 'text-center d-flex flex-row flex-wrap justify-content-center'}} ) }}
+            {{form_row(shoesForm.prix)}}
+            {{form_row(shoesForm.photo)}}
+            {{form_row(shoesForm.photo2)}}
+            {{form_row(shoesForm.photo3)}}
+            {{form_row(shoesForm.photo4)}}
+            {{form_row(shoesForm.pointure, {'attr': {'class': 'text-center d-flex flex-row flex-wrap justify-content-center mx-5'}} ) }}
+            {{form_row(shoesForm.stock)}}
+
+            <div class="text-center">
+                <button class="btn btn-dark">Enregistrer</button>
+            </div>
+        {{form_end(shoesForm)}}
+    </div>
+</div>    
+{% endblock %}

@@ -7,6 +7,8 @@ use App\Entity\Contact;
 use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\ChaussureType;
+use App\Form\Chaussure2Type;
+use App\Form\Chaussure3Type;
 use App\Form\CommentFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
@@ -17,9 +19,9 @@ use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BackofficeController extends AbstractController
 {
@@ -229,8 +231,9 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 }
 
 
-/* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
+/* ################## Affichage d'un article avec toutes les couleurs et pointures et modification ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
+// #[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
 public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request, Chaussure $shoes):Response
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
@@ -332,7 +335,97 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     ]);
 }
 
+#[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
+public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
+{
+    $compteur=0; //permet de compter le nombre d'enregistrement créé
+    
 
+    $shoesForm= $this->createForm(Chaussure3Type::class);//formulaire fait main pour pouvoir boucler sur les couleurs et les pointures et créer les enregistrements liés.
+    $shoesForm->handleRequest($request);
+    
+    if($shoesForm->isSubmitted() && $shoesForm->isValid())
+    {  
+        $data=$shoesForm->getData();
+        
+        foreach($data['couleur'] as $couleur)
+        {
+            foreach($data['pointure'] as $pointure)   
+            {
+                $shoes = new Chaussure;
+
+                $shoes->setCouleur($couleur);
+                $shoes->setPointure($pointure);
+                $shoes->setType($data['type']);
+                $shoes->setMarque($data['marque']);
+                $shoes->setModel($data['model']);
+                $shoes->setSexe($data['sexe']);
+                $shoes->setAffichage($data['affichage']);
+                $shoes->setMatiere($data['matiere']);
+                $shoes->setDescriptif($data['descriptif']);
+                $shoes->setPrix($data['prix']);
+                $shoes->setMatiere($data['matiere']);
+                $shoes->setStock($data['stock']);
+
+                
+                //traitement photo
+                // $photo = $shoesForm->get('photo')->getData();
+                // $photo2 = $shoesForm->get('photo2')->getData();
+                // $photo3 = $shoesForm->get('photo3')->getData();
+                // $photo4 = $shoesForm->get('photo4')->getData();
+                // // dd($photo);
+                
+                // if($photo)
+                // {
+                //     $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                //     $securePhoto= $slugger->slug($nomOriginePhoto);
+                //     $nouveauNomFichier = $data['marque'].'-'.$data['model'].'-'.$securePhoto . $photo->guessExtension();
+                //     $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
+                //     $shoes->setPhoto($nouveauNomFichier);
+                    
+                // }
+                // if($photo2)
+                // {
+                //     $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
+                //     $securePhoto2= $slugger->slug($nomOriginePhoto2);
+                //     $nouveauNomFichier2 = $data['marque'].'-'.$data['model'].'-'.$securePhoto2. $photo2->guessExtension();
+                //     $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
+                //     $shoes->setPhoto2($nouveauNomFichier2);
+                    
+                // }
+                // if($photo3)
+                // {
+                //     $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
+                //     $securePhoto3= $slugger->slug($nomOriginePhoto3);
+                //     $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. $photo3->guessExtension();
+                //     $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
+                //     $shoes->setPhoto3($nouveauNomFichier3);
+                    
+                // }
+                // if($photo4)
+                // {
+                //     $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
+                //     $securePhoto4= $slugger->slug($nomOriginePhoto4);
+                //     $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. $photo4->guessExtension();
+                //     $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
+                //     $shoes->setPhoto4($nouveauNomFichier4);
+                    
+                // }
+                
+                ++$compteur;
+                $manager->persist($shoes);
+                $manager->flush();
+            }
+        }
+        // dd($compteur);
+        
+        return $this->redirectToRoute('backoffice_affichage_general');
+    }
+
+    return $this->render('backoffice/ajout_article.html.twig', [
+        'shoesForm' => $shoesForm->createView(),
+    ]);
+}
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 
 
