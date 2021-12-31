@@ -55,11 +55,11 @@
 
             {% for data in photo %}
                 {% if color == data.couleur %}
-                <div class="d-flex justify-content-around my-3">
-                <div><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt=""></div>
-                <div><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt=""></div>
-                <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
-                <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
+                <div class="d-flex justify-content-around ms-5 my-3">
+                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt=""></div>
+                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt=""></div>
+                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
+                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
                 </div>
                 {% endif %}
             {% endfor %}
