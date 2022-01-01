@@ -27,7 +27,6 @@
 
 .conteneur-photo{
     display: flex!important;
-    /* flex-direction: column!important; */
     justify-content: space-around!important;
     height: 70%!important;
 }
@@ -54,8 +53,8 @@
     text-align: center;
 }
 
-/* ///////////////////////////////////////////////////MEDIA QUERIES HOME ///////////////////////////// */
-@media screen and (max-width:1300px){
+/* ///////////////////////////////////////////////////MEDIA QUERIES ACCUEIL ///////////////////////////// */
+@media screen and (max-width:1000px){
     .conteneur_image{
         width: 30%!important;
         height: auto!important;
@@ -64,7 +63,7 @@
 }
 
 
-@media screen and (max-width:800px){
+@media screen and (max-width:650px){
     .conteneur_image{
         width: 40%!important;
         height: auto!important;
@@ -72,7 +71,7 @@
     }
 }
 
-@media screen and (max-width:590px){
+@media screen and (max-width:400px){
     .conteneur_image{
         width: 70%!important; 
     }
@@ -107,14 +106,10 @@
 
     }
 
-}
-
-@media screen and (max-width:400px){
     .liens_categories{
-        font-size: 1.25rem!important;
-    }
+            font-size: 1.25rem!important;
+        }
 
-   
 }
 
 /* //////////////////////////////////////////////// MEDIA QUERIES PAGE INSCRIPTION /////////////////////////// */
@@ -129,19 +124,6 @@
     }
 }
 
-@media screen and (max-width:1150px){
-
-    .civilite{
-        width: 20%!important;
-    }
-}
-
-@media screen and (max-width:990px){
-
-    .civilite{
-        width: 30%!important;
-    }
-}
 
 @media screen and (max-width:780px){
     .form-inscription{
@@ -159,13 +141,7 @@
         margin: 0 auto!important;
         text-align: center!important;
     }
-}
-
-@media screen and (max-width:550px){
-    .form-inscription{
-        width: 90%!important;
-    }
-
+    
     .coordonnees{
         display: flex!important;
         flex-direction: column!important;
@@ -176,8 +152,8 @@
         width: 100%!important;
     }
 
-    
 }
+
 
 @media screen and (max-width:460px){
     .form-inscription{
@@ -223,16 +199,6 @@
     }
  }
 
- @media screen and (max-width:400px){
-
-    #connexion{
-        width: 90%!important;
-    }
-
-    button{
-        width: 65%!important;
-    }
-}
 
 @media screen and (max-width:335px){
 
@@ -244,24 +210,9 @@
         width: 80%!important;
     }
 
-    .div-inscription{
-        height: 70%!important;
-    }
 }
 
 /* ///////////////////////////////////////////////PROFIL/////////////////////////////////////////// */
-
-@media screen and (max-width:550px){
-
-    #connexion-2 h5{
-        font-size: 1.5rem!important;
-        margin-bottom: 8px!important;
-    }
-
-    .infos p{
-        font-size: 1.2rem!important;
-    }
-}
 
 @media screen and (max-width:450px){
     #connexion-2{
@@ -287,12 +238,9 @@
         justify-content: space-around!important;
     }
 
-    #connexion-2 h5{
-        margin-top: 5px!important;
-    }
 }
 
-/* ///////////////////////////////////////////// MEDIAQUERIES DETAILS ARTICLE ////////////////////////*/
+/* ///////////////////////////////////////////// MEDIA QUERIES DETAILS ARTICLE ////////////////////////*/
 
 @media screen and (max-width:1450px){
     .tailleselec, .colorselec{
@@ -312,20 +260,28 @@
         width: 70%!important;
     }
     
-}
-
-
-@media screen and (max-width:1350px){
-    .tailleselec, .colorselec{
-        width: 80%!important;
-    }
-
     .bouton-ajout-panier{
         width: 35%!important;
     }
 }
 
-@media screen and (max-width:1100px){
+
+@media screen and (max-width:900px){
+    .tailleselec, .colorselec{
+        width: 100%!important;
+    }
+
+    .champcom{
+        width: 100%!important;
+    }
+
+    .bouton-ajout-panier{
+        width: 45%!important;
+    }
+    .conteneur-photo{
+            width:50%!important;
+    }
+
     .conteneur-com{
         display: flex!important;
         flex-direction: column!important;
@@ -343,39 +299,7 @@
     .notation fieldset legend{
         text-align: center!important;
     }
-}
-
-
-@media screen and (max-width:900px){
-    .tailleselec, .colorselec{
-        width: 100%!important;
-    }
-
-    .champcom{
-        width: 100%!important;
-    }
-
-    .bouton-ajout-panier{
-        width: 45%!important;
-    }
-
-}
-
-@media screen and (max-width:750px){
-    .tailleselec div{
-        width: 23%!important;
-        
-    }
-
-    .colorselec div{
-        width: 27%!important;
-        
-    }
-
-    .conteneur-photo{
-        width:50%!important;
-    }
-   
+    
 }
 
 @media screen and (max-width:650px){
@@ -431,4 +355,65 @@
         width: 20%!important;
     }
 
+}
+
+/* ///////////////////////////////////////////// MEDIA QUERIES PANIER ////////////////////////*/
+
+@media screen and (max-width:940px){
+    
+    .boite-synth, .boite-1{
+        margin:0% 2% 10% 2%!important;
+    }
+  
+}
+
+@media screen and (max-width:830px) {
+    
+    .prix p, .prix a{
+        font-size: 1.3rem!important;
+        margin: 0!important;
+       
+    }
+}
+
+@media screen and (max-width:720px){
+
+    .conteneur{
+        display: flex!important;
+        flex-direction: column!important;
+        align-items: center!important;
+    }
+
+    .box-produit{
+       width: 100%!important;
+    }
+    
+    .image{
+        width: 40%!important;
+    }
+
+    .details{
+        width:30%!important
+    }
+
+    .prix{
+        width: 29%!important;
+    }
+   .box-commande{
+       width: 65%;
+   }
+
+}
+
+@media screen and (max-width:490px){
+
+    .prix{
+        display: flex!important;
+        flex-direction: column!important;
+        justify-content: flex-start!important;
+    }
+
+    .details{
+        width: 30%!important;
+    }
 }
