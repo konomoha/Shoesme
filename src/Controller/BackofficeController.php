@@ -335,6 +335,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     ]);
 }
 
+/* ################## Création Articles multiple couleur, multiple pointure ################## */
 #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
 public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
 {
@@ -347,7 +348,41 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
     if($shoesForm->isSubmitted() && $shoesForm->isValid())
     {  
         $data=$shoesForm->getData();
-        
+
+        if($shoesForm->get('photo'))
+        {
+            $photo = $shoesForm->get('photo')->getData();
+            $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+            $securePhoto= $slugger->slug($nomOriginePhoto);
+            $nouveauNomFichier = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' .$photo->guessExtension();
+            $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
+        }
+        if($shoesForm->get('photo2'))
+        {
+            $photo2 = $shoesForm->get('photo2')->getData();
+            $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
+            $securePhoto2= $slugger->slug($nomOriginePhoto2);
+            $nouveauNomFichier2 = $data['marque'].'-'.$data['model'].'-'.$securePhoto2. '.' . $photo2->guessExtension();
+            $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
+        }
+        if($shoesForm->get('photo3'))
+        {
+            $photo3 = $shoesForm->get('photo3')->getData();
+            $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
+            $securePhoto3= $slugger->slug($nomOriginePhoto3);
+            $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo3->guessExtension();
+            $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
+        }
+        if($shoesForm->get('photo4'))
+        {
+            $photo4 = $shoesForm->get('photo4')->getData();
+            $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
+            $securePhoto4= $slugger->slug($nomOriginePhoto4);
+            $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo4->guessExtension();
+            $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
+
+        }
+
         foreach($data['couleur'] as $couleur)
         {
             foreach($data['pointure'] as $pointure)   
@@ -368,56 +403,29 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
                 $shoes->setStock($data['stock']);
 
                 
-                //traitement photo
-                // $photo = $shoesForm->get('photo')->getData();
-                // $photo2 = $shoesForm->get('photo2')->getData();
-                // $photo3 = $shoesForm->get('photo3')->getData();
-                // $photo4 = $shoesForm->get('photo4')->getData();
-                // // dd($photo);
-                
-                // if($photo)
-                // {
-                //     $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                //     $securePhoto= $slugger->slug($nomOriginePhoto);
-                //     $nouveauNomFichier = $data['marque'].'-'.$data['model'].'-'.$securePhoto . $photo->guessExtension();
-                //     $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
-                //     $shoes->setPhoto($nouveauNomFichier);
-                    
-                // }
-                // if($photo2)
-                // {
-                //     $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
-                //     $securePhoto2= $slugger->slug($nomOriginePhoto2);
-                //     $nouveauNomFichier2 = $data['marque'].'-'.$data['model'].'-'.$securePhoto2. $photo2->guessExtension();
-                //     $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
-                //     $shoes->setPhoto2($nouveauNomFichier2);
-                    
-                // }
-                // if($photo3)
-                // {
-                //     $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
-                //     $securePhoto3= $slugger->slug($nomOriginePhoto3);
-                //     $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. $photo3->guessExtension();
-                //     $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
-                //     $shoes->setPhoto3($nouveauNomFichier3);
-                    
-                // }
-                // if($photo4)
-                // {
-                //     $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
-                //     $securePhoto4= $slugger->slug($nomOriginePhoto4);
-                //     $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. $photo4->guessExtension();
-                //     $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
-                //     $shoes->setPhoto4($nouveauNomFichier4);
-                    
-                // }
+                if($photo)
+                {
+                    $shoes->setPhoto($nouveauNomFichier);   
+                }
+                if($photo2)
+                {
+                    $shoes->setPhoto2($nouveauNomFichier2);
+                }
+                if($photo3)
+                {
+                    $shoes->setPhoto3($nouveauNomFichier3);
+                }
+                if($photo4)
+                {
+                    $shoes->setPhoto4($nouveauNomFichier4);
+                }
                 
                 ++$compteur;
                 $manager->persist($shoes);
                 $manager->flush();
             }
         }
-        // dd($compteur);
+        
         
         return $this->redirectToRoute('backoffice_affichage_general');
     }
