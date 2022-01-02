@@ -4,33 +4,41 @@
 ShoesMe | Commande
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
 {% block body %}
- 
-<h1 class="text-center">Récapitulatif de votre commande {{app.user.prenom}}</h1>
-{# {{dump(app.user)}} #}
 
-<table class="table-bordered text-center my-5 mx-auto">
-<tr>
 
-    <th class="p-3">Produit</th>
-    <th class="p-3">Prix</th>
-    <th class="p-3">Quantite</th>
+    <h1 class="text-center my-5">Récapitulatif de votre commande, {{app.user.prenom}}</h1>
+    {# {{dump(app.user)}} #}
 
-</tr>
-{% for data in dataCommande %}
-    {# {{dump(data)}} #}
+    <table class="table-bordered text-center my-5 mx-auto">
     <tr>
-        <td class="p-3">{{data.Chaussure.model}}</td>
-        <td class="p-3">{{data.Chaussure.prix}} €</td>
-        <td class="p-3">{{data.Quantite}}</td>
-        
+
+        <th class="p-3">Produit</th>
+        <th class="p-3">Prix</th>
+        <th class="p-3">Quantite</th>
+
     </tr>
-    
-{% endfor %}<tr><th colspan="2">Total Commande</th><td class="p-3">{{ (total * 1.2)|round(2)}} €</td></tr>
-</table>
-<div class="d-flex flex-column align-items-center justify-content-around col-5 mx-auto">
-    <button class="btn btn-warning col-2 mb-3 text-center text-dark"><a href="{{path('panier')}}" class="text-dark">Modifier</a> </button>
-    <button class="btn btn-success col-2 "><a href="{{path('commande_paiement')}}" onclick="return(confirm('Souhaitez-vous passer au paiement de votre commande?'));">Payer</a></button>
-</div>
+    {% for data in dataCommande %}
+        {# {{dump(data)}} #}
+        <tr>
+            <td class="p-3">{{data.Chaussure.model}}</td>
+            <td class="p-3">{{data.Chaussure.prix}} €</td>
+            <td class="p-3">{{data.Quantite}}</td>
+            
+        </tr>
+        
+    {% endfor %}<tr><th colspan="2">Total Commande</th><td class="p-3">{{ (total * 1.2)|round(2)}} €</td></tr>
+    </table>
+
+    <div class="d-flex flex-column align-items-center justify-content-around col-5 mx-auto my-5">
+        <button class="btn btn-warning col-2 mb-3 text-center text-dark btn-modifier"><a href="{{path('panier')}}" class="text-dark">Modifier</a> </button>
+        <button class="btn btn-success col-2 btn-payer"><a href="{{path('commande_paiement')}}" onclick="return(confirm('Souhaitez-vous passer au paiement de votre commande?'));">Payer</a></button>
+    </div>
+
 
 {% endblock %}
