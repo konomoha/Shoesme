@@ -374,6 +374,10 @@
         margin: 0!important;
        
     }
+
+    .btn-modifier, .btn-payer{
+        width: 45%!important;
+    }
 }
 
 @media screen and (max-width:720px){
@@ -415,5 +419,9 @@
 
     .details{
         width: 30%!important;
+    }
+
+    .box-commande{
+        width: 90%;
     }
 }
