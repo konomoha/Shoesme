@@ -81,7 +81,7 @@ class Chaussure3Type extends AbstractType
             'choices' => [
                 'standard' => 'standard',
                 'promotion' => 'promotion',
-                'nouveauté' => 'nouveaute',
+                'nouveaute' => 'nouveauté',
                 'destockage' => 'destockage',
                 'solde'=> 'solde',
             ],
