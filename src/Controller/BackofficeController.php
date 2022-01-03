@@ -244,7 +244,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $stocktotal=0;//
     $element=[];//variable de stockage
     
-    dd($shoes);
+    //dd($shoes);
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
@@ -292,13 +292,13 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
             }
             
         }
-        
+        $model=$value->getModel();
     }
     
     //Récupération de l'adresse des photos : 
     foreach ($couleur as $value)
     {
-        $element[]=$shoesRepo->findOneBy(['model'=>$shoesModel,'couleur'=>$value]);
+        $element[]=$shoesRepo->findOneBy(['model'=>$model,'couleur'=>$value]);
     }
     if($element)
     {
@@ -370,7 +370,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             $photo3 = $shoesForm->get('photo3')->getData();
             $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
             $securePhoto3= $slugger->slug($nomOriginePhoto3);
-            $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo3->guessExtension();
+            $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto3. '.' . $photo3->guessExtension();
             $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
         }
         if($shoesForm->get('photo4'))
@@ -378,7 +378,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             $photo4 = $shoesForm->get('photo4')->getData();
             $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
             $securePhoto4= $slugger->slug($nomOriginePhoto4);
-            $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo4->guessExtension();
+            $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto4. '.' . $photo4->guessExtension();
             $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
 
         }

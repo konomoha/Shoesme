@@ -16,7 +16,11 @@ class FemmeController extends AbstractController
         // ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
 
         $chaussure = $repoChaussure->findAll();
-         
+        // array(), // condition where
+        // array (), //order by
+        // 57, // la limite de chaussures à afficher
+        // 0); // offset
+
         return $this->render('femme/femme.html.twig', [
             'chaussure'=>$chaussure
         ]);
