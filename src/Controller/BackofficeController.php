@@ -241,15 +241,18 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $pointure=[];//idem pour les pointures
     $sexe=[];//idem pour le genre
     $adressePhoto=[];//idem pour les photos
+    $model='';
     $stocktotal=0;//
     $element=[];//variable de stockage
     
-    dd($shoes);
+    // dd($shoes);
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
     
+    
+
     //On récupère les couleurs, les pointures et les stocks disponibles pour le model sélectionné.
     foreach($shoesModel as $key=>$value)
     {
@@ -292,18 +295,20 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
             }
             
         }
-        
+        $model=$value->getModel();
     }
     
     //Récupération de l'adresse des photos : 
     foreach ($couleur as $value)
     {
-        $element[]=$shoesRepo->findOneBy(['model'=>$shoesModel,'couleur'=>$value]);
+        $element[]=$shoesRepo->findOneBy(['model'=>$model,'couleur'=>$value]);
     }
+    
     if($element)
     {
         foreach ($element as $key=>$value)
         {
+            
         $adressePhoto[]=[
             'couleur'=>$value->getCouleur(),
             'photo'=>$value->getPhoto(),
