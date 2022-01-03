@@ -244,6 +244,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $stocktotal=0;//
     $element=[];//variable de stockage
     
+
     //A finir
     // if($request)
     // {
