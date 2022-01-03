@@ -7,7 +7,6 @@ use App\Entity\Contact;
 use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\ChaussureType;
-use App\Form\Chaussure2Type;
 use App\Form\Chaussure3Type;
 use App\Form\CommentFormType;
 use App\Form\RegistrationFormType;
@@ -245,6 +244,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $stocktotal=0;//
     $element=[];//variable de stockage
     
+    dd($shoes);
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
@@ -298,7 +298,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     //Récupération de l'adresse des photos : 
     foreach ($couleur as $value)
     {
-        $element[]=$shoesRepo->findOneBy(['couleur'=>$value]);
+        $element[]=$shoesRepo->findOneBy(['model'=>$shoesModel,'couleur'=>$value]);
     }
     if($element)
     {
