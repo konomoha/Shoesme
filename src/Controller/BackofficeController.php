@@ -230,10 +230,9 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 }
 
 
-/* ################## Affichage d'un article avec toutes les couleurs et pointures et modification ################## */
+/* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
-// #[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
-public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request, Chaussure $shoes):Response
+public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
 
@@ -245,7 +244,13 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $stocktotal=0;//
     $element=[];//variable de stockage
     
-    // dd($shoes);
+    //A finir
+    // if($request)
+    // {
+    //     $affichage=$request->request->all();
+    //     // dd($affichage);
+    // }
+    
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
@@ -319,9 +324,6 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         }
     }
     
-    
-
-
     //on récupère le nombre de couleur disponible
     $nbcouleur=count($couleur);
     $nbpointure=count($pointure);
@@ -375,7 +377,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             $photo3 = $shoesForm->get('photo3')->getData();
             $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
             $securePhoto3= $slugger->slug($nomOriginePhoto3);
-            $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo3->guessExtension();
+            $nouveauNomFichier3 = $data['marque'].'-'.$data['model'].'-'.$securePhoto3. '.' . $photo3->guessExtension();
             $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
         }
         if($shoesForm->get('photo4'))
@@ -383,7 +385,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             $photo4 = $shoesForm->get('photo4')->getData();
             $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
             $securePhoto4= $slugger->slug($nomOriginePhoto4);
-            $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto. '.' . $photo4->guessExtension();
+            $nouveauNomFichier4 = $data['marque'].'-'.$data['model'].'-'.$securePhoto4. '.' . $photo4->guessExtension();
             $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
 
         }
@@ -431,7 +433,8 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             }
         }
         
-        
+        $this->addFlash('success', "$compteur articles ajoutés avec succés.");
+
         return $this->redirectToRoute('backoffice_affichage_general');
     }
 
