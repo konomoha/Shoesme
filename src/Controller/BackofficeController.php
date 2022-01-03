@@ -230,10 +230,9 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 }
 
 
-/* ################## Affichage d'un article avec toutes les couleurs et pointures et modification ################## */
+/* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
-// #[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
-public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request, Chaussure $shoes):Response
+public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
 
@@ -241,15 +240,25 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $pointure=[];//idem pour les pointures
     $sexe=[];//idem pour le genre
     $adressePhoto=[];//idem pour les photos
+    $model='';
     $stocktotal=0;//
     $element=[];//variable de stockage
     
-    //dd($shoes);
+
+    //A finir
+    // if($request)
+    // {
+    //     $affichage=$request->request->all();
+    //     // dd($affichage);
+    // }
+    
     
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
     
+    
+
     //On récupère les couleurs, les pointures et les stocks disponibles pour le model sélectionné.
     foreach($shoesModel as $key=>$value)
     {
@@ -300,10 +309,12 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     {
         $element[]=$shoesRepo->findOneBy(['model'=>$model,'couleur'=>$value]);
     }
+    
     if($element)
     {
         foreach ($element as $key=>$value)
         {
+            
         $adressePhoto[]=[
             'couleur'=>$value->getCouleur(),
             'photo'=>$value->getPhoto(),
@@ -314,9 +325,6 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         }
     }
     
-    
-
-
     //on récupère le nombre de couleur disponible
     $nbcouleur=count($couleur);
     $nbpointure=count($pointure);
@@ -426,7 +434,8 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
             }
         }
         
-        
+        $this->addFlash('success', "$compteur articles ajoutés avec succés.");
+
         return $this->redirectToRoute('backoffice_affichage_general');
     }
 
