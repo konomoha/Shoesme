@@ -14,12 +14,12 @@
 
 {% for message in app.flashes('success_payment') %}
 
-    <div class="col-4 mx-auto text-center alert alert-success p-3 mt-5">{{message}}</div>
+    <div class="col-6 mx-auto text-center alert alert-success p-3 mt-5 mess_success">{{message}}</div>
     
 {% endfor %}
 
-<div class="col-5 mx-auto row justify-content-around my-5">
-    <button class="btn btn-warning col-3 p-3 text-center "><a href="{{path('home')}}" class="text-dark">Retourner à l'accueil</a></button>
+<div class="col-6 mx-auto row justify-content-around my-5">
+    <button class="btn btn-warning col-3 p-3 text-center mess_accueil"><a href="{{path('home')}}" class="text-dark text-center">Retourner à l'accueil</a></button>
 </div>
 
 
