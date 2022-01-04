@@ -237,7 +237,7 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
 
 {
-    $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
+    $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();   
 
     $couleur=[];//on déclare couleur à vide pour pouvoir l'envoyer au template.
     $pointure=[];//idem pour les pointures
@@ -246,7 +246,6 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $model='';
     $stocktotal=0;//
     $element=[];//variable de stockage
-
     $hidden='hidden';
     $photoForm='';
     //on vérifie que l'url contient modification pour modifier l'affichage
@@ -257,7 +256,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         if($request->request->all())
         {
            $data=$request->request->all();
-            // dd($data);
+            
            foreach($data as $key=>$value)
            {
                //Si on récupère un numéric la $key correspond à l'id de la chaussure
@@ -267,49 +266,38 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
                     $shoesChangementStock=$shoesRepo->find($key);
                     $shoesChangementStock->setStock($stock);
                     $manager->persist($shoesChangementStock);
-                    $manager->flush();
+                    
                }
-               if($key=='selecteurAffichage')
+               //Sinon c'est que c'est le selecteur pour modifier l'affichage des chaussures
+               else
                {
+                    //Découpage de la $key et récupération de la marque en 0, du model en 1, et de la couleur en 2
+                    $modelChangementAffichage=str_replace('_', ' ',explode('/',$key,)); 
 
-               }
-
-                $photoForm=$this->createForm(PhotoType::class);
-                $photoForm->handleRequest($request);
-
-               if($photoForm->isSubmitted() && $photoForm->isValid())
-               {
-                   
-                    // foreach($shoesChangementPhoto as $enregistrement)
-                    // {
-                    //     // dd($enregistrement);
-                    //     switch($tabData[3])
-                    //     {
-                    //         case  'photo' :
-                    //             $photo = $value;
-                    //             $nouveauNomFichier = $enregistrement->getMarque().'-'.$enregistrement->getModel().'-'.$enregistrement->getCouleur().'.' .$photo->guessExtension();
-                    //             $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
-
-                    //             $enregistrement->setPhoto($nouveauNomFichier); 
-                    //             $manager->persist($enregistrement);
-                    //             break;
-
-                    //         case 'photo2' :
-                    //             break;
-
-                    //         case 'photo3' :
-                    //             break;
-
-                    //         case 'photo4' :
-                    //             break;
-                    //     }   
-                    // }
-               }
+                    $shoesChangementAffichage=$shoesRepo->findBy(['marque'=>$modelChangementAffichage[0], 'model'=>$modelChangementAffichage[1], 'couleur'=>$modelChangementAffichage[2]]);
+                        //Pour toutes les chaussures correspondantes, on modifie l'affichage
+                        foreach($shoesChangementAffichage as $enregistrement)
+                        {
+                            $enregistrement->setAffichage($value);
+                            $manager->persist($enregistrement);
+                        }
+                        
+               } 
            }
            $manager->flush();
         }
+        
+        $photoForm= $this->createForm(PhotoType::class);
+        $photoForm->handleRequest($request);
+        
+        if($photoForm->isSubmitted() && $photoForm->isValid())
+        {
+                   
+                  
+        }
     }
 
+/* ########################## AFFICHAGE */
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
@@ -396,7 +384,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         'sexe'=>$sexe,
         'photo'=>$adressePhoto,
         'hidden'=>$hidden,
-        'photoForm'=>$photoForm,
+        'photoForm'=>$photoForm->createView(),
 
     ]);
 }
