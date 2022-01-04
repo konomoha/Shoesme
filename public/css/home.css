@@ -4,8 +4,9 @@
 }
 
 .conteneur_image{
-    width: 17%!important;
-    height: auto!important;
+    width: 15%!important;
+    height: 200px!important;
+    margin-bottom: 200px !important;
 }
 
 .liens_categories{
@@ -35,8 +36,6 @@
     width: 95%!important;
     height: 95%!important;
 }
-
-
 
 .conteneur-choix{
     width: 45%!important;
