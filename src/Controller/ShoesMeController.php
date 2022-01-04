@@ -43,7 +43,7 @@ class ShoesMeController extends AbstractController
 
         $shoes = $chaussureRepo->findBy(
             array(), // condition where
-            array ('id' =>'DESC'), //order by
+            array (), //order by
             5, // la limite de chaussures à afficher
             0); // offset;
         
@@ -91,7 +91,5 @@ class ShoesMeController extends AbstractController
     public function ML()
     {
         return $this->render ('shoes_me/mentions.legales.html.twig');
-    }
-
-   
+    }   
 }

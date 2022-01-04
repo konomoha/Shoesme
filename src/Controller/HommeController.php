@@ -16,7 +16,6 @@ class HommeController extends AbstractController
         $sexe = 'm';
 
         $dataChaussure= $repoChaussure->findShoesType($sexe);
-
         $chaussure = $repoChaussure->findBy(
             array(), // condition where
             array (), //order by

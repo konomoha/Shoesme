@@ -73,6 +73,31 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.section-fille{
+    height: 800px; 
+    width: 800px;
+    background-image: url("../img/fille.jpg"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.section-garcon{
+    height: 800px; 
+    width: 800px;
+    background-image: url("../img/garcon.jpg"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.section-enfant a{
+    margin: 0 !important;
+}
+
+.section-enfant a:hover{
+    color: white;
+}
+
 .bouton-bas{
     height: 5rem;
     width: 13rem;
