@@ -13,14 +13,6 @@
 
     <div class="">
         <h3 class="text-center">Homme</h3>
-        
-            <div class="d-flex justify-content-center liens_categories">
-                <a href="#" class="H">Promotions</a>
-                <a href="#" class="H">Sneakers</a>
-                <a href="#" class="H">Derbies</a>
-                <a href="#" class="H">Boots</a>
-                {# <a href="#" class="H">Chaussures de villes</a> #}
-            </div>
     </div>
 
     {# <form method="post">
@@ -62,6 +54,7 @@
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
+
         {% for  data in dataChaussure %}
         
             <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
@@ -74,10 +67,8 @@
                     <p class="">Chaussure pour Homme</p>
                     <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="{{data.marque}} {{data.model}}">
                     <a href="{{path('details_article', {'id': data.id})}}" class="text-secondary">Details article</a>
-                    <a href="{{path('panier_add', {'id': data.id})}}" class="text-secondary">Ajouter au panier</a>
                 </a>
             </div>
-           
         {% endfor %}
 
     </div>
