@@ -61,6 +61,7 @@
         
         {% for data in chaussure %}
             {% if data.sexe == 'f' %}
+            {% if data.pointure == 40 %}
                  <div class="shoes_card card mb-5 carte_chaussure">
 
                     <div class="d-flex justify-content-between details_chaussure">
@@ -75,6 +76,7 @@
                     
                 </div>
             {% endif %} 
+                        {% endif %} 
 
         {% endfor %}
     </div>
