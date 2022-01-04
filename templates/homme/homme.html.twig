@@ -50,6 +50,7 @@
 
 <h1 class="text-center mt-5 mb-2">Nouvelles tendances</h1>
 {# {{dump(chaussure)}} #}
+{# {{dump(dataChaussure)}} #}
 
 {# {% for message in app.flashes('success') %}
     <div class="col-3 p-2 mx-auto text-center alert alert-success">
@@ -61,26 +62,22 @@
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
-        {% for  data in chaussure %}
-            {% if data.sexe == 'm' %}
-                {% if data.pointure == 47 %}
-            
-                <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
+        {% for  data in dataChaussure %}
+        
+            <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
 
-                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
-                        <div class="d-flex justify-content-between details_chaussure">
-                            <div class="fst-italic ms-3 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 
-                            <div class="fst-italic mx-3 text-black"><strong> {{data.prix}} €</strong></div>
-                        </div>
-                        <p class="">Chaussure pour Homme</p>
-                        <img src="{{ asset('img/' ~ data.photo) }}" class="" alt="chaussure1" width="300px" height="350px">
-                        <a href="" class="text-secondary">Details article</a>
-                        <a href="" class="text-secondary">Ajouter au panier</a>
-                    </a>
-                </div>
-
-                {% endif %}
-            {% endif %}
+                <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
+                    <div class="d-flex justify-content-between details_chaussure">
+                        <div class="fst-italic ms-3 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                        <div class="fst-italic mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+                    </div>
+                    <p class="">Chaussure pour Homme</p>
+                    <img src="{{ asset('img/' ~ data.photo) }}" class="" alt="chaussure1" width="300px" height="350px">
+                    <a href="" class="text-secondary">Details article</a>
+                    <a href="" class="text-secondary">Ajouter au panier</a>
+                </a>
+            </div>
+           
         {% endfor %}
 
     </div>
