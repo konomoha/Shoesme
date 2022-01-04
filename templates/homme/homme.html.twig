@@ -15,42 +15,11 @@
         <h3 class="text-center">Homme</h3>
     </div>
 
-    {# <form method="post">
-        <label for="categorie">Catégories</label>
-        <select name="categorie" id="categorie">
-            <option value=""></option>
-        </select>
-
-        <label for="marque">Marques</label>
-        <select name="marque" id="marque">
-            <option value=""></option>
-        </select>
-
-        <label for="taille">Taille</label>
-        <select name="taille" id="taille">
-            <option value=""></option>
-        </select>
-
-        <label for="couleur">Couleur</label>
-        <select name="couleur" id="couleur">
-            <option value=""></option>
-        </select>
-    </form> #}
-
-
 <img src="{{ asset('img/banniere.jpg') }}" alt="banniere" class="w-100">
 
-<h1 class="text-center mt-5 mb-2">Nouvelles tendances</h1>
-{# {{dump(chaussure)}} #}
-{# {{dump(dataChaussure)}} #}
+<h1 class="text-center mt-5 mb-2">Chaussures Homme</h1>
 
-{# {% for message in app.flashes('success') %}
-    <div class="col-3 p-2 mx-auto text-center alert alert-success">
-    <p>{{message}}</p>
-    <p class="fw-bold"><a href="{{path('panier')}}">Aller au panier</a></p>
-    </div>    
-{% endfor %} #}
-    <div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
+    <div class="ch1 mb-1 mt-5 row justify-content-around col-8 mx-auto">
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
@@ -58,9 +27,9 @@
 
         {% for  data in chaussure %}
             {% if data.sexe == 'm' %}
-                {% if data.pointure == 47 %}
+                {% if data.pointure == 43 %}
             
-                <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
+                <div class="shoes_card card mb-5 carte_chaussure" >
 
                     <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
                         <div class="d-flex justify-content-between details_chaussure">
@@ -68,7 +37,7 @@
                             <div class="fst-italic mx-3 text-black"><strong> {{data.prix}} €</strong></div>
                         </div>
                         <p class="">Chaussure pour Homme</p>
-                        <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="chaussure1" width="300px" height="350px">
+                        <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="chaussure1" height="350px">
                         <a href="{{path('details_article', {'id': data.id })}}" class="text-center text-black">Details article</a>
                     </a>
                 </div>
@@ -80,83 +49,7 @@
 
     </div>
 
-        {# <div class="ch1 mb-1 mt-5">
-
-        <div class="card mx-3">
-            <img src="{{ asset('img/nike1.jpg') }}" class="card-img-top" alt="chaussure1">
-            <p class="fst-italic"> Nike AirMax Plus</p>      
-        </div>
-
-        <div class="card mx-3">
-            <img src="{{ asset('img/nike2.jpg') }}" class="card-img-top" alt="chaussure2">
-            <p class="fst-italic">Nike AirMax 90</p>       
-        </div>
-
-
-        <div class="card mx-3">
-            <img src="{{ asset('img/nike3.jpg') }}" class="card-img-top" alt="chaussure2">
-            <p class="fst-italic">Air Max Plus 3</p>    
-        </div>
-
-    </div> #}
-
-    {# <h3><a href="#" class="H py-3">Tout voir</a></h3> #}
-
-
-    {# <img src="{{ asset('img/banniere2.jpg') }}" alt="banniere" class="w-100"> #}
-
-
-    {# <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1> #}
-        {# <div class="ch1 mb-1 ">
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/lacoste1.jpg') }}" class="card-img-top" alt="chaussure1">
-
-
-                <button class="btn btn-dark"><a href="{{ ('details_articles.html.twig') }}">En savoir plus</a></button>
-
-                <p class="fst-italic">Sneakers T-Clip Lacoste x Peanuts homme en cuir</p>
-            </div>
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/lacoste2.jpg') }}" class="card-img-top" alt="chaussure2">
-                <p class="fst-italic">Sneakers T-Clip homme en cuir et en textile</p>
-            </div>
-
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/lacoste3.jpg') }}" class="card-img-top" alt="chaussure2">
-                <p class="fst-italic">Sneakers L-Guard Breaker homme en daim et textile</p>
-                
-            </div>
-        </div> #}
-    
-    {# <h3><a href="#" class="H py-3">Tout voir</a></h3> #}
-
-
-    {# <img src="{{ asset('img/banniere3.jpg') }}" alt="banniere" class="w-100"> #}
-
-
-    {# <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1> #}
-        {# <div class="ch1 mb-1 mt-5">
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/adidas1.jpg') }}" class="card-img-top" alt="chaussure1">
-                <p class="fst-italic">CHAUSSURE ZX 2K BOOST UTILITY GORE-TEX</p>
-            </div>
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/adidas2.jpg') }}" class="card-img-top" alt="chaussure2">
-                <p class="fst-italic">CHAUSSURE OZWEEGO</p>
-            </div>
-
-
-            <div class="card mx-3">
-                <img src="{{ asset('img/adidas3.jpg') }}" class="card-img-top" alt="chaussure2">
-                <p class="fst-italic">Y-3 HOKORI II</p>
-                
-            </div>
-        </div> #}
+       
     
     <h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
 
