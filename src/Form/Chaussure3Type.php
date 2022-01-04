@@ -292,8 +292,7 @@ class Chaussure3Type extends AbstractType
                         '46'=>46,
                         '46.5'=>46.5,
                         '47'=>47,
-                ],
-            
+                ],            
             'required' => false,
             'expanded' => true,
             'multiple' => true,

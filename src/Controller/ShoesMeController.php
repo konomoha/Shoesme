@@ -80,5 +80,11 @@ class ShoesMeController extends AbstractController
         ]);
     }
 
+    #[Route ('/mentions_legales', name: 'm_l')]
+    public function ML()
+    {
+        return $this->render ('shoes_me/mentions.legales.html.twig');
+    }
+
    
 }
