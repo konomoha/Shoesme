@@ -19,7 +19,7 @@
         {% endfor %} </p>
     </p>
     <p>
-        {{nbcouleur}} couleurs disponibles (affiché des ronds de la couleur correspondante si on a le temps):
+        {{nbcouleur}} couleurs disponibles :
         {% for item in couleur %}
         {{item|capitalize}} 
         {% endfor %}
@@ -55,7 +55,7 @@
 
                 {% if hidden =='' %}
                     <form action="" method="post">
-                        <select name="selecteurAffichage" id="affichage" class="mx-2">
+                        <select name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{color}}" id="affichage" class="mx-2">
                             <option value="" selected>Modifier le statut d'affichage</option>
                             <option value="standard">standard</option>
                             <option value="promotion">promotion</option>
@@ -78,23 +78,12 @@
                 </div>
                 {# Si la variable hidden est à null alors on affiche le formulaire pour modifier les photo#}
                     {% if hidden =='' %}   
-                            <form action="" method="post" class="my-1 d-flex" enctype="multipart/form-data">
-                                <div class="ms-2">
-                                    <label for="photo"> Photo</label>
-                                    <input type="file" class="my-1" id="photo" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo">
-
-                                    <label for="photo2">Photo2</label>
-                                    <input type="file" class="my-1" id="photo2" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo2">
-                                </div>
-                                <div>
-                                    <label for="photo3">Photo3</label>
-                                    <input type="file" class="my-1" id="photo3" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo3">
-
-                                    <label for="photo4">Photo4</label>
-                                    <input type="file" class="my-1" id="photo4" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo4">
-                                </div>
-                                <button class="btn btn-warning me-4 my-1">Modifier photos</button>
-                            </form>
+                            {{form_start(photoForm)}}
+                                    {{form_row(photo)}}
+                                    {{form_row(photo2)}}
+                                    {{form_row(photo3)}}
+                                    {{form_row(photo4)}}
+                            {{form_end(photoForm)}}
                     {% endif %}
 
                 {% endif %}
