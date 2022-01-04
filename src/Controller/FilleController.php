@@ -13,7 +13,8 @@ class FilleController extends AbstractController
     public function index(ChaussureRepository $repoChaussure): Response
     {
         ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
-
+        $sexe = 'fille';
+        $dataChaussure= $repoChaussure->findShoesType($sexe);
         $chaussure = $repoChaussure->findAll();
             // array(), // condition where
             // array (), //order by
@@ -22,7 +23,8 @@ class FilleController extends AbstractController
         
          
         return $this->render('fille/fille.html.twig', [
-            'chaussure'=> $chaussure
+            'chaussure'=> $chaussure,
+            'dataChaussure'=>$dataChaussure
         ]);
     }
 

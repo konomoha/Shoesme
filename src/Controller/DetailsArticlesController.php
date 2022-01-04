@@ -8,6 +8,7 @@ use App\Form\CommentFormType;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
+use PDOException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,10 @@ class DetailsArticlesController extends AbstractController
     #[Route('/details_article/{id}', name:'details_article')]
     public function detailArticle(CommentaireRepository $repoCommentaire, Request $request, EntityManagerInterface $manager, Chaussure $chaussure, ChaussureRepository $chaussureRepo):Response
     {
+        $id = $chaussure->getId();
+        // dd($id);
+        $test = $chaussureRepo->findId($id); //test rowcount
+        
         //1er filtrage : on sélectionne le modèle de la chaussure grâce à l'id passé dans l'URL
         $model = $chaussure->getModel();
 
@@ -85,8 +90,8 @@ class DetailsArticlesController extends AbstractController
     //     $shoes = $chaussure->getId();
 
         
+                    }
                 }
-            }
         // dump(count($dataNote));
         // dump($moyenne);
         // dump($chaussure->getCommentaires());
@@ -121,6 +126,7 @@ class DetailsArticlesController extends AbstractController
         // {
         //     $total += $note->getEvaluation();
         // }
+        
 
         return $this->render('details_articles/details_articles.html.twig', [
             'formComment' => $formComment->createView(),
