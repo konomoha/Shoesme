@@ -17,11 +17,25 @@
 
     {% endfor %}
 
-<img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere " class="w-100">
 
-<br>
+<div class="entete"> 
 
-<h1 class="text-center mt-5">Nouveautés</h1>
+  <div class="titre-entete">
+    <h1 class="taille-titre">Le rêve est a vos pieds</h1>
+  </div>
+
+  <div class="div-bouton">
+    <div class="bouton-accueil fs-3">
+      <a href="{{ path('homme')}}" class="mx-auto">Collection HOMME</a>
+    </div>
+    <div class="bouton-accueil fs-3">
+      <a href="{{ path('femme')}}" class="mx-auto">Collection FEMME</a>
+    </div>
+  </div>
+
+</div>
+
+<h1 class="text-center mt-5 bg-light col-10 mx-auto">Nouveautés</h1>
 
 <div class="d-flex justify-content-center my-5 conteneur_best_seller"> 
 
@@ -40,7 +54,31 @@
   {% endfor %}
 </div>
 
-<h1 class="text-center mt-5">Meilleurs ventes</h1>
+
+<div class="d-flex flex-row justify-content-center mx-auto my-5">
+
+    <div class="section1 d-flex justify-content-end align-items-end">    
+      <div class="fs-3 bouton-bas me-3 mb-3">
+        <a href="{{ path('homme')}}" class="mx-auto">HOMME</a>
+      </div>
+    </div>
+
+    <div class="section2 d-flex justify-content-center mx-4 align-items-end ">    
+      <div class="fs-3 bouton-bas mb-3">
+        <a href="{{ path('femme')}}" class="mx-auto">FEMME</a>
+      </div>
+    </div>
+
+    <div class="section3 d-flex justify-content-start align-items-end">
+      <div class="fs-3 bouton-bas ms-3 mb-3">
+        <a href="{{ path('enfant')}}" class="mx-auto">ENFANT</a>
+      </div>
+    </div>
+
+  </div>
+
+
+<h1 class="text-center mt-5 bg-light col-10 mx-auto">Meilleurs ventes</h1>
 
   <div class="d-flex justify-content-center my-5 conteneur_best_seller">
   {% for data in chaussure_f %} 
@@ -58,5 +96,8 @@
 
   {% endfor %}
   </div>
+
+
+  
 
 {% endblock %}

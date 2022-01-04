@@ -13,14 +13,6 @@
 
     <div class="">
         <h3 class="text-center">Homme</h3>
-        
-            <div class="d-flex justify-content-center liens_categories">
-                <a href="#" class="H">Promotions</a>
-                <a href="#" class="H">Sneakers</a>
-                <a href="#" class="H">Derbies</a>
-                <a href="#" class="H">Boots</a>
-                {# <a href="#" class="H">Chaussures de villes</a> #}
-            </div>
     </div>
 
     {# <form method="post">
@@ -73,9 +65,8 @@
                             <div class="fst-italic mx-3 text-black"><strong> {{data.prix}} €</strong></div>
                         </div>
                         <p class="">Chaussure pour Homme</p>
-                        <img src="{{ asset('img/' ~ data.photo) }}" class="" alt="chaussure1" width="300px" height="350px">
-                        <a href="" class="text-secondary">Details article</a>
-                        <a href="" class="text-secondary">Ajouter au panier</a>
+                        <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="chaussure1" width="300px" height="350px">
+                        <a href="{{path('details_article', {'id': data.id })}}" class="text-secondary">Details article</a>
                     </a>
                 </div>
 

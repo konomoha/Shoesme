@@ -6,6 +6,89 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.entete{
+    height: 550px;
+    background: url("../img/zzzzz.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.titre-entete{
+    margin-left: 10% !important;
+    color: black;
+    text-shadow: 1px 1px 1px white;
+}
+
+.taille-titre{
+    font-size: 7rem;
+}
+
+.div-bouton{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10% !important;
+    margin-top: 100px !important;
+}
+
+.bouton-accueil{
+    height: 5rem;
+    width: 13rem;
+    background-color: rgb(0, 0, 0);
+    margin-right: 1% !important;
+    display: flex;
+    align-items: center;
+    padding: auto;
+    
+}
+
+.bouton-accueil a:hover{
+    color: white;
+}
+
+.bouton-accueil:hover{
+    box-shadow: 1px 1px 2px white;
+    color: white;
+    text-decoration: underline !important;
+}
+
+.section1{
+    height: 500px;
+    width: 500px;
+    background-image: url("../img/HOMME.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.section2{
+    height: 500px;
+    width: 500px;
+    background-image: url("../img/FEMME.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.section3{
+    height: 500px; 
+    width: 500px;
+    background-image: url("../img/ENFANT.jpg"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.bouton-bas{
+    height: 5rem;
+    width: 13rem;
+    background-color: rgba(0, 0, 0, 0.685);
+    display: flex;
+    align-items: center;
+    padding: auto;
+    
+}
+
+.bouton-bas a:hover{
+    color: white;
+    text-decoration: underline !important;
+}
+
+
 /* .modal-position{
     margin-left: 35% !important;
 } */
