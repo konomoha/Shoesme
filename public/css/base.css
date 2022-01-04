@@ -400,4 +400,13 @@ margin-top: 50px !important;
     .administratif, .categories{
         text-align: center!important;
     }
+
+    .conteneur_categories div{
+        width: 95%!important;
+    }
+
+    .conteneur_categories div a{
+        padding-left: 12px!important;
+        padding-right: 7px!important;
+    }
 }

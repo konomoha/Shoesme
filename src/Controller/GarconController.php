@@ -12,10 +12,13 @@ class GarconController extends AbstractController
     #[Route('/garcon', name: 'garcon')]
     public function index(ChaussureRepository $repoChaussure): Response
     {
+        $sexe = 'g';
+        $dataChaussure= $repoChaussure->findShoesType($sexe);
         $chaussure = $repoChaussure->findAll();
 
         return $this->render('garcon/garcon.html.twig', [
             'chaussure'=> $chaussure,
+            'dataChaussure'=>$dataChaussure
         ]);
     }
 }

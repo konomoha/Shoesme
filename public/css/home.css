@@ -4,9 +4,8 @@
 }
 
 .conteneur_image{
-    width: 15%!important;
-    height: 200px!important;
-    margin-bottom: 200px !important;
+    width: 17%!important;
+    height:auto!important
 }
 
 .liens_categories{
@@ -55,28 +54,33 @@
 }
 
 /* ///////////////////////////////////////////////////MEDIA QUERIES ACCUEIL ///////////////////////////// */
-@media screen and (max-width:1000px){
+@media screen and (max-width:1300px){
     .conteneur_image{
         width: 30%!important;
         height: auto!important;
-       
+
     }
 }
 
 
-@media screen and (max-width:650px){
+@media screen and (max-width:800px){
     .conteneur_image{
         width: 40%!important;
         height: auto!important;
-       
+
     }
 }
 
-@media screen and (max-width:400px){
+@media screen and (max-width:590px){
     .conteneur_image{
-        width: 70%!important; 
+        width: 95%!important;
+        height: auto!important;
+        margin-bottom: 3px!important;
+
     }
 }
+
+
 
 /* ///////////////////////////////////////////////////MEDIA QUERIES CATEGORIES ///////////////////////////// */
 
@@ -107,10 +111,9 @@
 
     }
 
-    .liens_categories{
-            font-size: 1.25rem!important;
-        }
-
+    .carte_chaussure a{
+        text-align: center!important;
+    }
 }
 
 /* //////////////////////////////////////////////// MEDIA QUERIES PAGE INSCRIPTION /////////////////////////// */

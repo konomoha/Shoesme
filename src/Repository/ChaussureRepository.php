@@ -69,4 +69,12 @@ class ChaussureRepository extends ServiceEntityRepository
                         ->getQuery();
         return $query->getResult();
     }
+
+    public function findId($id)
+    {
+        $query = $this->createQueryBuilder(alias:'c')
+                        ->select('count(c.id)')
+                        ->getQuery();
+        return $query->getResult();
+    }
 }
