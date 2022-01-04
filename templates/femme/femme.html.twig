@@ -12,61 +12,19 @@
 
 <div class="">
         <h3 class="text-center">Femme</h3>
-        
-            <div class="d-flex justify-content-center liens_categories">
-                <a href="#" class="H">Promotions</a>
-                <a href="#" class="H">Sneakers</a>
-                <a href="#" class="H">Boots</a>
-                <a href="#" class="H">Escarpins</a>
-              
-            </div>
-    </div>
-
-    {# <form method="post">
-        <label for="categorie">Catégories</label>
-        <select name="categorie" id="categorie">
-            <option value=""></option>
-        </select>
-
-        <label for="marque">Marques</label>
-        <select name="marque" id="marque">
-            <option value=""></option>
-        </select>
-
-        <label for="taille">Taille  </label>
-        <select name="taille" id="taille">
-            <option value=""></option>
-        </select>
-
-        <label for="couleur">Couleur</label>
-        <select name="couleur" id="couleur">
-            <option value=""></option>
-        </select>
-    </form> #}
+</div>
 
 
 <img src="{{ asset('img/banniere_2.jpg') }}" alt="banniere" class="w-100">
 
-<h1 class="text-center mt-5 mb-2">Nouvelles tendances</h1>
-{# {{dump(dataChaussure)}} #}
-{# {% for message in app.flashes('success') %}
-    <div class="col-3 p-2 mx-auto text-center alert alert-success">
-    <p>{{message}}</p>
-    <p class="fw-bold"><a href="{{path('panier')}}">Aller au panier</a></p>
-    </div>    
-{% endfor %} #}
+<h1 class="text-center mt-5 mb-2">Chaussures femme</h1>
+
     <div class="ch1 mb-1 mt-5 row justify-content-around col-8 mx-auto">
-
-        {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
-
         
         {% for data in chaussure %}
             {% if data.sexe == 'f' %}
             {% if data.pointure == 38 %}
                  <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
-
-     
-
                     <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
                         <div class="d-flex justify-content-between details_chaussure">
                             <div class="fst-italic ms-3 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 

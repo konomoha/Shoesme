@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    
+{% endblock %}
+
+
+{% block body %}
+
+
+<div class="d-flex flex-row justify-content-center mx-auto my-5 section-enfant">
+
+    <a href="{{ path('fille')}}" class="">
+        <div class="section-fille d-flex justify-content-center align-items-center">    
+        <div class="fs-3 bouton-bas d-flex justify-content-center align-items-center">
+            <div class="text-center">FILLE</div>
+        </div>
+        </div>
+    </a>
+
+    <a href="{{ path('garcon')}}" class="">
+        <div class="section-garcon d-flex justify-content-center align-items-center">
+            <div class="fs-3 bouton-bas d-flex justify-content-center align-items-center">
+                <div class="text-center">GARCON</div>
+            </div>
+        </div>
+    </a>
+
+  </div>
+    
+{% endblock %}
