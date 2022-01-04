@@ -14,7 +14,8 @@ class HommeController extends AbstractController
     {
         ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
 
-        $chaussure = $repoChaussure->findAll();
+        $chaussure=$repoChaussure->findBy(['sexe'=>'h']); 
+        // $chaussure = $repoChaussure->findAll();
             // array(), // condition where
             // array (), //order by
             // 57, // la limite de chaussures à afficher
