@@ -136,8 +136,7 @@ class BackofficeController extends AbstractController
                 // $securePhoto4= $slugger->slug($nomOriginePhoto4);
                 $nouveauNomFichier4 = $nomOriginePhoto4 . '-' . uniqid() . '.' . $photo4->guessExtension();
                 $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
-                $shoes->setPhoto4($nouveauNomFichier4);
-                
+                $shoes->setPhoto4($nouveauNomFichier4);     
             }
             
             else 
@@ -232,7 +231,10 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 
 /* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
+
+#[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
 public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
+
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
 
@@ -243,16 +245,66 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $model='';
     $stocktotal=0;//
     $element=[];//variable de stockage
-    
 
-    //A finir
-    // if($request)
-    // {
-    //     $affichage=$request->request->all();
-    //     // dd($affichage);
-    // }
-    
-    
+    $hidden='hidden';
+    $photoForm='';
+    //on vérifie que l'url contient modification pour modifier l'affichage
+    if(stristr($request->getPathInfo(), "modification"))
+    {
+        $hidden='';
+        //Si on recupère les données de request
+        if($request->request->all())
+        {
+           $data=$request->request->all();
+            
+           foreach($data as $key=>$value)
+           {
+               //Si on récupère un numéric la $key correspond à l'id de la chaussure
+               if(is_numeric($key))
+               {
+                    $stock=(int)$value;
+                    $shoesChangementStock=$shoesRepo->find($key);
+                    $shoesChangementStock->setStock($stock);
+                    $manager->persist($shoesChangementStock);
+                    $manager->flush();
+               }
+
+                $photoForm=$this->createForm(PhotoType::class);
+                $photoForm->handleRequest($request);
+
+               if($photoForm->isSubmitted() && $photoForm->isValid())
+               {
+                   
+                    // foreach($shoesChangementPhoto as $enregistrement)
+                    // {
+                    //     // dd($enregistrement);
+                    //     switch($tabData[3])
+                    //     {
+                    //         case  'photo' :
+                    //             $photo = $value;
+                    //             $nouveauNomFichier = $enregistrement->getMarque().'-'.$enregistrement->getModel().'-'.$enregistrement->getCouleur().'.' .$photo->guessExtension();
+                    //             $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
+
+                    //             $enregistrement->setPhoto($nouveauNomFichier); 
+                    //             $manager->persist($enregistrement);
+                    //             break;
+
+                    //         case 'photo2' :
+                    //             break;
+
+                    //         case 'photo3' :
+                    //             break;
+
+                    //         case 'photo4' :
+                    //             break;
+                    //     }   
+                    // }
+               }
+           }
+           $manager->flush();
+        }
+    }
+
 
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
@@ -303,7 +355,6 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         }
         $model=$value->getModel();
     }
-    
     //Récupération de l'adresse des photos : 
     foreach ($couleur as $value)
     {
@@ -339,11 +390,13 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         'nbpointure'=>$nbpointure,
         'sexe'=>$sexe,
         'photo'=>$adressePhoto,
+        'hidden'=>$hidden,
+        'photoForm'=>$photoForm,
 
     ]);
 }
 
-/* ################## Création Articles multiple couleur, multiple pointure ################## */
+/* ################## Création Articles multiples couleurs, multiples pointures ################## */
 #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
 public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, ChaussureRepository $repoChaussure)
 {
