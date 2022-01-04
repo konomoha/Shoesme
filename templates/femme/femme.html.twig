@@ -58,7 +58,7 @@
     <div class="ch1 mb-1 mt-5 row justify-content-around">
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
-        
+       
         {% for data in dataChaussure %}
 
                  <div class="shoes_card card mb-5 carte_chaussure">
@@ -74,6 +74,7 @@
                     <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top img-fluid" alt="chaussure1" >Details article</a>
                     
                 </div>
+
 
         {% endfor %}
     </div>
