@@ -58,9 +58,8 @@
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
-        {% for data in chaussure %}
-            {% if data.sexe == 'fille' %}
-            {% if data.pointure == 22 %}
+        {% for data in dataChaussure %}
+
                  <div class="shoes_card card mb-5 carte_chaussure">
 
                     <div class="d-flex justify-content-between details_chaussure">
@@ -74,9 +73,9 @@
                     <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top img-fluid" alt="chaussure1" >Details article</a>
                     
                 </div>
-            {% endif %} 
-            {% endif %}
+           
         {% endfor %}
+        
     </div>
 <h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
 
