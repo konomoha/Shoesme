@@ -14,11 +14,14 @@ class HommeController extends AbstractController
     {
         ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
 
+
+      
         $chaussure = $repoChaussure->findBy(
             array(), // condition where
             array (), //order by
             1000, // la limite de chaussures à afficher
             0); // offset
+
          
         return $this->render('homme/homme.html.twig', [
             'chaussure'=> $chaussure

@@ -17,9 +17,7 @@
             <div class="d-flex justify-content-center liens_categories">
                 <a href="#" class="H">Promotions</a>
                 <a href="#" class="H">Sneakers</a>
-                <a href="#" class="H">Derbies</a>
-                <a href="#" class="H">Boots</a>
-                <a href="#" class="H">Chaussures de villes</a>
+                
             </div>
     </div>
 
@@ -61,7 +59,7 @@
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in chaussure %}
-            {% if data.sexe == 'f' %}
+            {% if data.sexe == 'fille' %}
                  <div class="shoes_card card mb-5 carte_chaussure">
 
                     <div class="d-flex justify-content-between details_chaussure">
