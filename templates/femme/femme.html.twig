@@ -48,7 +48,7 @@
 <img src="{{ asset('img/banniere_2.jpg') }}" alt="banniere" class="w-100">
 
 <h1 class="text-center mt-5 mb-2">Nouvelles tendances</h1>
-
+{# {{dump(dataChaussure)}} #}
 {# {% for message in app.flashes('success') %}
     <div class="col-3 p-2 mx-auto text-center alert alert-success">
     <p>{{message}}</p>
@@ -58,11 +58,14 @@
     <div class="ch1 mb-1 mt-5 row justify-content-around col-8 mx-auto">
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
+
         
         {% for data in chaussure %}
             {% if data.sexe == 'f' %}
             {% if data.pointure == 38 %}
                  <div class="shoes_card card mb-5 carte_chaussure" width="300px" height="300px">
+
+     
 
                     <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
                         <div class="d-flex justify-content-between details_chaussure">
@@ -74,8 +77,10 @@
                         <a href="{{path('details_article', {'id': data.id })}}" class="text-secondary ">Details article</a>
                     </a>
                 </div>
+
             {% endif %} 
             {% endif %} 
+
         {% endfor %}
     </div>
 <h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>

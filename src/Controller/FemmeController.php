@@ -14,15 +14,19 @@ class FemmeController extends AbstractController
     public function index(ChaussureRepository $repoChaussure): Response
     {
         // ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
+        $sexe = 'f';
 
-        $chaussure = $repoChaussure->findAll();
-        // array(), // condition where
-        // array (), //order by
-        // 57, // la limite de chaussures à afficher
-        // 0); // offset
+        $dataChaussure= $repoChaussure->findShoesType($sexe);
+
+        $chaussure = $repoChaussure->findBy(
+            array(), // condition where
+            array (), //order by
+            1000, // la limite de chaussures à afficher
+            0); // offset
 
         return $this->render('femme/femme.html.twig', [
-            'chaussure'=>$chaussure
+            'chaussure'=>$chaussure,
+            'dataChaussure'=>$dataChaussure
         ]);
     }
 }
