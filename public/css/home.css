@@ -36,6 +36,8 @@
     height: 95%!important;
 }
 
+
+
 .conteneur-choix{
     width: 45%!important;
 }
@@ -266,10 +268,14 @@
 }
 
 
-@media screen and (max-width:900px){
+@media screen and (max-width:1080px){
     .tailleselec, .colorselec{
         width: 100%!important;
     }
+}
+
+@media screen and (max-width:900px){
+    
 
     .champcom{
         width: 100%!important;
@@ -313,6 +319,18 @@
     .conteneur-photo div img{
         width: 100%!important;
         height: 100%!important;
+    }
+
+    .bouton-ajout-panier{
+        width: 65%!important;
+    }
+
+    .tailleselec div {
+        width: 25%!important;
+    }
+
+    .colorselec div {
+        width: 30%!important;
     }
 }
 
@@ -359,69 +377,111 @@
 
 /* ///////////////////////////////////////////// MEDIA QUERIES PANIER ////////////////////////*/
 
-@media screen and (max-width:940px){
-    
-    .boite-synth, .boite-1{
-        margin:0% 2% 10% 2%!important;
+@media screen and (max-width:1375px){
+    .boite-1{
+        display: flex!important;
+        flex-direction: column!important;
+    }
+    .image{
+        width: 100%!important;
+    }
+
+    .prix, .details{
+        width: 95%!important;
+        margin: 0 auto!important;
+    }
+
+    .prix{
+        display: flex!important;
+        justify-content: flex-end!important;
+    }
+
+    .boite-synth{
+        width: 85%!important ;
+    }
+}
+
+@media screen and (max-width:1000px){
+    .box-produit{
+        width: 50%!important;
+    }
+    .box-commande{
+        width: 48%!important;
+        margin: 0 auto!important;
+    }
+    .boite-synth{
+        width: 100%!important;
+        margin:0 auto!important;
+    }
+
+    .btn-modifier, .btn-payer{
+        width: 35%!important;
     }
   
 }
 
 @media screen and (max-width:830px) {
-    
-    .prix p, .prix a{
-        font-size: 1.3rem!important;
-        margin: 0!important;
-       
-    }
 
-    .btn-modifier, .btn-payer{
-        width: 45%!important;
+    .boite-synth div p{
+        margin:0% 5%!important;
     }
 }
 
-@media screen and (max-width:720px){
+@media screen and (max-width:590px){
 
     .conteneur{
         display: flex!important;
         flex-direction: column!important;
         align-items: center!important;
-    }
-
-    .box-produit{
-       width: 100%!important;
-    }
+        margin-bottom: 10%!important;
     
-    .image{
-        width: 40%!important;
     }
 
-    .details{
-        width:30%!important
+    .box-commande, .box-produit{
+        width: 90%!important;
     }
 
-    .prix{
-        width: 29%!important;
+   
+    .boite-synth{
+        width: 80%!important;
     }
-   .box-commande{
-       width: 65%;
-   }
-
 }
 
 @media screen and (max-width:490px){
+    .box-commande, .box-produit{
+        width: 100%!important;
+    }
+    .boite-synth, .boite-1{
+      width: 85%!important;
+  }
 
-    .prix{
-        display: flex!important;
-        flex-direction: column!important;
-        justify-content: flex-start!important;
+  .btn-modifier, .btn-payer{
+    width: 50%!important;
+}
+}
+
+/*////////////////////////////////////////HISTORIQUE COMMANDES ////////////////////////////////////////////*/
+
+@media screen and (max-width:650px){
+
+    .conteneur-tab{
+        margin: 1rem!important;
+    }
+    .commantab, h3{
+        margin: 3rem auto!important;
     }
 
-    .details{
-        width: 30%!important;
+    h3{
+        text-align: center!important;
     }
+}
 
-    .box-commande{
-        width: 90%;
+@media screen and (max-width:410px){
+
+    .conteneur-tab{
+        margin: 0!important;
+    }
+    .commantab{
+        width: 95%!important;
     }
 }

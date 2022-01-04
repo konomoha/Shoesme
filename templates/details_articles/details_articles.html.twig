@@ -15,7 +15,7 @@
 
   {% endfor %}   
 
-     {# {{dump(datachaussure)}} #}
+     {# {{dump(datacom)}} #}
     {#{{dump(app.request.query.get('pointure'))}} #}
 
     
@@ -29,15 +29,15 @@
      </div> 
     
      <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo2) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
 
       <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo3) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
 
       <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+      <img src="{{ asset('img/' ~ datachaussure.0.photo4) }}" class="img-fluid" alt="chaussure_nike_1">
      </div>
     
   </div>
@@ -248,7 +248,7 @@
         <div class="d-flex justify-content-center mb-3">
           <button class="btn btn-dark p-2 ">Envoyer</button>
         </div>
-      {{form_start(formComment)}}
+      {{form_end(formComment)}}
 
     </div>
 
@@ -265,41 +265,38 @@
 <div class="row justify-content-around conteneur-avis">
   <h2 class="text-center my-5">Derniers avis</h2>
 
-
-
-  {% if datachaussure.0.commentaires is not empty %} 
-   
-
-      {% for comment in datachaussure.0.commentaires %}
-            
-          {# {{ dump(comment) }} #}
-          <div class="mb-3">
+  {% for data in datachaussure %}
+    
+    {% if data.commentaires != null %} 
+            {# {{dump(data.commentaires)}} #}
+        {% for comment in data.commentaires|reverse %}
           
+            <div class="mb-3">
+            
+              <div class="">
 
-            <div class="">
 
+                <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}} à {{ comment.date|date('H:i:s')}})</small></p>
+                
+              </div>
 
-              <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}} à {{ comment.date|date('H:i:s')}})</small></p>
+              <div class="col-8">
+
+                <p class="mb-2"><strong>Commentaire:</strong> <span class="fst-italic">{{ comment.contenu }}</span></p><hr>
+
+              </div>
               
             </div>
-
-            <div class="col-8">
-
-              <p class="mb-2"><strong>Commentaire:</strong> <span class="fst-italic">{{ comment.contenu }}</span></p><hr>
-
-            </div>
             
-          </div>
-          
-      {% endfor %}
-    
-  {% else %} 
+        {% endfor %}
+      
+      {% else %} 
 
+        <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
 
-      <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
+    {% endif %} 
 
-
-  {% endif %}  
+  {% endfor %} 
 </div>
   
 

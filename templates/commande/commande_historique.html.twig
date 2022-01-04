@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+ShoesMe | Historique Commandes
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Historique de vos commandes</h1>
+
+{# {{dump(dataCommande.0.detailsCommandes.0.chaussure.model)}} #}
+
+
+<div class="ms-4 my-5 conteneur-tab">
+
+    {% for data in dataCommande %}
+
+        <h3>Commande n°{{data.id}} du {{data.date|date('d/m/Y')}}</h3>
+        {# {{dump(data)}} #}
+            <table class="table-bordered table-responsive text-center my-5 commantab">
+                <tr>
+
+                    <th class="p-3">Produit</th>
+                    <th class="p-3">Marque</th>
+                    <th class="p-3">Quantite</th>
+                    <th class="p-3">Prix</th>
+                    
+
+                </tr>
+                    {% for detail in data.detailsCommandes %}
+                        <tr>
+                        <td class="p-3"><a class="text-success fw-bold" title="cliquez pour en savoir plus" target="_blank" href="{{path('details_article',{'id':detail.chaussure.id})}}">{{detail.chaussure.model}}</a></td>
+                        <td class="p-3">{{detail.chaussure.marque}}</td>
+                        <td class="p-3">{{detail.quantite}}</td>
+                        <td class="p-3">{{detail.chaussure.prix}} €</td>
+                        
+                            
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan=3 class="p-3 fw-bold">Total Commande:<td colspan=1 class="p-3 fw-bold"> {{data.montant}}</td></td>
+                    </tr>
+            </table>
+    {% endfor %}
+</div>
+{% endblock %}

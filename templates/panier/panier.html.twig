@@ -31,11 +31,11 @@
             {% for data in dataPanier %}
 
                 <div class="boite-1 d-flex flex-row mb-4">
-                    <div class="col-3 d-flex flex-row justify-content-start image">
+                    <div class="col-6 d-flex flex-row justify-content-center image">
                         <img class="img-fluid" src="{{ asset('img/' ~ data.Chaussure.photo) }}" alt="" style="image-size: contain;">
                     </div>
 
-                    <div class=" col-5 ms-3 my-3 details">
+                    <div class=" col-3 ms-3 my-3 details">
                         <h3 class="mt-2 fs-2"><strong>{{ data.Chaussure.marque }}</strong></h3>
                         <span>{{ data.Chaussure.model }}</span>
                         <p class="my-2">{{ data.Chaussure.descriptif }}</p>
@@ -58,9 +58,9 @@
                         </div>
                     </div>
 
-                    <div class="col-4 d-flex flex-row justify-content-end prix">
-                        <p class="fs-3 me-2"> {{ data.Chaussure.prix }} €</p>
-                        <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-x-lg fs-3 me-3"></i></a>
+                    <div class="col-3 d-flex flex-row justify-content-center prix">
+                        <p class="fs-3"> {{ data.Chaussure.prix }} €</p>
+                        <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-x-lg fs-3 me-1"></i></a>
                     </div>
                 </div>
             {% endfor %}
@@ -71,7 +71,7 @@
         {% endfor %}
 
         <div class="mt-5 col-5 box-commande" >
-            <div class="boite-synth">
+            <div class="boite-synth mx-auto">
                 <h2 class="text-center mt-4 mb-2">Synthèse de la commande</h2>
                 
                 {% if qte == 1 %}
@@ -86,11 +86,11 @@
                 
 
                 {% for data in dataPanier %}
-                    <div class="d-flex flex-row justify-content-around ">
+                    <div class="d-flex flex-row justify-content-between ">
 
-                        <p class="fs-4 ms-1">{{data.Quantite}} {{ data.Chaussure.model}}</p>
+                        <p class="fs-4 ms-5">{{data.Quantite}} {{ data.Chaussure.model}}</p>
                         
-                        <p class="fs-4 me-1">{{data.Quantite * data.Chaussure.prix}} €</p>
+                        <p class="fs-4 me-5">{{data.Quantite * data.Chaussure.prix}} €</p>
                         
                     </div>
                 {% endfor %}            
