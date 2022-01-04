@@ -44,6 +44,9 @@ class ContactFormType extends AbstractType
             ->add('commentaire', TextareaType::class,[
                 'label' => 'Votre Message :',
                 'required' => false,
+                'attr'=> [
+                    'rows' => 7
+                ],
                 'constraints' => [
                         new NotBlank([
                             'message' => 'Saisir votre message :'

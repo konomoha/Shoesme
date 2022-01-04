@@ -40,10 +40,17 @@ class ShoesMeController extends AbstractController
             array (), //order by
             5, // la limite de chaussures à afficher
             0); // offset
+
+        $shoes = $chaussureRepo->findBy(
+            array(), // condition where
+            array ('id' =>'DESC'), //order by
+            5, // la limite de chaussures à afficher
+            0); // offset;
         
         return $this->render('shoes_me/home.html.twig', [
             'chaussure_m' => $shoes_m,
             'chaussure_f' => $shoes_f,
+            'chaussure' => $shoes,
         ]);
 
 
@@ -78,6 +85,12 @@ class ShoesMeController extends AbstractController
         return $this->render('shoes_me/contact.html.twig', [
             'formContact' => $formContact->createView()
         ]);
+    }
+
+    #[Route ('/mentions_legales', name: 'm_l')]
+    public function ML()
+    {
+        return $this->render ('shoes_me/mentions.legales.html.twig');
     }
 
    

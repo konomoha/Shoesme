@@ -58,4 +58,15 @@ class ChaussureRepository extends ServiceEntityRepository
                         ->getQuery();
         return $query->getResult();
     }
+
+    public function findShoesType($sexe)
+    {
+        $query = $this->createQueryBuilder(alias:'c')
+                        ->where(predicates:'c.sexe = :sexe')
+                        ->setParameters(['sexe'=>$sexe]
+                        )
+                        ->groupBy('c.model') 
+                        ->getQuery();
+        return $query->getResult();
+    }
 }

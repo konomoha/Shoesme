@@ -45,10 +45,26 @@
 
 {# Affichage Pointure + stock par couleur #}
 <section class="mx-auto d-flex flex-row justify-content-around">
+
 {% for color in couleur %}
     
         <div class="border-start border-end border-info col-{{col}}">
-            <h3 class="text-center">{{color|upper}}</h3>
+
+            <div class="d-flex justify-content-center">
+                <h3 class="text-center mx-2">{{color|upper}}</h3>
+                    <form action="" method="post">
+                        <select name="selecteurAffichage" id="affichage" class="mx-2">
+                            <option value="" selected>Modifier le statut d'affichage</option>
+                            <option value="standard">standard</option>
+                            <option value="promotion">promotion</option>
+                            <option value="nouveaute">nouveauté</option>
+                            <option value="destockage">destockage</option>
+                            <option value="solde">solde</option>
+                        </select>
+                        {# <button class="btn btn-warning mx-2"><a href="{{path('backoffice_affichage_article', {'id'})}}"></a> Modifier</button> #}
+                    </form>
+                
+            </div>
 
             {% for data in photo %}
                 {% if color == data.couleur %}
@@ -98,6 +114,7 @@
             {% for data in chaussure %}
                 {% if color == data.couleur %}
 
+
                     {# Si la variable hidden est à null alors on affiche le formulaire #}
                     {% if hidden == '' %}
                         <form class="" method="post" name="">
@@ -134,10 +151,9 @@
                     {% endif %}          
             </div>
         
+=
         
         </div>
-        
-        
     
 {% endfor %}
 </section>

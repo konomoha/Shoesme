@@ -6,7 +6,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  <link rel="stylesheet" href="{{ asset("css/home.css") }}">
+  <link rel="stylesheet" href="{{ asset("css/home2.css") }}">
 {% endblock %}
 
 {% block body %}
@@ -17,54 +17,87 @@
 
     {% endfor %}
 
-<img src="{{ asset('img/banniereAccueil.jpg') }}" alt="banniere " class="w-100">
 
-<br>
+<div class="entete"> 
 
-<h1 class="text-center mt-5"> Best-sellers</h1>
+  <div class="titre-entete">
+    <h1 class="taille-titre">Le rêve est a vos pieds</h1>
+  </div>
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{ asset('img/nike1') }}" class="d-block w-100" alt="...">
-        </div>
-    <div class="carousel-item">
-      <img src="{{ asset('img/lacoste1') }}" class="d-block w-100" alt="...">
+  <div class="div-bouton">
+    <div class="bouton-accueil fs-3">
+      <a href="{{ path('homme')}}" class="mx-auto">Collection HOMME</a>
     </div>
-    <div class="carousel-item">
-      <img src="{{ asset('img/lacoste1') }}" class="d-block w-100" alt="...">
+    <div class="bouton-accueil fs-3">
+      <a href="{{ path('femme')}}" class="mx-auto">Collection FEMME</a>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
 </div>
-<div class="d-flex justify-content-center my-5 conteneur_best_seller">
+
+<h1 class="text-center mt-5 bg-light col-10 mx-auto">Nouveautés</h1>
+
+<div class="d-flex justify-content-center my-5 conteneur_best_seller"> 
+
   {% for data in chaussure_m %}
     <div class="d-flex mx-1 my-3 conteneur_image">
 
-          <a href="{{path('details_article', {'id': data.id })}}" ><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top d-block best_seller img-fluid" alt="..."></a>
+           <a href="{{path('details_article', {'id': data.id })}}" ><img src="{{ asset('img/' ~ data.photo) }}" class="d-block" alt="..." width="300px" height="350px">
+        <div class="baniere-model bg-light d-flex flex-row justify-content-between">
+            <div class="ms-3 text-secondary">{{ data.marque }}</div>
+            <div class="me-3 text-secondary">{{ data.model}}</div>
+        </div>
+        </a>
+          
 
     </div>
   {% endfor %}
 </div>
 
+
+<div class="d-flex flex-row justify-content-center mx-auto my-5">
+
+    <div class="section1 d-flex justify-content-end align-items-end">    
+      <div class="fs-3 bouton-bas me-3 mb-3">
+        <a href="{{ path('homme')}}" class="mx-auto">HOMME</a>
+      </div>
+    </div>
+
+    <div class="section2 d-flex justify-content-center mx-4 align-items-end ">    
+      <div class="fs-3 bouton-bas mb-3">
+        <a href="{{ path('femme')}}" class="mx-auto">FEMME</a>
+      </div>
+    </div>
+
+    <div class="section3 d-flex justify-content-start align-items-end">
+      <div class="fs-3 bouton-bas ms-3 mb-3">
+        <a href="{{ path('enfant')}}" class="mx-auto">ENFANT</a>
+      </div>
+    </div>
+
+  </div>
+
+
+<h1 class="text-center mt-5 bg-light col-10 mx-auto">Meilleurs ventes</h1>
 
   <div class="d-flex justify-content-center my-5 conteneur_best_seller">
   {% for data in chaussure_f %} 
     
     <div class="d-flex mx-1 my-3 test conteneur_image">
       
-          <a href=""><img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top best_seller img-fluid" alt="..."></a>
+           <a href="{{path('details_article', {'id': data.id })}}" ><img src="{{ asset('img/' ~ data.photo) }}" class="d-block" alt="..." width="300px" height="350px">
+        <div class="baniere-model bg-light d-flex flex-row justify-content-between">
+            <div class="ms-3 text-secondary">{{ data.marque }}</div>
+            <div class="me-3 text-secondary">{{ data.model}}</div>
+        </div>
+        </a>
 
     </div>
 
   {% endfor %}
   </div>
+
+
+  
 
 {% endblock %}

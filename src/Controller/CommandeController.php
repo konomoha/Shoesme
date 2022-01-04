@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Commande;
 use App\Entity\DetailsCommande;
+use App\Repository\CommandeRepository;
 use App\Repository\ChaussureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,7 +86,8 @@ class CommandeController extends AbstractController
                 
                 $commande->setMontant($total)
                             ->setEtat('envoyé')
-                            ->setUser($user);
+                            ->setUser($user)
+                            ->setDate(new \DateTime());
                 $manager->persist($commande);
                 $manager->flush();
 
@@ -131,5 +134,26 @@ class CommandeController extends AbstractController
     );
     }
 
+    #[Route('/commande/{id}', name: 'commande_historique')]
+    public function commandeHistory(User $user=null, CommandeRepository $commandeRepo):Response
+    {
+
+        $dataCommande="";
+
+        if($this->getUser())
+        {
+            $id = $user->getId();
+            $dataCommande = $commandeRepo->findAll($id);
+            // dd($dataCommande);
+        }
+        else{
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('commande/commande_historique.html.twig', [
+            "dataCommande"=>$dataCommande
+        ]
+    );
+    }
         
 }

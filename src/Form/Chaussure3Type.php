@@ -81,7 +81,7 @@ class Chaussure3Type extends AbstractType
             'choices' => [
                 'standard' => 'standard',
                 'promotion' => 'promotion',
-                'nouveauté' => 'nouveaute',
+                'nouveaute' => 'nouveauté',
                 'destockage' => 'destockage',
                 'solde'=> 'solde',
             ],
@@ -121,7 +121,12 @@ class Chaussure3Type extends AbstractType
                 'bleu' => 'bleu',
                 'rouge' => 'rouge',
                 'gris'=> 'gris',
-                'rose'=> 'rose'
+                'rose'=> 'rose',
+                'vert'=> 'vert',
+                'jaune'=> 'jaune',
+                'beige'=> 'beige',
+                'marron'=> 'marron'
+
             ],
             'required' => false,
             'expanded' => true,
@@ -287,8 +292,7 @@ class Chaussure3Type extends AbstractType
                         '46'=>46,
                         '46.5'=>46.5,
                         '47'=>47,
-                ],
-            
+                ],            
             'required' => false,
             'expanded' => true,
             'multiple' => true,

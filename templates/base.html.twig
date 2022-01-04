@@ -71,7 +71,7 @@
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="{{path('panier')}}">Mon panier</a></li>
                         <li><a class="dropdown-item" href="{{path('app_profil')}}">Mon profil</a></li>
-                        <li><a class="dropdown-item" href="#">Mes commandes</a></li>
+                        <li><a class="dropdown-item" href="{{path('commande_historique', {'id': app.user.id})}}">Mes commandes</a></li>
                         <li><hr class="dropdown-divider"></li>                           
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ path('app_logout')}}">Deconnexion</a></li>
@@ -93,6 +93,7 @@
 
         <div class="d-flex justify-content-center align-items-center p-3 shadow-lg conteneur_categories">
             <div class="d-flex justify-content-around align-items-center">
+                <a href="{{path('home')}}" class="nav-header nav-link link-dark  text-dark">Accueil</a>
                 <a href="#" class="nav-header nav-link link-dark text-dark">Nouveautés</a>
                 <a href="{{ path('femme') }}" class="nav-header nav-link link-dark  text-dark">Femme</a>
                 <a href="{{ path('homme') }}" class="nav-header nav-link link-dark  text-dark">Homme</a>
@@ -118,11 +119,10 @@
             <div class="col-3 my-2 categories">
                 <h5 class=" text-white mb-2">Categories</h5>
                 <div class="nav flex-column">
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Homme</a>
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Femme</a>
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Enfant</a>
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
+                    <a href="{{ path('homme') }}" class="nav-footer nav-link p-0 text-muted text-white">Homme</a>
+                    <a href="{{ path('homme') }}" class="nav-footer nav-link p-0 text-muted text-white">Femme</a>
+                    <a href="{{ path('fille') }}" class="nav-footer nav-link p-0 text-muted text-white">Fille</a>
+                    <a href="{{ path('garcon') }}" class="nav-footer nav-link p-0 text-muted text-white">Garçon</a>                   
                 </div>
             </div>
 
@@ -130,10 +130,9 @@
                 <h5 class="text-white mb-2">Administratifs</h5>
                 <div class="nav flex-column">
                     <a href="{{ path('contact') }}" class="nav-footer nav-link p-0 text-muted text-white">Contact</a>
-                    <a href="registration/mentions-legales.html.twig" class="nav-footer nav-link p-0 text-muted text-white">Mentions légales</a>
+                    <a href="{{ path('m_l') }}" class="nav-footer nav-link p-0 text-muted text-white">Mentions légales</a>
                     <a href="#" class="nav-footer nav-link p-0 text-muted text-white">Conditions générales</a>
                     <a href="#" class="nav-footer nav-link p-0 text-muted text-white">FAQs</a>
-                    <a href="#" class="nav-footer nav-link p-0 text-muted text-white">About</a>
                 </div>
             </div>
 
