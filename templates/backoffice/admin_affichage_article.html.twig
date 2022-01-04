@@ -11,31 +11,28 @@
 <h2 class="text-center">{{chaussure.0.marque ~ chaussure.0.model}} </h2>
 
 {# Récapitulatif des infos du modèle sélectionné #}
-<section class="d-flex flex-column justify-content-center align-items-center my-5">
-    <h3>
-        Disponible pour  
+<section class="d-flex flex-column my-3">
+    <p>
+        Disponible pour : 
         {% for item in sexe %}
             {{item|capitalize}} 
         {% endfor %} </p>
-    </h3>
-
-    <h3>
+    </p>
+    <p>
         {{nbcouleur}} couleurs disponibles (affiché des ronds de la couleur correspondante si on a le temps):
         {% for item in couleur %}
         {{item|capitalize}} 
         {% endfor %}
-    </h3>   
-
-    <h3>
+    </p>   
+    <p>
         {{nbpointure}} pointures disponibles : 
         {% for data in pointure %}
             {{data}} 
         {% endfor %}
-    </h3>    
-
-    <h3>
+    </p>    
+    <p>
         stock total : {{stockTotal}} unités 
-    </h3>    
+    </p>    
 
 </section>
 
@@ -61,6 +58,27 @@
                     <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
                     <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
                 </div>
+                {# Si la variable hidden est à null alors on affiche le formulaire pour modifier les photo#}
+                    {% if hidden =='' %}   
+                            <form action="" method="post" class="my-1 d-flex" enctype="multipart/form-data">
+                                <div class="ms-2">
+                                    <label for="photo"> Photo</label>
+                                    <input type="file" class="my-1" id="photo" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo">
+
+                                    <label for="photo2">Photo2</label>
+                                    <input type="file" class="my-1" id="photo2" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo2">
+                                </div>
+                                <div>
+                                    <label for="photo3">Photo3</label>
+                                    <input type="file" class="my-1" id="photo3" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo3">
+
+                                    <label for="photo4">Photo4</label>
+                                    <input type="file" class="my-1" id="photo4" accept=".png, .jpeg, .jpg, .webp, .gif" name="{{chaussure.0.marque}}/{{chaussure.0.model}}/{{data.couleur}}/photo4">
+                                </div>
+                                <button class="btn btn-warning me-4 my-1">Modifier photos</button>
+                            </form>
+                    {% endif %}
+
                 {% endif %}
             {% endfor %}
             
@@ -69,30 +87,51 @@
 
                 <div class="d-flex justify-content-center">
                     <h4 class="me-5">Pointures :</h4>
-                    <h4 class="ms-5">Stock :</h4>
+                    <h4 class="ms-3">Stock :</h4>
+                    {# Si la variable hidden est à null alors on affiche la colonne modifier stock #}
+                    {% if hidden =='' %}
+                    <h4 class="ms-5">Modifier stock :</h4>
+                    {% endif %}
                 </div>
 
-               
+             
             {% for data in chaussure %}
                 {% if color == data.couleur %}
-                <div class="d-flex justify-content-center">
 
-                    <div class="form-check pt-2 me-2">
-                        <input class="form-check-input" type="checkbox" value="{{data.pointure}}" id="{{data.pointure}}">
-                        <label class="form-check-label" for="{{data.pointure}}">
-                            {{data.pointure}}
-                        </label>
-                    </div>
+                    {# Si la variable hidden est à null alors on affiche le formulaire #}
+                    {% if hidden == '' %}
+                        <form class="" method="post" name="">
+                    {% endif %}  
 
-                    <div class="form-check col-2 ms-5">
-                        <input class="form-control" type="text" value="{{data.stock}}" id="{{data.stock}}">
-                    </div>
-        
-                </div>   
-                    
-                {% endif %}
+                    <div class="d-flex justify-content-center">
+
+                        <div class="form-check pt-2 me-2">
+                            <input class="form-check-input" type="checkbox" value="{{data.pointure}}" id="{{data.pointure}}">
+                            <label class="form-check-label" for="{{data.pointure}}">
+                                {{data.pointure}}
+                            </label>
+                        </div>
+
+                        <div class="form-check col-2 ms-5">
+                            <input class="form-control my-1" type="text" value="{{data.stock}}" id="{{data.stock}}">
+                        </div>
+                        {# suite formulaire #}
+                        {% if hidden =='' %}
+                            <div class="form-check col-2 ms-5">
+                                <input class="form-control my-1" type="text" name="{{data.id}}">
+                            </div>
+                        {% endif %}
+
+                    </div>        
+                {% endif %}       
             {% endfor %}    
-                              
+                    {# fin formulaire modification #}
+                    {% if hidden =='' %}
+                            <div class="text-center">
+                                <button class="btn btn-warning ms-2 my-1 col-3">Modifier stock</button>
+                            </div>
+                        </form>        
+                    {% endif %}          
             </div>
         
         
@@ -103,56 +142,4 @@
 {% endfor %}
 </section>
 
-
-{# Affichage par tableau #}
-{# <table class="table table-stripped table-hover mt-5" id="table-article">
-    <thead>
-        <tr>
-        {% for nom in titreColonne %}
-            {% if nom != 'id' and nom != 'photo' and nom != 'photo2' and nom != 'photo3' and nom != 'photo4'  %}
-                <th class="text-center">{{nom}}</th> 
-            {% endif %}
-        {% endfor %}
-            <th class="text-center">Photo</th>
-            <th class="text-center">Photo 2</th>
-            <th class="text-center">Photo 3</th>
-            <th class="text-center">Photo 4</th>
-            <th class="text-center">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-
-        {% for data in chaussure %}
-            <tr> 
-                {% if data %}
-                    <td class="text-center align-middle">{{data.marque}}</td>
-                    <td class="text-center align-middle">{{data.model}}</td>
-                    <td class="text-center align-middle">{{data.type}}</td>
-                    <td class="text-center align-middle">{{data.matiere}}</td>
-                    <td class="text-center align-middle">{{data.descriptif|slice(1, 60)}}</td>
-                    <td class="text-center align-middle">{{data.prix}}</td>
-                    <td class="text-center align-middle">{{data.sexe}}</td>
-                    <td class="text-center align-middle">{{data.affichage}}</td>
-                    <td class="text-center align-middle">{{data.pointure}}</td> 
-                    <td class="text-center">{{data.couleur}} </td> 
-                    <td class="text-center">{{data.stock}}</td>
-                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
-                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
-                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
-                    <td class="text-center align-middle"><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt="{{ data.marque}}. ' - '.{{data.model}}"></td>
-                {% endif %}
-            
-            <td class="">
-                <div class="text-center">
-                    <a href="{{path('backoffice_affichage_article', {'id': data.id}) }}" class="btn btn-outline-success my-1"><i class="bi bi-eye-fill"></i></a><br>
-                    <a href="{{path('backoffice_produit_modification',{'id': data.id}) }}" class="btn btn-outline-warning my-1"><i class="bi bi-pen"></i></a><br>
-                    <a href="{{path('backoffice_produit_suppression', {'id': data.id}) }}" class="btn btn-outline-danger my-1" onclick="return(confirm('Etes-vous sur de vouloir supprimer l'article : {{ data.id }} ?' ))"><i class="bi bi-trash"></i></a>
-                <div>
-            </td>            
-            </tr>
-        
-        {% endfor %}    
-        <tbody>
-    </table> #}
 {% endblock %}
