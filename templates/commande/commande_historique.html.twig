@@ -19,9 +19,12 @@ ShoesMe | Historique Commandes
 <div class="ms-4 my-5 conteneur-tab">
 
     {% for data in dataCommande %}
+   {# {{dump(data.user.id)}} #}
+        
+        {% if data.user.id == app.user.id %}
 
-        <h3>Commande n°{{data.id}} du {{data.date|date('d/m/Y')}}</h3>
-        {# {{dump(data)}} #}
+            <h3>Commande n°{{data.id}} du {{data.date|date('d/m/Y')}}</h3>
+            {# {{dump(data)}} #}
             <table class="table-bordered table-responsive text-center my-5 commantab">
                 <tr>
 
@@ -42,10 +45,11 @@ ShoesMe | Historique Commandes
                             
                     </tr>
                     {% endfor %}
-                    <tr>
-                        <td colspan=3 class="p-3 fw-bold">Total Commande:<td colspan=1 class="p-3 fw-bold"> {{data.montant}}</td></td>
-                    </tr>
+                <tr>
+                    <td colspan=3 class="p-3 fw-bold">Total Commande:<td colspan=1 class="p-3 fw-bold"> {{data.montant}}</td></td>
+                </tr>
             </table>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
