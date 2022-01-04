@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Contact;
+use App\Form\PhotoType;
 use App\Entity\Chaussure;
 use App\Entity\Commentaire;
 use App\Form\ChaussureType;
@@ -256,7 +257,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         if($request->request->all())
         {
            $data=$request->request->all();
-            
+            // dd($data);
            foreach($data as $key=>$value)
            {
                //Si on récupère un numéric la $key correspond à l'id de la chaussure
@@ -267,6 +268,10 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
                     $shoesChangementStock->setStock($stock);
                     $manager->persist($shoesChangementStock);
                     $manager->flush();
+               }
+               if($key=='selecteurAffichage')
+               {
+
                }
 
                 $photoForm=$this->createForm(PhotoType::class);
