@@ -52,6 +52,8 @@
 
             <div class="d-flex justify-content-center">
                 <h3 class="text-center mx-2">{{color|upper}}</h3>
+
+                {% if hidden =='' %}
                     <form action="" method="post">
                         <select name="selecteurAffichage" id="affichage" class="mx-2">
                             <option value="" selected>Modifier le statut d'affichage</option>
@@ -61,9 +63,9 @@
                             <option value="destockage">destockage</option>
                             <option value="solde">solde</option>
                         </select>
-                        {# <button class="btn btn-warning mx-2"><a href="{{path('backoffice_affichage_article', {'id'})}}"></a> Modifier</button> #}
+                        <button class="btn btn-warning mx-2"><a href="{{path('backoffice_affichage_article', {'id'})}}"></a> Modifier</button>
                     </form>
-                
+                {% endif %}
             </div>
 
             {% for data in photo %}
