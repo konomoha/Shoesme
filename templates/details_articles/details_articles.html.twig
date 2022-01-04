@@ -15,7 +15,7 @@
 
   {% endfor %}   
 
-     {# {{dump(datacom)}} #}
+     {# {{dump(datachaussure)}} #}
     {#{{dump(app.request.query.get('pointure'))}} #}
 
     
@@ -23,23 +23,49 @@
   
 
   <div class="col-6 d-flex row justify-content-center conteneur-photo">
-    
-     <div class="col-6 " >
-      <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
-     </div> 
-    
-     <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo2) }}" class="img-fluid" alt="chaussure_nike_1">
-     </div>
 
-      <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo3) }}" class="img-fluid" alt="chaussure_nike_1">
-     </div>
+    {% if couleurChaussure %}
 
+      {% for data in couleurChaussure %}
+        
+      <div class="col-6 " >
+        <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div> 
+      
       <div class="col-6 ">
-      <img src="{{ asset('img/' ~ datachaussure.0.photo4) }}" class="img-fluid" alt="chaussure_nike_1">
-     </div>
+        <img src="{{ asset('img/' ~ data.photo2) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+        <div class="col-6 ">
+        <img src="{{ asset('img/' ~ data.photo3) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+        <div class="col-6 ">
+        <img src="{{ asset('img/' ~ data.photo4) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+     {% endfor %}
+
+    {% else %}
     
+      <div class="col-6 " >
+        <img src="{{ asset('img/' ~ datachaussure.0.photo) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div> 
+      
+      <div class="col-6 ">
+        <img src="{{ asset('img/' ~ datachaussure.0.photo2) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+        <div class="col-6 ">
+        <img src="{{ asset('img/' ~ datachaussure.0.photo3) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+        <div class="col-6 ">
+        <img src="{{ asset('img/' ~ datachaussure.0.photo4) }}" class="img-fluid" alt="chaussure_nike_1">
+      </div>
+
+    {% endif %}
+
   </div>
     
   <div class="col-md-5 ms-2 mt-5 conteneur-choix">
