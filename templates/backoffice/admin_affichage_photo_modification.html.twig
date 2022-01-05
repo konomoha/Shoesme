@@ -1,0 +1,25 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block title %}
+    Shoesme | BO - Modfication photo
+{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center">Modification des photos </h2>
+
+<div class="d-flex justify-content-end">
+    <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
+</div>
+
+<form action="" name="selecteurModel" method="post">
+    <select name="selecteurChaussure" id="selecteurChaussure">
+        <option value="">Choisir un modèle de chaussure</option>
+        {% for data in selecteur %}
+            <option value="{{data.marque}}/{{data.model}}/{{data.couleur}}">{{data.marque ~ data.model ~ data.couleur}} </option>
+        {% endfor %}
+    </select>
+
+    <button>Valider</button>
+</form>
+{% endblock %}
