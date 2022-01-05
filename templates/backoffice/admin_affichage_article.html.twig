@@ -10,6 +10,9 @@
 
 <h2 class="text-center">{{chaussure.0.marque ~ chaussure.0.model}} </h2>
 
+<div class="d-flex justify-content-end">
+    <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
+</div>
 {# Récapitulatif des infos du modèle sélectionné #}
 <section class="d-flex flex-column my-3">
     <p>
@@ -77,13 +80,6 @@
                         <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
                     </div>
                 {# Si la variable hidden est à null alors on affiche le formulaire pour modifier les photo#}
-                    {% if hidden =='' %}   
-                        <form class="" method="post">
-                            <input type="file" name="test" id="test" accept="image/png, image/jpeg, image/jpg, image/webp">
-                            <button>Valider</button>
-                        </form>
-                        
-                    {% endif %}
 
                 {% endif %}
             {% endfor %}
