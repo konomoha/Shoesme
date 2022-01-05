@@ -214,7 +214,8 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
     if($request->get('produit'))
     {
         // dd($request->get('produit'));
-        $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['marque'=>'ASC','model'=>'ASC']); 
+        $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['marque'=>'ASC','model'=>'ASC']);
+
         $hidden ='';
     }
     else
@@ -243,10 +244,10 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
     $sexe=[];//idem pour le genre
     $adressePhoto=[];//idem pour les photos
     $model='';
-    $stocktotal=0;//
+    $stocktotal=0;
     $element=[];//variable de stockage
     $hidden='hidden';
-    $photoForm='';
+    
     
     //on vérifie que l'url contient modification pour modifier l'affichage
     if(stristr($request->getPathInfo(), "modification"))
@@ -255,7 +256,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
         //Si on recupère les données de request
         if($request->request->all())
         {
-            dd($request->files->all(), $request->request->all());
+            
            $data=$request->request->all();
             // dd($data);
            foreach($data as $key=>$value)
@@ -283,13 +284,11 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
                         {
                             $enregistrement->setAffichage($value);
                             $manager->persist($enregistrement);
-                        }
-                        
+                        }   
                } 
            }
            $manager->flush();
-        }
-          //Gérer les photos ou passer sur un autre controller.      
+        }      
     }
 
 /* ########################## AFFICHAGE */
@@ -297,8 +296,6 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
     //On récupère tous les enregistrements de chaussure correspondant au model sélectionné
     $shoesModel = $shoesRepo->findBy(['model'=>$shoes->getModel()], ['couleur'=>'ASC', 'pointure'=>'ASC']); 
     
-    
-
     //On récupère les couleurs, les pointures et les stocks disponibles pour le model sélectionné.
     foreach($shoesModel as $key=>$value)
     {
@@ -379,8 +376,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
         'sexe'=>$sexe,
         'photo'=>$adressePhoto,
         'hidden'=>$hidden,
-        'photoForm'=> (($photoForm) ? $photoForm->createView() : ''),
-
+        
     ]);
 }
 
@@ -484,6 +480,13 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
         'shoesForm' => $shoesForm->createView(),
     ]);
 }
+
+// #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
+// public function backOfficeModificationPhoto():
+// {
+
+// }
+
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 
 
