@@ -47,6 +47,16 @@ class ChaussureRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findModel($model)
+    {
+        $query = $this->createQueryBuilder(alias:'c')
+                        ->where(predicates:'c.model = :model')
+                        ->setParameters(['model'=>$model]
+                        )
+                        ->groupBy('c.model') 
+                        ->getQuery();
+        return $query->getResult();
+    }
 
     public function findSize($model)
     {
