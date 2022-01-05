@@ -25,10 +25,8 @@
         
 
 
-        {% for  data in chaussure %}
-            {% if data.sexe == 'm' %}
-                {% if data.pointure == 43 %}
-            
+        {% for  data in dataChaussure %}
+        
                 <div class="shoes_card card mb-5 carte_chaussure" >
 
                     <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
@@ -42,16 +40,13 @@
                     </a>
                 </div>
 
-                {% endif %}
-            {% endif %}
-
         {% endfor %}
 
     </div>
 
        
     
-    <h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
+    <div class="my-5"></div>
 
 
 
