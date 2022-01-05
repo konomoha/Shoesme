@@ -7,6 +7,8 @@
 
 {% block body %}
 
+{% set tabModel = [] %}
+
 <h1 class="text-center">Affichage Général des produits</h1>
 <div class="d-flex justify-content-end">
     <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
@@ -20,15 +22,17 @@
 
 <h3>Sélectionner un produit pour filtrer les résultats :</h3>
 <pre>
-    {# {{ dump(shoesSelecteur) }} #}
+  
 </pre>
     <div class="col-4 mb-5 d-flex">
     <form action="" method="POST" class="d-flex">
         <select name="produit" id="produit" class="form-select">   
             <option value="">Sélectionner un produit</option>
-            {% for item in chaussure %}
+
+            {% for item in selecteur %}
             <option value="{{item.model}}">{{item.marque}} - {{item.model}}</option>   
             {% endfor %}
+
         </select>
         <button type="submit" class="btn btn-dark ms-3">Valider</button>
     </form>

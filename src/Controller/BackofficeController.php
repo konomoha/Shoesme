@@ -206,10 +206,25 @@ class BackofficeController extends AbstractController
 #[Route('backoffice/affichage', name: 'backoffice_affichage_general')]
 public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request):Response
 {
+    $selecteurTab=[];
     $hidden="hidden";
     //Récupération des titres des champs
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
-
+    
+    //Création de tableau de valeur unique pour le selecteur
+    $selecteurProduit=$shoesRepo->findAll();
+    foreach($selecteurProduit as $key=>$value)
+    {
+        if( $value->getModel()!=NULL && !(in_array(['marque'=>$value->getMarque(), 'model'=>$value->getModel()], $selecteurTab)) )
+        {
+            // dd($value);
+            $selecteurTab[]=[
+                'marque'=> $value->getMarque(),
+                'model'=> $value->getModel(),
+            ];    
+        }
+    }
+    
     //Affichage global ou article sélectionné dans le selecteur produit.
     if($request->get('produit'))
     {
@@ -227,15 +242,15 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
         'titreColonne'=> $titreColonneShoes,
         'chaussure'=> $shoes,
         'hidden'=>$hidden,
+        'selecteur'=>$selecteurTab,
     ]);
 }
 
 
-/* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
+/* ################## Affichage d'un article avec toutes les couleurs et pointures + modification affichage et stock ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
 #[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
 public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, SluggerInterface $slugger, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
-
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();   
 
@@ -481,11 +496,36 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
     ]);
 }
 
-// #[Route('/backoffice/produit/ajout', name: 'backoffice_produit_ajout')]
-// public function backOfficeModificationPhoto():
-// {
+/* ################## Modification Photo ################## */
+#[Route('/backoffice/affichage/photo/modification', name: 'backoffice_affichage_photo_modification')]
+public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Request $request):Response
+{
+    $selecteurTab=[];
+    //Création du sélecteur avec les valeurs
+    $selecteurShoes=$shoesRepo->findAll();
+    foreach($selecteurShoes as $key=>$value)
+    {
+        if( $value->getModel()!=NULL && !(in_array(['marque'=>$value->getMarque(), 'model'=>$value->getModel(), 'couleur'=>$value->getCouleur()], $selecteurTab)) )
+        {
+            // dd($value);
+            $selecteurTab[]=[
+                'marque'=> $value->getMarque(),
+                'model'=> $value->getModel(),
+                'couleur'=> $value->getCouleur()
+            ];    
+        }
+    }
+    // dd($request->request->all());
 
-// }
+    if($request->request->all())
+    {
+
+    }
+
+    return $this->render('backoffice/admin_affichage_photo_modification.html.twig', [
+        'selecteur'=>$selecteurTab,
+    ]);
+}
 
 /* ##################------------ FIN - CRUD - CHAUSSURE ------------################## */  
 

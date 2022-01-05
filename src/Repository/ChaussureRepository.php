@@ -87,4 +87,10 @@ class ChaussureRepository extends ServiceEntityRepository
                         ->getQuery();
         return $query->getResult();
     }
+
+    public function makeDistinct()
+    {
+     $this->queryBuilder->distinct();
+    }
+
 }
