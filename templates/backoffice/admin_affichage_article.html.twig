@@ -70,20 +70,19 @@
 
             {% for data in photo %}
                 {% if color == data.couleur %}
-                <div class="d-flex justify-content-around ms-5 my-3">
-                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt=""></div>
-                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt=""></div>
-                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
-                    <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
-                </div>
+                    <div class="d-flex justify-content-around ms-5 my-3">
+                        <div><img class="photobo" src="{{ asset('img/' ~ data.photo) }}" alt=""></div>
+                        <div><img class="photobo" src="{{ asset('img/' ~ data.photo2) }}" alt=""></div>
+                        <div><img class="photobo" src="{{ asset('img/' ~ data.photo3) }}" alt=""></div>
+                        <div><img class="photobo" src="{{ asset('img/' ~ data.photo4) }}" alt=""></div>
+                    </div>
                 {# Si la variable hidden est à null alors on affiche le formulaire pour modifier les photo#}
                     {% if hidden =='' %}   
-                            {{form_start(photoForm)}}
-                                    {{form_row(photo)}}
-                                    {{form_row(photo2)}}
-                                    {{form_row(photo3)}}
-                                    {{form_row(photo4)}}
-                            {{form_end(photoForm)}}
+                        <form class="" method="post">
+                            <input type="file" name="test" id="test" accept="image/png, image/jpeg, image/jpg, image/webp">
+                            <button>Valider</button>
+                        </form>
+                        
                     {% endif %}
 
                 {% endif %}
@@ -141,8 +140,6 @@
                         </form>        
                     {% endif %}          
             </div>
-        
-=
         
         </div>
     
