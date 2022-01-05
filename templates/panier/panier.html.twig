@@ -9,13 +9,15 @@
 
 {% block body %}
 
-<h1 class="text-center mt-4 mb-5">
+<h1 class="text-center mt-4">
     {% if app.user %}
         Votre panier {{app.user.prenom|capitalize}}
     {% else %}
         Panier
     {% endif %}
 </h1>
+
+<p class="mx-auto col-5 my-3 fs-5 fst-italic text-center"><a class="text-dark  fw-bold" href="{{path('home')}}">Retourner à l'accueil</a></p>
 {# {{dump(dataPanier)}} #}
 
 {% set qte = 0 %}
