@@ -18,7 +18,7 @@
     {% endfor %}
 
 
-<div class="entete col-9 mx-auto"> 
+<div class="entete mx-auto"> 
 
   <div class="titre-entete">
     <h1 class="taille-titre">Le rêve est à vos pieds</h1>
@@ -37,7 +37,7 @@
 
 <h1 class="text-center marge-top bg-light col-9 mx-auto ombre-bottom">Nouveautés</h1>
 
-<div class="d-flex justify-content-between marge-top col-9 mx-auto conteneur_best_seller"> 
+<div class="d-flex justify-content-around marge-top col-11 mx-auto conteneur_best_seller"> 
 
   {% for data in chaussure_m %}
     <div class="d-flex my-3 ombre-bottom">
@@ -53,7 +53,7 @@
 
 <h1 class="text-center marge-top bg-light col-9 mx-auto ombre-bottom">Promotions</h1>
 
-  <div class="d-flex justify-content-between my-5 col-9 mx-auto conteneur_best_seller marge-top">
+  <div class="d-flex justify-content-around my-5 col-11 mx-auto conteneur_best_seller marge-top">
   {% for data in chaussure_f %} 
     
     <div class="d-flex mx-1 my-3 test ombre-bottom">
@@ -69,8 +69,8 @@
 
   {% endfor %}
   </div>
-<div class="bg-light col-9 py-5 mx-auto marge-top shadow-lg">
-  {# <h2 class="text-center">Catégories</h2> #}
+<div class="bg-light p-5 mx-auto marge-top shadow-lg">
+  <h2 class="text-center">Catégories</h2>
     <div class="d-flex flex-row justify-content-center mx-auto my-5">
 
         <div class="section1 d-flex justify-content-end align-items-end">    
@@ -90,12 +90,12 @@
             <a href="{{ path('enfant')}}" class="mx-auto">ENFANT</a>
           </div>
         </div>
-      </div>
+    </div>
 </div>
 
-  <h1 class="text-center marge-top bg-light col-9 mx-auto ombre-bottom">Meilleurs ventes</h1>
+  <h1 class="text-center marge-top bg-light col-11 mx-auto ombre-bottom">Meilleurs ventes</h1>
 
-  <div class="d-flex justify-content-between my-5 col-9 mx-auto conteneur_best_seller marge-top">
+  <div class="d-flex justify-content-around my-5 col-9 mx-auto conteneur_best_seller marge-top">
   {% for data in chaussure_f %} 
     
     <div class="d-flex mx-1 my-3 test ombre-bottom">
