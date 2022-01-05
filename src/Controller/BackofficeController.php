@@ -214,7 +214,7 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
     if($request->get('produit'))
     {
         // dd($request->get('produit'));
-        $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['model'=>'ASC','couleur'=>'ASC', 'pointure'=>'ASC']); 
+        $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['marque'=>'ASC','model'=>'ASC']); 
         $hidden ='';
     }
     else
@@ -232,9 +232,8 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
 
 /* ################## Affichage d'un article avec toutes les couleurs et pointures ################## */
 #[Route ('backoffice/affichage/article/{id}', name:'backoffice_affichage_article')]
-
 #[Route('/backoffice/affichage/modification/{id}', name: 'backoffice_produit_modification')]
-public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
+public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, SluggerInterface $slugger, EntityManagerInterface $manager, Request $request=null, Chaussure $shoes):Response
 
 {
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();   
@@ -248,6 +247,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
     $element=[];//variable de stockage
     $hidden='hidden';
     $photoForm='';
+    
     //on vérifie que l'url contient modification pour modifier l'affichage
     if(stristr($request->getPathInfo(), "modification"))
     {
@@ -255,21 +255,24 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         //Si on recupère les données de request
         if($request->request->all())
         {
+            dd($request->files->all(), $request->request->all());
            $data=$request->request->all();
-            
+            // dd($data);
            foreach($data as $key=>$value)
            {
                //Si on récupère un numéric la $key correspond à l'id de la chaussure
                if(is_numeric($key))
                {
+                    if($value)
+                    {
                     $stock=(int)$value;
                     $shoesChangementStock=$shoesRepo->find($key);
                     $shoesChangementStock->setStock($stock);
                     $manager->persist($shoesChangementStock);
-                    
+                    }
                }
-               //Sinon c'est que c'est le selecteur pour modifier l'affichage des chaussures
-               else
+               //Sinon si ce n'est pas pour les photos c'est que c'est le selecteur pour modifier l'affichage des chaussures
+               elseif ($key!='photo')
                {
                     //Découpage de la $key et récupération de la marque en 0, du model en 1, et de la couleur en 2
                     $modelChangementAffichage=str_replace('_', ' ',explode('/',$key,)); 
@@ -286,15 +289,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
            }
            $manager->flush();
         }
-        
-        $photoForm= $this->createForm(PhotoType::class);
-        $photoForm->handleRequest($request);
-        
-        if($photoForm->isSubmitted() && $photoForm->isValid())
-        {
-                   
-                  
-        }
+          //Gérer les photos ou passer sur un autre controller.      
     }
 
 /* ########################## AFFICHAGE */
@@ -384,7 +379,7 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Enti
         'sexe'=>$sexe,
         'photo'=>$adressePhoto,
         'hidden'=>$hidden,
-        'photoForm'=>$photoForm->createView(),
+        'photoForm'=> (($photoForm) ? $photoForm->createView() : ''),
 
     ]);
 }
@@ -402,7 +397,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
     if($shoesForm->isSubmitted() && $shoesForm->isValid())
     {  
         $data=$shoesForm->getData();
-
+        // dd($data);
         if($shoesForm->get('photo'))
         {
             $photo = $shoesForm->get('photo')->getData();
