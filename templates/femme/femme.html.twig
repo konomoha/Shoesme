@@ -19,11 +19,11 @@
 
 <h1 class="text-center mt-5 mb-2">Chaussures Femme</h1>
 
-    <div class="ch1 mb-1 mt-5 row justify-content-around col-8 mx-auto">
+    <div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
         
         {% for data in dataChaussure %}
             
-                 <div class="shoes_card card mb-5 carte_chaussure">
+                 <div class="shoes_card card mb-5 carte_chaussure col-3 mx-2">
                     <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
                         <div class="d-flex justify-content-between details_chaussure">
                             <div class="fst-italic ms-3 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 
@@ -37,6 +37,6 @@
 
         {% endfor %}
     </div>
-<h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
+<div class="mb-3 m-t1 p-2"></div>
 
 {% endblock %}

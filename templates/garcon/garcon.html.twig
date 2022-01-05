@@ -43,7 +43,7 @@
     </form> #}
 
 
-<img src="{{ asset('img/banniere_4.jpg') }}" alt="banniere" class="w-100" style="height: 500px">
+<img src="{{ asset('img/banniere_4.jpg') }}" alt="banniere" class="w-100 banniere-articles">
 
 <h1 class="text-center mt-5 mb-5">Nouvelles tendances</h1>
 
@@ -53,13 +53,13 @@
     <p class="fw-bold"><a href="{{path('panier')}}">Aller au panier</a></p>
     </div>    
 {% endfor %} #}
-    <div class="ch1 mb-1 mt-5 row justify-content-around">
+    <div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
         {% for data in dataChaussure %}
       
-                 <div class="shoes_card card mb-5 carte_chaussure">
+                 <div class="shoes_card card mb-5 carte_chaussure col-3 mx-2">
 
                     <div class="d-flex justify-content-between details_chaussure">
                         <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
@@ -75,6 +75,6 @@
 
         {% endfor %}
     </div>
-<h3 class="mb-3 m-t1 p-2"><a href="#" class="H py-3">Tout voir</a></h3>
+<div class="mb-3 m-t1 p-2"></div>
 
 {% endblock %}

@@ -1,3 +1,7 @@
+.banniere-articles{
+    height: 500px!important;
+}
+
 .conteneur_best_seller{
     display: flex!important;
     flex-wrap: wrap!important;
@@ -83,6 +87,11 @@
 
 
 /* ///////////////////////////////////////////////////MEDIA QUERIES CATEGORIES ///////////////////////////// */
+@media screen and (max-width:1024px){
+    .banniere-articles{
+        height: 400px!important;
+    }
+}
 
 @media screen and (max-width:940px){
     .details_chaussure{
@@ -104,7 +113,13 @@
     }
 }
 
-@media screen and (max-width:400px){
+@media screen and (max-width:768px){
+    .banniere-articles{
+        height: 350px!important;
+    }
+}
+
+@media screen and (max-width:425px){
     .carte_chaussure{
         width: 90%!important;
         margin-bottom: 5px!important;
@@ -113,6 +128,10 @@
 
     .carte_chaussure a{
         text-align: center!important;
+    }
+
+    .banniere-articles{
+        height: 270px!important;
     }
 }
 
@@ -242,6 +261,49 @@
         justify-content: space-around!important;
     }
 
+}
+
+/*//////////////////////////////////////////TEMPLATE ENFANTS /////////////////////////////////*/
+
+@media screen and (max-width:1024px){
+    .section-fille, .section-garcon{
+        height: 600px!important;
+    }
+}
+
+@media screen and (max-width:768px){
+    .section-fille, .section-garcon{
+        height: 400px!important;
+    }
+}
+
+@media screen and (max-width:625px){
+
+    .section-enfant{
+        display: flex!important;
+        flex-direction: column!important; 
+        align-items: center!important;
+    }
+   
+    .section-fille, .section-garcon{
+        width: 400px!important;
+        height: 400px!important;
+        margin-bottom: 1rem!important;
+    }
+}
+
+@media screen and (max-width:400px){
+    .section-fille, .section-garcon{
+        width: 350px!important;
+        height: 350px!important;
+    }
+}
+
+@media screen and (max-width:370px){
+    .section-fille, .section-garcon{
+        width: 300px!important;
+        height: 300px!important;
+    }
 }
 
 /* ///////////////////////////////////////////// MEDIA QUERIES DETAILS ARTICLE ////////////////////////*/

@@ -12,7 +12,10 @@ body{
 
 .entete{
     height: 550px;
-    background: url("../img/zzzzz.jpg");
+    background-image: url("../img/zzzzz.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,6 +34,7 @@ body{
 .div-bouton{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     margin-left: 10% !important;
     margin-top: 100px !important;
 }
@@ -67,25 +71,28 @@ body{
     padding: 0 !important;
 }
 
+.big-boite{
+    padding: 3rem!important;
+}
 .section1{
     height: 500px;
     width: 500px;
     background-image: url("../img/HOMME.jpg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .section2{
     height: 500px;
     width: 500px;
     background-image: url("../img/FEMME.jpeg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .section3{
     height: 500px; 
     width: 500px;
     background-image: url("../img/ENFANT.jpg"); 
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -105,15 +112,23 @@ body{
     background-repeat: no-repeat;
 }
 
+
 .section-enfant a{
-    margin: 0 !important;
+    margin-left: 0 !important;
 }
 
 .section-enfant a:hover{
     color: white;
 }
 
-.bouton-bas{
+.bouton-bas-enfant{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouton-bas, .bouton-bas-enfant{
     height: 5rem;
     width: 13rem;
     background-color: rgba(0, 0, 0, 0.685);
@@ -415,6 +430,66 @@ margin-top: 50px !important;
 
 
 /* ---------------------------------------MEDIA QUERIES-------------------- */
+@media screen and (max-width:1650px){
+    .big-boite{
+        padding: 1rem!important;
+    }
+}
+
+@media screen and (max-width:1150px){
+    .boite-categories{
+        display: flex!important;
+        flex-direction: column!important;
+        justify-content: space-between!important;
+        align-items: center!important;
+    }
+
+    .taille-titre{
+        font-size: 6rem;
+        text-align: center!important;
+        margin: 0!important;
+    }
+
+    .section1, .section2, .section3{
+        width: 700px!important ;
+        height: 700px!important;
+        margin: 50px!important;
+    }
+}
+
+@media screen and (max-width:980px){
+    .taille-titre{
+        font-size: 5rem;
+        margin-right: 0!important;
+    }
+
+    .titre-entete{
+        margin: 0!important;
+    }
+
+    .entete{
+        background-position: left!important;
+    }
+}
+
+@media screen and (max-width:720px){
+
+    .section1, .section2, .section3{
+        width: 600px!important ;
+        height: 600px!important;
+        margin: 50px!important;
+    }
+
+    .taille-titre{
+        font-size: 4.5rem!important;
+    }
+
+    .entete{
+        background-position-x: -170px!important;
+
+    }
+}
+
 @media screen and (max-width:690px){
 
     .navbar_buttons{
@@ -482,6 +557,28 @@ margin-top: 50px !important;
     .administratif{
         width: 40%!important;
     }
+
+    .section1, .section2, .section3{
+        width: 500px!important ;
+        height: 500px!important;
+        margin: 50px!important;
+    }
+}
+
+@media screen and (max-width:550px){
+    .taille-titre{
+        font-size: 3.5rem!important;
+    }
+
+    .div-bouton{
+        display: flex!important;
+        flex-direction: column!important;
+        align-items: center!important;
+    }
+
+    .bouton-accueil{
+        margin-bottom: 0.8rem!important;
+    }
 }
 
 @media screen and (max-width:530px){
@@ -499,6 +596,31 @@ margin-top: 50px !important;
     .navbar_buttons i{
         font-size: 1.4rem!important;
     }
+
+    .section1, .section2, .section3{
+        width: 400px!important ;
+        height: 400px!important;
+        margin: 20px!important;
+    }
+
+    .bouton-bas{
+        height: 3.5rem!important;
+
+    }
+}
+
+@media screen and (max-width:430px){
+    .taille-titre{
+        font-size: 2.5rem!important;
+        font-weight: bold!important;
+    }
+}
+
+@media screen and (max-width:410px){
+    .section1, .section2, .section3{
+        width: 300px!important ;
+        height: 300px!important;
+    }
 }
 
 
@@ -512,8 +634,10 @@ margin-top: 50px !important;
         margin: 0!important;
     }
 
+
     .navbar_buttons{
-        margin: 5px 0px 5px 20px!important;
+        margin: 5px 0px 5px 0px!important;
+        padding-left: 0.5rem!important;
     }
 
     .social_media a i{
@@ -532,5 +656,11 @@ margin-top: 50px !important;
     .conteneur_categories div a{
         padding-left: 12px!important;
         padding-right: 7px!important;
+    }
+}
+
+@media screen and (max-width:320px){
+    .navbar_buttons{
+        padding-left: 3rem!important;
     }
 }
