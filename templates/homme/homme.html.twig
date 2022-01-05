@@ -19,7 +19,7 @@
 
 <h1 class="text-center mt-5 mb-2">Chaussures Homme</h1>
 
-    <div class="ch1 mb-1 mt-5 row justify-content-around col-8 mx-auto">
+    <div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
 
         {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
         
@@ -29,12 +29,12 @@
             {% if data.sexe == 'm' %}
                 {% if data.pointure == 43 %}
             
-                <div class="shoes_card card mb-5 carte_chaussure" >
+                <div class="shoes_card card mb-5 carte_chaussure col-3 mx-2" >
 
-                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
-                        <div class="d-flex justify-content-between details_chaussure">
-                            <div class="fst-italic ms-3 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 
-                            <div class="fst-italic mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary" height="350px">
+                        <div class="d-flex justify-content-between details_chaussure mx-2">
+                            <div class="fst-italic ms-1 text-black "> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                            <div class="fst-italic mx-1 text-black"><strong> {{data.prix}} €</strong></div>
                         </div>
                         <p class="">Chaussure pour Homme</p>
                         <img src="{{ asset('img/' ~ data.photo) }}" class="img-fluid" alt="chaussure1" height="350px">
