@@ -493,7 +493,7 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
 
 /* ################## Modification Photo ################## */
 #[Route('/backoffice/affichage/photo/modification', name: 'backoffice_affichage_photo_modification')]
-public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Request $request, EntityManagerInterface $manager):Response
+public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger):Response
 {
     $shoesAffichage='';
     $modelCouleur=[];
@@ -518,21 +518,21 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
     }
     
     
-
-    if($request->request->has('selecteurChaussure'))
+   
+    if($request->query->get('selecteurChaussure'))
     {
         //Récupération : 0 => la marque, 1 => le model, 2 => la couleur
-        $modelCouleur=str_replace('_', ' ',explode('/',$request->request->all()['selecteurChaussure']));
-
+        $modelCouleur=str_replace('_', ' ',explode('/',$request->query->get('selecteurChaussure')));
+        
         //On récupère un enregistrement pour afficher les photos sur le template
         $shoesAffichage=$shoesRepo->findOneBy(['marque'=>$modelCouleur[0], 'model'=>$modelCouleur[1], 'couleur'=>$modelCouleur[2]]);
         
         //On récupère tous les enregistrements correspondant à modifier
         $shoesUpdate=$shoesRepo->findBy(['marque'=>$modelCouleur[0], 'model'=>$modelCouleur[1], 'couleur'=>$modelCouleur[2]]);
-        
+    
+    
         $photoUpdateForm= $this->createForm(PhotoType::class);
         $photoUpdateForm->handleRequest($request);
-        // dd($photoUpdateForm);
         if($photoUpdateForm->isSubmitted() && $photoUpdateForm->isValid())
         {
             
@@ -552,9 +552,10 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
             
                 if($photo)
                 {
+                    
                     $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                     $securePhoto= $slugger->slug($nomOriginePhoto);
-                    $nouveauNomFichier = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $nouveauNomFichier = $value->getMarque().'-'.$value->getModel().'-'.$value->getCouleur().'-'.$securePhoto .'.' . $photo->guessExtension();
                     $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
                     $value->setPhoto($nouveauNomFichier);
                     
@@ -563,7 +564,7 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
                 {
                     $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
                     $securePhoto2= $slugger->slug($nomOriginePhoto2);
-                    $nouveauNomFichier2 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $nouveauNomFichier2 = $value->getMarque().'-'.$value->getModel().'-'.$value->getCouleur().'-'.$securePhoto .'.' . $photo->guessExtension();
                     $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
                     $value->setPhoto2($nouveauNomFichier2);
                     
@@ -572,7 +573,7 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
                 {
                     $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
                     $securePhoto3= $slugger->slug($nomOriginePhoto3);
-                    $nouveauNomFichier3 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $nouveauNomFichier3 = $value->getMarque().'-'.$value->getModel().'-'.$value->getCouleur().'-'.$securePhoto .'.' . $photo->guessExtension();
                     $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
                     $value->setPhoto3($nouveauNomFichier3);
                     
@@ -581,7 +582,7 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
                 {
                     $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
                     $securePhoto4= $slugger->slug($nomOriginePhoto4);
-                    $nouveauNomFichier4 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $nouveauNomFichier4 = $value->getMarque().'-'.$value->getModel().'-'.$value->getCouleur().'-'.$securePhoto .'.' . $photo->guessExtension();
                     $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
                     $value->setPhoto4($nouveauNomFichier4);     
                 }

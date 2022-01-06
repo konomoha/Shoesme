@@ -96,7 +96,7 @@ class PhotoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Chaussure::class,
+            // 'data_class' => Chaussure::class,
         ]);
     }
 }
