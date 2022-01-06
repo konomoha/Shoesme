@@ -41,6 +41,7 @@ class CommentFormType extends AbstractType
                 ],
                 // 'required' => false,
                 'expanded' => true,
+                'required' => false,
                 'multiple' => false,
                 'label' => 'Notez ce produit' 
             ]);

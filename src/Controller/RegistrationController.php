@@ -19,57 +19,67 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
-        //nouvel objet issu de la classe User
-        $user = new User();
-
-        //On déclare ici une variable $registerForm dans laquelle on se sert de la méthode createForm dans laquelle on fait appel à un formulaire spécifique issu de la classe RegistrationFormType en usant la condition true.
-        $registerForm = $this->createForm(RegistrationFormType::class, $user, ['userRegister'=>true]);
-
-        $registerForm->handleRequest($request);
-
-        if ($registerForm->isSubmitted() && $registerForm->isValid()) 
+        if(!$this->getUser())
         {
 
-            $avatar = $registerForm->get('avatar')->getData();
+        
+            //nouvel objet issu de la classe User
+            $user = new User();
 
-            // on encore le mot de passe en faisant appel à l'objet $userPasswordHasher de l'interface UserPasswordHasherInterface
-            //En argument on lui fournit l'objet entité dans lequel nous allons encoder un élément ($user) et on lui fournit le mot de passe saisi dans le formulaire à encoder
-           
-            $hash = $userPasswordHasher->hashPassword(
-                $user,
-                $registerForm->get('password')->getData()
-            );
+            //On déclare ici une variable $registerForm dans laquelle on se sert de la méthode createForm dans laquelle on fait appel à un formulaire spécifique issu de la classe RegistrationFormType en usant la condition true.
+            $registerForm = $this->createForm(RegistrationFormType::class, $user, ['userRegister'=>true]);
 
-            // On transmet au setter du passwordf la clé de hachage à enregistrer en BDD
-            $user->setPassword($hash);
+            $registerForm->handleRequest($request);
 
-            //Si l'utilisateur a choisi un avatar, on débute le traitement et la sécurisation du nom de l'image
-            if($avatar)
-            {   
-                //On récupère le nom d'origine de l'avatar choisi
-                $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME); 
+            if ($registerForm->isSubmitted() && $registerForm->isValid()) 
+            {
+
+                $avatar = $registerForm->get('avatar')->getData();
+
+                // on encore le mot de passe en faisant appel à l'objet $userPasswordHasher de l'interface UserPasswordHasherInterface
+                //En argument on lui fournit l'objet entité dans lequel nous allons encoder un élément ($user) et on lui fournit le mot de passe saisi dans le formulaire à encoder
+            
+                $hash = $userPasswordHasher->hashPassword(
+                    $user,
+                    $registerForm->get('password')->getData()
+                );
+
+                // On transmet au setter du passwordf la clé de hachage à enregistrer en BDD
+                $user->setPassword($hash);
+
+                //Si l'utilisateur a choisi un avatar, on débute le traitement et la sécurisation du nom de l'image
+                if($avatar)
+                {   
+                    //On récupère le nom d'origine de l'avatar choisi
+                    $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME); 
+                    
+                    //On sécurise l'inclusion du nom du fichier dans l'URL
+                    $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
+                    $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
+
+                    // On copie l'image vers le bon chemin, vers le bon dossier 'public/avatar' (services.yaml)
+                    $avatar->move(
+                        $this->getparameter('avatar_directory'),
+                        $nouveauNomFichier);
+                    
+                    //On transmet ensuite au setteur le nouveau nom du fichier
+                    $user->setAvatar($nouveauNomFichier);
                 
-                //On sécurise l'inclusion du nom du fichier dans l'URL
-                $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
-                $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
-
-                // On copie l'image vers le bon chemin, vers le bon dossier 'public/avatar' (services.yaml)
-                $avatar->move(
-                    $this->getparameter('avatar_directory'),
-                    $nouveauNomFichier);
+                }
                 
-                //On transmet ensuite au setteur le nouveau nom du fichier
-                $user->setAvatar($nouveauNomFichier);
-              
+                $this->addFlash('success_register', "Félicitations, vous êtes inscrit(e)!");
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                
+                //On redirige l'internaute sur la page d'accueil
+                return $this->redirectToRoute('home');
             }
-            
-            $this->addFlash('success_register', "Félicitations, vous êtes inscrit(e)!");
+        }
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            //On redirige l'internaute sur la page d'accueil
-            return $this->redirectToRoute('home');
+        else
+        {
+            return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('registration/register.html.twig', [
