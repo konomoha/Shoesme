@@ -28,22 +28,33 @@
 {% endfor %}
 
 <div class="d-flex flex-row conteneur">
+
     {% if dataPanier %}
+
         <div class="col-7 box-produit">
-            {% for data in dataPanier %}
+
+            {% for data in dataPanier %} 
+
+             {# On crée une boucle qui génère automatiquement un affichage des produits dans le panier #}
 
                 <div class="boite-1 d-flex flex-row mb-4">
+
                     <div class="col-6 d-flex flex-row justify-content-center image">
                         <img class="img-fluid" src="{{ asset('img/' ~ data.Chaussure.photo) }}" alt="" style="image-size: contain;">
                     </div>
 
                     <div class=" col-3 ms-3 my-3 details">
+
                         <h3 class="mt-2 fs-2"><strong>{{ data.Chaussure.marque }}</strong></h3>
+
                         <span>{{ data.Chaussure.model }}</span>
+
                         <p class="my-2">{{ data.Chaussure.descriptif }}</p>
 
                         <div class="my-2 fs-4">Taille : {{data.Chaussure.pointure}}</div>
+
                         <div class="my-2 fs-4">Couleur : {{data.Chaussure.couleur}}</div>
+
                         <div class=" d-flex justify-content-between">
                             
                             <a href="{{path('panier_remove', {id: data.Chaussure.id})}}" class=""><i class="bi bi-dash-square text-secondary fs-5"></i>{#<i class="bi bi-cart-dash"></i>#}</a>
@@ -58,14 +69,18 @@
                             <a href="{{path('details_article', {'id': data.Chaussure.id })}}" class="text-dark mx-auto">Détails article</a>
 
                         </div>
+
                     </div>
 
                     <div class="col-3 d-flex flex-row justify-content-center prix">
                         <p class="fs-3"> {{ data.Chaussure.prix }} €</p>
                         <a href="{{path('panier_delete', {id: data.Chaussure.id})}}" class="text-dark"><i class="bi bi-x-lg fs-3 me-1"></i></a>
                     </div>
+
                 </div>
+
             {% endfor %}
+
         </div>
 
         {% for data in dataPanier %}
@@ -73,21 +88,30 @@
         {% endfor %}
 
         <div class="mt-5 col-5 box-commande" >
+
             <div class="boite-synth mx-auto">
+
                 <h2 class="text-center mt-4 mb-2">Synthèse de la commande</h2>
                 
                 {% if qte == 1 %}
+
                 <div class="d-flex flex-row justify-content-center my-4">
                     <p class="fs-3"> {{ qte }} article</p>
-                </div>                
+                </div>      
+
                 {% else %}
+
                 <div class="d-flex flex-row justify-content-center my-4">
                     <p class="fs-3"> {{ qte }} articles</p>
-                </div>                 
+                </div>     
+
                 {% endif %}
                 
 
                 {% for data in dataPanier %}
+
+                {# Pour chaque référence dans le panier, un calcul est effectué et affiché sur le template #}
+
                     <div class="d-flex flex-row justify-content-between ">
 
                         <p class="fs-4 ms-5">{{data.Quantite}} {{ data.Chaussure.model}}</p>
@@ -95,28 +119,36 @@
                         <p class="fs-4 me-5">{{data.Quantite * data.Chaussure.prix}} €</p>
                         
                     </div>
+
                 {% endfor %}            
 
-                {% if total >= 100 %}                
+                {% if total >= 100 %}  
+
                     <div class="d-flex flex-row justify-content-around my-3">
                         <p class="fs-3">Livraison</p>
                         <p class="fs-3">Gratuite</p>
                     </div>
+
                 {% else %}
+
                     <div class="d-flex flex-row justify-content-around my-3">
                         <p class="fs-3">Frais de port</p>
                         <p class="fs-3">9.90 €</p>
                     </div>
+
                 {% endif %}                
                 
                 {% if total <= 100 %}
+
                     <div class="d-flex flex-row justify-content-around">
                     
                         <p class="fs-2">Total</p> 
                         <p class="fs-2 fw-bold">{{total + 9.90}} €</p>
 
                     </div>
+
                 {% else %}
+
                     <div class="d-flex flex-row justify-content-around mb-2">
 
                         <p class="fs-2">Total</p> 
@@ -160,7 +192,7 @@
 
 <h2 class="text-center mx-auto fst-italic my-5"><i class="bi bi-bag"></i> Panier vide </h2>
 
-{% endif %} 
+    {% endif %} 
     
     
 {% endblock %}
