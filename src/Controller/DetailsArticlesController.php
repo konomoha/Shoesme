@@ -123,7 +123,8 @@ class DetailsArticlesController extends AbstractController
             'couleurChaussure'=>$couleurChaussure,
             'datacom'=> $datacom,
             'moyenne'=> $moyenne,
-            'sizeGroup'=>$sizeGroup
+            'sizeGroup'=>$sizeGroup,
+            'dataNote'=>$dataNote
         ]);
     }
 }

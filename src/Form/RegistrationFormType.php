@@ -152,7 +152,7 @@ class RegistrationFormType extends AbstractType
                     'label' => "Uploader une photo",
                     'mapped' => true, 
                     'data_class'=> null,
-                    // 'required'=> false,
+                    'required'=> false,
                     
                     'constraints' => [
                         new File([
