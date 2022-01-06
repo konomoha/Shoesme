@@ -126,7 +126,6 @@ class Chaussure3Type extends AbstractType
                 'jaune'=> 'jaune',
                 'beige'=> 'beige',
                 'marron'=> 'marron'
-
             ],
             'required' => false,
             'expanded' => true,

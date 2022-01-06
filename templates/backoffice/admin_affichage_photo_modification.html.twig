@@ -11,15 +11,49 @@
 <div class="d-flex justify-content-end">
     <a href="{{ path('home') }}" class="btn btn-outline-dark">Retour au site</a>
 </div>
+{% for message in app.flashes('success') %}
+        <div class="col-6 mx-auto text-center alert alert-success">
+            {{ message }}
+        </div>        
+    {% endfor %}
+<section class="d-flex">
+    <form action="" name="selecteurModel" method="post" class="col-6">
+        <select name="selecteurChaussure" id="selecteurChaussure">
+            <option value="">Choisir un modèle de chaussure</option>
+            {% for data in selecteur %}
+                <option value="{{data.marque}}/{{data.model}}/{{data.couleur}}">{{data.marque}}  {{data.model}}  {{data.couleur}} </option>
+            {% endfor %}
+        </select>
 
-<form action="" name="selecteurModel" method="post">
-    <select name="selecteurChaussure" id="selecteurChaussure">
-        <option value="">Choisir un modèle de chaussure</option>
-        {% for data in selecteur %}
-            <option value="{{data.marque}}/{{data.model}}/{{data.couleur}}">{{data.marque ~ data.model ~ data.couleur}} </option>
-        {% endfor %}
-    </select>
+        <button>Valider</button>
+    </form>
 
-    <button>Valider</button>
-</form>
+    {% if AffichagePhoto != '' %}
+    <h4 class="text-start col-6">Photos actuelles</h4>
+</section>
+    <div class="d-flex justify-content-around my-5 mx-5">
+        <div><img class="photobo" src="{{ asset('img/' ~ AffichagePhoto.photo) }}" alt=""></div>
+        <div><img class="photobo" src="{{ asset('img/' ~ AffichagePhoto.photo2) }}" alt=""></div>
+        <div><img class="photobo" src="{{ asset('img/' ~ AffichagePhoto.photo3) }}" alt=""></div>
+        <div><img class="photobo" src="{{ asset('img/' ~ AffichagePhoto.photo4) }}" alt=""></div>
+    </div>
+    <hr>
+    <hr>
+    {% endif %}
+
+
+    {% if AffichagePhoto != '' %}
+       {# {{dump(formPhoto)}} #}
+       
+        {{form_start(formPhoto, {'attr': {'class': 'd-flex justify-content-around my-5'}})}}
+            {{form_row(formPhoto.photo)}}
+            {{form_row(formPhoto.photo2)}}
+            {{form_row(formPhoto.photo3)}}
+            {{form_row(formPhoto.photo4)}}
+            <button class="btn btn-warning">Confirmer</button>
+           
+        {{form_end(formPhoto)}}
+        
+    {% endif %}
+
 {% endblock %}

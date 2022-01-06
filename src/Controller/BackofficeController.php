@@ -48,7 +48,7 @@ class BackofficeController extends AbstractController
         //Suppression chaussures
         if($shoesRemove)
         {
-            $id=$shoesRemove->getId()//. ' - ' . $shoesRemove->getMarque(). ' - ' . $shoesRemove->getModel()
+            $id=$shoesRemove->getId()
             ;
             $manager->remove($shoesRemove);
             $manager->flush();
@@ -174,13 +174,11 @@ class BackofficeController extends AbstractController
         }
 
        //Récupération et affichage du model sélectionné
-        $test=$request->query->get('model');
+        $model=$request->query->get('model');
         $selecteurModel='';
         if($test)
         {
-            $selecteurModel= $repoChaussure->findBy(['model'=>$test],
-            //    ['marque'=>'ASC']
-            ); 
+            $selecteurModel= $repoChaussure->findBy(['model'=>$model]); 
         } 
 
         $chaussure=$repoChaussure->findAll();
@@ -211,13 +209,12 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
     //Récupération des titres des champs
     $titreColonneShoes=$manager->getClassMetadata(Chaussure::class)->getFieldNames();
     
-    //Création de tableau de valeur unique pour le selecteur
+    //Création du tableau pour le selecteur
     $selecteurProduit=$shoesRepo->findAll();
     foreach($selecteurProduit as $key=>$value)
     {
         if( $value->getModel()!=NULL && !(in_array(['marque'=>$value->getMarque(), 'model'=>$value->getModel()], $selecteurTab)) )
         {
-            // dd($value);
             $selecteurTab[]=[
                 'marque'=> $value->getMarque(),
                 'model'=> $value->getModel(),
@@ -225,10 +222,9 @@ public function backOfficeAffihageGeneral(ChaussureRepository $shoesRepo, Entity
         }
     }
     
-    //Affichage global ou article sélectionné dans le selecteur produit.
+    //Affichage article sélectionné dans le selecteur produit ou global
     if($request->get('produit'))
     {
-        // dd($request->get('produit'));
         $shoes = $shoesRepo->findBy(['model'=>$request->get('produit')], ['marque'=>'ASC','model'=>'ASC']);
 
         $hidden ='';
@@ -259,24 +255,23 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
     $sexe=[];//idem pour le genre
     $adressePhoto=[];//idem pour les photos
     $model='';
-    $stocktotal=0;
+    $stocktotal=0;//calcul du stock total pour un model
     $element=[];//variable de stockage
-    $hidden='hidden';
+    $hidden='hidden';//permet de masquer les formulaires de modification
     
     
-    //on vérifie que l'url contient modification pour modifier l'affichage
+    //on vérifie que l'url contient 'modification', si oui on change l'affichage
     if(stristr($request->getPathInfo(), "modification"))
     {
         $hidden='';
         //Si on recupère les données de request
         if($request->request->all())
-        {
-            
+        { 
            $data=$request->request->all();
-            // dd($data);
+            
            foreach($data as $key=>$value)
            {
-               //Si on récupère un numéric la $key correspond à l'id de la chaussure
+               //Si on récupère un numéric, la $key correspond à l'id de la chaussure, on a reçu des stock à modifier
                if(is_numeric($key))
                {
                     if($value)
@@ -287,8 +282,8 @@ public function backofficeAffichageArticle (ChaussureRepository $shoesRepo, Slug
                     $manager->persist($shoesChangementStock);
                     }
                }
-               //Sinon si ce n'est pas pour les photos c'est que c'est le selecteur pour modifier l'affichage des chaussures
-               elseif ($key!='photo')
+               //Sinon on reçoit une marque, un model, une couleur et la valeur du champs affichage
+               else
                {
                     //Découpage de la $key et récupération de la marque en 0, du model en 1, et de la couleur en 2
                     $modelChangementAffichage=str_replace('_', ' ',explode('/',$key,)); 
@@ -498,16 +493,22 @@ public function backOfficeAjoutArticle(Request $request,EntityManagerInterface $
 
 /* ################## Modification Photo ################## */
 #[Route('/backoffice/affichage/photo/modification', name: 'backoffice_affichage_photo_modification')]
-public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Request $request):Response
+public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Request $request, EntityManagerInterface $manager):Response
 {
+    $shoesAffichage='';
+    $modelCouleur=[];
     $selecteurTab=[];
-    //Création du sélecteur avec les valeurs
+    $compteur=0;
+    $photoUpdateForm = NULL;
+    $test='Coucou';
+    
+
+    //Création des valeurs pour le selecteurs du template
     $selecteurShoes=$shoesRepo->findAll();
     foreach($selecteurShoes as $key=>$value)
     {
         if( $value->getModel()!=NULL && !(in_array(['marque'=>$value->getMarque(), 'model'=>$value->getModel(), 'couleur'=>$value->getCouleur()], $selecteurTab)) )
         {
-            // dd($value);
             $selecteurTab[]=[
                 'marque'=> $value->getMarque(),
                 'model'=> $value->getModel(),
@@ -515,15 +516,115 @@ public function backOfficeModificationPhoto(ChaussureRepository $shoesRepo, Requ
             ];    
         }
     }
-    // dd($request->request->all());
+    
+    
 
-    if($request->request->all())
+    if($request->request->has('selecteurChaussure'))
     {
+        //Récupération : 0 => la marque, 1 => le model, 2 => la couleur
+        $modelCouleur=str_replace('_', ' ',explode('/',$request->request->all()['selecteurChaussure']));
 
+        //On récupère un enregistrement pour afficher les photos sur le template
+        $shoesAffichage=$shoesRepo->findOneBy(['marque'=>$modelCouleur[0], 'model'=>$modelCouleur[1], 'couleur'=>$modelCouleur[2]]);
+        
+        //On récupère tous les enregistrements correspondant à modifier
+        $shoesUpdate=$shoesRepo->findBy(['marque'=>$modelCouleur[0], 'model'=>$modelCouleur[1], 'couleur'=>$modelCouleur[2]]);
+        
+        $photoUpdateForm= $this->createForm(PhotoType::class);
+        $photoUpdateForm->handleRequest($request);
+        // dd($photoUpdateForm);
+        if($photoUpdateForm->isSubmitted() && $photoUpdateForm->isValid())
+        {
+            
+            foreach($shoesUpdate as $key=>$value)
+            {
+                
+                $photoEnregistree = $value->getPhoto();
+                $photoEnregistree2= $value->getPhoto2();
+                $photoEnregistree3= $value->getPhoto3();
+                $photoEnregistree4= $value->getPhoto4();   
+
+                $photo  = $photoUpdateForm->get('photo')->getData();
+                $photo2 = $photoUpdateForm->get('photo2')->getData();
+                $photo3 = $photoUpdateForm->get('photo3')->getData();
+                $photo4 = $photoUpdateForm->get('photo4')->getData();
+
+            
+                if($photo)
+                {
+                    $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                    $securePhoto= $slugger->slug($nomOriginePhoto);
+                    $nouveauNomFichier = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $photo->move($this->getParameter('photo_directory'), $nouveauNomFichier);
+                    $value->setPhoto($nouveauNomFichier);
+                    
+                }
+                if($photo2)
+                {
+                    $nomOriginePhoto2 = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
+                    $securePhoto2= $slugger->slug($nomOriginePhoto2);
+                    $nouveauNomFichier2 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $photo2->move($this->getParameter('photo_directory'), $nouveauNomFichier2);
+                    $value->setPhoto2($nouveauNomFichier2);
+                    
+                }
+                if($photo3)
+                {
+                    $nomOriginePhoto3 = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
+                    $securePhoto3= $slugger->slug($nomOriginePhoto3);
+                    $nouveauNomFichier3 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $photo3->move($this->getParameter('photo_directory'), $nouveauNomFichier3);
+                    $value->setPhoto3($nouveauNomFichier3);
+                    
+                }
+                if($photo4)
+                {
+                    $nomOriginePhoto4 = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
+                    $securePhoto4= $slugger->slug($nomOriginePhoto4);
+                    $nouveauNomFichier4 = $value['marque'].'-'.$value['model'].'-'.$value['couleur'].'-'.$securePhoto . '-' . uniqid() . '.' . $photo->guessExtension();
+                    $photo4->move($this->getParameter('photo_directory'), $nouveauNomFichier4);
+                    $value->setPhoto4($nouveauNomFichier4);     
+                }
+            
+            
+                else 
+                { 
+                    if(isset($photoEnregistree))
+                        $value->setPhoto($photoEnregistree);
+                    else  
+                        $value->setPhoto(null);
+
+                    if(isset($photoEnregistree2))
+                        $value->setPhoto2($photoEnregistree2);
+                    else  
+                        $value->setPhoto2(null);
+
+                    if(isset($photoEnregistree3))
+                        $value->setPhoto3($photoEnregistree3);
+                    else  
+                        $value->setPhoto3(null);
+
+                    if(isset($photoEnregistree4))
+                        $value->setPhoto4($photoEnregistree4);
+                    else  
+                        $value->setPhoto4(null);
+
+                }
+                ++$compteur;
+                $manager->persist($shoes);
+            }
+            $manager->flush();
+            $this->addFlash('success', "$compteur chaussures ont été mises à jour");
+            return $this->redirectToRoute('backoffice_affichage_photo_modification');
+        }
+                    
     }
 
+       
     return $this->render('backoffice/admin_affichage_photo_modification.html.twig', [
         'selecteur'=>$selecteurTab,
+        'AffichagePhoto'=>$shoesAffichage,
+        'formPhoto'=>($photoUpdateForm) ? $photoUpdateForm->createView() : $photoUpdateForm='' 
     ]);
 }
 
