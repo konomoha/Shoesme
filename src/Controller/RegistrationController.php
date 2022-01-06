@@ -19,34 +19,46 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
+        //nouvel objet issu de la classe User
         $user = new User();
+
+        //On déclare ici une variable $registerForm dans laquelle on se sert de la méthode createForm dans laquelle on fait appel à un formulaire spécifique issu de la classe RegistrationFormType en usant la condition true.
         $registerForm = $this->createForm(RegistrationFormType::class, $user, ['userRegister'=>true]);
+
         $registerForm->handleRequest($request);
 
         if ($registerForm->isSubmitted() && $registerForm->isValid()) 
         {
 
             $avatar = $registerForm->get('avatar')->getData();
-            
+
+            // on encore le mot de passe en faisant appel à l'objet $userPasswordHasher de l'interface UserPasswordHasherInterface
+            //En argument on lui fournit l'objet entité dans lequel nous allons encoder un élément ($user) et on lui fournit le mot de passe saisi dans le formulaire à encoder
            
             $hash = $userPasswordHasher->hashPassword(
                 $user,
                 $registerForm->get('password')->getData()
             );
 
+            // On transmet au setter du passwordf la clé de hachage à enregistrer en BDD
             $user->setPassword($hash);
 
+            //Si l'utilisateur a choisi un avatar, on débute le traitement et la sécurisation du nom de l'image
             if($avatar)
             {   
-                $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);           
+                //On récupère le nom d'origine de l'avatar choisi
+                $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME); 
+                
+                //On sécurise l'inclusion du nom du fichier dans l'URL
                 $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
                 $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
 
-     
+                // On copie l'image vers le bon chemin, vers le bon dossier 'public/avatar' (services.yaml)
                 $avatar->move(
                     $this->getparameter('avatar_directory'),
                     $nouveauNomFichier);
-
+                
+                //On transmet ensuite au setteur le nouveau nom du fichier
                 $user->setAvatar($nouveauNomFichier);
               
             }
@@ -56,7 +68,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-
+            //On redirige l'internaute sur la page d'accueil
             return $this->redirectToRoute('home');
         }
 
@@ -88,12 +100,13 @@ class RegistrationController extends AbstractController
     #[Route('/profil/{id}/edit', name: 'app_profil_edit')]
     public function profilEdit(User $user=null, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger):Response
     {
-        
+        //On vérifie que l'utilisateur est bien enregistré en bdd. Si oui, on stock son avatar dans une variable
         if($user)
         {
             $avatarActuel = $user->getAvatar();
         }
-            
+
+        //On fait appel au formulaire dédié à la modification en passant en 'true' le FormType userUpdate    
         $profilUpdate = $this->createForm(RegistrationFormType::class, $user, ['userUpdate'=>true]);
         $profilUpdate->handleRequest($request);
 
@@ -101,15 +114,16 @@ class RegistrationController extends AbstractController
         {
             // dd($user);
             
+            //On récupère toutes les informations de l'image uploadé dans le formulaire
             $avatar = $profilUpdate->get('avatar')->getData();
 
-            if($avatar)
+            if($avatar)//si une photo est uploadé dans le formulaire, on entre le IF et on traite l'image
             {   
                 $nomOrigineAvatar = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);           
                 $secureNomAvatar = $slugger->slug($nomOrigineAvatar);       
                 $nouveauNomFichier = $secureNomAvatar . '-' . uniqid(). '.' .$avatar->guessExtension();
 
-                try
+                try //tentative de copie de l'image dans le dossier avatar/
                 {
                     $avatar->move(
                     $this->getparameter('avatar_directory'),
@@ -125,14 +139,16 @@ class RegistrationController extends AbstractController
               
             }
             
+            //Sinon, aucune image n'a été uploadée, on renvoie dans la bdd l'avatar actuel
             else
             {
+                //Si l'image actuelle est définie en BDD, alors en cas de modification, si on ne change pas de photo, on réinsère la photo actuelle en bdd
                 if(isset($avatarActuel))
                 {
                     $user->setAvatar($avatarActuel);
                 }
                     
-
+                //Sinon aucune image n'a été uploadée, on envoie la valeur NULL en BDD 
                 else
                 {
                     $user->setAvatar(null);
@@ -144,6 +160,7 @@ class RegistrationController extends AbstractController
             $manager->persist($user);
             $manager->flush();
             
+            //On redirige finalement l'internaute vers la page de connexion
             return $this->redirectToRoute('app_logout');
 
         }

@@ -12,14 +12,14 @@
 
 
 <div class="">
-        <h3 class="text-center">Fille</h3>
+    <h3 class="text-center">Fille</h3>
         
-            <div class="d-flex justify-content-center liens_categories">
-                <a href="#" class="H">Promotions</a>
-                <a href="#" class="H">Sneakers</a>
-                
-            </div>
+    <div class="d-flex justify-content-center liens_categories">
+        <a href="#" class="H">Promotions</a>
+        <a href="#" class="H">Sneakers</a>
+        
     </div>
+</div>
 
     {# <form method="post">
         <label for="categorie">Catégories</label>
@@ -54,29 +54,27 @@
     <p class="fw-bold"><a href="{{path('panier')}}">Aller au panier</a></p>
     </div>    
 {% endfor %} #}
-    <div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
+<div class="ch1 mb-1 mt-5 row justify-content-around col-10 mx-auto">
+    
+    {% for data in dataChaussure %}
 
-        {# BOUCLE DE CARDS CREEE VIA UNE METHODE LIMIT DANS LE CONTROLLER HOMME (l'affichage initial n'a pas été supprimé, juste commenté en-dessous #}
+        <div class="shoes_card card mb-5 carte_chaussure col-3 mx-2">
+
+            <div class="d-flex justify-content-between details_chaussure">
+                <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
+                <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
+            </div>
+
+            <p class="ms-3">Chaussure pour Fille</p>
+
+            <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
+            <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top img-fluid" alt="chaussure1" >Details article</a>
+            
+        </div>
         
-        {% for data in dataChaussure %}
-
-                 <div class="shoes_card card mb-5 carte_chaussure col-3 mx-2">
-
-                    <div class="d-flex justify-content-between details_chaussure">
-                        <div class="fst-italic text-center mx-3 text-black"> {{data.marque|upper}} {{data.model|capitalize}}</div> 
-                        <div class="fst-italic text-center mx-3 text-black"><strong> {{data.prix}} €</strong></div>
-                    </div>
-
-                    <p class="ms-3">Chaussure pour Fille</p>
-
-                    <a href="{{path('details_article', {'id': data.id })}}" class="p-2 link-secondary btn">
-                    <img src="{{ asset('img/' ~ data.photo) }}" class="card-img-top img-fluid" alt="chaussure1" >Details article</a>
-                    
-                </div>
-           
-        {% endfor %}
-        
-    </div>
+    {% endfor %}
+    
+</div>
 <div class="mb-3 m-t1 p-2"></div>
 
 {% endblock %}

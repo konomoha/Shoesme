@@ -302,7 +302,7 @@
               <div class="">
 
 
-                <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }}<small>(le {{ comment.date|date('d/m/Y')}} à {{ comment.date|date('H:i:s')}})</small></p>
+                <p class="fw-bold">publié par {{ comment.user.nom }} {{ comment.user.prenom }} <small class="fst-italic">(le {{ comment.date|date('d/m/Y')}} à {{ comment.date|date('H:i:s')}})</small></p>
                 
               </div>
 
@@ -315,14 +315,13 @@
             </div>
             
         {% endfor %}
-      
-      {% else %} 
-
-        <p class="fst-italic mb-5">Soyez le premier à donner votre avis!</p>
-
     {% endif %} 
-
   {% endfor %} 
+
+  {% if datachaussure.0.commentaires is empty %}
+  <p class="fst-italic mb-5 text-center">Soyez le premier à donner votre avis!</p>
+  {% endif %}
+    
 </div>
   
 

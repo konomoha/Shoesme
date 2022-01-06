@@ -12,7 +12,6 @@ class HommeController extends AbstractController
     #[Route('/homme', name: 'homme')]
     public function index(ChaussureRepository $repoChaussure): Response
     {
-        ////////////////////////////////////////////////METHODE AFFICHAGE LIMIT /////////////////////////////////////
         $sexe = 'm';
 
         $dataChaussure= $repoChaussure->findShoesType($sexe);

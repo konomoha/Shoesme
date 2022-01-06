@@ -11,48 +11,62 @@
 
 <div class="main-connex">
     <div class="div-inscription p-4">
+
             {% if error %}
+
                 <div class="alert alert-danger text-center col-4 mx-auto mt-4 p-2 mess">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+
             {% endif %}
 
             {% for message in app.flashes('success_edit') %}
 
-            <div class="bg-success text-center p-3 mx-auto col-4 mess">{{ message }}</div>
+                <div class="bg-success text-center p-3 mx-auto col-4 mess">{{ message }}</div>
             
-
             {% endfor %}
 
 
             {% if app.user %}
+
                 <div class="mb-3">
                     Bienvenue {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
                 </div>
+
             {% endif %}
 
             <div id="connexion" class="bg-white">
+
                 <h1 class="h-3 my-4 font-weight-normal text-center">Connexion</h1>
+
                 <form method="post" class="mb-5">
+
                     <div class="my-3">
                         <label for="inputEmail">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mt-1" autocomplete="email" required autofocus>
                     </div>
+
                     <div  class="my-3">
                         <label for="inputPassword">Mot de passe</label>
                         <input type="password" name="password" id="inputPassword" class="form-control mt-1" autocomplete="current-password" required>
+
                         <div class="d-flex justify-content-end">
                             <a href="" class="text-black lien-inscrip fs-sm">Mot de passe oublié ?</a>
                         </div>
+
                     </div>
 
                     <div class="d-flex justify-content-end">
+
                         <input type="hidden" name="_csrf_token"
                             value="{{ csrf_token('authenticate') }}">
 
                         <button class="btn btn-lg btn-dark py-2 px-4 my-5 mx-auto" type="submit">
                             Se connecter
                         </button>
+
                     </div>
+
                     <p class="text-center mt-4 mb-4">Pas encore de compte ? <a href="{{ path('app_register') }}" class="text-black lien-inscrip">S'inscrire</a></p>
+                    
                 </form>
                 
             </div>

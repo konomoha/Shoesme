@@ -7,25 +7,27 @@
 {% block body %}
 
 <div class="main-inscription">
-<div class="div-inscription p-4">
 
-  <h1 class="text-center my-5">Contactez-nous</h1>
+    <div class="div-inscription p-4">
+
+    <h1 class="text-center my-5">Contactez-nous</h1>
 
 
-    {{ form_start(formContact, {'attr': {'class': 'col-5 mx-auto my-5 bg-light form-inscription shadow-lg rounded'}} ) }}
+        {{ form_start(formContact, {'attr': {'class': 'col-5 mx-auto my-5 bg-light form-inscription shadow-lg rounded'}} ) }}
 
-        {{ form_row(formContact.nom) }}
-        {{ form_row(formContact.prenom) }}
-        {{ form_row(formContact.email) }}
-        {{ form_row(formContact.commentaire) }}
+            {{ form_row(formContact.nom) }}
+            {{ form_row(formContact.prenom) }}
+            {{ form_row(formContact.email) }}
+            {{ form_row(formContact.commentaire) }}
 
-        <div class="mx-auto text-center">
-            <button class="col-4 btn btn-dark text-white">Valider</button>
-        </div>
+            <div class="mx-auto text-center">
+                <button class="col-4 btn btn-dark text-white">Valider</button>
+            </div>
 
-    {{ form_end(formContact) }}
+        {{ form_end(formContact) }}
 
-</div>
+    </div>
+    
 </div>
     
 {% endblock %}
